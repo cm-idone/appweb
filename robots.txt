@@ -1,0 +1,21 @@
+
+User-agent: *
+Disallow: /components/
+Disallow: /core/
+Disallow: /css/
+Disallow: /images/
+Disallow: /includes/
+Disallow: /js/
+Disallow: /languages/
+Disallow: /layouts/
+Disallow: /libraries/
+Disallow: /module/
+Disallow: /plugins/
+Disallow: /schemas/
+Disallow: /uploads/
+Disallow: /.gitignore
+Disallow: /configuration.php
+Disallow: /favicon.ico
+Disallow: /index.php
+Disallow: /txt.txt
+Sitemap: https://id.one-consultores.com/sitemap.xml/
