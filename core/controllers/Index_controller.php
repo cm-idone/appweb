@@ -19,7 +19,7 @@ class Index_controller extends Controller
 		}
 		else
 		{
-			define('_title', Configuration::$web_page . ' | ' . System::seo('title') . ' | ' . System::seo('keywords'));
+			define('_title', Configuration::$web_page . ' | ' . System::settings('seo', 'title', $GLOBALS['_vkye_module'], true) . ' | ' . System::settings('seo', 'keywords', $GLOBALS['_vkye_module'], true));
 
 			$template = $this->view->render($this, 'index');
 
