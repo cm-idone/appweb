@@ -19,8 +19,8 @@ class Laboratory_model extends Model
             'reason' => $data['reason'],
             'tests' => ($data['type'] == 'alcoholic') ? json_encode([
                 '1' => !empty($data['test_1']) ? $data['test_1'] : '0.00',
-                '2' => !empty($data['test_2']) ? $data['test_1'] : '',
-                '3' => !empty($data['test_3']) ? $data['test_1'] : ''
+                '2' => !empty($data['test_2']) ? $data['test_2'] : '',
+                '3' => !empty($data['test_3']) ? $data['test_3'] : ''
             ]) : null,
             'analysis' => ($data['type'] == 'antidoping') ? json_encode([
                 'COC' => !empty($data['analysis_COC']) ? $data['analysis_COC'] : '',
