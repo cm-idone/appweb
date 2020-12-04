@@ -25,15 +25,15 @@ class Employees_model extends Model
 			'avatar' => !empty($data['files']['avatar']['name']) ? Fileloader::up($data['files']['avatar']) : null,
 			'firstname' => $data['firstname'],
 			'lastname' => $data['lastname'],
-			'sex' => $data['sex'],
-			'birth_date' => $data['birth_date'],
-			'ife' => $data['ife'],
-			'nss' => $data['nss'],
-			'rfc' => $data['rfc'],
-			'curp' => $data['curp'],
+			'sex' => !empty($data['sex']) ? $data['sex'] : null,
+			'birth_date' => !empty($data['birth_date']) ? $data['birth_date'] : null,
+			'ife' => !empty($data['ife']) ? $data['ife'] : null,
+			'nss' => !empty($data['nss']) ? $data['nss'] : null,
+			'rfc' => !empty($data['rfc']) ? $data['rfc'] : null,
+			'curp' => !empty($data['curp']) ? $data['curp'] : null,
 			'bank' => json_encode([
-				'name' => $data['bank_name'],
-				'account' => $data['bank_account']
+				'name' => !empty($data['bank_name']) ? $data['bank_name'] : '',
+				'account' => !empty($data['bank_account']) ? $data['bank_account'] : ''
 			]),
 			'nsv' => !empty($data['nsv']) ? $data['nsv'] : null,
 			'email' => !empty($data['email']) ? $data['email'] : null,
@@ -41,16 +41,16 @@ class Employees_model extends Model
                 'country' => !empty($data['phone_country']) ? $data['phone_country'] : '',
                 'number' => !empty($data['phone_number']) ? $data['phone_number'] : ''
             ]),
-			'rank' => $data['rank'],
+			'rank' => !empty($data['rank']) ? $data['rank'] : null,
 			'nie' => $data['nie'],
-			'admission_date' => $data['admission_date'],
+			'admission_date' => !empty($data['admission_date']) ? $data['admission_date'] : null,
 			'responsibilities' => !empty($data['responsibilities']) ? $data['responsibilities'] : null,
 			'emergency_contacts' => json_encode([
 				'first' => [
-					'name' => $data['emergency_contacts_first_name'],
+					'name' => !empty($data['emergency_contacts_first_name']) ? $data['emergency_contacts_first_name'] : '',
 					'phone' => [
-						'country' => $data['emergency_contacts_first_phone_country'],
-						'number' => $data['emergency_contacts_first_phone_number']
+						'country' => !empty($data['emergency_contacts_first_phone_country']) ? $data['emergency_contacts_first_phone_country'] : '',
+						'number' => !empty($data['emergency_contacts_first_phone_number']) ? $data['emergency_contacts_first_phone_number'] : ''
 					]
 				],
 				'second' => [
@@ -104,7 +104,8 @@ class Employees_model extends Model
 			'blocked' => false
 		]);
 
-		QRcode::png($data['qr']['content'], $data['qr']['dir'], $data['qr']['level'], $data['qr']['size'], $data['qr']['frame']);
+		if (!empty($query))
+			QRcode::png($data['qr']['content'], $data['qr']['dir'], $data['qr']['level'], $data['qr']['size'], $data['qr']['frame']);
 
 		return $query;
 	}
@@ -239,26 +240,38 @@ class Employees_model extends Model
 
         $edited = System::decode_json_to_array($this->database->select('employees', [
             'avatar',
-			'docs'
+            'nie',
+			'docs',
+			'qr'
         ], [
             'id' => $data['id']
         ]));
 
         if (!empty($edited))
         {
+			if ($_POST['nie'] != $edited[0]['nie'])
+			{
+				$data['qr']['filename'] = Session::get_value('vkye_account')['path'] . '_employee_qr_' . $data['nie'] . '.png';
+				$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . Session::get_value('vkye_account')['path'] . '/' . $data['nie'];
+				$data['qr']['dir'] = PATH_UPLOADS . $data['qr']['filename'];
+				$data['qr']['level'] = 'H';
+				$data['qr']['size'] = 5;
+				$data['qr']['frame'] = 3;
+			}
+
             $query = $this->database->update('employees', [
 				'avatar' => !empty($data['files']['avatar']['name']) ? Fileloader::up($data['files']['avatar']) : $edited[0]['avatar'],
 				'firstname' => $data['firstname'],
 				'lastname' => $data['lastname'],
-				'sex' => $data['sex'],
-				'birth_date' => $data['birth_date'],
-				'ife' => $data['ife'],
-				'nss' => $data['nss'],
-				'rfc' => $data['rfc'],
-				'curp' => $data['curp'],
+				'sex' => !empty($data['sex']) ? $data['sex'] : null,
+				'birth_date' => !empty($data['birth_date']) ? $data['birth_date'] : null,
+				'ife' => !empty($data['ife']) ? $data['ife'] : null,
+				'nss' => !empty($data['nss']) ? $data['nss'] : null,
+				'rfc' => !empty($data['rfc']) ? $data['rfc'] : null,
+				'curp' => !empty($data['curp']) ? $data['curp'] : null,
 				'bank' => json_encode([
-					'name' => $data['bank_name'],
-					'account' => $data['bank_account']
+					'name' => !empty($data['bank_name']) ? $data['bank_name'] : '',
+					'account' => !empty($data['bank_account']) ? $data['bank_account'] : ''
 				]),
 				'nsv' => !empty($data['nsv']) ? $data['nsv'] : null,
 				'email' => !empty($data['email']) ? $data['email'] : null,
@@ -266,16 +279,16 @@ class Employees_model extends Model
 	                'country' => !empty($data['phone_country']) ? $data['phone_country'] : '',
 	                'number' => !empty($data['phone_number']) ? $data['phone_number'] : ''
 	            ]),
-				'rank' => $data['rank'],
+				'rank' => !empty($data['rank']) ? $data['rank'] : null,
 				'nie' => $data['nie'],
-				'admission_date' => $data['admission_date'],
+				'admission_date' => !empty($data['admission_date']) ? $data['admission_date'] : null,
 				'responsibilities' => !empty($data['responsibilities']) ? $data['responsibilities'] : null,
 				'emergency_contacts' => json_encode([
 					'first' => [
-						'name' => $data['emergency_contacts_first_name'],
+						'name' => !empty($data['emergency_contacts_first_name']) ? $data['emergency_contacts_first_name'] : '',
 						'phone' => [
-							'country' => $data['emergency_contacts_first_phone_country'],
-							'number' => $data['emergency_contacts_first_phone_number']
+							'country' => !empty($data['emergency_contacts_first_phone_country']) ? $data['emergency_contacts_first_phone_country'] : '',
+							'number' => !empty($data['emergency_contacts_first_phone_number']) ? $data['emergency_contacts_first_phone_number'] : ''
 						]
 					],
 					'second' => [
@@ -323,7 +336,8 @@ class Employees_model extends Model
 					'material_responsive' => !empty($data['files']['docs_material_responsive']['name']) ? Fileloader::up($data['files']['docs_material_responsive']) : $edited[0]['docs']['material_responsive'],
 					'privacy_notice' => !empty($data['files']['docs_privacy_notice']['name']) ? Fileloader::up($data['files']['docs_privacy_notice']) : $edited[0]['docs']['privacy_notice'],
 					'regulation' => !empty($data['files']['docs_regulation']['name']) ? Fileloader::up($data['files']['docs_regulation']) : $edited[0]['docs']['regulation']
-				])
+				]),
+				'qr' => ($_POST['nie'] != $edited[0]['nie']) ? $data['qr']['filename'] : $edited[0]['qr']
             ], [
                 'id' => $data['id']
             ]);
@@ -392,6 +406,12 @@ class Employees_model extends Model
 
 				if (!empty($data['files']['docs_regulation']['name']) AND !empty($edited[0]['docs']['regulation']))
 					Fileloader::down($edited[0]['docs']['regulation']);
+
+				if ($_POST['nie'] != $edited[0]['nie'])
+				{
+					QRcode::png($data['qr']['content'], $data['qr']['dir'], $data['qr']['level'], $data['qr']['size'], $data['qr']['frame']);
+					Fileloader::down($edited[0]['nie']);
+				}
 			}
         }
 

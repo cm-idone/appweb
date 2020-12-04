@@ -28,6 +28,71 @@ $(document).ready(function()
         open_form_modal('create', $('[data-modal="' + create_action + '"]'));
     });
 
+    $('[name="phone_country"]').on('change', function()
+    {
+        if ($(this).val().length <= 0)
+            $('[name="phone_number"]').val('');
+    });
+
+    $('[name="phone_number"]').on('keyup', function()
+    {
+        validate_string('int', $(this).val(), $(this));
+    });
+
+    $('[data-action="generate_random_nie"]').on('click', function()
+    {
+        generate_string(['uppercase','lowercase','int'], 8, $('[name="nie"]'));
+    });
+
+    $('[name="emergency_contacts_first_phone_country"]').on('change', function()
+    {
+        if ($(this).val().length <= 0)
+            $('[name="emergency_contacts_first_phone_number"]').val('');
+    });
+
+    $('[name="emergency_contacts_first_phone_number"]').on('keyup', function()
+    {
+        validate_string('int', $(this).val(), $(this));
+    });
+
+    $('[name="emergency_contacts_second_phone_country"]').on('change', function()
+    {
+        if ($(this).val().length <= 0)
+            $('[name="emergency_contacts_second_phone_number"]').val('');
+    });
+
+    $('[name="emergency_contacts_second_phone_number"]').on('keyup', function()
+    {
+        validate_string('int', $(this).val(), $(this));
+    });
+
+    $('[name="emergency_contacts_third_phone_country"]').on('change', function()
+    {
+        if ($(this).val().length <= 0)
+            $('[name="emergency_contacts_third_phone_number"]').val('');
+    });
+
+    $('[name="emergency_contacts_third_phone_number"]').on('keyup', function()
+    {
+        validate_string('int', $(this).val(), $(this));
+    });
+
+    $('[name="emergency_contacts_fourth_phone_country"]').on('change', function()
+    {
+        if ($(this).val().length <= 0)
+            $('[name="emergency_contacts_fourth_phone_number"]').val('');
+    });
+
+    $('[name="emergency_contacts_fourth_phone_number"]').on('keyup', function()
+    {
+        validate_string('int', $(this).val(), $(this));
+    });
+
+    $('[data-modal="' + create_action + '"]').find('form').on('submit', function(event)
+    {
+        send_form_modal('create', $(this), event);
+    });
+
     $(document).on('click', '[data-action="' + update_action + '"]', function()
     {
         action = read_action;
@@ -363,66 +428,6 @@ $(document).ready(function()
 
             $('[name="docs_regulation"]').parents('.uploader').find('img').attr('src', docs_regulation);
         });
-    });
-
-    $('[name="phone_country"]').on('change', function()
-    {
-        if ($(this).val().length <= 0)
-            $('[name="phone_number"]').val('');
-    });
-
-    $('[name="phone_number"]').on('keyup', function()
-    {
-        validate_string('int', $(this).val(), $(this));
-    });
-
-    $('[name="emergency_contacts_first_phone_country"]').on('change', function()
-    {
-        if ($(this).val().length <= 0)
-            $('[name="emergency_contacts_first_phone_number"]').val('');
-    });
-
-    $('[name="emergency_contacts_first_phone_number"]').on('keyup', function()
-    {
-        validate_string('int', $(this).val(), $(this));
-    });
-
-    $('[name="emergency_contacts_second_phone_country"]').on('change', function()
-    {
-        if ($(this).val().length <= 0)
-            $('[name="emergency_contacts_second_phone_number"]').val('');
-    });
-
-    $('[name="emergency_contacts_second_phone_number"]').on('keyup', function()
-    {
-        validate_string('int', $(this).val(), $(this));
-    });
-
-    $('[name="emergency_contacts_third_phone_country"]').on('change', function()
-    {
-        if ($(this).val().length <= 0)
-            $('[name="emergency_contacts_third_phone_number"]').val('');
-    });
-
-    $('[name="emergency_contacts_third_phone_number"]').on('keyup', function()
-    {
-        validate_string('int', $(this).val(), $(this));
-    });
-
-    $('[name="emergency_contacts_fourth_phone_country"]').on('change', function()
-    {
-        if ($(this).val().length <= 0)
-            $('[name="emergency_contacts_fourth_phone_number"]').val('');
-    });
-
-    $('[name="emergency_contacts_fourth_phone_number"]').on('keyup', function()
-    {
-        validate_string('int', $(this).val(), $(this));
-    });
-
-    $('[data-modal="' + create_action + '"]').find('form').on('submit', function(event)
-    {
-        send_form_modal('create', $(this), event);
     });
 
     $(document).on('click', '[data-action="' + block_action + '"]', function()

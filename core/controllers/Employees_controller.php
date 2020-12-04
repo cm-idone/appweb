@@ -25,39 +25,20 @@ class Employees_controller extends Controller
 				if (Validations::empty($_POST['lastname']) == false)
 					array_push($errors, ['lastname','{$lang.dont_leave_this_field_empty}']);
 
-				if (Validations::empty($_POST['sex']) == false)
-					array_push($errors, ['sex','{$lang.dont_leave_this_field_empty}']);
-
-				if (Validations::empty($_POST['birth_date']) == false)
-					array_push($errors, ['birth_date','{$lang.dont_leave_this_field_empty}']);
-				else if ($_POST['birth_date'] > Dates::current_date())
+				if (Validations::empty($_POST['birth_date']) == true AND $_POST['birth_date'] > Dates::past_date(Date::current_date(), 15, 'year'))
 					array_push($errors, ['birth_date','{$lang.invalid_field}']);
 
-				if (Validations::empty($_POST['ife']) == false)
-					array_push($errors, ['ife','{$lang.dont_leave_this_field_empty}']);
-				else if ($this->model->check_exist_employee($_POST['id'], 'ife', $_POST['ife']) == true)
+				if (Validations::empty($_POST['ife']) == true AND $this->model->check_exist_employee($_POST['id'], 'ife', $_POST['ife']) == true)
 					array_push($errors, ['ife','{$lang.this_record_already_exists}']);
 
-				if (Validations::empty($_POST['nss']) == false)
-					array_push($errors, ['nss','{$lang.dont_leave_this_field_empty}']);
-				else if ($this->model->check_exist_employee($_POST['id'], 'nss', $_POST['nss']) == true)
+				if (Validations::empty($_POST['nss']) == true AND $this->model->check_exist_employee($_POST['id'], 'nss', $_POST['nss']) == true)
 					array_push($errors, ['nss','{$lang.this_record_already_exists}']);
 
-				if (Validations::empty($_POST['rfc']) == false)
-					array_push($errors, ['rfc','{$lang.dont_leave_this_field_empty}']);
-				else if ($this->model->check_exist_employee($_POST['id'], 'rfc', $_POST['rfc']) == true)
+				if (Validations::empty($_POST['rfc']) == true AND $this->model->check_exist_employee($_POST['id'], 'rfc', $_POST['rfc']) == true)
 					array_push($errors, ['rfc','{$lang.this_record_already_exists}']);
 
-				if (Validations::empty($_POST['curp']) == false)
-					array_push($errors, ['curp','{$lang.dont_leave_this_field_empty}']);
-				else if ($this->model->check_exist_employee($_POST['id'], 'curp', $_POST['curp']) == true)
+				if (Validations::empty($_POST['curp']) == true AND $this->model->check_exist_employee($_POST['id'], 'curp', $_POST['curp']) == true)
 					array_push($errors, ['curp','{$lang.this_record_already_exists}']);
-
-				if (Validations::empty($_POST['bank_name']) == false)
-					array_push($errors, ['bank_name','{$lang.dont_leave_this_field_empty}']);
-
-				if (Validations::empty($_POST['bank_account']) == false)
-					array_push($errors, ['bank_account','{$lang.dont_leave_this_field_empty}']);
 
 				if (Validations::email($_POST['email'], true) == false)
 					array_push($errors, ['email','{$lang.invalid_field}']);
@@ -67,26 +48,33 @@ class Employees_controller extends Controller
 				else if (Validations::number('int', $_POST['phone_number'], true) == false)
 					array_push($errors, ['phone_number','{$lang.invalid_field}']);
 
-				if (Validations::empty($_POST['rank']) == false)
-					array_push($errors, ['rank','{$lang.dont_leave_this_field_empty}']);
-
 				if (Validations::empty($_POST['nie']) == false)
 					array_push($errors, ['nie','{$lang.dont_leave_this_field_empty}']);
 				else if ($this->model->check_exist_employee($_POST['id'], 'nie', $_POST['nie']) == true)
 					array_push($errors, ['nie','{$lang.this_record_already_exists}']);
 
-				if (Validations::empty($_POST['admission_date']) == false)
-					array_push($errors, ['admission_date','{$lang.dont_leave_this_field_empty}']);
-				else if ($_POST['admission_date'] > Dates::current_date())
+				if (Validations::empty($_POST['admission_date']) == true AND $_POST['admission_date'] > Date::current_date())
 					array_push($errors, ['admission_date','{$lang.invalid_field}']);
-
-				if (Validations::empty($_POST['emergency_contacts_first_name']) == false)
-					array_push($errors, ['emergency_contacts_first_name','{$lang.dont_leave_this_field_empty}']);
 
 				if (Validations::empty([$_POST['emergency_contacts_first_phone_country'],$_POST['emergency_contacts_first_phone_number']], true) == false)
 					array_push($errors, ['emergency_contacts_first_phone_number','{$lang.dont_leave_this_field_empty}']);
 				else if (Validations::number('int', $_POST['emergency_contacts_first_phone_number'], true) == false)
 					array_push($errors, ['emergency_contacts_first_phone_number','{$lang.invalid_field}']);
+
+				if (Validations::empty([$_POST['emergency_contacts_second_phone_country'],$_POST['emergency_contacts_second_phone_number']], true) == false)
+					array_push($errors, ['emergency_contacts_second_phone_number','{$lang.dont_leave_this_field_empty}']);
+				else if (Validations::number('int', $_POST['emergency_contacts_second_phone_number'], true) == false)
+					array_push($errors, ['emergency_contacts_second_phone_number','{$lang.invalid_field}']);
+
+				if (Validations::empty([$_POST['emergency_contacts_third_phone_country'],$_POST['emergency_contacts_third_phone_number']], true) == false)
+					array_push($errors, ['emergency_contacts_third_phone_number','{$lang.dont_leave_this_field_empty}']);
+				else if (Validations::number('int', $_POST['emergency_contacts_third_phone_number'], true) == false)
+					array_push($errors, ['emergency_contacts_third_phone_number','{$lang.invalid_field}']);
+
+				if (Validations::empty([$_POST['emergency_contacts_fourth_phone_country'],$_POST['emergency_contacts_fourth_phone_number']], true) == false)
+					array_push($errors, ['emergency_contacts_fourth_phone_number','{$lang.dont_leave_this_field_empty}']);
+				else if (Validations::number('int', $_POST['emergency_contacts_fourth_phone_number'], true) == false)
+					array_push($errors, ['emergency_contacts_fourth_phone_number','{$lang.invalid_field}']);
 
 				if (empty($errors))
 				{

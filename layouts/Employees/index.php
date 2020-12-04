@@ -55,7 +55,8 @@ $this->dependencies->add(['js', '{$path.js}Employees/index.js']);
                         <?php endif; ?>
                     <?php endif; ?>
                     <?php if (Permissions::user(['scan_employees']) == true) : ?>
-                        <a href="/<?php echo Session::get_value('vkye_account')['path']; ?>/<?php echo $value['nie']; ?>"><i class="fas fa-user-circle"></i><span>{$lang.view_id_one}</span></a>
+                        <a href="{$path.uploads}<?php echo $value['qr']; ?>" download="<?php echo $value['nie']; ?>.png"><i class="fas fa-qrcode"></i><span>{$lang.download_id_one}</span></a>
+                        <a href="/<?php echo Session::get_value('vkye_account')['path']; ?>/<?php echo $value['nie']; ?>"><i class="fas fa-id-card-alt"></i><span>{$lang.view_id_one}</span></a>
                     <?php endif; ?>
                 </div>
             </div>
@@ -233,7 +234,8 @@ $this->dependencies->add(['js', '{$path.js}Employees/index.js']);
                                 </div>
                             </div>
                             <div class="span4">
-                                <div class="text">
+                                <div class="compound st-2-left">
+                                    <a data-action="generate_random_nie"><i class="fas fa-redo" aria-hidden="true"></i></a>
                                     <input type="text" name="nie">
                                 </div>
                                 <div class="title">
