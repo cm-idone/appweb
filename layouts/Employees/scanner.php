@@ -15,28 +15,29 @@ $this->dependencies->add(['js', '{$path.js}Employees/scanner.min.js']);
                     <img src="<?php echo (!empty($data['employee']['avatar']) ? '{$path.uploads}' . $data['employee']['avatar'] : '{$path.images}employee.png'); ?>">
                 </figure>
                 <h4><?php echo $data['employee']['firstname'] . ' ' . $data['employee']['lastname']; ?></h4>
-                <span><?php echo (!empty($data['employee']['email']) ? $data['employee']['email'] : '({$lang.not_email})'); ?></span>
-                <span><?php echo ((!empty($data['employee']['phone']['country']) AND !empty($data['employee']['phone']['number'])) ? '+ (' . $data['employee']['phone']['country'] . ') ' . $data['employee']['phone']['number'] : '({$lang.not_phone})'); ?></span>
+                <span><?php echo $data['employee']['nie']; ?></span>
                 <span class="breaker"></span>
-                <h6>{$lang.sex}: {$lang.<?php echo $data['employee']['sex']; ?>}</h6>
-                <h6>{$lang.birth_date}: <?php echo Dates::format_date($data['employee']['birth_date'], 'long'); ?></h6>
-                <h6>{$lang.age}: <?php echo Functions::format_age($data['employee']['birth_date']); ?></h6>
-                <h6>{$lang.ife}: <?php echo $data['employee']['ife']; ?></h6>
-                <h6>{$lang.nss}: <?php echo $data['employee']['nss']; ?></h6>
-                <h6>{$lang.rfc}: <?php echo $data['employee']['rfc']; ?></h6>
-                <h6>{$lang.curp}: <?php echo $data['employee']['curp']; ?></h6>
-                <h6>{$lang.account_number}: (<?php echo $data['employee']['bank']['name']; ?>) <?php echo $data['employee']['bank']['account']; ?></h6>
-                <h6>{$lang.nsv}: <?php echo (!empty($data['employee']['nsv']) ? $data['employee']['nsv'] : '{$lang.not_established}'); ?></h6>
+                <h6>{$lang.sex}: {$lang.<?php echo (!empty($data['employee']['sex']) ? $data['employee']['sex'] : '{$lang.not_available}'); ?>}</h6>
+                <h6>{$lang.birth_date}: <?php echo (!empty($data['employee']['birth_date']) ? Dates::format_date($data['employee']['birth_date'], 'long') : '{$lang.not_available}'); ?></h6>
+                <h6>{$lang.age}: <?php echo (!empty($data['employee']['birth_date']) ? Functions::format_age($data['employee']['birth_date']) : '{$lang.not_available}'); ?></h6>
+                <h6>{$lang.ife}: <?php echo (!empty($data['employee']['ife']) ? $data['employee']['ife'] : '{$lang.not_available}'); ?></h6>
+                <h6>{$lang.nss}: <?php echo (!empty($data['employee']['nss']) ? $data['employee']['nss'] : '{$lang.not_available}'); ?></h6>
+                <h6>{$lang.rfc}: <?php echo (!empty($data['employee']['rfc']) ? $data['employee']['rfc'] : '{$lang.not_available}'); ?></h6>
+                <h6>{$lang.curp}: <?php echo (!empty($data['employee']['curp']) ? $data['employee']['curp'] : '{$lang.not_available}'); ?></h6>
+                <h6>{$lang.account_number}: <?php echo ((!empty($data['employee']['bank']['name']) AND !empty($data['employee']['bank']['account'])) ? '(' . $data['employee']['bank']['name'] . ') ' . $data['employee']['bank']['account'] : '{$lang.not_available}'); ?></h6>
+                <h6>{$lang.nsv}: <?php echo (!empty($data['employee']['nsv']) ? $data['employee']['nsv'] : '{$lang.not_available}'); ?></h6>
+                <h6>{$lang.email}: <?php echo (!empty($data['employee']['email']) ? $data['employee']['email'] : '{$lang.not_available}'); ?></h6>
+                <h6>{$lang.phone}: <?php echo ((!empty($data['employee']['phone']['country']) AND !empty($data['employee']['phone']['number'])) ? '+ (' . $data['employee']['phone']['country'] . ') ' . $data['employee']['phone']['number'] : '{$lang.not_available}'); ?></h6>
                 <span class="breaker"></span>
-                <h6>{$lang.rank}: <?php echo $data['employee']['rank']; ?></h6>
+                <h6>{$lang.rank}: <?php echo (!empty($data['employee']['rank']) ? $data['employee']['rank'] : '{$lang.not_available}'); ?></h6>
                 <h6>{$lang.nie}: <?php echo $data['employee']['nie']; ?></h6>
-                <h6>{$lang.admission_date}: <?php echo Dates::format_date($data['employee']['admission_date'], 'long'); ?></h6>
-                <p>{$lang.responsibilities}: <?php echo (!empty($data['employee']['responsibilities']) ? $data['employee']['responsibilities'] : '{$lang.not_established}'); ?></p>
+                <h6>{$lang.admission_date}: <?php echo (!empty($data['employee']['admission_date']) ? Dates::format_date($data['employee']['admission_date'], 'long') : '{$lang.not_available}'); ?></h6>
+                <p>{$lang.responsibilities}: <?php echo (!empty($data['employee']['responsibilities']) ? $data['employee']['responsibilities'] : '{$lang.not_available}'); ?></p>
                 <span class="breaker"></span>
-                <h6>{$lang.emergency_contact} 1: <?php echo '+ (' . $data['employee']['emergency_contacts']['first']['phone']['country'] . ') ' . $data['employee']['emergency_contacts']['first']['phone']['number'] . ' ' . $data['employee']['emergency_contacts']['first']['name'] ?></h6>
-                <h6>{$lang.emergency_contact} 2: <?php echo (!empty($data['employee']['emergency_contacts']['second']['name']) ? '+ (' . $data['employee']['emergency_contacts']['second']['phone']['country'] . ') ' . $data['employee']['emergency_contacts']['second']['phone']['number'] . ' ' . $data['employee']['emergency_contacts']['second']['name'] : '{$lang.not_established}'); ?></h6>
-                <h6>{$lang.emergency_contact} 3: <?php echo (!empty($data['employee']['emergency_contacts']['third']['name']) ? '+ (' . $data['employee']['emergency_contacts']['third']['phone']['country'] . ') ' . $data['employee']['emergency_contacts']['third']['phone']['number'] . ' ' . $data['employee']['emergency_contacts']['third']['name'] : '{$lang.not_established}'); ?></h6>
-                <h6>{$lang.emergency_contact} 4: <?php echo (!empty($data['employee']['emergency_contacts']['fourth']['name']) ? '+ (' . $data['employee']['emergency_contacts']['fourth']['phone']['country'] . ') ' . $data['employee']['emergency_contacts']['fourth']['phone']['number'] . ' ' . $data['employee']['emergency_contacts']['fourth']['name'] : '{$lang.not_established}'); ?></h6>
+                <h6>{$lang.emergency_contact} 1: <?php echo (!empty($data['employee']['emergency_contacts']['first']['name']) ? '+ (' . $data['employee']['emergency_contacts']['first']['phone']['country'] . ') ' . $data['employee']['emergency_contacts']['first']['phone']['number'] . ' ' . $data['employee']['emergency_contacts']['first']['name'] : '{$lang.not_available}'); ?></h6>
+                <h6>{$lang.emergency_contact} 2: <?php echo (!empty($data['employee']['emergency_contacts']['second']['name']) ? '+ (' . $data['employee']['emergency_contacts']['second']['phone']['country'] . ') ' . $data['employee']['emergency_contacts']['second']['phone']['number'] . ' ' . $data['employee']['emergency_contacts']['second']['name'] : '{$lang.not_available}'); ?></h6>
+                <h6>{$lang.emergency_contact} 3: <?php echo (!empty($data['employee']['emergency_contacts']['third']['name']) ? '+ (' . $data['employee']['emergency_contacts']['third']['phone']['country'] . ') ' . $data['employee']['emergency_contacts']['third']['phone']['number'] . ' ' . $data['employee']['emergency_contacts']['third']['name'] : '{$lang.not_available}'); ?></h6>
+                <h6>{$lang.emergency_contact} 4: <?php echo (!empty($data['employee']['emergency_contacts']['fourth']['name']) ? '+ (' . $data['employee']['emergency_contacts']['fourth']['phone']['country'] . ') ' . $data['employee']['emergency_contacts']['fourth']['phone']['number'] . ' ' . $data['employee']['emergency_contacts']['fourth']['name'] : '{$lang.not_available}'); ?></h6>
                 <span class="breaker"></span>
                 <a data-action="preview_doc" data-doc="birth_certificate"><?php echo (!empty($data['employee']['docs']['birth_certificate']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.birth_certificate}</a>
                 <a data-action="preview_doc" data-doc="address_proof"><?php echo (!empty($data['employee']['docs']['address_proof']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.address_proof}</a>

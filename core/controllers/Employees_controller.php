@@ -294,7 +294,7 @@ class Employees_controller extends Controller
 	                            </div>
 	                            <div class="span4">
 	                                <div class="text">
-	                                    <input type="text" value="' . $data['employee']['ife'] . '" disabled>
+	                                    <input type="text" value="' . (!empty($data['employee']['ife']) ? $data['employee']['ife'] : '{$lang.not_available}') . '" disabled>
 	                                </div>
 	                                <div class="title">
 	                                    <h6>{$lang.ife}</h6>
@@ -306,7 +306,7 @@ class Employees_controller extends Controller
 	                        <div class="row">
 	                            <div class="span3">
 	                                <div class="text">
-	                                    <input type="text" value="' . Functions::format_age($data['employee']['birth_date']) . '" disabled>
+	                                    <input type="text" value="' . (!empty($data['employee']['birth_date']) ? Functions::format_age($data['employee']['birth_date']) : '{$lang.not_available}') . '" disabled>
 	                                </div>
 	                                <div class="title">
 	                                    <h6>{$lang.age}</h6>
@@ -314,7 +314,7 @@ class Employees_controller extends Controller
 	                            </div>
 	                            <div class="span6">
 	                                <div class="text">
-	                                    <input type="text" value="' . Dates::format_date($data['employee']['birth_date'], 'long') . '" disabled>
+	                                    <input type="text" value="' . (!empty($data['employee']['birth_date']) ? Dates::format_date($data['employee']['birth_date'], 'long') : '{$lang.not_available}') . '" disabled>
 	                                </div>
 	                                <div class="title">
 	                                    <h6>{$lang.birth_date}</h6>
@@ -322,7 +322,7 @@ class Employees_controller extends Controller
 	                            </div>
 	                            <div class="span3">
 	                                <div class="text">
-	                                    <input type="text" value="{$lang.' . $data['employee']['sex'] . '}" disabled>
+	                                    <input type="text" value="' . (!empty($data['employee']['sex']) ? '{$lang.' . $data['employee']['sex'] . '}' : '{$lang.not_available}') . '" disabled>
 	                                </div>
 	                                <div class="title">
 	                                    <h6>{$lang.sex}</h6>

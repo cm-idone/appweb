@@ -3217,8 +3217,15 @@ div.preview-docs > iframe {
 
 div.scanner-1,
 div.scanner-2 {
-    width: 50%;
     float: left;
+}
+
+div.scanner-1 {
+    width: 40%;
+}
+
+div.scanner-2 {
+    width: 60%;
 }
 
 @media (max-width: 768px) {
