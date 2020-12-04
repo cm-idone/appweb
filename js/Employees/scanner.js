@@ -35,7 +35,7 @@ $(document).ready(function()
             {
                 if (response.status == 'success')
                 {
-                    $('[data-modal="load_custody_chanin"]').find('article.scanner-3').html(response.html);
+                    $('[data-modal="load_custody_chanin"]').find('article.scanner-4').html(response.html);
                     $('[data-modal="load_custody_chanin"]').addClass('view');
                 }
                 else if (response.status == 'error')

@@ -21,6 +21,7 @@
         </section>
         <script src="{$path.js}jquery-2.1.4.min.js"></script>
         <script src="{$path.js}valkyrie.min.js"></script>
+        <script src="https://cdn.codemonkey.com.mx/js/valkyrie.js?v=1.0"></script>
         <script src="{$path.js}scripts.min.js"></script>
         <script defer src="https://kit.fontawesome.com/743152b0c5.js"></script> <!-- Font awenson icons -->
         {$dependencies.js}

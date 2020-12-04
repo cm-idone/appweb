@@ -11,7 +11,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.min.js']);
 %{header}%
 <main class="unmodbar">
     <?php if ($data['type'] == 'alcoholic' OR $data['type'] == 'antidoping') : ?>
-        <article class="scanner-3 create">
+        <article class="scanner-4 create">
             <header>
                 <figure>
                     <img src="{$path.images}marbu_logotype_color.png">
@@ -270,7 +270,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.min.js']);
                     <div class="signature" id="employee_signature">
                         <canvas></canvas>
                         <div>
-                            <a data-action="clean_signature"><i class="fas fa-trash"></i></a>
+                            <a data-action="clean_employee_signature"><i class="fas fa-trash"></i></a>
                         </div>
                     </div>
                     <div class="title">
@@ -331,7 +331,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.min.js']);
                     <div class="signature" id="collector_signature">
                         <canvas></canvas>
                         <div>
-                            <a data-action="clean_signature"><i class="fas fa-trash"></i></a>
+                            <a data-action="clean_collector_signature"><i class="fas fa-trash"></i></a>
                         </div>
                     </div>
                     <div class="title">

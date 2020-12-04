@@ -10,6 +10,11 @@ $(document).ready(function()
 
     resize_canvas(employee_canvas);
 
+    $('[data-action="clean_employee_signature"]').on('click', function()
+    {
+        employee_pad.clear();
+    });
+
     var collector_signature = document.getElementById('collector_signature');
     var collector_canvas = collector_signature.querySelector('canvas');
     var collector_pad = new SignaturePad(collector_canvas, {
@@ -17,6 +22,11 @@ $(document).ready(function()
     });
 
     resize_canvas(collector_canvas);
+
+    $('[data-action="clean_collector_signature"]').on('click', function()
+    {
+        collector_pad.clear();
+    });
 
     $('form[name="create_custody_chain"]').on('submit', function(event)
     {

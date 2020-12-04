@@ -14,6 +14,7 @@
 		<meta name="description" content="{$_vkye_seo_description}" />
 		{$dependencies.meta}
 		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+		<link rel="stylesheet" href="https://cdn.codemonkey.com.mx/css/valkyrie.css?v=1.0" type="text/css" media="all" />
 		<link rel="stylesheet" href="{$path.css}valkyrie.min.css" type="text/css" media="all" />
 		<link rel="stylesheet" href="{$path.css}styles.min.css" type="text/css" media="all" />
 		<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet"> <!-- Roboto font -->
