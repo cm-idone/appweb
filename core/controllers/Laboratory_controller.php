@@ -97,6 +97,10 @@ class Laboratory_controller extends Controller
     		{
     			define('_title', Configuration::$web_page . ' | {$lang.do_test}');
 
+				global $data;
+
+				$data['locations'] = $this->model->read_locations();
+
     			$template = $this->view->render($this, 'create');
 
     			echo $template;

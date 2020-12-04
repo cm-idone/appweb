@@ -48,6 +48,10 @@ class Urls_registered_vkye
             '/%param%/%param%' => [
                 'controller' => 'Employees',
                 'method' => 'Scanner'
+            ],
+            '/locations' => [
+                'controller' => 'Locations',
+                'method' => 'index'
             ]
         ];
     }

@@ -33,7 +33,6 @@ class Login_model extends Model
 					'avatar',
 					'name',
 					'type',
-					'token',
 					'path',
 					'email',
 					'description',

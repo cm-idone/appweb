@@ -73,4 +73,21 @@ class Laboratory_model extends Model
 
         return !empty($query) ? $query[0] : null;
 	}
+
+	public function read_locations()
+	{
+		$query = $this->database->select('locations', [
+			'name'
+		], [
+            'AND' => [
+				'account' => Session::get_value('vkye_account')['id'],
+				'blocked' => false
+			],
+            'ORDER' => [
+    			'name' => 'ASC'
+    		]
+        ]);
+
+		return $query;
+	}
 }

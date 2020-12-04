@@ -283,7 +283,12 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.min.js']);
                     <div class="row">
                         <div class="span8">
                             <div class="text">
-                                <input type="text" name="collection_place">
+                                <select name="collection_place">
+                                    <option value="">{$lang.choose_an_option}</option>
+                                    <?php foreach ($data['locations'] as $value) : ?>
+                                        <option value="<?php echo $value['name']; ?>"><?php echo $value['name']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                             <div class="title">
                                 <h6>{$lang.place}</h6>

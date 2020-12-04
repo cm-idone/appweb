@@ -40,6 +40,7 @@ class Permissions
                     array_push($paths, '/Dashboard/index');
                     array_push($paths, '/Employees/index');
                     array_push($paths, '/Employees/scanner');
+                    array_push($paths, '/Locations/index');
 
                     foreach (Session::get_value('vkye_account')['permissions'] as $key => $value)
                     {
@@ -113,6 +114,26 @@ class Permissions
 
                         case 'delete_employees' :
                             array_push($paths, '/Employees/index');
+                            break;
+
+                        case 'create_locations' :
+                            array_push($paths, '/Locations/index');
+                            break;
+
+                        case 'update_locations' :
+                            array_push($paths, '/Locations/index');
+                            break;
+
+                        case 'block_locations' :
+                            array_push($paths, '/Locations/index');
+                            break;
+
+                        case 'unblock_locations' :
+                            array_push($paths, '/Locations/index');
+                            break;
+
+                        case 'delete_locations' :
+                            array_push($paths, '/Locations/index');
                             break;
 
                         default:

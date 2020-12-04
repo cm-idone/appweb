@@ -36,9 +36,9 @@
 </header>
 <header class="leftbar">
     <nav>
-        <!-- <ul>
+        <ul>
             <li><a href="/dashboard"><i class="fas fa-igloo"></i><span>{$lang.dashboard}</span></a></li>
-        </ul> -->
+        </ul>
         <?php if (!empty(Session::get_value('vkye_account'))) : ?>
             <!-- <?php if (Permissions::account(['laboratory']) == true AND Permissions::user(['laboratory','custody_chains'], true) == true) : ?>
                 <ul>
@@ -89,6 +89,19 @@
             <?php endif; ?>
         </div>
         <nav>
+            <ul>
+                <li><a href="/dashboard"><i class="fas fa-igloo"></i>{$lang.dashboard}</a></li>
+            </ul>
+            <?php if (Permissions::user(['employees','locations'], true) == true) : ?>
+                <ul>
+                    <?php if (Permissions::user(['employees'], true) == true) : ?>
+                        <li><a href="/employees"><i class="fas fa-user-friends"></i>{$lang.employees}</a></li>
+                    <?php endif; ?>
+                    <?php if (Permissions::user(['locations'], true) == true) : ?>
+                        <li><a href="/locations"><i class="fas fa-map-marker-alt"></i>{$lang.locations}</a></li>
+                    <?php endif; ?>
+                </ul>
+            <?php endif; ?>
             <!-- <?php if (!empty(Session::get_value('vkye_account'))) : ?>
                 <?php if (Permissions::user(['account'], true) == true) : ?>
                     <ul>
