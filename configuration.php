@@ -147,7 +147,7 @@ class Configuration
 	 *
      * @var string $db_name
      */
-	public static $db_name = 'idone';
+	public static $db_name = 'id_one';
 
 	/**
      * Usuario de la base de datos
@@ -156,7 +156,7 @@ class Configuration
 	 *
      * @var string $db_user
      */
-	public static $db_user = 'codemonkey';
+	public static $db_user = 'one_consultores';
 
 	/**
      * Contraseña de la base de datos.
@@ -165,7 +165,7 @@ class Configuration
 	 *
      * @var string $db_pass
      */
-	public static $db_pass = 'Nff4j26!';
+	public static $db_pass = 'B!39ze5g';
 
 	/**
      * Tipo de caracteres para la base de datos. Opcional.
