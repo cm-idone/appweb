@@ -25,7 +25,7 @@ class Employees_controller extends Controller
 				if (Validations::empty($_POST['lastname']) == false)
 					array_push($errors, ['lastname','{$lang.dont_leave_this_field_empty}']);
 
-				if (Validations::empty($_POST['birth_date']) == true AND $_POST['birth_date'] > Dates::past_date(Date::current_date(), 15, 'year'))
+				if (Validations::empty($_POST['birth_date']) == true AND $_POST['birth_date'] > Dates::past_date(Dates::current_date(), 15, 'year'))
 					array_push($errors, ['birth_date','{$lang.invalid_field}']);
 
 				if (Validations::empty($_POST['ife']) == true AND $this->model->check_exist_employee($_POST['id'], 'ife', $_POST['ife']) == true)
@@ -53,7 +53,7 @@ class Employees_controller extends Controller
 				else if ($this->model->check_exist_employee($_POST['id'], 'nie', $_POST['nie']) == true)
 					array_push($errors, ['nie','{$lang.this_record_already_exists}']);
 
-				if (Validations::empty($_POST['admission_date']) == true AND $_POST['admission_date'] > Date::current_date())
+				if (Validations::empty($_POST['admission_date']) == true AND $_POST['admission_date'] > Dates::current_date())
 					array_push($errors, ['admission_date','{$lang.invalid_field}']);
 
 				if (Validations::empty([$_POST['emergency_contacts_first_phone_country'],$_POST['emergency_contacts_first_phone_number']], true) == false)
