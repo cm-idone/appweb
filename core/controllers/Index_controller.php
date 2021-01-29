@@ -12,7 +12,7 @@ class Index_controller extends Controller
 	public function index()
 	{
 		header('Location: /login');
-
+		
 		if (Format::exist_ajax_request() == true)
 		{
 

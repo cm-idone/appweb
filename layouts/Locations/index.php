@@ -2,25 +2,22 @@
 
 defined('_EXEC') or die;
 
-$this->dependencies->add(['js', '{$path.js}Locations/index.min.js']);
+$this->dependencies->add(['js', '{$path.js}Locations/index.js']);
 
 ?>
 
 %{header}%
 <header class="modbar">
-    <div class="title">
-        <span><i class="fas fa-truck"></i><strong>{$lang.locations}</strong></span>
-    </div>
     <div class="buttons">
-        <?php if (Permissions::user(['create_locations']) == true) : ?>
-            <a data-action="create_location" class="success"><i class="fas fa-plus"></i><span>{$lang.create}</span></a>
-        <?php endif; ?>
         <fieldset class="fields-group big">
             <div class="compound st-4-left">
                 <span><i class="fas fa-search"></i></span>
                 <input type="text" data-search="locations" placeholder="{$lang.search}">
             </div>
         </fieldset>
+        <?php if (Permissions::user(['create_locations']) == true) : ?>
+            <a data-action="create_location" class="success"><i class="fas fa-plus"></i><span>{$lang.create}</span></a>
+        <?php endif; ?>
     </div>
 </header>
 <main>

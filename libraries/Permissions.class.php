@@ -38,9 +38,6 @@ class Permissions
                 {
                     array_push($paths, '/System/index');
                     array_push($paths, '/Dashboard/index');
-                    array_push($paths, '/Employees/index');
-                    array_push($paths, '/Employees/scanner');
-                    array_push($paths, '/Locations/index');
 
                     foreach (Session::get_value('vkye_account')['permissions'] as $key => $value)
                     {
@@ -49,7 +46,12 @@ class Permissions
                             case 'laboratory' :
                                 array_push($paths, '/Laboratory/index');
                                 array_push($paths, '/Laboratory/create');
-                                array_push($paths, '/Laboratory/custodychains');
+                                array_push($paths, '/Laboratory/alcoholic');
+                                array_push($paths, '/Laboratory/antidoping');
+                                array_push($paths, '/Laboratory/covid');
+                                array_push($paths, '/Employees/index');
+                                array_push($paths, '/Employees/scanner');
+                                array_push($paths, '/Locations/index');
                                 break;
 
                             default:
@@ -65,85 +67,128 @@ class Permissions
         }
         else if ($option == 'user')
         {
-            if (Session::get_value('vkye_user')['permissions'] != 'all')
+            if (Session::get_value('vkye_account')['type'] == 'business')
             {
-                array_push($paths, '/System/index');
-                array_push($paths, '/Dashboard/index');
-
-                foreach (Session::get_value('vkye_user')['permissions'] as $key => $value)
+                if (Session::get_value('vkye_user')['permissions'] != 'all')
                 {
-                    switch ($value)
+                    array_push($paths, '/System/index');
+                    array_push($paths, '/Dashboard/index');
+
+                    foreach (Session::get_value('vkye_user')['permissions'] as $key => $value)
                     {
-                        case 'view_laboratory' :
-                            array_push($paths, '/Laboratory/index');
-                            break;
+                        switch ($value)
+                        {
+                            case 'read_laboratory' :
+                                array_push($paths, '/Laboratory/index');
+                                break;
 
-                        case 'create_custody_chains' :
-                            array_push($paths, '/Laboratory/create');
-                            array_push($paths, '/Laboratory/custodychains');
-                            break;
+                            case 'create_alcoholic' :
+                                array_push($paths, '/Laboratory/create');
+                                array_push($paths, '/Laboratory/alcoholic');
+                                break;
 
-                        case 'update_custody_chains' :
-                            array_push($paths, '/Laboratory/custodychains');
-                            break;
+                            case 'read_alcoholic' :
+                                array_push($paths, '/Laboratory/alcoholic');
+                                break;
 
-                        case 'delete_custody_chains' :
-                            array_push($paths, '/Laboratory/custodychains');
-                            break;
+                            case 'update_alcoholic' :
+                                array_push($paths, '/Laboratory/alcoholic');
+                                break;
 
-                        case 'create_employees' :
-                            array_push($paths, '/Employees/index');
-                            break;
+                            case 'delete_alcoholic' :
+                                array_push($paths, '/Laboratory/alcoholic');
+                                break;
 
-                        case 'update_employees' :
-                            array_push($paths, '/Employees/index');
-                            break;
+                            case 'create_antidoping' :
+                                array_push($paths, '/Laboratory/create');
+                                array_push($paths, '/Laboratory/antidoping');
+                                break;
 
-                        case 'scan_employees' :
-                            array_push($paths, '/Employees/index');
-                            array_push($paths, '/Employees/scanner');
-                            break;
+                            case 'read_antidoping' :
+                                array_push($paths, '/Laboratory/antidoping');
+                                break;
 
-                        case 'block_employees' :
-                            array_push($paths, '/Employees/index');
-                            break;
+                            case 'update_antidoping' :
+                                array_push($paths, '/Laboratory/antidoping');
+                                break;
 
-                        case 'unblock_employees' :
-                            array_push($paths, '/Employees/index');
-                            break;
+                            case 'delete_antidoping' :
+                                array_push($paths, '/Laboratory/antidoping');
+                                break;
 
-                        case 'delete_employees' :
-                            array_push($paths, '/Employees/index');
-                            break;
+                            case 'create_covid' :
+                                array_push($paths, '/Laboratory/create');
+                                array_push($paths, '/Laboratory/covid');
+                                break;
 
-                        case 'create_locations' :
-                            array_push($paths, '/Locations/index');
-                            break;
+                            case 'read_covid' :
+                                array_push($paths, '/Laboratory/covid');
+                                break;
 
-                        case 'update_locations' :
-                            array_push($paths, '/Locations/index');
-                            break;
+                            case 'update_covid' :
+                                array_push($paths, '/Laboratory/covid');
+                                break;
 
-                        case 'block_locations' :
-                            array_push($paths, '/Locations/index');
-                            break;
+                            case 'delete_covid' :
+                                array_push($paths, '/Laboratory/covid');
+                                break;
 
-                        case 'unblock_locations' :
-                            array_push($paths, '/Locations/index');
-                            break;
+                            case 'create_employees' :
+                                array_push($paths, '/Employees/index');
+                                break;
 
-                        case 'delete_locations' :
-                            array_push($paths, '/Locations/index');
-                            break;
+                            case 'update_employees' :
+                                array_push($paths, '/Employees/index');
+                                break;
 
-                        default:
-                            break;
+                            case 'scan_employees' :
+                                array_push($paths, '/Employees/index');
+                                array_push($paths, '/Employees/scanner');
+                                break;
+
+                            case 'block_employees' :
+                                array_push($paths, '/Employees/index');
+                                break;
+
+                            case 'unblock_employees' :
+                                array_push($paths, '/Employees/index');
+                                break;
+
+                            case 'delete_employees' :
+                                array_push($paths, '/Employees/index');
+                                break;
+
+                            case 'create_locations' :
+                                array_push($paths, '/Locations/index');
+                                break;
+
+                            case 'update_locations' :
+                                array_push($paths, '/Locations/index');
+                                break;
+
+                            case 'block_locations' :
+                                array_push($paths, '/Locations/index');
+                                break;
+
+                            case 'unblock_locations' :
+                                array_push($paths, '/Locations/index');
+                                break;
+
+                            case 'delete_locations' :
+                                array_push($paths, '/Locations/index');
+                                break;
+
+                            default:
+                                break;
+                        }
                     }
-                }
 
-                $paths = array_unique($paths);
-                $paths = array_values($paths);
-                $access = in_array($path, $paths) ? true : false;
+                    $paths = array_unique($paths);
+                    $paths = array_values($paths);
+                    $access = in_array($path, $paths) ? true : false;
+                }
+                else
+                    $access = true;
             }
             else
                 $access = true;
@@ -187,26 +232,31 @@ class Permissions
     {
         $access = false;
 
-        if (Session::get_value('vkye_user')['permissions'] != 'all')
+        if (Session::get_value('vkye_account')['type'] == 'business')
         {
-            foreach ($data as $value)
+            if (Session::get_value('vkye_user')['permissions'] != 'all')
             {
-                if ($group == true)
+                foreach ($data as $value)
                 {
-                    foreach (Session::get_value('vkye_user')['permissions'] as $subvalue)
+                    if ($group == true)
                     {
-                        $subvalue = explode('_', $subvalue, 2);
+                        foreach (Session::get_value('vkye_user')['permissions'] as $subvalue)
+                        {
+                            $subvalue = explode('_', $subvalue, 2);
 
-                        if ($value == $subvalue[1])
+                            if ($value == $subvalue[1])
+                                $access = true;
+                        }
+                    }
+                    else
+                    {
+                        if (in_array($value, Session::get_value('vkye_user')['permissions']))
                             $access = true;
                     }
                 }
-                else
-                {
-                    if (in_array($value, Session::get_value('vkye_user')['permissions']))
-                        $access = true;
-                }
             }
+            else
+                $access = true;
         }
         else
             $access = true;

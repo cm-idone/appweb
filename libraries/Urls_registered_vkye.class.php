@@ -29,17 +29,21 @@ class Urls_registered_vkye
                 'controller' => 'Laboratory',
                 'method' => 'index'
             ],
-            '/laboratory/create/%param%' => [
-                'controller' => 'Laboratory',
-                'method' => 'create'
-            ],
             '/laboratory/create/%param%/%param%' => [
                 'controller' => 'Laboratory',
                 'method' => 'create'
             ],
-            '/laboratory/custodychains' => [
+            '/laboratory/alcoholic' => [
                 'controller' => 'Laboratory',
-                'method' => 'custodychains'
+                'method' => 'alcoholic'
+            ],
+            '/laboratory/antidoping' => [
+                'controller' => 'Laboratory',
+                'method' => 'antidoping'
+            ],
+            '/laboratory/covid' => [
+                'controller' => 'Laboratory',
+                'method' => 'covid'
             ],
             '/employees' => [
                 'controller' => 'Employees',

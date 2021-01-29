@@ -4,7 +4,7 @@
     <?php if (!empty(Session::get_value('vkye_account'))) : ?>
         <div class="account">
             <figure>
-                <img src="<?php echo (!empty(Session::get_value('vkye_account')['avatar']) ? '{$path.uploads}' . Session::get_value('vkye_account')['avatar'] : '{$path.images}account.png'); ?>">
+                <img src="<?php echo (!empty(Session::get_value('vkye_account')['avatar']) ? '{$path.uploads}' . Session::get_value('vkye_account')['avatar'] : 'https://cdn.codemonkey.com.mx/monkeyboard/assets/images/account.png'); ?>">
             </figure>
             <div>
                 <h4 class="<?php echo ((Session::get_value('vkye_account')['status'] == true) ? 'online' : 'offline'); ?>"><i class="fas fa-circle"></i><?php echo Session::get_value('vkye_account')['name']; ?></h4>
@@ -23,35 +23,41 @@
             <span><?php echo Session::get_value('vkye_user')['email']; ?></span>
         </div>
         <figure>
-            <img src="<?php echo (!empty(Session::get_value('vkye_user')['avatar']) ? '{$path.uploads}' . Session::get_value('vkye_user')['avatar'] : '{$path.images}user.png'); ?>">
+            <img src="<?php echo (!empty(Session::get_value('vkye_user')['avatar']) ? '{$path.uploads}' . Session::get_value('vkye_user')['avatar'] : 'https://cdn.codemonkey.com.mx/monkeyboard/assets/images/user.png'); ?>">
         </figure>
     </div>
-    <!-- <nav>
+    <nav>
         <ul>
             <li><a><i class="fas fa-star"></i></a></li>
             <li><a><i class="fas fa-heart"></i></a></li>
             <li><a><i class="fas fa-meteor"></i></a></li>
         </ul>
-    </nav> -->
+    </nav>
 </header>
 <header class="leftbar">
     <nav>
         <ul>
+            <li><a href="/about" class="logotype"><img src="{$path.images}imagotype_white.png"><span><?php echo Configuration::$web_page . ' ' . Configuration::$web_page_version; ?> by Code Monkey</span></a></li>
+        </ul>
+        <ul>
+            <li><a href="/search"><i class="fas fa-search"></i><span>{$lang.search}</span></a></li>
             <li><a href="/dashboard"><i class="fas fa-igloo"></i><span>{$lang.dashboard}</span></a></li>
         </ul>
         <?php if (!empty(Session::get_value('vkye_account'))) : ?>
-            <!-- <?php if (Permissions::account(['laboratory']) == true AND Permissions::user(['laboratory','custody_chains'], true) == true) : ?>
+            <?php if (Permissions::account(['laboratory']) == true AND Permissions::user(['laboratory','alcoholic','antidoping','covid'], true) == true) : ?>
                 <ul>
                     <?php if (Permissions::user(['laboratory'], true) == true) : ?>
-                        <li><a href="/laboratory"><i class="fas fa-vial"></i><span>{$lang.laboratory}</span></a></li>
-                    <?php elseif (Permissions::user(['custody_chains'], true) == true) : ?>
-                        <li><a href="/laboratory/custodychains"><i class="fas fa-vial"></i><span>{$lang.laboratory}</span></a></li>
+                        <li><a href="/laboratory"><i class="fas fa-flask"></i><span>{$lang.laboratory}</span></a></li>
                     <?php endif; ?>
-                </ul>
-            <?php endif; ?> -->
-            <?php if (Permissions::user(['employees'], true) == true) : ?>
-                <ul>
-                    <li><a href="/employees"><i class="fas fa-user-friends"></i><span>{$lang.employees}</span></a></li>
+                    <?php if (Permissions::user(['alcoholic'], true) == true) : ?>
+                        <li><a href="/laboratory/alcoholic"><i class="fas fa-wine-bottle"></i><span>{$lang.alcoholic}</span></a></li>
+                    <?php endif; ?>
+                    <?php if (Permissions::user(['antidoping'], true) == true) : ?>
+                        <li><a href="/laboratory/antidoping"><i class="fas fa-cannabis"></i><span>{$lang.antidoping}</span></a></li>
+                    <?php endif; ?>
+                    <?php if (Permissions::user(['covid'], true) == true) : ?>
+                        <li><a href="/laboratory/covid"><i class="fas fa-virus"></i><span>{$lang.covid}</span></a></li>
+                    <?php endif; ?>
                 </ul>
             <?php endif; ?>
         <?php endif; ?>
@@ -64,7 +70,7 @@
                 <?php foreach (Session::get_value('vkye_user')['accounts'] as $key => $value) : ?>
                     <div class="item">
                         <figure>
-                            <img src="<?php echo (!empty($value['avatar']) ? '{$path.uploads}' . $value['avatar'] : '{$path.images}account.png'); ?>">
+                            <img src="<?php echo (!empty($value['avatar']) ? '{$path.uploads}' . $value['avatar'] : 'https://cdn.codemonkey.com.mx/monkeyboard/assets/images/account.png'); ?>">
                         </figure>
                         <div>
                             <h4><?php echo $value['name']; ?></h4>
@@ -92,17 +98,35 @@
             <ul>
                 <li><a href="/dashboard"><i class="fas fa-igloo"></i>{$lang.dashboard}</a></li>
             </ul>
-            <?php if (Permissions::user(['employees','locations'], true) == true) : ?>
-                <ul>
-                    <?php if (Permissions::user(['employees'], true) == true) : ?>
-                        <li><a href="/employees"><i class="fas fa-user-friends"></i>{$lang.employees}</a></li>
-                    <?php endif; ?>
-                    <?php if (Permissions::user(['locations'], true) == true) : ?>
-                        <li><a href="/locations"><i class="fas fa-map-marker-alt"></i>{$lang.locations}</a></li>
-                    <?php endif; ?>
-                </ul>
-            <?php endif; ?>
-            <!-- <?php if (!empty(Session::get_value('vkye_account'))) : ?>
+            <?php if (!empty(Session::get_value('vkye_account'))) : ?>
+                <?php if (Permissions::account(['laboratory']) == true AND Permissions::user(['laboratory','alcoholic','antidoping','covid'], true) == true) : ?>
+                    <ul>
+                        <li><h4>{$lang.laboratory}</h4></li>
+                        <?php if (Permissions::user(['laboratory'], true) == true) : ?>
+                            <li><a href="/laboratory"><i class="fas fa-flask"></i><span>{$lang.laboratory}</span></a></li>
+                        <?php endif; ?>
+                        <?php if (Permissions::user(['alcoholic'], true) == true) : ?>
+                            <li><a href="/laboratory/alcoholic"><i class="fas fa-wine-bottle"></i><span>{$lang.alcoholic}</span></a></li>
+                        <?php endif; ?>
+                        <?php if (Permissions::user(['antidoping'], true) == true) : ?>
+                            <li><a href="/laboratory/antidoping"><i class="fas fa-cannabis"></i><span>{$lang.antidoping}</span></a></li>
+                        <?php endif; ?>
+                        <?php if (Permissions::user(['covid'], true) == true) : ?>
+                            <li><a href="/laboratory/covid"><i class="fas fa-virus"></i><span>{$lang.covid}</span></a></li>
+                        <?php endif; ?>
+                    </ul>
+                <?php endif; ?>
+                <?php if (Permissions::account(['laboratory']) == true AND Permissions::user(['employees','locations'], true) == true) : ?>
+                    <ul>
+                        <li><h4>{$lang.administration}</h4></li>
+                        <?php if (Permissions::user(['employees'], true) == true) : ?>
+                            <li><a href="/employees"><i class="fas fa-user-friends"></i>{$lang.employees}</a></li>
+                        <?php endif; ?>
+                        <?php if (Permissions::user(['locations'], true) == true) : ?>
+                            <li><a href="/locations"><i class="fas fa-map-marker-alt"></i>{$lang.locations}</a></li>
+                        <?php endif; ?>
+                    </ul>
+                <?php endif; ?>
                 <?php if (Permissions::user(['account'], true) == true) : ?>
                     <ul>
                         <li><h4>{$lang.my_account}</h4></li>
@@ -129,12 +153,11 @@
                 <li><a>{$lang.privacy_policies}</a></li>
             </ul>
             <ul>
-                <li><a>ID-ONE 1.0</a></li>
-                <li><a>{$lang.development_by} One Consultores & Code Monkey</a></li>
-                <li><a>Power by Valkyrie</a></li>
-            </ul> -->
+                <li><a href="https://codemonkey.com.mx/" target="_blank"><?php echo Configuration::$web_page . ' ' . Configuration::$web_page_version; ?> by Code Monkey</a></li>
+                <li><a href="" target="_blank">Power by Valkyrie</a></li>
+            </ul>
             <ul>
-                <!-- <li><a class="reverse">{$lang.technical_support}<i class="fas fa-headset"></i></a></li> -->
+                <li><a class="reverse">{$lang.technical_support}<i class="fas fa-headset"></i></a></li>
                 <li><a class="reverse" data-action="logout">{$lang.logout}<i class="fas fa-power-off"></i></a></li>
             </ul>
         </nav>

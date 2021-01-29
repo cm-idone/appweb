@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 14-01-2021 a las 17:50:43
+-- Tiempo de generación: 29-01-2021 a las 00:02:21
 -- Versión del servidor: 10.0.38-MariaDB-0+deb8u1
 -- Versión de PHP: 7.3.18
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `id_one`
+-- Base de datos: `idone`
 --
 
 -- --------------------------------------------------------
@@ -31,7 +31,7 @@ CREATE TABLE `accounts` (
   `id` bigint(20) NOT NULL,
   `avatar` text,
   `name` text NOT NULL,
-  `type` enum('business') NOT NULL,
+  `type` enum('business','personal') NOT NULL,
   `path` text NOT NULL,
   `email` text NOT NULL,
   `description` text,
@@ -781,21 +781,30 @@ CREATE TABLE `users_permissions` (
 --
 
 INSERT INTO `users_permissions` (`id`, `code`, `group`, `priority`) VALUES
-(1, 'create_custody_chanins', 'custody_chanins', '1.2.1'),
-(2, 'update_custody_chanins', 'custody_chanins', '1.2.2'),
-(3, 'delete_custody_chanins', 'custody_chanins', '1.2.3'),
+(1, 'create_alcoholic', 'alcoholic', '1.2.1'),
+(2, 'read_alcoholic', 'alcoholic', '1.2.2'),
+(3, 'update_alcoholic', 'alcoholic', '1.2.3'),
 (4, 'create_employees', 'employees', '2.1.1'),
 (5, 'update_employees', 'employees', '2.1.2'),
 (6, 'scan_employees', 'employees', '2.1.3'),
 (7, 'block_employees', 'employees', '2.1.4'),
 (8, 'unblock_employees', 'employees', '2.1.5'),
 (9, 'delete_employees', 'employees', '2.1.6'),
-(10, 'view_laboratory', 'laboratory', '1.1.1'),
+(10, 'read_laboratory', 'laboratory', '1.1.1'),
 (11, 'create_locations', 'locations', '3.1.1'),
 (12, 'update_locations', 'locations', '3.1.2'),
 (13, 'block_locations', 'locations', '3.1.3'),
 (14, 'unblock_locations', 'locations', '3.1.4'),
-(15, 'delete_locations', 'locations', '3.1.5');
+(15, 'delete_locations', 'locations', '3.1.5'),
+(16, 'delete_alcoholic', 'alcoholic', '1.2.4'),
+(17, 'create_antidoping', 'antidoping', '1.3.1'),
+(18, 'read_antidoping', 'antidoping', '1.3.2'),
+(19, 'update_antidoping', 'antidoping', '1.3.3'),
+(20, 'delete_antidoping', 'antidoping', '1.3.4'),
+(21, 'create_covid', 'covid', '1.4.1'),
+(22, 'read_covid', 'covid', '1.4.2'),
+(23, 'update_covid', 'covid', '1.4.3'),
+(24, 'delete_covid', 'covid', '1.4.4');
 
 --
 -- Índices para tablas volcadas
@@ -909,7 +918,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `users_permissions`
 --
 ALTER TABLE `users_permissions`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Restricciones para tablas volcadas

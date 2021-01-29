@@ -8,19 +8,16 @@ $this->dependencies->add(['js', '{$path.js}Employees/index.js']);
 
 %{header}%
 <header class="modbar">
-    <div class="title">
-        <span><i class="fas fa-user-friends"></i><strong>{$lang.employees}</strong></span>
-    </div>
     <div class="buttons">
-        <?php if (Permissions::user(['create_employees']) == true) : ?>
-            <a data-action="create_employee" class="success"><i class="fas fa-plus"></i><span>{$lang.create}</span></a>
-        <?php endif; ?>
         <fieldset class="fields-group big">
             <div class="compound st-4-left">
                 <span><i class="fas fa-search"></i></span>
                 <input type="text" data-search="employees" placeholder="{$lang.search}">
             </div>
         </fieldset>
+        <?php if (Permissions::user(['create_employees']) == true) : ?>
+            <a data-action="create_employee" class="success"><i class="fas fa-plus"></i><span>{$lang.create}</span></a>
+        <?php endif; ?>
     </div>
 </header>
 <main>
@@ -28,11 +25,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/index.js']);
         <?php foreach ($data['employees'] as $value) : ?>
             <div>
                 <figure>
-                    <?php if (!empty($value['avatar'])) : ?>
-                        <img src="{$path.uploads}<?php echo $value['avatar']; ?>">
-                    <?php else : ?>
-                        <img src="{$path.images}employee.png">
-                    <?php endif; ?>
+                    <img src="<?php echo (!empty($value['avatar']) ? '{$path.uploads}' . $value['avatar'] : '{$path.images}employee.png'); ?>">
                 </figure>
                 <h4><?php echo $value['firstname'] . ' ' . $value['lastname']; ?></h4>
                 <span><?php echo $value['nie']; ?></span>

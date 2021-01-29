@@ -23,7 +23,7 @@ class Login_controller extends Controller
 
 			if (empty($errors))
 			{
-				$query = $this->model->get_session($_POST['email']);
+				$query = $this->model->read_session($_POST['email']);
 
 				if (!empty($query))
 				{

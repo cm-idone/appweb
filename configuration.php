@@ -30,6 +30,15 @@ class Configuration
 	public static $web_page = 'ID One';
 
 	/**
+     * Nombre del sitio web.
+	 *
+	 * @static
+	 *
+     * @var string $web_page
+     */
+	public static $web_page_version = '1.0';
+
+	/**
      * Idioma por default
 	 * @example es, en, fr, ru..
 	 *
@@ -221,7 +230,7 @@ class Configuration
 	 *
      * @var boolean $smtp_auth
      */
-	public static $smtp_auth = false;
+	public static $smtp_auth = true;
 
 	/**
      * Dominio o IP del servidor SMTP.
@@ -230,7 +239,7 @@ class Configuration
 	 *
      * @var string $smtp_host
      */
-	public static $smtp_host = '';
+	public static $smtp_host = 'mail.codemonkey.com.mx';
 
 	/**
      * Usuario de la cuenta smtp.
@@ -240,7 +249,7 @@ class Configuration
 	 *
      * @var string $smtp_user
      */
-	public static $smtp_user = '';
+	public static $smtp_user = 'noreply@one-consultores.com';
 
 	/**
      * Contraseña de la cuenta smtp.
@@ -249,7 +258,7 @@ class Configuration
 	 *
      * @var string $smtp_pass
      */
-	public static $smtp_pass = '';
+	public static $smtp_pass = 'V5qt2$s4';
 
 	/**
      * Seguridad de la encriptacion para el envio de SMTP.

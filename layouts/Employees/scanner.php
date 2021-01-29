@@ -2,7 +2,7 @@
 
 defined('_EXEC') or die;
 
-$this->dependencies->add(['js', '{$path.js}Employees/scanner.min.js']);
+$this->dependencies->add(['js', '{$path.js}Employees/scanner.js']);
 
 ?>
 
@@ -88,7 +88,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/scanner.min.js']);
             <div class="tab" data-target="tab2">
                 <div class="tbl-st-4">
                     <h4>
-                        <?php if (Permissions::user(['create_custody_chains']) == true) : ?>
+                        <?php if (Permissions::user(['create_alcoholic']) == true) : ?>
                             <a href="/laboratory/create/alcoholic/<?php echo $data['employee']['nie']; ?>" class="success">{$lang.do_test}</a>
                         <?php endif; ?>
                         <span><?php echo count($data['employee']['custody_chanins']['alcoholic']); ?> {$lang.performed_tests}</span>
@@ -113,7 +113,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/scanner.min.js']);
             <div class="tab" data-target="tab3">
                 <div class="tbl-st-4">
                     <h4>
-                        <?php if (Permissions::user(['create_custody_chains']) == true) : ?>
+                        <?php if (Permissions::user(['create_antidoping']) == true) : ?>
                             <a href="/laboratory/create/antidoping/<?php echo $data['employee']['nie']; ?>" class="success">{$lang.do_test}</a>
                         <?php endif; ?>
                         <span><?php echo count($data['employee']['custody_chanins']['antidoping']); ?> {$lang.performed_tests}</span>

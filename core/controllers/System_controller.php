@@ -15,7 +15,7 @@ class System_controller extends Controller
 		{
 			if ($_POST['action'] == 'switch_account')
 			{
-				$query = $this->model->get_session($_POST['id'], 'id');
+				$query = $this->model->read_session($_POST['id'], 'id');
 
 				if (!empty($query))
 				{

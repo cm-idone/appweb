@@ -110,7 +110,7 @@ class Laboratory_controller extends Controller
             Permissions::redirection('laboratory');
 	}
 
-    public function custodychanins()
+    public function alcoholic()
     {
         if (Format::exist_ajax_request() == true)
 		{
@@ -118,9 +118,41 @@ class Laboratory_controller extends Controller
 		}
 		else
 		{
-			define('_title', Configuration::$web_page . ' | {$lang.custody_chanins}');
+			define('_title', Configuration::$web_page . ' | {$lang.alcoholic}');
 
-			$template = $this->view->render($this, 'custodychanins');
+			$template = $this->view->render($this, 'alcoholic');
+
+			echo $template;
+		}
+    }
+
+	public function antidoping()
+    {
+        if (Format::exist_ajax_request() == true)
+		{
+
+		}
+		else
+		{
+			define('_title', Configuration::$web_page . ' | {$lang.antidoping}');
+
+			$template = $this->view->render($this, 'antidoping');
+
+			echo $template;
+		}
+    }
+
+	public function covid()
+    {
+        if (Format::exist_ajax_request() == true)
+		{
+
+		}
+		else
+		{
+			define('_title', Configuration::$web_page . ' | {$lang.covid}');
+
+			$template = $this->view->render($this, 'covid');
 
 			echo $template;
 		}
