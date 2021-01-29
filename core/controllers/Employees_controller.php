@@ -168,7 +168,7 @@ class Employees_controller extends Controller
 		}
 	}
 
-	public function scanner($params)
+	public function profile($params)
 	{
 		$go = false;
 
@@ -594,7 +594,7 @@ class Employees_controller extends Controller
 			{
                 define('_title', Configuration::$web_page . ' | ' . $data['employee']['firstname'] . ' ' . $data['employee']['lastname']);
 
-    			$template = $this->view->render($this, 'scanner');
+    			$template = $this->view->render($this, 'profile');
 
     			echo $template;
 			}

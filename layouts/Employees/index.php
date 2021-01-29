@@ -47,7 +47,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/index.js']);
                             <a data-action="update_employee" data-id="<?php echo $value['id']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
                         <?php endif; ?>
                     <?php endif; ?>
-                    <?php if (Permissions::user(['scan_employees']) == true) : ?>
+                    <?php if (Permissions::user(['control_employees']) == true) : ?>
                         <a href="{$path.uploads}<?php echo $value['qr']; ?>" download="<?php echo $value['nie']; ?>.png"><i class="fas fa-qrcode"></i><span>{$lang.download_id_one}</span></a>
                         <a href="/<?php echo Session::get_value('vkye_account')['path']; ?>/<?php echo $value['nie']; ?>"><i class="fas fa-id-card-alt"></i><span>{$lang.view_id_one}</span></a>
                     <?php endif; ?>

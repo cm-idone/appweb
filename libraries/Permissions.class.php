@@ -36,8 +36,8 @@ class Permissions
             {
                 if (Session::get_value('vkye_account')['status'] == true)
                 {
-                    array_push($paths, '/System/index');
                     array_push($paths, '/Dashboard/index');
+                    array_push($paths, '/System/index');
 
                     foreach (Session::get_value('vkye_account')['permissions'] as $key => $value)
                     {
@@ -46,11 +46,8 @@ class Permissions
                             case 'laboratory' :
                                 array_push($paths, '/Laboratory/index');
                                 array_push($paths, '/Laboratory/create');
-                                array_push($paths, '/Laboratory/alcoholic');
-                                array_push($paths, '/Laboratory/antidoping');
-                                array_push($paths, '/Laboratory/covid');
                                 array_push($paths, '/Employees/index');
-                                array_push($paths, '/Employees/scanner');
+                                array_push($paths, '/Employees/profile');
                                 array_push($paths, '/Locations/index');
                                 break;
 
@@ -71,66 +68,54 @@ class Permissions
             {
                 if (Session::get_value('vkye_user')['permissions'] != 'all')
                 {
-                    array_push($paths, '/System/index');
                     array_push($paths, '/Dashboard/index');
+                    array_push($paths, '/System/index');
 
                     foreach (Session::get_value('vkye_user')['permissions'] as $key => $value)
                     {
                         switch ($value)
                         {
-                            case 'read_laboratory' :
+                            case 'control_laboratory' :
                                 array_push($paths, '/Laboratory/index');
                                 break;
 
                             case 'create_alcoholic' :
                                 array_push($paths, '/Laboratory/create');
-                                array_push($paths, '/Laboratory/alcoholic');
-                                break;
-
-                            case 'read_alcoholic' :
-                                array_push($paths, '/Laboratory/alcoholic');
+                                array_push($paths, '/Laboratory/index');
                                 break;
 
                             case 'update_alcoholic' :
-                                array_push($paths, '/Laboratory/alcoholic');
+                                array_push($paths, '/Laboratory/index');
                                 break;
 
                             case 'delete_alcoholic' :
-                                array_push($paths, '/Laboratory/alcoholic');
+                                array_push($paths, '/Laboratory/index');
                                 break;
 
                             case 'create_antidoping' :
                                 array_push($paths, '/Laboratory/create');
-                                array_push($paths, '/Laboratory/antidoping');
-                                break;
-
-                            case 'read_antidoping' :
-                                array_push($paths, '/Laboratory/antidoping');
+                                array_push($paths, '/Laboratory/index');
                                 break;
 
                             case 'update_antidoping' :
-                                array_push($paths, '/Laboratory/antidoping');
+                                array_push($paths, '/Laboratory/index');
                                 break;
 
                             case 'delete_antidoping' :
-                                array_push($paths, '/Laboratory/antidoping');
+                                array_push($paths, '/Laboratory/index');
                                 break;
 
                             case 'create_covid' :
                                 array_push($paths, '/Laboratory/create');
-                                array_push($paths, '/Laboratory/covid');
-                                break;
-
-                            case 'read_covid' :
-                                array_push($paths, '/Laboratory/covid');
+                                array_push($paths, '/Laboratory/index');
                                 break;
 
                             case 'update_covid' :
-                                array_push($paths, '/Laboratory/covid');
+                                array_push($paths, '/Laboratory/index');
                                 break;
 
                             case 'delete_covid' :
-                                array_push($paths, '/Laboratory/covid');
+                                array_push($paths, '/Laboratory/index');
                                 break;
 
                             case 'create_employees' :
@@ -141,9 +126,9 @@ class Permissions
                                 array_push($paths, '/Employees/index');
                                 break;
 
-                            case 'scan_employees' :
+                            case 'control_employees' :
                                 array_push($paths, '/Employees/index');
-                                array_push($paths, '/Employees/scanner');
+                                array_push($paths, '/Employees/profile');
                                 break;
 
                             case 'block_employees' :

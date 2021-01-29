@@ -17,10 +17,6 @@ class Urls_registered_vkye
                 'controller' => 'Login',
                 'method' => 'index'
             ],
-            '/system' => [
-                'controller' => 'System',
-                'method' => 'index'
-            ],
             '/dashboard' => [
                 'controller' => 'Dashboard',
                 'method' => 'index'
@@ -29,21 +25,13 @@ class Urls_registered_vkye
                 'controller' => 'Laboratory',
                 'method' => 'index'
             ],
+            '/laboratory/%param%' => [
+                'controller' => 'Laboratory',
+                'method' => 'index'
+            ],
             '/laboratory/create/%param%/%param%' => [
                 'controller' => 'Laboratory',
                 'method' => 'create'
-            ],
-            '/laboratory/alcoholic' => [
-                'controller' => 'Laboratory',
-                'method' => 'alcoholic'
-            ],
-            '/laboratory/antidoping' => [
-                'controller' => 'Laboratory',
-                'method' => 'antidoping'
-            ],
-            '/laboratory/covid' => [
-                'controller' => 'Laboratory',
-                'method' => 'covid'
             ],
             '/employees' => [
                 'controller' => 'Employees',
@@ -51,10 +39,14 @@ class Urls_registered_vkye
             ],
             '/%param%/%param%' => [
                 'controller' => 'Employees',
-                'method' => 'Scanner'
+                'method' => 'profile'
             ],
             '/locations' => [
                 'controller' => 'Locations',
+                'method' => 'index'
+            ],
+            '/system' => [
+                'controller' => 'System',
                 'method' => 'index'
             ]
         ];

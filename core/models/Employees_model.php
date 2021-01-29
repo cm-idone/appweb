@@ -132,11 +132,11 @@ class Employees_model extends Model
 		return $query;
 	}
 
-	public function read_employee($id, $scanner = false)
+	public function read_employee($id, $profile = false)
 	{
 		$where = [];
 
-		if ($scanner == true)
+		if ($profile == true)
 		{
 			$where = [
 				'AND' => [
@@ -175,7 +175,7 @@ class Employees_model extends Model
 
 		if (!empty($query))
 		{
-			if ($scanner == true)
+			if ($profile == true)
 			{
 				$custody_chanins = System::decode_json_to_array($this->database->select('custody_chanins', [
 					'[>]users' => [

@@ -47,10 +47,10 @@
             <?php if (Permissions::account(['laboratory']) == true AND Permissions::user(['laboratory','alcoholic','antidoping','covid'], true) == true) : ?>
                 <ul>
                     <?php if (Permissions::user(['laboratory'], true) == true) : ?>
-                        <li><a href="/laboratory"><i class="fas fa-flask"></i><span>{$lang.laboratory}</span></a></li>
+                        <li><a href="/laboratory"><img src="{$path.images}marbu_logotype_color.png"><span>Marbu {$lang.laboratory}</span></a></li>
                     <?php endif; ?>
                     <?php if (Permissions::user(['alcoholic'], true) == true) : ?>
-                        <li><a href="/laboratory/alcoholic"><i class="fas fa-wine-bottle"></i><span>{$lang.alcoholic}</span></a></li>
+                        <li><a href="/laboratory/alcoholic"><i class="fas fa-cocktail"></i><span>{$lang.alcoholic}</span></a></li>
                     <?php endif; ?>
                     <?php if (Permissions::user(['antidoping'], true) == true) : ?>
                         <li><a href="/laboratory/antidoping"><i class="fas fa-cannabis"></i><span>{$lang.antidoping}</span></a></li>
@@ -58,6 +58,11 @@
                     <?php if (Permissions::user(['covid'], true) == true) : ?>
                         <li><a href="/laboratory/covid"><i class="fas fa-virus"></i><span>{$lang.covid}</span></a></li>
                     <?php endif; ?>
+                </ul>
+            <?php endif; ?>
+            <?php if (Permissions::account(['laboratory']) == true AND Permissions::user(['employees'], true) == true) : ?>
+                <ul>
+                    <li><a href="/employees"><i class="fas fa-user-friends"></i><span>{$lang.employees}</span></a></li>
                 </ul>
             <?php endif; ?>
         <?php endif; ?>
@@ -103,16 +108,16 @@
                     <ul>
                         <li><h4>{$lang.laboratory}</h4></li>
                         <?php if (Permissions::user(['laboratory'], true) == true) : ?>
-                            <li><a href="/laboratory"><i class="fas fa-flask"></i><span>{$lang.laboratory}</span></a></li>
+                            <li><a href="/laboratory"><figure><img src="{$path.images}marbu_logotype_color.png"></figure>Marbu {$lang.laboratory}</a></li>
                         <?php endif; ?>
                         <?php if (Permissions::user(['alcoholic'], true) == true) : ?>
-                            <li><a href="/laboratory/alcoholic"><i class="fas fa-wine-bottle"></i><span>{$lang.alcoholic}</span></a></li>
+                            <li><a href="/laboratory/alcoholic"><i class="fas fa-cocktail"></i>{$lang.alcoholic}</a></li>
                         <?php endif; ?>
                         <?php if (Permissions::user(['antidoping'], true) == true) : ?>
-                            <li><a href="/laboratory/antidoping"><i class="fas fa-cannabis"></i><span>{$lang.antidoping}</span></a></li>
+                            <li><a href="/laboratory/antidoping"><i class="fas fa-cannabis"></i>{$lang.antidoping}</a></li>
                         <?php endif; ?>
                         <?php if (Permissions::user(['covid'], true) == true) : ?>
-                            <li><a href="/laboratory/covid"><i class="fas fa-virus"></i><span>{$lang.covid}</span></a></li>
+                            <li><a href="/laboratory/covid"><i class="fas fa-virus"></i>{$lang.covid}</a></li>
                         <?php endif; ?>
                     </ul>
                 <?php endif; ?>

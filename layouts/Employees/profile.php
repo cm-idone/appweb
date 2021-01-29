@@ -2,7 +2,7 @@
 
 defined('_EXEC') or die;
 
-$this->dependencies->add(['js', '{$path.js}Employees/scanner.js']);
+$this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
 
 ?>
 
@@ -20,7 +20,8 @@ $this->dependencies->add(['js', '{$path.js}Employees/scanner.js']);
             <ul>
                 <li data-tab-target="tab1" class="view">{$lang.personal_proceedings}</li>
                 <li data-tab-target="tab2">{$lang.labor_proceedings}</li>
-                <li data-tab-target="tab3">{$lang.emergency_contacts}</li>
+                <li data-tab-target="tab3">{$lang.labor}</li>
+                <li data-tab-target="tab4">{$lang.emergency_contacts}</li>
             </ul>
             <div class="tab" data-target="tab1">
                 <h6><strong>{$lang.sex}</strong>: {$lang.<?php echo (!empty($data['employee']['sex']) ? $data['employee']['sex'] : '{$lang.not_available}'); ?>}</h6>
@@ -42,24 +43,6 @@ $this->dependencies->add(['js', '{$path.js}Employees/scanner.js']);
                 <p><strong>{$lang.responsibilities}</strong>: <?php echo (!empty($data['employee']['responsibilities']) ? $data['employee']['responsibilities'] : '{$lang.not_available}'); ?></p>
             </div>
             <div class="tab" data-target="tab3">
-                <h6><strong>{$lang.emergency_contact} 1</strong>: <?php echo (!empty($data['employee']['emergency_contacts']['first']['name']) ? $data['employee']['emergency_contacts']['first']['name'] . ' | + (' . $data['employee']['emergency_contacts']['first']['phone']['country'] . ') ' . $data['employee']['emergency_contacts']['first']['phone']['number'] : '{$lang.not_available}'); ?></h6>
-                <h6><strong>{$lang.emergency_contact} 2</strong>: <?php echo (!empty($data['employee']['emergency_contacts']['second']['name']) ? $data['employee']['emergency_contacts']['second']['name'] . ' | + (' . $data['employee']['emergency_contacts']['second']['phone']['country'] . ') ' . $data['employee']['emergency_contacts']['second']['phone']['number'] : '{$lang.not_available}'); ?></h6>
-                <h6><strong>{$lang.emergency_contact} 3</strong>: <?php echo (!empty($data['employee']['emergency_contacts']['third']['name']) ? $data['employee']['emergency_contacts']['third']['name'] . ' | + (' . $data['employee']['emergency_contacts']['third']['phone']['country'] . ') ' . $data['employee']['emergency_contacts']['third']['phone']['number'] : '{$lang.not_available}'); ?></h6>
-                <h6><strong>{$lang.emergency_contact} 4</strong>: <?php echo (!empty($data['employee']['emergency_contacts']['fourth']['name']) ? $data['employee']['emergency_contacts']['fourth']['name'] . ' | + (' . $data['employee']['emergency_contacts']['fourth']['phone']['country'] . ') ' . $data['employee']['emergency_contacts']['fourth']['phone']['number'] : '{$lang.not_available}'); ?></h6>
-            </div>
-        </div>
-    </div>
-    <div class="scanner-3">
-        <div class="tabs" data-tab-active="tab1">
-            <ul>
-                <li data-tab-target="tab1" class="view">{$lang.labor}</li>
-                <li data-tab-target="tab2">{$lang.alcoholic}</li>
-                <li data-tab-target="tab3">{$lang.antidoping}</li>
-                <li data-tab-target="tab4">{$lang.covid}</li>
-                <li data-tab-target="tab5">{$lang.polygraph}</li>
-                <li data-tab-target="tab6">{$lang.psychometric}</li>
-            </ul>
-            <div class="tab" data-target="tab1">
                 <div>
                     <a data-action="preview_doc" data-doc="birth_certificate"><?php echo (!empty($data['employee']['docs']['birth_certificate']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.birth_certificate}</a>
                     <a data-action="preview_doc" data-doc="address_proof"><?php echo (!empty($data['employee']['docs']['address_proof']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.address_proof}</a>
@@ -69,6 +52,8 @@ $this->dependencies->add(['js', '{$path.js}Employees/scanner.js']);
                     <a data-action="preview_doc" data-doc="professional_license"><?php echo (!empty($data['employee']['docs']['professional_license']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.professional_license}</a>
                     <a data-action="preview_doc" data-doc="driver_license"><?php echo (!empty($data['employee']['docs']['driver_license']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.driver_license}</a>
                     <a data-action="preview_doc" data-doc="account_state"><?php echo (!empty($data['employee']['docs']['account_state']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.account_state}</a>
+                </div>
+                <div>
                     <a data-action="preview_doc" data-doc="medical_examination"><?php echo (!empty($data['employee']['docs']['medical_examination']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.medical_examination}</a>
                     <a data-action="preview_doc" data-doc="criminal_records"><?php echo (!empty($data['employee']['docs']['criminal_records']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.criminal_records}</a>
                     <a data-action="preview_doc" data-doc="economic_study"><?php echo (!empty($data['employee']['docs']['economic_study']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.economic_study}</a>
@@ -76,16 +61,32 @@ $this->dependencies->add(['js', '{$path.js}Employees/scanner.js']);
                     <a data-action="preview_doc" data-doc="recommendation_letters_first"><?php echo (!empty($data['employee']['docs']['recommendation_letters']['first']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.recommendation_letter} 1</a>
                     <a data-action="preview_doc" data-doc="recommendation_letters_second"><?php echo (!empty($data['employee']['docs']['recommendation_letters']['second']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.recommendation_letter} 2</a>
                     <a data-action="preview_doc" data-doc="recommendation_letters_third"><?php echo (!empty($data['employee']['docs']['recommendation_letters']['third']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.recommendation_letter} 3</a>
+                    <a data-action="preview_doc" data-doc="work_contract"><?php echo (!empty($data['employee']['docs']['work_contract']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.work_contract}</a>
                 </div>
                 <div>
-                    <a data-action="preview_doc" data-doc="work_contract"><?php echo (!empty($data['employee']['docs']['work_contract']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.work_contract}</a>
                     <a data-action="preview_doc" data-doc="resignation_letter"><?php echo (!empty($data['employee']['docs']['resignation_letter']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.resignation_letter}</a>
                     <a data-action="preview_doc" data-doc="material_responsive"><?php echo (!empty($data['employee']['docs']['material_responsive']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.material_responsive}</a>
                     <a data-action="preview_doc" data-doc="privacy_notice"><?php echo (!empty($data['employee']['docs']['privacy_notice']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.privacy_notice}</a>
                     <a data-action="preview_doc" data-doc="regulation"><?php echo (!empty($data['employee']['docs']['regulation']) ? '<i class="fas fa-check-square success"></i>' : '<i class="fas fa-times-circle error"></i>'); ?> {$lang.regulation}</a>
                 </div>
             </div>
-            <div class="tab" data-target="tab2">
+            <div class="tab" data-target="tab4">
+                <h6><strong>{$lang.emergency_contact} 1</strong>: <?php echo (!empty($data['employee']['emergency_contacts']['first']['name']) ? $data['employee']['emergency_contacts']['first']['name'] . ' | + (' . $data['employee']['emergency_contacts']['first']['phone']['country'] . ') ' . $data['employee']['emergency_contacts']['first']['phone']['number'] : '{$lang.not_available}'); ?></h6>
+                <h6><strong>{$lang.emergency_contact} 2</strong>: <?php echo (!empty($data['employee']['emergency_contacts']['second']['name']) ? $data['employee']['emergency_contacts']['second']['name'] . ' | + (' . $data['employee']['emergency_contacts']['second']['phone']['country'] . ') ' . $data['employee']['emergency_contacts']['second']['phone']['number'] : '{$lang.not_available}'); ?></h6>
+                <h6><strong>{$lang.emergency_contact} 3</strong>: <?php echo (!empty($data['employee']['emergency_contacts']['third']['name']) ? $data['employee']['emergency_contacts']['third']['name'] . ' | + (' . $data['employee']['emergency_contacts']['third']['phone']['country'] . ') ' . $data['employee']['emergency_contacts']['third']['phone']['number'] : '{$lang.not_available}'); ?></h6>
+                <h6><strong>{$lang.emergency_contact} 4</strong>: <?php echo (!empty($data['employee']['emergency_contacts']['fourth']['name']) ? $data['employee']['emergency_contacts']['fourth']['name'] . ' | + (' . $data['employee']['emergency_contacts']['fourth']['phone']['country'] . ') ' . $data['employee']['emergency_contacts']['fourth']['phone']['number'] : '{$lang.not_available}'); ?></h6>
+            </div>
+        </div>
+    </div>
+    <div class="scanner-3">
+        <h4><img src="{$path.images}marbu_logotype_color.png">Marbu {$lang.laboratory} | {$lang.tests_results}</h4>
+        <div class="tabs" data-tab-active="tab1">
+            <ul>
+                <li data-tab-target="tab1" class="view">{$lang.alcoholic}</li>
+                <li data-tab-target="tab2">{$lang.antidoping}</li>
+                <li data-tab-target="tab3">{$lang.covid}</li>
+            </ul>
+            <div class="tab" data-target="tab1">
                 <div class="tbl-st-4">
                     <h4>
                         <?php if (Permissions::user(['create_alcoholic']) == true) : ?>
@@ -110,7 +111,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/scanner.js']);
                     <?php endif; ?>
                 </div>
             </div>
-            <div class="tab" data-target="tab3">
+            <div class="tab" data-target="tab2">
                 <div class="tbl-st-4">
                     <h4>
                         <?php if (Permissions::user(['create_antidoping']) == true) : ?>
@@ -139,9 +140,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/scanner.js']);
                     <?php endif; ?>
                 </div>
             </div>
-            <div class="tab" data-target="tab4"></div>
-            <div class="tab" data-target="tab5"></div>
-            <div class="tab" data-target="tab6"></div>
+            <div class="tab" data-target="tab3"></div>
         </div>
     </div>
 </main>
