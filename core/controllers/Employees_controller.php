@@ -25,9 +25,6 @@ class Employees_controller extends Controller
 				if (Validations::empty($_POST['lastname']) == false)
 					array_push($errors, ['lastname','{$lang.dont_leave_this_field_empty}']);
 
-				if (Validations::empty($_POST['birth_date']) == true AND $_POST['birth_date'] > Dates::past_date(Dates::current_date(), 15, 'year'))
-					array_push($errors, ['birth_date','{$lang.invalid_field}']);
-
 				if (Validations::empty($_POST['ife']) == true AND $this->model->check_exist_employee($_POST['id'], 'ife', $_POST['ife']) == true)
 					array_push($errors, ['ife','{$lang.this_record_already_exists}']);
 
@@ -39,9 +36,6 @@ class Employees_controller extends Controller
 
 				if (Validations::empty($_POST['curp']) == true AND $this->model->check_exist_employee($_POST['id'], 'curp', $_POST['curp']) == true)
 					array_push($errors, ['curp','{$lang.this_record_already_exists}']);
-
-				if (Validations::email($_POST['email'], true) == false)
-					array_push($errors, ['email','{$lang.invalid_field}']);
 
 				if (Validations::empty([$_POST['phone_country'],$_POST['phone_number']], true) == false)
 					array_push($errors, ['phone_number','{$lang.dont_leave_this_field_empty}']);
@@ -158,9 +152,9 @@ class Employees_controller extends Controller
 		{
 			define('_title', Configuration::$web_page . ' | {$lang.employees}');
 
-			global $data;
+			global $global;
 
-			$data['employees'] = $this->model->read_employees();
+			$global['employees'] = $this->model->read_employees();
 
 			$template = $this->view->render($this, 'index');
 
@@ -200,11 +194,11 @@ class Employees_controller extends Controller
 					Session::set_value('vkye_temporal', []);
 				}
 
-				global $data;
+				global $global;
 
-				$data['employee'] = $this->model->read_employee($params[1], true);
+				$global['employee'] = $this->model->read_employee($params[1], true);
 
-				if (!empty($data['employee']))
+				if (!empty($global['employee']))
 					$go = true;
 			}
         }
@@ -218,13 +212,13 @@ class Employees_controller extends Controller
 					$html = '';
 
 					if ($_POST['doc'] == 'recommendation_letters_first')
-						$_POST['doc'] = $data['employee']['docs']['recommendation_letters']['first'];
+						$_POST['doc'] = $global['employee']['docs']['recommendation_letters']['first'];
 					else if ($_POST['doc'] == 'recommendation_letters_second')
-						$_POST['doc'] = $data['employee']['docs']['recommendation_letters']['second'];
+						$_POST['doc'] = $global['employee']['docs']['recommendation_letters']['second'];
 					else if ($_POST['doc'] == 'recommendation_letters_third')
-						$_POST['doc'] = $data['employee']['docs']['recommendation_letters']['third'];
+						$_POST['doc'] = $global['employee']['docs']['recommendation_letters']['third'];
 					else
-						$_POST['doc'] = $data['employee']['docs'][$_POST['doc']];
+						$_POST['doc'] = $global['employee']['docs'][$_POST['doc']];
 
 					if (!empty($_POST['doc']))
 					{
@@ -266,7 +260,7 @@ class Employees_controller extends Controller
 	                        <div class="row">
 	                            <div class="span6">
 	                                <div class="text">
-	                                    <input type="text" value="' . $data['employee']['lastname'] . '" disabled>
+	                                    <input type="text" value="' . $global['employee']['lastname'] . '" disabled>
 	                                </div>
 	                                <div class="title">
 	                                    <h6>{$lang.lastname} ({$lang.paternal_maternal})</h6>
@@ -274,7 +268,7 @@ class Employees_controller extends Controller
 	                            </div>
 	                            <div class="span6">
 	                                <div class="text">
-	                                    <input type="text" value="' . $data['employee']['firstname'] . '" disabled>
+	                                    <input type="text" value="' . $global['employee']['firstname'] . '" disabled>
 	                                </div>
 	                                <div class="title">
 	                                    <h6>{$lang.firstname}</h6>
@@ -294,7 +288,7 @@ class Employees_controller extends Controller
 	                            </div>
 	                            <div class="span4">
 	                                <div class="text">
-	                                    <input type="text" value="' . (!empty($data['employee']['ife']) ? $data['employee']['ife'] : '{$lang.not_available}') . '" disabled>
+	                                    <input type="text" value="' . (!empty($global['employee']['ife']) ? $global['employee']['ife'] : '{$lang.not_available}') . '" disabled>
 	                                </div>
 	                                <div class="title">
 	                                    <h6>{$lang.ife}</h6>
@@ -306,7 +300,7 @@ class Employees_controller extends Controller
 	                        <div class="row">
 	                            <div class="span3">
 	                                <div class="text">
-	                                    <input type="text" value="' . (!empty($data['employee']['birth_date']) ? Functions::format_age($data['employee']['birth_date']) : '{$lang.not_available}') . '" disabled>
+	                                    <input type="text" value="' . (!empty($global['employee']['birth_date']) ? Functions::format_age($global['employee']['birth_date']) : '{$lang.not_available}') . '" disabled>
 	                                </div>
 	                                <div class="title">
 	                                    <h6>{$lang.age}</h6>
@@ -314,7 +308,7 @@ class Employees_controller extends Controller
 	                            </div>
 	                            <div class="span6">
 	                                <div class="text">
-	                                    <input type="text" value="' . (!empty($data['employee']['birth_date']) ? Dates::format_date($data['employee']['birth_date'], 'long') : '{$lang.not_available}') . '" disabled>
+	                                    <input type="text" value="' . (!empty($global['employee']['birth_date']) ? Dates::format_date($global['employee']['birth_date'], 'long') : '{$lang.not_available}') . '" disabled>
 	                                </div>
 	                                <div class="title">
 	                                    <h6>{$lang.birth_date}</h6>
@@ -322,7 +316,7 @@ class Employees_controller extends Controller
 	                            </div>
 	                            <div class="span3">
 	                                <div class="text">
-	                                    <input type="text" value="' . (!empty($data['employee']['sex']) ? '{$lang.' . $data['employee']['sex'] . '}' : '{$lang.not_available}') . '" disabled>
+	                                    <input type="text" value="' . (!empty($global['employee']['sex']) ? '{$lang.' . $global['employee']['sex'] . '}' : '{$lang.not_available}') . '" disabled>
 	                                </div>
 	                                <div class="title">
 	                                    <h6>{$lang.sex}</h6>
@@ -335,7 +329,7 @@ class Employees_controller extends Controller
 	                        <div class="row">
 	                            <div class="span3">
 	                                <div class="text">
-	                                    <input type="text" value="{$lang.' . $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['type'] . '}" disabled>
+	                                    <input type="text" value="{$lang.' . $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['type'] . '}" disabled>
 	                                </div>
 	                                <div class="title">
 	                                    <h6>{$lang.type}</h6>
@@ -343,19 +337,19 @@ class Employees_controller extends Controller
 	                            </div>
 	                            <div class="span3">
 	                                <div class="text">
-	                                    <input type="text" value="{$lang.' . $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['reason'] . '}" disabled>
+	                                    <input type="text" value="{$lang.' . $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['reason'] . '}" disabled>
 	                                </div>
 	                                <div class="title">
 	                                    <h6>{$lang.reason}</h6>
 	                                </div>
 	                            </div>';
 
-					if ($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['type'] == 'alcoholic')
+					if ($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['type'] == 'alcoholic')
 					{
 						$html .=
 						'<div class="span2">
 							<div class="text">
-								<input type="text" value="' . (!empty($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['tests']['1']) ? number_format($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['tests']['1'], 2, '.', '') : '') . '" disabled>
+								<input type="text" value="' . (!empty($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['tests']['1']) ? number_format($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['tests']['1'], 2, '.', '') : '') . '" disabled>
 							</div>
 							<div class="title">
 								<h6>{$lang.test} 1</h6>
@@ -363,7 +357,7 @@ class Employees_controller extends Controller
 						</div>
 						<div class="span2">
 							<div class="text">
-								<input type="text" value="' . (!empty($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['tests']['2']) ? number_format($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['tests']['2'], 2, '.', '') : '') . '" disabled>
+								<input type="text" value="' . (!empty($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['tests']['2']) ? number_format($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['tests']['2'], 2, '.', '') : '') . '" disabled>
 							</div>
 							<div class="title">
 								<h6>{$lang.test} 2</h6>
@@ -371,19 +365,19 @@ class Employees_controller extends Controller
 						</div>
 						<div class="span2">
 							<div class="text">
-								<input type="text" value="' . (!empty($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['tests']['3']) ? number_format($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['tests']['3'], 2, '.', '') : '') . '" disabled>
+								<input type="text" value="' . (!empty($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['tests']['3']) ? number_format($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['tests']['3'], 2, '.', '') : '') . '" disabled>
 							</div>
 							<div class="title">
 								<h6>{$lang.test} 3</h6>
 							</div>
 						</div>';
 					}
-					else if ($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['type'] == 'antidoping')
+					else if ($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['type'] == 'antidoping')
 					{
 						$html .=
 						'<div class="span2">
 							<div class="text">
-								<input type="text" value="' . (!empty($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['COC']) ? '{$lang.' . $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['COC'] . '}' : '') . '" disabled>
+								<input type="text" value="' . (!empty($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['COC']) ? '{$lang.' . $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['COC'] . '}' : '') . '" disabled>
 							</div>
 							<div class="title">
 								<h6>COC</h6>
@@ -391,7 +385,7 @@ class Employees_controller extends Controller
 						</div>
 						<div class="span2">
 							<div class="text">
-								<input type="text" value="' . (!empty($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['THC']) ? '{$lang.' . $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['THC'] . '}' : '') . '" disabled>
+								<input type="text" value="' . (!empty($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['THC']) ? '{$lang.' . $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['THC'] . '}' : '') . '" disabled>
 							</div>
 							<div class="title">
 								<h6>THC</h6>
@@ -399,7 +393,7 @@ class Employees_controller extends Controller
 						</div>
 						<div class="span2">
 							<div class="text">
-								<input type="text" value="' . (!empty($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['MET']) ? '{$lang.' . $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['MET'] . '}' : '') . '" disabled>
+								<input type="text" value="' . (!empty($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['MET']) ? '{$lang.' . $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['MET'] . '}' : '') . '" disabled>
 							</div>
 							<div class="title">
 								<h6>MET</h6>
@@ -411,14 +405,14 @@ class Employees_controller extends Controller
 					'	</div>
 	                </fieldset>';
 
-					if ($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['type'] == 'antidoping')
+					if ($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['type'] == 'antidoping')
 					{
 						$html .=
 						'<fieldset class="fields-group">
 							<div class="row">
 								<div class="span2">
 									<div class="text">
-										<input type="text" value="' . (!empty($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['ANF']) ? '{$lang.' . $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['ANF'] . '}' : '') . '" disabled>
+										<input type="text" value="' . (!empty($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['ANF']) ? '{$lang.' . $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['ANF'] . '}' : '') . '" disabled>
 									</div>
 									<div class="title">
 										<h6>ANF</h6>
@@ -426,7 +420,7 @@ class Employees_controller extends Controller
 								</div>
 								<div class="span2">
 									<div class="text">
-										<input type="text" value="' . (!empty($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['BZD']) ? '{$lang.' . $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['BZD'] . '}' : '') . '" disabled>
+										<input type="text" value="' . (!empty($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['BZD']) ? '{$lang.' . $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['BZD'] . '}' : '') . '" disabled>
 									</div>
 									<div class="title">
 										<h6>BZD</h6>
@@ -434,7 +428,7 @@ class Employees_controller extends Controller
 								</div>
 								<div class="span2">
 									<div class="text">
-										<input type="text" value="' . (!empty($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['OPI']) ? '{$lang.' . $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['OPI'] . '}' : '') . '" disabled>
+										<input type="text" value="' . (!empty($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['OPI']) ? '{$lang.' . $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['OPI'] . '}' : '') . '" disabled>
 									</div>
 									<div class="title">
 										<h6>OPI</h6>
@@ -442,7 +436,7 @@ class Employees_controller extends Controller
 								</div>
 								<div class="span2">
 									<div class="text">
-										<input type="text" value="' . (!empty($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['BAR']) ? '{$lang.' . $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['BAR'] . '}' : '') . '" disabled>
+										<input type="text" value="' . (!empty($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['BAR']) ? '{$lang.' . $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['analysis']['BAR'] . '}' : '') . '" disabled>
 									</div>
 									<div class="title">
 										<h6>BAR</h6>
@@ -456,7 +450,7 @@ class Employees_controller extends Controller
 					'<h2>{$lang.medical_treatment}</h2>
 	                <fieldset class="fields-group">
 	                    <div class="text">
-	                        <textarea disabled>' . (!empty($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['medicines']) ? $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['medicines'] : '') . '</textarea>
+	                        <textarea disabled>' . (!empty($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['medicines']) ? $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['medicines'] : '') . '</textarea>
 	                    </div>
 	                    <div class="title">
 	                        <h6>{$lang.prescription_drugs}</h6>
@@ -466,7 +460,7 @@ class Employees_controller extends Controller
 	                    <div class="row">
 	                        <div class="span8">
 	                            <div class="text">
-	                                <input type="text" value="' . (!empty($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['prescription']['issued_by']) ? $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['prescription']['issued_by'] : '') . '" disabled>
+	                                <input type="text" value="' . (!empty($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['prescription']['issued_by']) ? $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['prescription']['issued_by'] : '') . '" disabled>
 	                            </div>
 	                            <div class="title">
 	                                <h6>{$lang.prescription_issued_by}</h6>
@@ -474,7 +468,7 @@ class Employees_controller extends Controller
 	                        </div>
 	                        <div class="span4">
 	                            <div class="text">
-	                                <input type="text" value="' . (!empty($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['prescription']['date']) ? Dates::format_date($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['prescription']['date'], 'long') : '') . '" disabled>
+	                                <input type="text" value="' . (!empty($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['prescription']['date']) ? Dates::format_date($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['prescription']['date'], 'long') : '') . '" disabled>
 	                            </div>
 	                            <div class="title">
 	                                <h6>{$lang.date}</h6>
@@ -483,15 +477,15 @@ class Employees_controller extends Controller
 	                    </div>
 	                </fieldset>
 	                <h2>{$lang.authorization}</h2>
-	                <p>{$lang.custody_chanin_alert_' . $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['type'] . '_1}</p>
+	                <p>{$lang.custody_chanin_alert_' . $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['type'] . '_1}</p>
 	                <fieldset class="fields-group">';
 
-					if (!empty($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['signatures']['employee']))
+					if (!empty($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['signatures']['employee']))
 					{
 						$html .=
 						'<div class="img">
 							<figure>
-								<img src="{$path.uploads}' . $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['signatures']['employee'] . '">
+								<img src="{$path.uploads}' . $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['signatures']['employee'] . '">
 							</figure>
 						</div>';
 					}
@@ -509,12 +503,12 @@ class Employees_controller extends Controller
 	                    </div>
 	                </fieldset>
 	                <h2>{$lang.collector}</h2>
-	                <p>{$lang.custody_chanin_alert_' . $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['type'] . '_2}</p>
+	                <p>{$lang.custody_chanin_alert_' . $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['type'] . '_2}</p>
 	                <fieldset class="fields-group">
 	                    <div class="row">
 	                        <div class="span8">
 	                            <div class="text">
-	                                <input type="text" value="' . (!empty($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['collection']['place']) ? $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['collection']['place'] : '') . '" disabled>
+	                                <input type="text" value="' . (!empty($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['collection']['place']) ? $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['collection']['place'] : '') . '" disabled>
 	                            </div>
 	                            <div class="title">
 	                                <h6>{$lang.place}</h6>
@@ -522,7 +516,7 @@ class Employees_controller extends Controller
 	                        </div>
 	                        <div class="span4">
 	                            <div class="text">
-	                                <input type="text" value="' . Dates::format_hour($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['collection']['hour'], '12-long') . '" disabled>
+	                                <input type="text" value="' . Dates::format_hour($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['collection']['hour'], '12-long') . '" disabled>
 	                            </div>
 	                            <div class="title">
 	                                <h6>{$lang.hour}</h6>
@@ -532,7 +526,7 @@ class Employees_controller extends Controller
 	                </fieldset>
 	                <fieldset class="fields-group">
 	                    <div class="text">
-	                        <input type="text" value="' . (!empty($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['result']) ? $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['result'] : '') . '" disabled>
+	                        <input type="text" value="' . (!empty($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['result']) ? $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['result'] : '') . '" disabled>
 	                    </div>
 	                    <div class="title">
 	                        <h6>{$lang.conformity_result}</h6>
@@ -542,7 +536,7 @@ class Employees_controller extends Controller
 	                    <div class="row">
 	                        <div class="span4">
 	                            <div class="text">
-	                                <input type="text" value="' . $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['user_firstname'] . ' ' . $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['user_lastname'] . '" disabled>
+	                                <input type="text" value="' . $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['user_firstname'] . ' ' . $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['user_lastname'] . '" disabled>
 	                            </div>
 	                            <div class="title">
 	                                <h6>{$lang.name}</h6>
@@ -550,12 +544,12 @@ class Employees_controller extends Controller
 	                        </div>
 							<div class="span4">';
 
-					if (!empty($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['signatures']['collector']))
+					if (!empty($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['signatures']['collector']))
 					{
 						$html .=
 						'<div class="img">
 							<figure>
-								<img src="{$path.uploads}' . $data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['signatures']['collector'] . '">
+								<img src="{$path.uploads}' . $global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['signatures']['collector'] . '">
 							</figure>
 						</div>';
 					}
@@ -574,7 +568,7 @@ class Employees_controller extends Controller
 	                            </div>
 	                            <div class="span4">
 	                                <div class="text">
-	                                    <input type="text" value="' . Dates::format_date($data['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['date'], 'long') . '" disabled>
+	                                    <input type="text" value="' . Dates::format_date($global['employee']['custody_chanins'][$_POST['type']][$_POST['key']]['date'], 'long') . '" disabled>
 	                                </div>
 	                                <div class="title">
 	                                    <h6>{$lang.date}</h6>
@@ -592,7 +586,7 @@ class Employees_controller extends Controller
 			}
 			else
 			{
-                define('_title', Configuration::$web_page . ' | ' . $data['employee']['firstname'] . ' ' . $data['employee']['lastname']);
+                define('_title', Configuration::$web_page . ' | ' . $global['employee']['firstname'] . ' ' . $global['employee']['lastname']);
 
     			$template = $this->view->render($this, 'profile');
 

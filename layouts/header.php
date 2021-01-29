@@ -47,7 +47,7 @@
             <?php if (Permissions::account(['laboratory']) == true AND Permissions::user(['laboratory','alcoholic','antidoping','covid'], true) == true) : ?>
                 <ul>
                     <?php if (Permissions::user(['laboratory'], true) == true) : ?>
-                        <li><a href="/laboratory"><img src="{$path.images}marbu_logotype_color.png"><span>Marbu {$lang.laboratory}</span></a></li>
+                        <li><a href="/laboratory/marbu"><img src="{$path.images}marbu_logotype_color.png"><span>Marbu {$lang.laboratory}</span></a></li>
                     <?php endif; ?>
                     <?php if (Permissions::user(['alcoholic'], true) == true) : ?>
                         <li><a href="/laboratory/alcoholic"><i class="fas fa-cocktail"></i><span>{$lang.alcoholic}</span></a></li>
@@ -108,7 +108,7 @@
                     <ul>
                         <li><h4>{$lang.laboratory}</h4></li>
                         <?php if (Permissions::user(['laboratory'], true) == true) : ?>
-                            <li><a href="/laboratory"><figure><img src="{$path.images}marbu_logotype_color.png"></figure>Marbu {$lang.laboratory}</a></li>
+                            <li><a href="/laboratory/marbu"><figure><img src="{$path.images}marbu_logotype_color.png"></figure>Marbu {$lang.laboratory}</a></li>
                         <?php endif; ?>
                         <?php if (Permissions::user(['alcoholic'], true) == true) : ?>
                             <li><a href="/laboratory/alcoholic"><i class="fas fa-cocktail"></i>{$lang.alcoholic}</a></li>
@@ -158,7 +158,7 @@
                 <li><a>{$lang.privacy_policies}</a></li>
             </ul>
             <ul>
-                <li><a href="https://codemonkey.com.mx/" target="_blank"><?php echo Configuration::$web_page . ' ' . Configuration::$web_page_version; ?> by Code Monkey</a></li>
+                <li><a href="/about"><?php echo Configuration::$web_page . ' ' . Configuration::$web_page_version; ?> by Code Monkey</a></li>
                 <li><a href="" target="_blank">Power by Valkyrie</a></li>
             </ul>
             <ul>

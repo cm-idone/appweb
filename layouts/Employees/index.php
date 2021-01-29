@@ -22,7 +22,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/index.js']);
 </header>
 <main>
     <div class="tbl-st-2" data-table="employees">
-        <?php foreach ($data['employees'] as $value) : ?>
+        <?php foreach ($global['employees'] as $value) : ?>
             <div>
                 <figure>
                     <img src="<?php echo (!empty($value['avatar']) ? '{$path.uploads}' . $value['avatar'] : '{$path.images}employee.png'); ?>">

@@ -1,0 +1,8 @@
+
+article.scanner-4 > main > form > fieldset > div.button > button {
+    width: auto !important;
+}
+
+article.scanner-4 > main > form > fieldset > div.button > button > i {
+    margin-right: 10px;
+}

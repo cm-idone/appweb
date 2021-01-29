@@ -13,6 +13,10 @@ class Urls_registered_vkye
                 'controller' => 'Index',
                 'method' => 'index'
             ],
+            '/%param%/covid/travel' => [
+                'controller' => 'Covid',
+                'method' => 'index'
+            ],
             '/login' => [
                 'controller' => 'Login',
                 'method' => 'index'
@@ -21,9 +25,9 @@ class Urls_registered_vkye
                 'controller' => 'Dashboard',
                 'method' => 'index'
             ],
-            '/laboratory' => [
+            '/laboratory/marbu' => [
                 'controller' => 'Laboratory',
-                'method' => 'index'
+                'method' => 'marbu'
             ],
             '/laboratory/%param%' => [
                 'controller' => 'Laboratory',

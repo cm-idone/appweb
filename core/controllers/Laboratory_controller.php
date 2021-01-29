@@ -9,7 +9,7 @@ class Laboratory_controller extends Controller
 		parent::__construct();
 	}
 
-    public function index()
+	public function marbu()
     {
         if (Format::exist_ajax_request() == true)
 		{
@@ -17,7 +17,23 @@ class Laboratory_controller extends Controller
 		}
 		else
 		{
-			define('_title', Configuration::$web_page . ' | {$lang.laboratory}');
+			define('_title', Configuration::$web_page . ' | Marbu {$lang.laboratory}');
+
+			$template = $this->view->render($this, 'marbu');
+
+			echo $template;
+		}
+    }
+
+    public function index($params)
+    {
+        if (Format::exist_ajax_request() == true)
+		{
+
+		}
+		else
+		{
+			define('_title', Configuration::$web_page . ' | {$lang.laboratory} | {$lang.' . $params[0] . '}');
 
 			$template = $this->view->render($this, 'index');
 
@@ -31,15 +47,15 @@ class Laboratory_controller extends Controller
 
         if (!empty($params[0]))
         {
-            global $data;
+            global $global;
 
-            $data['type'] = $params[0];
+            $global['type'] = $params[0];
 
-            if (($data['type'] == 'alcoholic' OR $data['type'] == 'antidoping') AND !empty($params[1]))
+            if (($global['type'] == 'alcoholic' OR $global['type'] == 'antidoping') AND !empty($params[1]))
             {
-				$data['employee'] = $this->model->read_employee($params[1]);
+				$global['employee'] = $this->model->read_employee($params[1]);
 
-				if (!empty($data['employee']))
+				if (!empty($global['employee']))
 					$go = true;
             }
         }
@@ -63,8 +79,8 @@ class Laboratory_controller extends Controller
 
     				if (empty($errors))
     				{
-                        $_POST['employee'] = $data['employee']['id'];
-                        $_POST['type'] = $data['type'];
+                        $_POST['employee'] = $global['employee']['id'];
+                        $_POST['type'] = $global['type'];
 
 						$query = $this->model->create_custody_chain($_POST);
 
@@ -73,7 +89,7 @@ class Laboratory_controller extends Controller
     						echo json_encode([
     							'status' => 'success',
     							'message' => '{$lang.operation_success}',
-                                'path' => '/' . Session::get_value('vkye_account')['path'] . '/' . $data['employee']['nie']
+                                'path' => '/' . Session::get_value('vkye_account')['path'] . '/' . $global['employee']['nie']
     						]);
     					}
     					else
@@ -95,11 +111,11 @@ class Laboratory_controller extends Controller
     		}
     		else
     		{
-    			define('_title', Configuration::$web_page . ' | {$lang.do_test}');
+    			define('_title', Configuration::$web_page . ' | {$lang.do_test} | {$lang.' . $params[0] . '}');
 
-				global $data;
+				global $global;
 
-				$data['locations'] = $this->model->read_locations();
+				$global['locations'] = $this->model->read_locations();
 
     			$template = $this->view->render($this, 'create');
 

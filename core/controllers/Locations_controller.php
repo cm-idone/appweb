@@ -100,9 +100,9 @@ class Locations_controller extends Controller
 		{
 			define('_title', Configuration::$web_page . ' | {$lang.locations}');
 
-			global $data;
+			global $global;
 
-			$data['locations'] = $this->model->read_locations();
+			$global['locations'] = $this->model->read_locations();
 
 			$template = $this->view->render($this, 'index');
 

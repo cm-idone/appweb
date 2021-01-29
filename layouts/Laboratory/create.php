@@ -10,7 +10,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
 
 %{header}%
 <main class="unmodbar">
-    <?php if ($data['type'] == 'alcoholic' OR $data['type'] == 'antidoping') : ?>
+    <?php if ($global['type'] == 'alcoholic' OR $global['type'] == 'antidoping') : ?>
         <article class="scanner-4 create">
             <header>
                 <figure>
@@ -28,7 +28,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                     <div class="row">
                         <div class="span6">
                             <div class="text">
-                                <input type="text" value="<?php echo $data['employee']['lastname']; ?>" disabled>
+                                <input type="text" value="<?php echo $global['employee']['lastname']; ?>" disabled>
                             </div>
                             <div class="title">
                                 <h6>{$lang.lastname} ({$lang.paternal_maternal})</h6>
@@ -36,7 +36,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                         </div>
                         <div class="span6">
                             <div class="text">
-                                <input type="text" value="<?php echo $data['employee']['firstname']; ?>" disabled>
+                                <input type="text" value="<?php echo $global['employee']['firstname']; ?>" disabled>
                             </div>
                             <div class="title">
                                 <h6>{$lang.firstname}</h6>
@@ -56,7 +56,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                         </div>
                         <div class="span4">
                             <div class="text">
-                                <input type="text" value="<?php echo $data['employee']['ife']; ?>" disabled>
+                                <input type="text" value="<?php echo $global['employee']['ife']; ?>" disabled>
                             </div>
                             <div class="title">
                                 <h6>{$lang.ife}</h6>
@@ -68,7 +68,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                     <div class="row">
                         <div class="span3">
                             <div class="text">
-                                <input type="text" value="<?php echo Functions::format_age($data['employee']['birth_date']); ?>" disabled>
+                                <input type="text" value="<?php echo Functions::format_age($global['employee']['birth_date']); ?>" disabled>
                             </div>
                             <div class="title">
                                 <h6>{$lang.age}</h6>
@@ -76,7 +76,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                         </div>
                         <div class="span6">
                             <div class="text">
-                                <input type="text" value="<?php echo Dates::format_date($data['employee']['birth_date'], 'long'); ?>" disabled>
+                                <input type="text" value="<?php echo Dates::format_date($global['employee']['birth_date'], 'long'); ?>" disabled>
                             </div>
                             <div class="title">
                                 <h6>{$lang.birth_date}</h6>
@@ -84,7 +84,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                         </div>
                         <div class="span3">
                             <div class="text">
-                                <input type="text" value="{$lang.<?php echo $data['employee']['sex']; ?>}" disabled>
+                                <input type="text" value="{$lang.<?php echo $global['employee']['sex']; ?>}" disabled>
                             </div>
                             <div class="title">
                                 <h6>{$lang.sex}</h6>
@@ -97,7 +97,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                     <div class="row">
                         <div class="span3">
                             <div class="text">
-                                <input type="text" value="{$lang.<?php echo $data['type'] ?>}" disabled>
+                                <input type="text" value="{$lang.<?php echo $global['type'] ?>}" disabled>
                             </div>
                             <div class="title">
                                 <h6>{$lang.type}</h6>
@@ -116,7 +116,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                                 <h6>{$lang.reason}</h6>
                             </div>
                         </div>
-                        <?php if ($data['type'] == 'alcoholic') : ?>
+                        <?php if ($global['type'] == 'alcoholic') : ?>
                             <div class="span2">
                                 <div class="text">
                                     <input type="text" name="test_1">
@@ -141,7 +141,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                                     <h6>{$lang.test} 3</h6>
                                 </div>
                             </div>
-                        <?php elseif ($data['type'] == 'antidoping') : ?>
+                        <?php elseif ($global['type'] == 'antidoping') : ?>
                             <div class="span2">
                                 <div class="text">
                                     <select name="analysis_COC">
@@ -181,7 +181,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                         <?php endif; ?>
                     </div>
                 </fieldset>
-                <?php if ($data['type'] == 'antidoping') : ?>
+                <?php if ($global['type'] == 'antidoping') : ?>
                     <fieldset class="fields-group">
                         <div class="row">
                             <div class="span2">
@@ -265,7 +265,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                     </div>
                 </fieldset>
                 <h2>{$lang.authorization}</h2>
-                <p>{$lang.custody_chanin_alert_<?php echo $data['type']; ?>_1}</p>
+                <p>{$lang.custody_chanin_alert_<?php echo $global['type']; ?>_1}</p>
                 <fieldset class="fields-group">
                     <div class="signature" id="employee_signature">
                         <canvas></canvas>
@@ -278,14 +278,14 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                     </div>
                 </fieldset>
                 <h2>{$lang.collector}</h2>
-                <p>{$lang.custody_chanin_alert_<?php echo $data['type']; ?>_2}</p>
+                <p>{$lang.custody_chanin_alert_<?php echo $global['type']; ?>_2}</p>
                 <fieldset class="fields-group">
                     <div class="row">
                         <div class="span8">
                             <div class="text">
                                 <select name="collection_place">
                                     <option value="">{$lang.choose_an_option}</option>
-                                    <?php foreach ($data['locations'] as $value) : ?>
+                                    <?php foreach ($global['locations'] as $value) : ?>
                                         <option value="<?php echo $value['name']; ?>"><?php echo $value['name']; ?></option>
                                     <?php endforeach; ?>
                                 </select>

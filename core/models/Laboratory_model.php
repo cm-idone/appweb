@@ -45,7 +45,8 @@ class Laboratory_model extends Model
                 'employee' => !empty($data['employee_signature']) ? Fileloader::base64($data['employee_signature']) : '',
                 'collector' => !empty($data['collector_signature']) ? Fileloader::base64($data['collector_signature']) : ''
             ]),
-            'date' => $_POST['date']
+            'date' => $_POST['date'],
+			'external' => false
         ]);
 
         return $query;
