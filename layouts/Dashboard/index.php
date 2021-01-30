@@ -8,7 +8,7 @@ $this->dependencies->add(['js', '{$path.js}Dashboard/index.js']);
 ?>
 
 %{header}%
-<main class="unmodbar">
+<main class="workspace unmodbar">
     <!-- <div class="sacanner-qr">
         <video id="qr_scanner" style="width:100%;height:300px;border:1px solid red;box-sizing:border-box;"></video>
         <a data-action="qr_scanner_change_front_camera">Cámara frontal</a>

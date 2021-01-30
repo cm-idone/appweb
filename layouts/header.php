@@ -37,7 +37,7 @@
 <header class="leftbar">
     <nav>
         <ul>
-            <li><a href="/about" class="logotype"><img src="{$path.images}imagotype_white.png"><span><?php echo Configuration::$web_page . ' ' . Configuration::$web_page_version; ?> by Code Monkey</span></a></li>
+            <li><a href="/about" class="logotype"><img src="{$path.images}imagotype_white.png"><span><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?> by Code Monkey</span></a></li>
         </ul>
         <ul>
             <li><a href="/search"><i class="fas fa-search"></i><span>{$lang.search}</span></a></li>
@@ -158,8 +158,8 @@
                 <li><a>{$lang.privacy_policies}</a></li>
             </ul>
             <ul>
-                <li><a href="/about"><?php echo Configuration::$web_page . ' ' . Configuration::$web_page_version; ?> by Code Monkey</a></li>
-                <li><a href="" target="_blank">Power by Valkyrie</a></li>
+                <li><a href="/about"><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?> by Code Monkey</a></li>
+                <li><a href="/about">Power by Valkyrie</a></li>
             </ul>
             <ul>
                 <li><a class="reverse">{$lang.technical_support}<i class="fas fa-headset"></i></a></li>

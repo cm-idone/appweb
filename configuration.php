@@ -30,13 +30,13 @@ class Configuration
 	public static $web_page = 'ID One';
 
 	/**
-     * Nombre del sitio web.
+     * Versión del sitio web.
 	 *
 	 * @static
 	 *
-     * @var string $web_page
+     * @var string $web_version
      */
-	public static $web_page_version = '1.0';
+	public static $web_version = '1.0';
 
 	/**
      * Idioma por default
@@ -258,7 +258,7 @@ class Configuration
 	 *
      * @var string $smtp_pass
      */
-	public static $smtp_pass = 'V5qt2$s4';
+	public static $smtp_pass = '2#5igqR3';
 
 	/**
      * Seguridad de la encriptacion para el envio de SMTP.
@@ -278,4 +278,19 @@ class Configuration
      * @var integer $smtp_port
      */
 	public static $smtp_port = 465;
+
+	/**
+     * Variables extras del sitio web.
+	 *
+	 * @static
+	 *
+     * @var integer $vars
+     */
+	public static $vars = [
+		'marbu' => [
+			'phone' => '+52 (998) 313 2948',
+			'email' => 'marbu@one-consultores.com',
+			'website' => 'marbu.one-consultores.com'
+		]
+	];
 }

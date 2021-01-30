@@ -9,7 +9,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
 ?>
 
 %{header}%
-<main class="unmodbar">
+<main class="workspace unmodbar">
     <?php if ($global['type'] == 'alcoholic' OR $global['type'] == 'antidoping') : ?>
         <article class="scanner-4 create">
             <header>

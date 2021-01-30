@@ -46,6 +46,7 @@ class Permissions
                             case 'laboratory' :
                                 array_push($paths, '/Laboratory/index');
                                 array_push($paths, '/Laboratory/create');
+                                array_push($paths, '/Laboratory/update');
                                 array_push($paths, '/Employees/index');
                                 array_push($paths, '/Employees/profile');
                                 array_push($paths, '/Locations/index');
@@ -80,12 +81,13 @@ class Permissions
                                 break;
 
                             case 'create_alcoholic' :
-                                array_push($paths, '/Laboratory/create');
                                 array_push($paths, '/Laboratory/index');
+                                array_push($paths, '/Laboratory/create');
                                 break;
 
                             case 'update_alcoholic' :
                                 array_push($paths, '/Laboratory/index');
+                                array_push($paths, '/Laboratory/update');
                                 break;
 
                             case 'delete_alcoholic' :
@@ -93,12 +95,13 @@ class Permissions
                                 break;
 
                             case 'create_antidoping' :
-                                array_push($paths, '/Laboratory/create');
                                 array_push($paths, '/Laboratory/index');
+                                array_push($paths, '/Laboratory/create');
                                 break;
 
                             case 'update_antidoping' :
                                 array_push($paths, '/Laboratory/index');
+                                array_push($paths, '/Laboratory/update');
                                 break;
 
                             case 'delete_antidoping' :
@@ -106,12 +109,13 @@ class Permissions
                                 break;
 
                             case 'create_covid' :
-                                array_push($paths, '/Laboratory/create');
                                 array_push($paths, '/Laboratory/index');
+                                array_push($paths, '/Laboratory/create');
                                 break;
 
                             case 'update_covid' :
                                 array_push($paths, '/Laboratory/index');
+                                array_push($paths, '/Laboratory/update');
                                 break;
 
                             case 'delete_covid' :

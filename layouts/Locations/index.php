@@ -20,7 +20,7 @@ $this->dependencies->add(['js', '{$path.js}Locations/index.js']);
         <?php endif; ?>
     </div>
 </header>
-<main>
+<main class="workspace">
     <div class="tbl-st-2" data-table="locations">
         <?php foreach ($global['locations'] as $value) : ?>
             <div>

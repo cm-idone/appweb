@@ -7,7 +7,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
 ?>
 
 %{header}%
-<main class="unmodbar">
+<main class="workspace unmodbar">
     <div class="scanner-1">
         <figure>
             <img src="<?php echo (!empty($global['employee']['avatar']) ? '{$path.uploads}' . $global['employee']['avatar'] : '{$path.images}employee.png'); ?>">

@@ -13,27 +13,26 @@ class Covid_model extends Model
 
     public function create_custody_chain($data)
     {
-		$data['qr']['filename'] = 'tmp_' . $data['account']['path'] . '_covid_qr_' . $data['token'] . '.png';
-		$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . Session::get_value('vkye_account')['path'] . '/' . $data['nie'];
+		$data['qr']['content'] = 'https://' . Configuration::$domain . '/laboratory/update/' . $data['token'];
 		$data['qr']['dir'] = PATH_UPLOADS . $data['qr']['filename'];
 		$data['qr']['level'] = 'H';
 		$data['qr']['size'] = 5;
 		$data['qr']['frame'] = 3;
 
         $query = $this->database->insert('custody_chanins', [
-            'account' => $data['account']['id'],
+            'account' => $data['account'],
+			'token' => $data['token'],
             'employee' => null,
-            'user' => null,
-            'type' => $_POST['test'],
+            'type' => $_POST['type'],
             'reason' => null,
-            'tests' => null,
-            'analysis' => null,
-            'result' => null,
+            'results' => null,
+            'comments' => null,
             'medicines' => null,
             'prescription' => json_encode([
                 'issued_by' => '',
                 'date' => ''
             ]),
+			'collector' => null,
             'collection' => json_encode([
                 'place' => '',
                 'hour' => ''
@@ -53,12 +52,15 @@ class Covid_model extends Model
                     'country' => $data['phone_country'],
                     'number' => $data['phone_number']
                 ],
-                'travel' => $data['travel']
+                'travel_to' => $data['travel_to']
             ]),
-			'qr' => '',
-			'external' => true,
-			'date' => Dates::current_date()
+			'qr' => $data['qr']['filename'],
+			'date' => Dates::current_date(),
+			'closed' => false
         ]);
+
+		if (!empty($query))
+			QRcode::png($data['qr']['content'], $data['qr']['dir'], $data['qr']['level'], $data['qr']['size'], $data['qr']['frame']);
 
         return $query;
     }
@@ -67,8 +69,7 @@ class Covid_model extends Model
     {
         $query = System::decode_json_to_array($this->database->select('accounts', [
             'id',
-            'avatar',
-            'path'
+            'avatar'
         ], [
             'path' => $path
         ]));
