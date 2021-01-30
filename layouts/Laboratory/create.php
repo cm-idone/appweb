@@ -18,7 +18,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                 </figure>
                 <h1>{$lang.custody_chanin}</h1>
                 <figure>
-                    <img src="<?php echo (!empty(Session::get_value('vkye_account')['avatar']) ? '{$path.uploads}' . Session::get_value('vkye_account')['avatar'] : '{$path.images}account.png'); ?>">
+                    <img src="<?php echo (!empty(Session::get_value('vkye_account')['avatar']) ? '{$path.uploads}' . Session::get_value('vkye_account')['avatar'] : '{$path.images}logotype_color.png'); ?>">
                 </figure>
             </header>
             <form name="create_custody_chain">
@@ -106,7 +106,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                         <div class="span3">
                             <div class="text">
                                 <select name="reason">
-                                    <option value="" hidden>{$lang.choose_an_option}</option>
+                                    <option value="" class="hidden">{$lang.choose_an_option}</option>
                                     <option value="random">{$lang.random}</option>
                                     <option value="reasonable_suspicion">{$lang.reasonable_suspicion}</option>
                                     <option value="periodic">{$lang.periodic}</option>
@@ -306,7 +306,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                 </fieldset>
                 <fieldset class="fields-group">
                     <div class="text">
-                        <input type="text" name="result">
+                        <input type="text" name="comments">
                     </div>
                     <div class="title">
                         <h6>{$lang.conformity_result}</h6>
@@ -346,7 +346,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                 <fieldset class="fields-group">
                     <div class="button">
                         <a class="alert" data-action="go_back"><i class="fas fa-times"></i></a>
-                        <button type="submit" class="success"><i class="fas fa-plus"></i></button>
+                        <button type="submit" class="success"><i class="fas fa-check"></i></button>
                     </div>
                 </fieldset>
             </form>
