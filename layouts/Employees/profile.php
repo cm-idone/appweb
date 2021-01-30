@@ -99,9 +99,9 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                             <div>
                                 <h5><?php echo Dates::format_date($value['date'], 'long'); ?></h5>
                                 <h6>
-                                    <?php echo (!empty($value['tests']['1']) ? '<span class="' . (($value['tests']['1'] <= '0') ? 'success' : (($value['tests']['1'] > '0' AND $value['tests']['1'] < '0.20') ? 'warning' : 'alert')) . '">' . number_format($value['tests']['1'], 2, '.', '') . '</span>' : ''); ?>
-                                    <?php echo (!empty($value['tests']['2']) ? '<span class="' . (($value['tests']['2'] <= '0') ? 'success' : (($value['tests']['2'] > '0' AND $value['tests']['2'] < '0.20') ? 'warning' : 'alert')) . '">' . number_format($value['tests']['2'], 2, '.', '') . '</span>' : ''); ?>
-                                    <?php echo (!empty($value['tests']['3']) ? '<span class="' . (($value['tests']['3'] <= '0') ? 'success' : (($value['tests']['3'] > '0' AND $value['tests']['3'] < '0.20') ? 'warning' : 'alert')) . '">' . number_format($value['tests']['3'], 2, '.', '') . '</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['1']) ? '<span class="' . (($value['results']['1'] <= '0') ? 'success' : (($value['results']['1'] > '0' AND $value['results']['1'] < '0.20') ? 'warning' : 'alert')) . '">' . number_format($value['results']['1'], 2, '.', '') . '</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['2']) ? '<span class="' . (($value['results']['2'] <= '0') ? 'success' : (($value['results']['2'] > '0' AND $value['results']['2'] < '0.20') ? 'warning' : 'alert')) . '">' . number_format($value['results']['2'], 2, '.', '') . '</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['3']) ? '<span class="' . (($value['results']['3'] <= '0') ? 'success' : (($value['results']['3'] > '0' AND $value['results']['3'] < '0.20') ? 'warning' : 'alert')) . '">' . number_format($value['results']['3'], 2, '.', '') . '</span>' : ''); ?>
                                 </h6>
                                 <a data-action="load_custody_chanin" data-type="alcoholic" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chanin}</span></a>
                             </div>
@@ -124,13 +124,13 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                             <div>
                                 <h5><?php echo Dates::format_date($value['date'], 'long'); ?></h5>
                                 <h6>
-                                    <?php echo (!empty($value['analysis']['COC']) ? '<span class="' . (!empty($value['analysis']['COC']) ? (($value['analysis']['COC'] == 'positive') ? 'alert' : 'success') : '') . '">COC</span>' : ''); ?>
-                                    <?php echo (!empty($value['analysis']['THC']) ? '<span class="' . (!empty($value['analysis']['THC']) ? (($value['analysis']['THC'] == 'positive') ? 'alert' : 'success') : '') . '">THC</span>' : ''); ?>
-                                    <?php echo (!empty($value['analysis']['ANF']) ? '<span class="' . (!empty($value['analysis']['ANF']) ? (($value['analysis']['ANF'] == 'positive') ? 'alert' : 'success') : '') . '">ANF</span>' : ''); ?>
-                                    <?php echo (!empty($value['analysis']['MET']) ? '<span class="' . (!empty($value['analysis']['MET']) ? (($value['analysis']['MET'] == 'positive') ? 'alert' : 'success') : '') . '">MET</span>' : ''); ?>
-                                    <?php echo (!empty($value['analysis']['BZD']) ? '<span class="' . (!empty($value['analysis']['BZD']) ? (($value['analysis']['BZD'] == 'positive') ? 'alert' : 'success') : '') . '">BZD</span>' : ''); ?>
-                                    <?php echo (!empty($value['analysis']['OPI']) ? '<span class="' . (!empty($value['analysis']['OPI']) ? (($value['analysis']['OPI'] == 'positive') ? 'alert' : 'success') : '') . '">OPI</span>' : ''); ?>
-                                    <?php echo (!empty($value['analysis']['BAR']) ? '<span class="' . (!empty($value['analysis']['BAR']) ? (($value['analysis']['BAR'] == 'positive') ? 'alert' : 'success') : '') . '">BAR</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['COC']) ? '<span class="' . (!empty($value['results']['COC']) ? (($value['results']['COC'] == 'positive') ? 'alert' : 'success') : '') . '">COC</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['THC']) ? '<span class="' . (!empty($value['results']['THC']) ? (($value['results']['THC'] == 'positive') ? 'alert' : 'success') : '') . '">THC</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['ANF']) ? '<span class="' . (!empty($value['results']['ANF']) ? (($value['results']['ANF'] == 'positive') ? 'alert' : 'success') : '') . '">ANF</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['MET']) ? '<span class="' . (!empty($value['results']['MET']) ? (($value['results']['MET'] == 'positive') ? 'alert' : 'success') : '') . '">MET</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['BZD']) ? '<span class="' . (!empty($value['results']['BZD']) ? (($value['results']['BZD'] == 'positive') ? 'alert' : 'success') : '') . '">BZD</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['OPI']) ? '<span class="' . (!empty($value['results']['OPI']) ? (($value['results']['OPI'] == 'positive') ? 'alert' : 'success') : '') . '">OPI</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['BAR']) ? '<span class="' . (!empty($value['results']['BAR']) ? (($value['results']['BAR'] == 'positive') ? 'alert' : 'success') : '') . '">BAR</span>' : ''); ?>
                                 </h6>
                                 <a data-action="load_custody_chanin" data-type="antidoping" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chanin}</span></a>
                             </div>

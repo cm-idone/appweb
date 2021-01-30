@@ -179,18 +179,17 @@ class Employees_model extends Model
 			{
 				$custody_chanins = System::decode_json_to_array($this->database->select('custody_chanins', [
 					'[>]users' => [
-						'user' => 'id'
+						'collector' => 'id'
 					]
 				], [
 		            'custody_chanins.id',
-		            'users.avatar(user_avatar)',
-		            'users.firstname(user_firstname)',
-		            'users.lastname(user_lastname)',
+		            'users.avatar(collector_avatar)',
+		            'users.firstname(collector_firstname)',
+		            'users.lastname(collector_lastname)',
 					'custody_chanins.type',
 					'custody_chanins.reason',
-					'custody_chanins.tests',
-					'custody_chanins.analysis',
-					'custody_chanins.result',
+					'custody_chanins.results',
+					'custody_chanins.comments',
 					'custody_chanins.medicines',
 					'custody_chanins.prescription',
 					'custody_chanins.collection',
@@ -311,7 +310,7 @@ class Employees_model extends Model
 							'country' => !empty($data['emergency_contacts_fourth_phone_country']) ? $data['emergency_contacts_fourth_phone_country'] : '',
 							'number' => !empty($data['emergency_contacts_fourth_phone_number']) ? $data['emergency_contacts_fourth_phone_number'] : ''
 						]
-					],
+					]
 				]),
 				'docs' => json_encode([
 					'birth_certificate' => !empty($data['files']['docs_birth_certificate']['name']) ? Fileloader::up($data['files']['docs_birth_certificate']) : $edited[0]['docs']['birth_certificate'],
