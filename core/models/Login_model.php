@@ -47,7 +47,7 @@ class Login_model extends Model
 					'work_team',
 					'permissions',
 					'settings',
-					'status'
+					'blocked'
 				], [
 					'id' => $value['id']
 				]));
