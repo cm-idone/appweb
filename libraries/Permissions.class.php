@@ -34,7 +34,7 @@ class Permissions
         {
             if (!empty(Session::get_value('vkye_account')))
             {
-                if (Session::get_value('vkye_account')['status'] == true)
+                if (Session::get_value('vkye_account')['blocked'] == false)
                 {
                     array_push($paths, '/Dashboard/index');
                     array_push($paths, '/System/index');

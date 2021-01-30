@@ -7,7 +7,7 @@
                 <img src="<?php echo (!empty(Session::get_value('vkye_account')['avatar']) ? '{$path.uploads}' . Session::get_value('vkye_account')['avatar'] : 'https://cdn.codemonkey.com.mx/monkeyboard/assets/images/account.png'); ?>">
             </figure>
             <div>
-                <h4 class="<?php echo ((Session::get_value('vkye_account')['status'] == true) ? 'online' : 'offline'); ?>"><i class="fas fa-circle"></i><?php echo Session::get_value('vkye_account')['name']; ?></h4>
+                <h4 class="<?php echo ((Session::get_value('vkye_account')['blocked'] == false) ? 'online' : 'offline'); ?>"><i class="fas fa-circle"></i><?php echo Session::get_value('vkye_account')['name']; ?></h4>
                 <span>{$lang.<?php echo Session::get_value('vkye_account')['type']; ?>}</span>
             </div>
         </div>
@@ -37,7 +37,7 @@
 <header class="leftbar">
     <nav>
         <ul>
-            <li><a href="/about" class="logotype"><img src="{$path.images}imagotype_white.png"><span><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?> by Code Monkey</span></a></li>
+            <li><a href="/about" class="logotype"><img src="{$path.images}imagotype_white.png"><span><strong><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?></strong> by Code Monkey</span></a></li>
         </ul>
         <ul>
             <li><a href="/search"><i class="fas fa-search"></i><span>{$lang.search}</span></a></li>
@@ -79,7 +79,7 @@
                         </figure>
                         <div>
                             <h4><?php echo $value['name']; ?></h4>
-                            <?php if ($value['status'] == true) : ?>
+                            <?php if ($value['blocked'] == false) : ?>
                                 <?php if (Session::get_value('vkye_account')['id'] == $value['id']) : ?>
                                     <span class="online"><i class="fas fa-circle"></i>{$lang.online}</span>
                                 <?php else : ?>
@@ -158,7 +158,7 @@
                 <li><a>{$lang.privacy_policies}</a></li>
             </ul>
             <ul>
-                <li><a href="/about"><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?> by Code Monkey</a></li>
+                <li><a href="/about"><strong><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?></strong> by Code Monkey</a></li>
                 <li><a href="/about">Power by Valkyrie</a></li>
             </ul>
             <ul>
