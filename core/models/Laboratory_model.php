@@ -90,6 +90,9 @@ class Laboratory_model extends Model
 			'AND' => [
 				'custody_chanins.account' => Session::get_value('vkye_account')['id'],
 				'custody_chanins.type' => $type
+			],
+			'ORDER' => [
+				'id' => 'DESC'
 			]
 		]));
 
