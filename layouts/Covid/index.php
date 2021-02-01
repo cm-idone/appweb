@@ -42,7 +42,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                             <input type="text" name="ife">
                         </div>
                         <div class="title">
-                            <h6>{$lang.id}</h6>
+                            <h6>{$lang.passport}</h6>
                         </div>
                     </div>
                 </div>
