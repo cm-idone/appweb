@@ -140,7 +140,6 @@ class Employees_model extends Model
 		{
 			$where = [
 				'AND' => [
-					'account' => Session::get_value('vkye_account')['id'],
 					'nie' => $id,
 					'blocked' => false
 				]
@@ -151,6 +150,7 @@ class Employees_model extends Model
 
 		$query = System::decode_json_to_array($this->database->select('employees', [
             'id',
+            'account',
             'avatar',
 			'firstname',
 			'lastname',

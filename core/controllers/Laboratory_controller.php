@@ -163,14 +163,14 @@ class Laboratory_controller extends Controller
 					if ($break == false)
 					{
 						$session = new System_model();
-						$session = $session->read_session($params[0], 'id');
+						$session = $session->read_session($global['custody_chanin']['account'], 'id');
 
 						Session::set_value('vkye_account', $session['account']);
 						Session::set_value('vkye_user', $session['user']);
 						Session::set_value('vkye_lang', $session['user']['language']);
 						Session::set_value('vkye_temporal', []);
 
-						$go = true;
+						header('Location: /laboratory/update/' . $params[0]);
 					}
 				}
 				else
@@ -334,7 +334,5 @@ class Laboratory_controller extends Controller
 				echo $template;
 			}
 		}
-		else
-            Permissions::redirection('laboratory');
 	}
 }

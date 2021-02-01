@@ -168,37 +168,36 @@ class Employees_controller extends Controller
 
         if (!empty($params[0]) AND !empty($params[1]))
         {
-			$break = true;
+			global $global;
 
-			if ($params[0] == Session::get_value('vkye_account')['path'])
-				$break = false;
-			else
-            {
-				foreach (Session::get_value('vkye_user')['accounts'] as $value)
-				{
-					if ($params[0] == $value['path'])
-						$break = false;
-				}
-            }
+			$global['employee'] = $this->model->read_employee($params[1], true);
 
-			if ($break == false)
+			if (!empty($global['employee']))
 			{
-				if ($params[0] != Session::get_value('vkye_account')['path'])
+				if ($global['employee']['account'] != Session::get_value('vkye_account')['id'])
 				{
-					$session = new System_model();
-					$session = $session->read_session($params[0], 'path');
+					$break = true;
 
-					Session::set_value('vkye_account', $session['account']);
-					Session::set_value('vkye_user', $session['user']);
-					Session::set_value('vkye_lang', $session['user']['language']);
-					Session::set_value('vkye_temporal', []);
+					foreach (Session::get_value('vkye_user')['accounts'] as $value)
+					{
+						if ($global['employee']['account'] == $value['id'])
+							$break = false;
+					}
+
+					if ($break == false)
+					{
+						$session = new System_model();
+						$session = $session->read_session($global['employee']['account'], 'id');
+
+						Session::set_value('vkye_account', $session['account']);
+						Session::set_value('vkye_user', $session['user']);
+						Session::set_value('vkye_lang', $session['user']['language']);
+						Session::set_value('vkye_temporal', []);
+
+						header('Location: /' . $params[0] . '/' . $params[1]);
+					}
 				}
-
-				global $global;
-
-				$global['employee'] = $this->model->read_employee($params[1], true);
-
-				if (!empty($global['employee']))
+				else
 					$go = true;
 			}
         }
@@ -261,7 +260,5 @@ class Employees_controller extends Controller
     			echo $template;
 			}
 		}
-		else
-			Permissions::redirection('employees');
 	}
 }
