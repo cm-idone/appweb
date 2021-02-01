@@ -37,6 +37,10 @@ class Laboratory_controller extends Controller
 		{
 			define('_title', Configuration::$web_page . ' | {$lang.laboratory} | {$lang.' . $params[0] . '}');
 
+			global $global;
+
+			$global['custody_chanins'] = $this->model->read_custody_chanins($params[0]);
+
 			$template = $this->view->render($this, 'index');
 
 			echo $template;

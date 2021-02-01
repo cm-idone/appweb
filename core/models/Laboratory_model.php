@@ -67,6 +67,35 @@ class Laboratory_model extends Model
         return $query;
     }
 
+	public function read_custody_chanins($type)
+	{
+		if ($type == 'covid')
+			$type = ['covid_pcr','covid_an','covid_ac'];
+
+		$query = System::decode_json_to_array($this->database->select('custody_chanins', [
+			'[>]employees' => [
+				'employee' => 'id'
+			]
+		], [
+			'custody_chanins.id',
+			'custody_chanins.token',
+			'custody_chanins.employee',
+			'employees.firstname(employee_firstname)',
+			'employees.lastname(employee_lastname)',
+			'custody_chanins.contact',
+			'custody_chanins.type',
+			'custody_chanins.hour',
+			'custody_chanins.date'
+		], [
+			'AND' => [
+				'custody_chanins.account' => Session::get_value('vkye_account')['id'],
+				'custody_chanins.type' => $type
+			]
+		]));
+
+		return $query;
+	}
+
 	public function read_custody_chanin($token)
 	{
 		$query = System::decode_json_to_array($this->database->select('custody_chanins', [
