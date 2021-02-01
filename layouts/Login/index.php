@@ -28,7 +28,7 @@ $this->dependencies->add(['js', '{$path.js}Login/index.js']);
             <button type="submit">{$lang.login}</button>
         </div>
     </form>
-    <a href="https://codemonkey.com.mx/monkeyboard/copyright" target="_blank">Copyright <i class="far fa-copyright"></i> 2021 One Consultores & Code Monkey</a>
-    <a href="https://codemonkey.com.mx/" target="_blank"><strong><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?></strong>Software {$lang.development_by}<img src="https://cdn.codemonkey.com.mx/monkeyboard/assets/images/cm_logotype_black.png"></a>
+    <a href="https://codemonkey.com.mx/monkeyboard/copyright" target="_blank">Copyright <i class="far fa-copyright"></i> 2021 | One Consultores & Code Monkey</a>
+    <a href="https://codemonkey.com.mx/" target="_blank"><strong><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?></strong>Software {$lang.development_by} One Consultores & <img src="https://cdn.codemonkey.com.mx/monkeyboard/assets/images/cm_logotype_black.png"></a>
     <p>{$lang.with_love}</p>
 </main>
