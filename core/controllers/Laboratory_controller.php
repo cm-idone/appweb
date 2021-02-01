@@ -227,13 +227,13 @@ class Laboratory_controller extends Controller
     				if (Validations::empty($_POST['reason']) == false)
     					array_push($errors, ['reason','{$lang.dont_leave_this_field_empty}']);
 
-					if ($global['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_1'], true) == false)
+					if ($global['custody_chanin']['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_1'], true) == false)
 					   array_push($errors, ['test_1','{$lang.invalid_field}']);
 
-					if ($global['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_2'], true) == false)
+					if ($global['custody_chanin']['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_2'], true) == false)
 					   array_push($errors, ['test_2','{$lang.invalid_field}']);
 
-					if ($global['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_3'], true) == false)
+					if ($global['custody_chanin']['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_3'], true) == false)
 					   array_push($errors, ['test_3','{$lang.invalid_field}']);
 
                     if (Validations::empty($_POST['date']) == false)
