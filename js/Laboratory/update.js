@@ -76,7 +76,7 @@ $(document).ready(function()
             {
                 check_form_errors(form, response, function()
                 {
-                    open_notification_modal('success', response.message, 'go_back');
+                    open_notification_modal('success', response.message, response.path);
                 });
             }
         });
