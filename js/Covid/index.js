@@ -4,7 +4,7 @@ $(document).ready(function()
 {
     $('[name="ife"]').on('keyup', function()
     {
-        validate_string(['uppercase','lowercase','int'], $(this).val(), $(this));
+        validate_string(['uppercase','int'], $(this).val(), $(this));
     });
 
     $('[name="age"]').on('keyup', function()

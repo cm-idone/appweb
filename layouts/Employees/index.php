@@ -189,7 +189,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/index.js']);
                         <div class="row">
                             <div class="span6">
                                 <div class="text">
-                                    <input type="text" name="email">
+                                    <input type="email" name="email">
                                 </div>
                                 <div class="title">
                                     <h6>{$lang.email}</h6>
@@ -203,7 +203,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/index.js']);
                                             <option value="<?php echo $value['lada']; ?>"><?php echo $value['name'][Session::get_value('vkye_lang')]; ?></option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <input type="text" name="phone_number" placeholder="{$lang.number}">
+                                    <input type="number" name="phone_number" placeholder="{$lang.number}">
                                 </div>
                                 <div class="title">
                                     <h6>{$lang.phone}</h6>
@@ -276,7 +276,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/index.js']);
                                             <option value="<?php echo $value['lada']; ?>"><?php echo $value['name'][Session::get_value('vkye_lang')]; ?></option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <input type="text" name="emergency_contacts_first_phone_number" placeholder="{$lang.number}">
+                                    <input type="number" name="emergency_contacts_first_phone_number" placeholder="{$lang.number}">
                                 </div>
                                 <div class="title">
                                     <h6>{$lang.phone}</h6>
@@ -302,7 +302,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/index.js']);
                                             <option value="<?php echo $value['lada']; ?>"><?php echo $value['name'][Session::get_value('vkye_lang')]; ?></option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <input type="text" name="emergency_contacts_second_phone_number" placeholder="{$lang.number}">
+                                    <input type="number" name="emergency_contacts_second_phone_number" placeholder="{$lang.number}">
                                 </div>
                                 <div class="title">
                                     <h6>{$lang.phone}</h6>
@@ -328,7 +328,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/index.js']);
                                             <option value="<?php echo $value['lada']; ?>"><?php echo $value['name'][Session::get_value('vkye_lang')]; ?></option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <input type="text" name="emergency_contacts_third_phone_number" placeholder="{$lang.number}">
+                                    <input type="number" name="emergency_contacts_third_phone_number" placeholder="{$lang.number}">
                                 </div>
                                 <div class="title">
                                     <h6>{$lang.phone}</h6>
@@ -354,7 +354,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/index.js']);
                                             <option value="<?php echo $value['lada']; ?>"><?php echo $value['name'][Session::get_value('vkye_lang')]; ?></option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <input type="text" name="emergency_contacts_fourth_phone_number" placeholder="{$lang.number}">
+                                    <input type="number" name="emergency_contacts_fourth_phone_number" placeholder="{$lang.number}">
                                 </div>
                                 <div class="title">
                                     <h6>{$lang.phone}</h6>

@@ -53,7 +53,7 @@ class Laboratory_controller extends Controller
 
             $global['type'] = $params[0];
 
-            if (($global['type'] == 'alcoholic' OR $global['type'] == 'antidoping') AND !empty($params[1]))
+            if (($global['type'] == 'alcoholic' OR $global['type'] == 'antidoping' OR $global['type'] == 'covid_pcr' OR $global['type'] == 'covid_an' OR $global['type'] == 'covid_ac') AND !empty($params[1]))
             {
 				$global['employee'] = $this->model->read_employee($params[1]);
 
@@ -70,14 +70,26 @@ class Laboratory_controller extends Controller
                 {
                     $errors = [];
 
-    				if (Validations::empty($_POST['reason']) == false)
+					if (Validations::empty($_POST['reason']) == false)
     					array_push($errors, ['reason','{$lang.dont_leave_this_field_empty}']);
 
-                    if (Validations::empty($_POST['collection_hour']) == false)
-    					array_push($errors, ['collection_hour','{$lang.dont_leave_this_field_empty}']);
+					if ($global['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_1'], true) == false)
+					   array_push($errors, ['test_1','{$lang.invalid_field}']);
+
+					if ($global['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_2'], true) == false)
+					   array_push($errors, ['test_2','{$lang.invalid_field}']);
+
+					if ($global['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_3'], true) == false)
+					   array_push($errors, ['test_3','{$lang.invalid_field}']);
 
                     if (Validations::empty($_POST['date']) == false)
     					array_push($errors, ['date','{$lang.dont_leave_this_field_empty}']);
+
+                    if (Validations::empty($_POST['hour']) == false)
+    					array_push($errors, ['hour','{$lang.dont_leave_this_field_empty}']);
+
+                    if (Validations::empty($_POST['collector']) == false)
+    					array_push($errors, ['collector','{$lang.dont_leave_this_field_empty}']);
 
     				if (empty($errors))
     				{
@@ -90,8 +102,7 @@ class Laboratory_controller extends Controller
     					{
     						echo json_encode([
     							'status' => 'success',
-    							'message' => '{$lang.operation_success}',
-                                'path' => '/' . Session::get_value('vkye_account')['path'] . '/' . $global['employee']['nie']
+    							'message' => '{$lang.operation_success}'
     						]);
     					}
     					else
@@ -114,8 +125,6 @@ class Laboratory_controller extends Controller
     		else
     		{
     			define('_title', Configuration::$web_page . ' | {$lang.do_test} | {$lang.' . $params[0] . '}');
-
-				global $global;
 
 				$global['locations'] = $this->model->read_locations();
 
@@ -189,13 +198,13 @@ class Laboratory_controller extends Controller
 						else if (Validations::string(['uppercase','int'], $_POST['ife']) == false)
 			                array_push($errors, ['ife','{$lang.invalid_field}']);
 
+						if (Validations::empty($_POST['birth_date']) == false)
+					   		array_push($errors, ['birth_date','{$lang.dont_leave_this_field_empty}']);
+
 						if (Validations::empty($_POST['age']) == false)
 	    					array_push($errors, ['age','{$lang.dont_leave_this_field_empty}']);
 						else if (Validations::number('int', $_POST['age']) == false)
 						   array_push($errors, ['age','{$lang.invalid_field}']);
-
-					   	if (Validations::empty($_POST['birth_date']) == false)
-					   		array_push($errors, ['birth_date','{$lang.dont_leave_this_field_empty}']);
 
 					   	if (Validations::empty($_POST['sex']) == false)
 					   		array_push($errors, ['sex','{$lang.dont_leave_this_field_empty}']);
@@ -203,7 +212,7 @@ class Laboratory_controller extends Controller
 					   	if (Validations::empty($_POST['email']) == false)
 					   		array_push($errors, ['email','{$lang.dont_leave_this_field_empty}']);
 					   	else if (Validations::email($_POST['email']) == false)
-					   		array_push($errors, ['email','{$lang.dont_leave_this_field_empty}']);
+					   		array_push($errors, ['email','{$lang.invalid_field}']);
 
 						if (Validations::empty([$_POST['phone_country'],$_POST['phone_number']]) == false)
 			                array_push($errors, ['phone_number','{$lang.dont_leave_this_field_empty}']);
@@ -216,6 +225,15 @@ class Laboratory_controller extends Controller
 
     				if (Validations::empty($_POST['reason']) == false)
     					array_push($errors, ['reason','{$lang.dont_leave_this_field_empty}']);
+
+					if ($global['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_1'], true) == false)
+					   array_push($errors, ['test_1','{$lang.invalid_field}']);
+
+					if ($global['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_2'], true) == false)
+					   array_push($errors, ['test_2','{$lang.invalid_field}']);
+
+					if ($global['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_3'], true) == false)
+					   array_push($errors, ['test_3','{$lang.invalid_field}']);
 
                     if (Validations::empty($_POST['date']) == false)
     					array_push($errors, ['date','{$lang.dont_leave_this_field_empty}']);
@@ -261,12 +279,13 @@ class Laboratory_controller extends Controller
 				define('_title', Configuration::$web_page . ' | {$lang.update_test} | ' . $params[0]);
 
 				$global['locations'] = $this->model->read_locations();
-				$global[''] = (($global['custody_chanin']['type'] == 'covid_pcr' OR $global['custody_chanin']['type'] == 'covid_an' OR $global['custody_chanin']['type'] == 'covid_ac') AND empty($global['custody_chanin']['employee'])) ? true : false;
 
 				$template = $this->view->render($this, 'update');
 
 				echo $template;
 			}
 		}
+		else
+            Permissions::redirection('laboratory');
 	}
 }

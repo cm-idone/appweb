@@ -23,24 +23,24 @@ $(document).ready(function()
         });
     });
 
-    $('[data-action="load_custody_chanin"]').on('click', function()
-    {
-        $.ajax({
-            type: 'POST',
-            data: 'type=' + $(this).data('type') + '&key=' + $(this).data('key') + '&action=load_custody_chanin',
-            processData: false,
-            cache: false,
-            dataType: 'json',
-            success: function(response)
-            {
-                if (response.status == 'success')
-                {
-                    $('[data-modal="load_custody_chanin"]').find('article.scanner-4').html(response.html);
-                    $('[data-modal="load_custody_chanin"]').addClass('view');
-                }
-                else if (response.status == 'error')
-                    open_notification_modal('alert', response.message);
-            }
-        });
-    });
+    // $('[data-action="load_custody_chanin"]').on('click', function()
+    // {
+    //     $.ajax({
+    //         type: 'POST',
+    //         data: 'type=' + $(this).data('type') + '&key=' + $(this).data('key') + '&action=load_custody_chanin',
+    //         processData: false,
+    //         cache: false,
+    //         dataType: 'json',
+    //         success: function(response)
+    //         {
+    //             if (response.status == 'success')
+    //             {
+    //                 $('[data-modal="load_custody_chanin"]').find('article.scanner-4').html(response.html);
+    //                 $('[data-modal="load_custody_chanin"]').addClass('view');
+    //             }
+    //             else if (response.status == 'error')
+    //                 open_notification_modal('alert', response.message);
+    //         }
+    //     });
+    // });
 });

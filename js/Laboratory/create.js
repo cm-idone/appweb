@@ -2,6 +2,21 @@
 
 $(document).ready(function()
 {
+    $('[name="test_1"]').on('keyup', function()
+    {
+        validate_string(['int','float'], $(this).val(), $(this));
+    });
+
+    $('[name="test_2"]').on('keyup', function()
+    {
+        validate_string(['int','float'], $(this).val(), $(this));
+    });
+
+    $('[name="test_3"]').on('keyup', function()
+    {
+        validate_string(['int','float'], $(this).val(), $(this));
+    });
+
     var employee_signature = document.getElementById('employee_signature');
     var employee_canvas = employee_signature.querySelector('canvas');
     var employee_pad = new SignaturePad(employee_canvas, {
@@ -15,19 +30,6 @@ $(document).ready(function()
         employee_pad.clear();
     });
 
-    var collector_signature = document.getElementById('collector_signature');
-    var collector_canvas = collector_signature.querySelector('canvas');
-    var collector_pad = new SignaturePad(collector_canvas, {
-        backgroundColor: 'rgb(255, 255, 255)'
-    });
-
-    resize_canvas(collector_canvas);
-
-    $('[data-action="clean_collector_signature"]').on('click', function()
-    {
-        collector_pad.clear();
-    });
-
     $('form[name="create_custody_chain"]').on('submit', function(event)
     {
         event.preventDefault();
@@ -36,10 +38,8 @@ $(document).ready(function()
         var data = new FormData(form[0]);
 
         employee_pad.fromData(employee_pad.toData());
-        collector_pad.fromData(collector_pad.toData());
 
         data.append('employee_signature', ((employee_pad.isEmpty()) ? '' : employee_pad.toDataURL('image/jpeg')));
-        data.append('collector_signature', ((collector_pad.isEmpty()) ? '' : collector_pad.toDataURL('image/jpeg')));
         data.append('action', 'create_custody_chain');
 
         $.ajax({
@@ -53,7 +53,7 @@ $(document).ready(function()
             {
                 check_form_errors(form, response, function()
                 {
-                    open_notification_modal('success', response.message, response.path);
+                    open_notification_modal('success', response.message, 'go_back');
                 });
             }
         });

@@ -12,13 +12,14 @@ class Laboratory_model extends Model
     public function create_custody_chain($data)
     {
         $query = $this->database->insert('custody_chanins', [
-            'account' => Session::get_value('vkye_account')['id'],
+			'account' => Session::get_value('vkye_account')['id'],
 			'token' => System::generate_random_string(),
             'employee' => $data['employee'],
+			'contact' => null,
             'type' => $data['type'],
             'reason' => $data['reason'],
 			'results' => ($data['type'] == 'alcoholic') ? json_encode([
-                '1' => !empty($data['test_1']) ? $data['test_1'] : '0.00',
+                '1' => !empty($data['test_1']) ? $data['test_1'] : '',
                 '2' => !empty($data['test_2']) ? $data['test_2'] : '',
                 '3' => !empty($data['test_3']) ? $data['test_3'] : ''
             ]) : (($data['type'] == 'antidoping') ? json_encode([
@@ -29,25 +30,37 @@ class Laboratory_model extends Model
                 'BZD' => !empty($data['test_BZD']) ? $data['test_BZD'] : '',
                 'OPI' => !empty($data['test_OPI']) ? $data['test_OPI'] : '',
                 'BAR' => !empty($data['test_BAR']) ? $data['test_BAR'] : ''
-            ]) : null),
-            'comments' => !empty($_POST['comments']) ? $_POST['comments'] : null,
-            'medicines' => !empty($_POST['medicines']) ? $_POST['medicines'] : null,
-            'prescription' => json_encode([
-                'issued_by' => !empty($data['prescription_issued_by']) ? $data['prescription_issued_by'] : '',
-                'date' => !empty($data['prescription_date']) ? $data['date'] : ''
-            ]),
-			'collector' => Session::get_value('vkye_user')['id'],
-            'collection' => json_encode([
-                'place' => !empty($data['collection_place']) ? $data['collection_place'] : '',
-                'hour' => $data['collection_hour']
-            ]),
-            'signatures' => json_encode([
+            ]) : (($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an') ? json_encode([
+				'result' => $data['test_result'],
+				'unity' => $data['test_unity'],
+				'reference_values' => $data['test_reference_values']
+			]) : (($data['type'] == 'covid_ac') ? json_encode([
+				'igm' => [
+					'result' => $data['test_igm_result'],
+					'unity' => '',
+					'reference_values' => $data['test_igm_reference_values']
+				],
+				'igg' => [
+					'result' => $data['test_igg_result'],
+					'unity' => '',
+					'reference_values' => $data['test_igg_reference_values']
+				]
+			]) : null))),
+			'medicines' => (($data['type'] == 'alcoholic' OR $data['type'] == 'antidoping') AND !empty($data['medicines'])) ? $data['medicines'] : null,
+			'prescription' => ($data['type'] == 'alcoholic' OR $data['type'] == 'antidoping') ? json_encode([
+				'issued_by' => !empty($data['prescription_issued_by']) ? $data['prescription_issued_by'] : '',
+				'date' => !empty($data['prescription_date']) ? $data['prescription_date'] : ''
+			]) : null,
+			'collector' => $data['collector'],
+			'location' => !empty($data['location']) ? $data['location'] : null,
+			'hour' => $data['hour'],
+			'date' => $data['date'],
+			'comments' => !empty($data['comments']) ? $data['comments'] : null,
+			'signatures' => json_encode([
                 'employee' => !empty($data['employee_signature']) ? Fileloader::base64($data['employee_signature']) : '',
-                'collector' => !empty($data['collector_signature']) ? Fileloader::base64($data['collector_signature']) : ''
+                'collector' => ''
             ]),
-			'contact' => null,
 			'qr' => null,
-            'date' => $_POST['date'],
 			'closed' => true
         ]);
 
@@ -137,8 +150,8 @@ class Laboratory_model extends Model
 					'reference_values' => $data['test_igg_reference_values']
 				]
 			]) : null))),
-            'medicines' => (($data['custody_chanin']['type'] == 'alcoholic' OR $data['custody_chanin']['type'] == 'antidoping') AND !empty($data['custody_chanin']['employee'])) ? $data['medicines'] : null,
-            'prescription' => (($data['custody_chanin']['type'] == 'alcoholic' OR $data['custody_chanin']['type'] == 'antidoping') AND !empty($data['custody_chanin']['employee'])) ? json_encode([
+            'medicines' => (($data['custody_chanin']['type'] == 'alcoholic' OR $data['custody_chanin']['type'] == 'antidoping') AND !empty($data['medicines'])) ? $data['medicines'] : null,
+            'prescription' => ($data['custody_chanin']['type'] == 'alcoholic' OR $data['custody_chanin']['type'] == 'antidoping') ? json_encode([
                 'issued_by' => !empty($data['prescription_issued_by']) ? $data['prescription_issued_by'] : '',
                 'date' => !empty($data['prescription_date']) ? $data['prescription_date'] : ''
             ]) : null,
@@ -147,10 +160,10 @@ class Laboratory_model extends Model
 			'hour' => $data['hour'],
 			'date' => $data['date'],
 			'comments' => !empty($data['comments']) ? $data['comments'] : null,
-            'signatures' => json_encode([
-                'employee' => (!empty($data['custody_chanin']['employee']) AND !empty($data['employee_signature'])) ? Fileloader::base64($data['employee_signature']) : $data['custody_chanin']['signatures']['employee'],
+            'signatures' => (($data['custody_chanin']['type'] == 'alcoholic' OR $data['custody_chanin']['type'] == 'antidoping') OR (($data['custody_chanin']['type'] == 'covid_pcr' OR $data['custody_chanin']['type'] == 'covid_an' OR $data['custody_chanin']['type'] == 'covid_ac') AND !empty($data['custody_chanin']['employee']))) ? json_encode([
+                'employee' => !empty($data['employee_signature']) ? Fileloader::base64($data['employee_signature']) : $data['custody_chanin']['signatures']['employee'],
                 'collector' => ''
-            ]),
+            ]) : null,
 			'closed' => true
         ], [
 			'id' => $data['custody_chanin']['id']

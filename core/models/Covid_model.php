@@ -56,19 +56,13 @@ class Covid_model extends Model
 				]
 			]) : null),
             'medicines' => null,
-            'prescription' => json_encode([
-                'issued_by' => '',
-                'date' => ''
-            ]),
+            'prescription' => null,
 			'collector' => null,
 			'location' => null,
 			'hour' => null,
 			'date' => Dates::current_date(),
 			'comments' => null,
-            'signatures' => json_encode([
-                'employee' => '',
-                'collector' => ''
-            ]),
+            'signatures' => null,
 			'qr' => $data['qr']['filename'],
 			'closed' => false
         ]);

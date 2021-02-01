@@ -17,6 +17,21 @@ $(document).ready(function()
         validate_string('int', $(this).val(), $(this));
     });
 
+    $('[name="test_1"]').on('keyup', function()
+    {
+        validate_string(['int','float'], $(this).val(), $(this));
+    });
+
+    $('[name="test_2"]').on('keyup', function()
+    {
+        validate_string(['int','float'], $(this).val(), $(this));
+    });
+
+    $('[name="test_3"]').on('keyup', function()
+    {
+        validate_string(['int','float'], $(this).val(), $(this));
+    });
+
     var employee_signature = document.getElementById('employee_signature');
 
     if (employee_signature)
@@ -61,7 +76,7 @@ $(document).ready(function()
             {
                 check_form_errors(form, response, function()
                 {
-                    open_notification_modal('success', response.message, response.path);
+                    open_notification_modal('success', response.message, 'go_back');
                 });
             }
         });

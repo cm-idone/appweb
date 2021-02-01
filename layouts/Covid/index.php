@@ -68,7 +68,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                     <div class="span4">
                         <div class="text">
                             <select name="sex">
-                                <option value="" class="hidden"></option>
+                                <option value="" class="hidden">{$lang.choose_an_option}</option>
                                 <option value="male">{$lang.male}</option>
                                 <option value="female">{$lang.female}</option>
                             </select>
@@ -92,7 +92,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                     <div class="span4">
                         <div class="compound st-1-left">
                             <select name="phone_country">
-                                <option value="">{$lang.country}</option>
+                                <option value="" class="hidden">{$lang.country}</option>
                                 <?php foreach (Functions::countries() as $value) : ?>
                                     <option value="<?php echo $value['lada']; ?>"><?php echo $value['name'][Session::get_value('vkye_lang')]; ?></option>
                                 <?php endforeach; ?>
@@ -106,7 +106,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                     <div class="span4">
                         <div class="text">
                             <select name="type">
-                                <option value="" class="hidden"></option>
+                                <option value="" class="hidden">{$lang.choose_an_option}</option>
                                 <option value="covid_pcr">PCR</option>
                                 <option value="covid_an">{$lang.antigen}</option>
                                 <option value="covid_ac">{$lang.anticorps}</option>

@@ -178,32 +178,23 @@ class Employees_model extends Model
 			if ($profile == true)
 			{
 				$custody_chanins = System::decode_json_to_array($this->database->select('custody_chanins', [
-					'[>]users' => [
-						'collector' => 'id'
-					]
-				], [
-		            'custody_chanins.id',
-		            'users.avatar(collector_avatar)',
-		            'users.firstname(collector_firstname)',
-		            'users.lastname(collector_lastname)',
-					'custody_chanins.type',
-					'custody_chanins.reason',
-					'custody_chanins.results',
-					'custody_chanins.comments',
-					'custody_chanins.medicines',
-					'custody_chanins.prescription',
-					'custody_chanins.collection',
-					'custody_chanins.signatures',
-					'custody_chanins.date'
+		            'id',
+					'token',
+					'type',
+					'results',
+					'date'
 		        ], [
-		            'custody_chanins.employee' => $query[0]['id'],
+		            'employee' => $query[0]['id'],
 					'ORDER' => [
-						'custody_chanins.date' => 'DESC'
+						'date' => 'DESC'
 					]
 		        ]));
 
 				$query[0]['custody_chanins']['alcoholic'] = [];
 				$query[0]['custody_chanins']['antidoping'] = [];
+				$query[0]['custody_chanins']['covid_pcr'] = [];
+				$query[0]['custody_chanins']['covid_an'] = [];
+				$query[0]['custody_chanins']['covid_ac'] = [];
 
 				foreach ($custody_chanins as $key => $value)
 				{
@@ -211,6 +202,12 @@ class Employees_model extends Model
 						array_push($query[0]['custody_chanins']['alcoholic'], $value);
 					else if ($value['type'] == 'antidoping')
 						array_push($query[0]['custody_chanins']['antidoping'], $value);
+					else if ($value['type'] == 'covid_pcr')
+						array_push($query[0]['custody_chanins']['covid_pcr'], $value);
+					else if ($value['type'] == 'covid_an')
+						array_push($query[0]['custody_chanins']['covid_an'], $value);
+					else if ($value['type'] == 'covid_ac')
+						array_push($query[0]['custody_chanins']['covid_ac'], $value);
 				}
 			}
 

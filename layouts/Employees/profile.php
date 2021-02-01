@@ -84,7 +84,9 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
             <ul>
                 <li data-tab-target="tab1" class="view">{$lang.alcoholic}</li>
                 <li data-tab-target="tab2">{$lang.antidoping}</li>
-                <li data-tab-target="tab3">{$lang.covid}</li>
+                <li data-tab-target="tab3">{$lang.covid_pcr}</li>
+                <li data-tab-target="tab4">{$lang.covid_an}</li>
+                <li data-tab-target="tab5">{$lang.covid_ac}</li>
             </ul>
             <div class="tab" data-target="tab1">
                 <div class="tbl-st-4">
@@ -103,7 +105,10 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                                     <?php echo (!empty($value['results']['2']) ? '<span class="' . (($value['results']['2'] <= '0') ? 'success' : (($value['results']['2'] > '0' AND $value['results']['2'] < '0.20') ? 'warning' : 'alert')) . '">' . number_format($value['results']['2'], 2, '.', '') . '</span>' : ''); ?>
                                     <?php echo (!empty($value['results']['3']) ? '<span class="' . (($value['results']['3'] <= '0') ? 'success' : (($value['results']['3'] > '0' AND $value['results']['3'] < '0.20') ? 'warning' : 'alert')) . '">' . number_format($value['results']['3'], 2, '.', '') . '</span>' : ''); ?>
                                 </h6>
-                                <a data-action="load_custody_chanin" data-type="alcoholic" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chanin}</span></a>
+                                <?php if (Permissions::user(['update_alcoholic']) == true) : ?>
+                                    <a href="/laboratory/update/<?php echo $value['token']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
+                                <?php endif; ?>
+                                <!-- <a data-action="load_custody_chanin" data-type="alcoholic" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chanin}</span></a> -->
                             </div>
                         <?php endforeach; ?>
                     <?php else : ?>
@@ -132,7 +137,10 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                                     <?php echo (!empty($value['results']['OPI']) ? '<span class="' . (!empty($value['results']['OPI']) ? (($value['results']['OPI'] == 'positive') ? 'alert' : 'success') : '') . '">OPI</span>' : ''); ?>
                                     <?php echo (!empty($value['results']['BAR']) ? '<span class="' . (!empty($value['results']['BAR']) ? (($value['results']['BAR'] == 'positive') ? 'alert' : 'success') : '') . '">BAR</span>' : ''); ?>
                                 </h6>
-                                <a data-action="load_custody_chanin" data-type="antidoping" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chanin}</span></a>
+                                <?php if (Permissions::user(['update_antidoping']) == true) : ?>
+                                    <a href="/laboratory/update/<?php echo $value['token']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
+                                <?php endif; ?>
+                                <!-- <a data-action="load_custody_chanin" data-type="antidoping" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chanin}</span></a> -->
                             </div>
                         <?php endforeach; ?>
                     <?php else : ?>
@@ -140,7 +148,93 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                     <?php endif; ?>
                 </div>
             </div>
-            <div class="tab" data-target="tab3"></div>
+            <div class="tab" data-target="tab3">
+                <div class="tbl-st-4">
+                    <h4>
+                        <?php if (Permissions::user(['create_covid']) == true) : ?>
+                            <a href="/laboratory/create/covid_pcr/<?php echo $global['employee']['nie']; ?>" class="success">{$lang.do_test}</a>
+                        <?php endif; ?>
+                        <span><?php echo count($global['employee']['custody_chanins']['covid_pcr']); ?> {$lang.performed_tests}</span>
+                    </h4>
+                    <?php if (!empty($global['employee']['custody_chanins']['covid_pcr'])) : ?>
+                        <?php foreach ($global['employee']['custody_chanins']['covid_pcr'] as $key => $value) : ?>
+                            <div>
+                                <h5><?php echo Dates::format_date($value['date'], 'long'); ?></h5>
+                                <h6>
+                                    <?php echo (!empty($value['results']['result']) ? '<span class="' . (!empty($value['results']['result']) ? (($value['results']['result'] == 'positive') ? 'alert' : 'success') : '') . '">{$lang.result}: {$lang.' . $value['results']['result'] . '}</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['unity']) ? '<span>{$lang.unity}: ' . $value['results']['unity'] . '</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['reference_values']) ? '<span class="' . (!empty($value['results']['reference_values']) ? (($value['results']['reference_values'] == 'detected') ? 'alert' : 'success') : '') . '">{$lang.reference_values}: {$lang.' . $value['results']['reference_values'] . '}</span>' : ''); ?>
+                                </h6>
+                                <?php if (Permissions::user(['update_covid']) == true) : ?>
+                                    <a href="/laboratory/update/<?php echo $value['token']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
+                                <?php endif; ?>
+                                <!-- <a data-action="load_custody_chanin" data-type="covid_pcr" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chanin}</span></a> -->
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <div></div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="tab" data-target="tab4">
+                <div class="tbl-st-4">
+                    <h4>
+                        <?php if (Permissions::user(['create_covid']) == true) : ?>
+                            <a href="/laboratory/create/covid_an/<?php echo $global['employee']['nie']; ?>" class="success">{$lang.do_test}</a>
+                        <?php endif; ?>
+                        <span><?php echo count($global['employee']['custody_chanins']['covid_an']); ?> {$lang.performed_tests}</span>
+                    </h4>
+                    <?php if (!empty($global['employee']['custody_chanins']['covid_an'])) : ?>
+                        <?php foreach ($global['employee']['custody_chanins']['covid_an'] as $key => $value) : ?>
+                            <div>
+                                <h5><?php echo Dates::format_date($value['date'], 'long'); ?></h5>
+                                <h6>
+                                    <?php echo (!empty($value['results']['result']) ? '<span class="' . (!empty($value['results']['result']) ? (($value['results']['result'] == 'positive') ? 'alert' : 'success') : '') . '">{$lang.result}: {$lang.' . $value['results']['result'] . '}</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['unity']) ? '<span>{$lang.unity}: ' . $value['results']['unity'] . '</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['reference_values']) ? '<span class="' . (!empty($value['results']['reference_values']) ? (($value['results']['reference_values'] == 'detected') ? 'alert' : 'success') : '') . '">{$lang.reference_values}: {$lang.' . $value['results']['reference_values'] . '}</span>' : ''); ?>
+                                </h6>
+                                <?php if (Permissions::user(['update_covid']) == true) : ?>
+                                    <a href="/laboratory/update/<?php echo $value['token']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
+                                <?php endif; ?>
+                                <!-- <a data-action="load_custody_chanin" data-type="covid_an" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chanin}</span></a> -->
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <div></div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="tab" data-target="tab5">
+                <div class="tbl-st-4">
+                    <h4>
+                        <?php if (Permissions::user(['create_covid']) == true) : ?>
+                            <a href="/laboratory/create/covid_ac/<?php echo $global['employee']['nie']; ?>" class="success">{$lang.do_test}</a>
+                        <?php endif; ?>
+                        <span><?php echo count($global['employee']['custody_chanins']['covid_ac']); ?> {$lang.performed_tests}</span>
+                    </h4>
+                    <?php if (!empty($global['employee']['custody_chanins']['covid_ac'])) : ?>
+                        <?php foreach ($global['employee']['custody_chanins']['covid_ac'] as $key => $value) : ?>
+                            <div>
+                                <h5><?php echo Dates::format_date($value['date'], 'long'); ?></h5>
+                                <h6>
+                                    <?php echo (!empty($value['results']['igm']['result']) ? '<span class="' . (!empty($value['results']['igm']['result']) ? (($value['results']['igm']['result'] == 'reactive') ? 'alert' : 'success') : '') . '">IgM {$lang.result}:  {$lang.' . $value['results']['igm']['result'] . '}</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['igm']['unity']) ? '<span>Igm {$lang.unity}: ' . $value['results']['igm']['unity'] . '</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['igm']['reference_values']) ? '<span class="' . (!empty($value['results']['igm']['reference_values']) ? (($value['results']['igm']['reference_values'] == 'reactive') ? 'alert' : 'success') : '') . '">IgM {$lang.reference_values}: {$lang.' . $value['results']['igm']['reference_values'] . '}</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['igg']['result']) ? '<span class="' . (!empty($value['results']['igg']['result']) ? (($value['results']['igg']['result'] == 'reactive') ? 'alert' : 'success') : '') . '">IgG {$lang.result}: {$lang.' . $value['results']['igg']['result'] . '}</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['igg']['unity']) ? '<span>IgG {$lang.unity}: ' . $value['results']['igg']['unity'] . '</span>' : ''); ?>
+                                    <?php echo (!empty($value['results']['igg']['reference_values']) ? '<span class="' . (!empty($value['results']['igg']['reference_values']) ? (($value['results']['igg']['reference_values'] == 'reactive') ? 'alert' : 'success') : '') . '">IgG {$lang.reference_values}: {$lang.' . $value['results']['igg']['reference_values'] . '}</span>' : ''); ?>
+                                </h6>
+                                <?php if (Permissions::user(['update_covid']) == true) : ?>
+                                    <a href="/laboratory/update/<?php echo $value['token']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
+                                <?php endif; ?>
+                                <!-- <a data-action="load_custody_chanin" data-type="covid_ac" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chanin}</span></a> -->
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <div></div>
+                    <?php endif; ?>
+                </div>
+            </div>
         </div>
     </div>
 </main>
