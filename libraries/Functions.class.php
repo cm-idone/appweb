@@ -4,13 +4,32 @@ defined('_EXEC') or die;
 
 class Functions
 {
-    static public function format_age($date)
+    static public function format_age($date, $int = false)
     {
         $today = explode('-', Dates::current_date());
         $date = explode('-', $date);
         $age = ($today[0] - $date[0]);
 
-        return $age . ' {$lang.years}';
+        if ($int == false)
+            return $age . ' {$lang.years}';
+        else
+            return $age;
+    }
+
+    static public function collectors()
+    {
+        $database = new Medoo();
+
+        return $database->select('system_collectors', [
+            'id',
+            'name',
+            'signature'
+        ], [
+            'ORDER' => [
+                'default' => 'DESC',
+                'name' => 'ASC'
+            ]
+        ]);
     }
 
     static public function countries()

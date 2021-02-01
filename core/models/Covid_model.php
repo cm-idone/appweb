@@ -23,30 +23,13 @@ class Covid_model extends Model
             'account' => $data['account'],
 			'token' => $data['token'],
             'employee' => null,
-            'type' => $_POST['type'],
-            'reason' => null,
-            'results' => null,
-            'comments' => null,
-            'medicines' => null,
-            'prescription' => json_encode([
-                'issued_by' => '',
-                'date' => ''
-            ]),
-			'collector' => null,
-            'collection' => json_encode([
-                'place' => '',
-                'hour' => ''
-            ]),
-            'signatures' => json_encode([
-                'employee' => '',
-                'collector' => ''
-            ]),
-            'contact' => json_encode([
+			'contact' => json_encode([
                 'firstname' => $data['firstname'],
                 'lastname' => $data['lastname'],
+				'ife' => $data['ife'],
                 'birth_date' => $data['birth_date'],
                 'age' => $data['age'],
-                'id' => $data['id'],
+                'sex' => $data['sex'],
                 'email' => $data['email'],
                 'phone' => [
                     'country' => $data['phone_country'],
@@ -54,8 +37,39 @@ class Covid_model extends Model
                 ],
                 'travel_to' => $data['travel_to']
             ]),
-			'qr' => $data['qr']['filename'],
+            'type' => $_POST['type'],
+            'reason' => 'random',
+            'results' => ($_POST['type'] == 'covid_pcr' OR $_POST['type'] == 'covid_an') ? json_encode([
+				'result' => '',
+				'unity' => '',
+				'reference_values' => ''
+			]) : (($_POST['type'] == 'covid_ac') ? json_encode([
+				'igm' => [
+					'result' => '',
+					'unity' => '',
+					'reference_values' => ''
+				],
+				'igg' => [
+					'result' => '',
+					'unity' => '',
+					'reference_values' => ''
+				]
+			]) : null),
+            'medicines' => null,
+            'prescription' => json_encode([
+                'issued_by' => '',
+                'date' => ''
+            ]),
+			'collector' => null,
+			'location' => null,
+			'hour' => null,
 			'date' => Dates::current_date(),
+			'comments' => null,
+            'signatures' => json_encode([
+                'employee' => '',
+                'collector' => ''
+            ]),
+			'qr' => $data['qr']['filename'],
 			'closed' => false
         ]);
 

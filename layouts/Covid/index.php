@@ -21,7 +21,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
             <p>{$lang.covid_alert_1}</p>
             <fieldset class="fields-group">
                 <div class="row">
-                    <div class="span6">
+                    <div class="span4">
                         <div class="text">
                             <input type="text" name="firstname">
                         </div>
@@ -29,12 +29,20 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                             <h6>{$lang.firstname}</h6>
                         </div>
                     </div>
-                    <div class="span6">
+                    <div class="span4">
                         <div class="text">
                             <input type="text" name="lastname">
                         </div>
                         <div class="title">
                             <h6>{$lang.lastname}</h6>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="text">
+                            <input type="text" name="ife">
+                        </div>
+                        <div class="title">
+                            <h6>{$lang.id}</h6>
                         </div>
                     </div>
                 </div>
@@ -51,7 +59,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                     </div>
                     <div class="span4">
                         <div class="text">
-                            <input type="text" name="age">
+                            <input type="number" name="age">
                         </div>
                         <div class="title">
                             <h6>{$lang.age}</h6>
@@ -59,10 +67,14 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                     </div>
                     <div class="span4">
                         <div class="text">
-                            <input type="text" name="id">
+                            <select name="sex">
+                                <option value="" class="hidden"></option>
+                                <option value="male">{$lang.male}</option>
+                                <option value="female">{$lang.female}</option>
+                            </select>
                         </div>
                         <div class="title">
-                            <h6>{$lang.id}</h6>
+                            <h6>{$lang.sex}</h6>
                         </div>
                     </div>
                 </div>
@@ -80,12 +92,12 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                     <div class="span4">
                         <div class="compound st-1-left">
                             <select name="phone_country">
-                                <option value="">{$lang.lada}</option>
+                                <option value="">{$lang.country}</option>
                                 <?php foreach (Functions::countries() as $value) : ?>
                                     <option value="<?php echo $value['lada']; ?>"><?php echo $value['name'][Session::get_value('vkye_lang')]; ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <input type="text" name="phone_number" placeholder="{$lang.number}">
+                            <input type="number" name="phone_number" placeholder="{$lang.number}">
                         </div>
                         <div class="title">
                             <h6>{$lang.phone}</h6>
@@ -110,7 +122,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                 <div class="row">
                     <div class="span4">
                         <div class="text">
-                            <input type="name" name="travel_to">
+                            <input type="text" name="travel_to">
                         </div>
                         <div class="title">
                             <h6>{$lang.where_you_travel}</h6>

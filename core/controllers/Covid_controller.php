@@ -29,6 +29,11 @@ class Covid_controller extends Controller
 		            if (Validations::empty($_POST['lastname']) == false)
 		                array_push($errors, ['lastname','{$lang.dont_leave_this_field_empty}']);
 
+					if (Validations::empty($_POST['ife']) == false)
+		                array_push($errors, ['ife','{$lang.dont_leave_this_field_empty}']);
+		            else if (Validations::string(['uppercase','lowercase','int'], $_POST['ife']) == false)
+		                array_push($errors, ['ife','{$lang.invalid_field}']);
+
 		            if (Validations::empty($_POST['birth_date']) == false)
 		                array_push($errors, ['birth_date','{$lang.dont_leave_this_field_empty}']);
 
@@ -37,10 +42,8 @@ class Covid_controller extends Controller
 		            else if (Validations::number('int', $_POST['age']) == false)
 		                array_push($errors, ['age','{$lang.invalid_field}']);
 
-		            if (Validations::empty($_POST['id']) == false)
-		                array_push($errors, ['id','{$lang.dont_leave_this_field_empty}']);
-		            else if (Validations::string(['uppercase','lowercase','int'], $_POST['id']) == false)
-		                array_push($errors, ['id','{$lang.invalid_field}']);
+		            if (Validations::empty($_POST['sex']) == false)
+		                array_push($errors, ['sex','{$lang.dont_leave_this_field_empty}']);
 
 		            if (Validations::empty($_POST['email']) == false)
 		                array_push($errors, ['email','{$lang.dont_leave_this_field_empty}']);
@@ -72,7 +75,7 @@ class Covid_controller extends Controller
 
 							try
 							{
-								$mail->setFrom(Configuration::$vars['marbu']['email'], 'Marbu ' . Languages::email('laboratory')[Session::get_value('vkye_lang')]);
+								$mail->setFrom(Configuration::$vars['marbu']['email'], Configuration::$web_page . ' | Marbu ' . Languages::email('laboratory')[Session::get_value('vkye_lang')]);
 								$mail->addAddress($_POST['email'], $_POST['firstname'] . ' ' . $_POST['lastname']);
 								$mail->Subject = Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'] ;
 								$mail->Body =
@@ -85,8 +88,8 @@ class Covid_controller extends Controller
 											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 												<td style="width:100%;margin:0px;padding:40px;border:0px;box-sizing:border-box;background-color:#fff;">
 													<figure style="width:100%;margin:0px;padding:0px;text-align:center;">
-														<img style="width:auto;height:200px;" src="https://' . Configuration::$domain . '/images/marbu_logotype_color.png">
-														<img style="width:auto;height:200px;margin-left:40px;" src="https://' . Configuration::$domain . '/' . (!empty($global['account']['avatar']) ? 'uploads/' . $global['account']['avatar'] : 'images/logotype_color.png') . '">
+														<img style="width:auto;height:100px;" src="https://' . Configuration::$domain . '/images/marbu_logotype_color.png">
+														<img style="width:auto;height:100px;margin-left:40px;" src="https://' . Configuration::$domain . '/' . (!empty($global['account']['avatar']) ? 'uploads/' . $global['account']['avatar'] : 'images/logotype_color.png') . '">
 													</figure>
 												</td>
 											</tr>
@@ -100,8 +103,11 @@ class Covid_controller extends Controller
 											</tr>
 											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 												<td style="width:100%;margin:0px;padding:40px;border:0px;box-sizing:border-box;background-color:#fff;">
-													<p>' . Configuration::$vars['marbu']['phone'] . ' | ' . Configuration::$vars['marbu']['email'] . ' | ' . Configuration::$vars['marbu']['website'] . '</p>
-													<p>' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' <strong>' . Configuration::$web_page . ' ' . Configuration::$web_version . '</strong> | Software ' . Languages::email('development_by')[Session::get_value('vkye_lang')] . ' Code Monkey</p>
+													<p>' . Configuration::$vars['marbu']['phone'] . '</p>
+													<p>' . Configuration::$vars['marbu']['email'] . '</p>
+													<p>' . Configuration::$vars['marbu']['website'] . '</p>
+													<p>' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' <strong>' . Configuration::$web_page . ' ' . Configuration::$web_version . '</strong></p>
+													<p>Software ' . Languages::email('development_by')[Session::get_value('vkye_lang')] . ' Code Monkey</p>
 												</td>
 											</tr>
 										</table>
@@ -145,7 +151,7 @@ class Covid_controller extends Controller
 	        }
 	        else
 	        {
-	            define('_title', 'Marbu {$lang.laboratory} | Covid');
+	            define('_title', Configuration::$web_page . ' | Marbu {$lang.laboratory} | Covid');
 
 	            if (System::temporal('get_if_exists', 'covid', 'contact') == false)
 	                System::temporal('set_forced', 'covid', 'contact', []);

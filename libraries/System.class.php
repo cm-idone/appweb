@@ -32,7 +32,7 @@ class System
     */
     public static function temporal($option, $module, $key, $value = null)
     {
-        $temporal = Session::get_value('vkye_temporal');
+        $temporal = (Session::exists_var('vkye_temporal') == true) ? Session::get_value('vkye_temporal') : [];
 
         if ($option == 'set_forced' OR $option == 'set_if_not_exist')
         {

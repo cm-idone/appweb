@@ -185,12 +185,12 @@ class Employees_controller extends Controller
 			{
 				if ($params[0] != Session::get_value('vkye_account')['path'])
 				{
-					$system = new System_model();
-					$system = $system->get_session($params[0], 'path');
+					$session = new System_model();
+					$session = $session->read_session($params[0], 'path');
 
-					Session::set_value('vkye_account', $system['account']);
-					Session::set_value('vkye_user', $system['user']);
-					Session::set_value('vkye_lang', $system['user']['language']);
+					Session::set_value('vkye_account', $session['account']);
+					Session::set_value('vkye_user', $session['user']);
+					Session::set_value('vkye_lang', $session['user']['language']);
 					Session::set_value('vkye_temporal', []);
 				}
 

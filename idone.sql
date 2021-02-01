@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 29-01-2021 a las 17:05:27
+-- Tiempo de generación: 01-02-2021 a las 08:44:19
 -- Versión del servidor: 10.0.38-MariaDB-0+deb8u1
 -- Versión de PHP: 7.3.18
 
@@ -99,18 +99,19 @@ CREATE TABLE `custody_chanins` (
   `account` bigint(20) NOT NULL,
   `token` varchar(255) NOT NULL,
   `employee` bigint(20) DEFAULT NULL,
+  `contact` text,
   `type` enum('alcoholic','antidoping','covid_pcr','covid_an','covid_ac') NOT NULL,
-  `reason` enum('random','reasonable_suspicion','periodic','other') DEFAULT NULL,
+  `reason` enum('random','reasonable_suspicion','periodic','other') NOT NULL,
   `results` text,
-  `comments` text,
   `medicines` text,
   `prescription` text,
   `collector` bigint(20) DEFAULT NULL,
-  `collection` text,
-  `signatures` text,
-  `contact` text,
-  `qr` text,
+  `location` bigint(20) DEFAULT NULL,
+  `hour` time DEFAULT NULL,
   `date` date NOT NULL,
+  `comments` text,
+  `signatures` text,
+  `qr` text,
   `closed` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -118,97 +119,100 @@ CREATE TABLE `custody_chanins` (
 -- Volcado de datos para la tabla `custody_chanins`
 --
 
-INSERT INTO `custody_chanins` (`id`, `account`, `token`, `employee`, `type`, `reason`, `results`, `comments`, `medicines`, `prescription`, `collector`, `collection`, `signatures`, `contact`, `qr`, `date`, `closed`) VALUES
-(1, 2, 'Ntno6GPi', 7, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', 'No puede trabajar', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Muelle de Las Perlas\",\"hour\":\"17:00:00\"}', '{\"employee\":\"\",\"collector\":\"\"}', NULL, NULL, '2020-08-18', 1),
-(2, 2, 'p9VmgZZL', 7, 'alcoholic', 'random', '{\"1\":\"0.39\",\"2\":\"0.36\",\"3\":\"0.48\"}', 'No puede trabajar', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Muelle de Las Perlas\",\"hour\":\"17:00:00\"}', '{\"employee\":\"\",\"collector\":\"\"}', NULL, NULL, '2020-09-18', 1),
-(3, 2, 'BPoFGA9Q', 7, 'alcoholic', 'random', '{\"1\":\"0.14\",\"2\":\"\",\"3\":\"\"}', 'No puede trabajar', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Muelle de Las Perlas\",\"hour\":\"17:00:00\"}', '{\"employee\":\"\",\"collector\":\"\"}', NULL, NULL, '2020-10-18', 1),
-(4, 2, 'GsyM3647', 7, 'antidoping', 'random', '{\"COC\":\"positive\",\"THC\":\"positive\",\"ANF\":\"\",\"MET\":\"negative\",\"BZD\":\"\",\"OPI\":\"\",\"BAR\":\"\"}', 'No puede trabajar', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Muelle de Las Perlas\",\"hour\":\"17:00:00\"}', '{\"employee\":\"\",\"collector\":\"\"}', NULL, NULL, '2020-10-18', 1),
-(5, 2, 'UntLOGQS', 7, 'alcoholic', 'reasonable_suspicion', '{\"1\":\"0.40\",\"2\":\"0.40\",\"3\":\"\"}', 'No puede trabajar', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Muelle de Las Perlas\",\"hour\":\"09:11:59\"}', '{\"employee\":\"\",\"collector\":\"\"}', NULL, NULL, '2020-10-23', 1),
-(6, 2, 'yBZ7VKLD', 7, 'antidoping', 'reasonable_suspicion', '{\"COC\":\"positive\",\"THC\":\"positive\",\"MET\":\"positive\",\"ANF\":\"positive\",\"BZD\":\"positive\",\"OPI\":\"positive\",\"BAR\":\"positive\"}', 'No puede trabajar', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Muelle de Las Perlas\",\"hour\":\"09:22:43\"}', '{\"employee\":\"\",\"collector\":\"\"}', NULL, NULL, '2020-10-23', 1),
-(7, 1, 'rXDpvxmV', 5, 'alcoholic', 'periodic', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', 'Todo perfecto', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Oficinas centrales\",\"hour\":\"09:27:51\"}', '{\"employee\":\"\",\"collector\":\"\"}', NULL, NULL, '2020-10-23', 1),
-(8, 1, 'ti0HX9Fy', 5, 'antidoping', 'periodic', '{\"COC\":\"negative\",\"THC\":\"negative\",\"MET\":\"negative\",\"ANF\":\"negative\",\"BZD\":\"negative\",\"OPI\":\"negative\",\"BAR\":\"negative\"}', 'Todo perfecto', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Oficinas centrales\",\"hour\":\"09:30:14\"}', '{\"employee\":\"\",\"collector\":\"\"}', NULL, NULL, '2020-10-23', 1),
-(9, 1, 'xuPLV6bs', 5, 'alcoholic', 'reasonable_suspicion', '{\"1\":\"0.45\",\"2\":\"0.45\",\"3\":\"\"}', 'No puede trabajar', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Oficinas centrales\",\"hour\":\"10:41:40\"}', '{\"employee\":\"\",\"collector\":\"\"}', NULL, NULL, '2020-10-23', 1),
-(13, 1, 'yhhMCJuu', 5, 'alcoholic', 'reasonable_suspicion', '{\"1\":\"0.40\",\"2\":\"0.40\",\"3\":\"\"}', 'No puede trabajar', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Muelle de Las Perlas\",\"hour\":\"22:20:07\"}', '{\"employee\":\"fyOioaDax7xyoyGR.png\",\"collector\":\"Vi1S7Jxz0Eutzki5.png\"}', NULL, NULL, '2020-10-27', 1),
-(14, 1, '7sCKNS3D', 5, 'alcoholic', 'reasonable_suspicion', '{\"1\":\"0.40\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"\",\"hour\":\"22:28:51\"}', '{\"employee\":\"MgCakFp685Zd03Ra.png\",\"collector\":\"Dw9XlO9RGhCu8d8d.png\"}', NULL, NULL, '2020-10-27', 1),
-(15, 1, 'KLvZsb1b', 5, 'antidoping', 'reasonable_suspicion', '{\"COC\":\"positive\",\"THC\":\"positive\",\"MET\":\"positive\",\"ANF\":\"positive\",\"BZD\":\"positive\",\"OPI\":\"positive\",\"BAR\":\"positive\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 3, '{\"place\":\"\",\"hour\":\"12:13:19\"}', '{\"employee\":\"PbOJudpeKoEzfVV8.png\",\"collector\":\"O2zOBMqw5ls5cUJN.png\"}', NULL, NULL, '2020-10-29', 1),
-(16, 1, 'dGJHaEbh', 5, 'alcoholic', 'random', '{\"1\":\"0.50\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"\",\"hour\":\"15:14:11\"}', '{\"employee\":\"H82LocfhYGFiCtkn.png\",\"collector\":\"RrsBIPIVeT7Zmbu1.png\"}', NULL, NULL, '2020-11-25', 1),
-(17, 2, 'ec7fRGmx', 7, 'alcoholic', 'random', '{\"1\":\"0.22\",\"2\":\"0.22\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:02:00\"}', '{\"employee\":\"\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(18, 2, 'LnS6lbtW', 43, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:03:50\"}', '{\"employee\":\"\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(19, 2, 'L5Uccujl', 26, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:04:42\"}', '{\"employee\":\"\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(20, 2, '77zLDFfl', 154, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:09:16\"}', '{\"employee\":\"wSWFjIM7ciMmmtrV.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(21, 2, 'mgCz8Gtt', 214, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:22:26\"}', '{\"employee\":\"uPmP0o64RH09o4SZ.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(22, 2, 'RftmZZPY', 206, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:28:03\"}', '{\"employee\":\"XTc5heFczFSowjHQ.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(23, 2, 'jRupnJJc', 30, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:30:21\"}', '{\"employee\":\"6rxeFsLN0Aac5WSF.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(24, 2, 'uveuGIEw', 64, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:31:35\"}', '{\"employee\":\"CAoGaew7I3sezjIM.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(25, 2, 'JT0FzdSf', 109, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:31:17\"}', '{\"employee\":\"FK9oS49I473WlQFg.png\",\"collector\":\"2Z6EbgoCeGSGvJpi.png\"}', NULL, NULL, '2020-11-25', 1),
-(26, 2, 'RBEuL1De', 21, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:33:16\"}', '{\"employee\":\"puw9ZbCErq9g6CXS.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(27, 2, 'spBMEV6w', 85, 'alcoholic', 'random', '{\"1\":\"0.08\",\"2\":\"0.08\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:34:02\"}', '{\"employee\":\"2ePYQfWQ7uZPe5aK.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(28, 2, 'eFditevf', 92, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:36:18\"}', '{\"employee\":\"9p7vuexfDc9OgRgi.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(29, 2, 'lolI0JbX', 137, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:38:01\"}', '{\"employee\":\"4XHqVibp7w84PTf7.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(30, 2, 'omvPPDYx', 15, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:39:02\"}', '{\"employee\":\"eDtPWj2SNGrcQPAh.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(31, 2, 'hBG2UTZz', 14, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:40:43\"}', '{\"employee\":\"PWyiWJeEJ3z2cFBu.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(32, 2, 'BVIKQliC', 139, 'alcoholic', 'random', '{\"1\":\"0.22\",\"2\":\"0.22\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:39:51\"}', '{\"employee\":\"QO1llSQxEPmWRuzM.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(33, 2, '83lgTtRK', 165, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:48:57\"}', '{\"employee\":\"RHeThgiRvNFoeZiv.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(34, 2, 'VjcMZZCW', 125, 'alcoholic', 'random', '{\"1\":\"0o\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:50:52\"}', '{\"employee\":\"Lm5XNFLNhJ2lzwT5.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(35, 2, 'nH0hIcs3', 58, 'alcoholic', 'random', '{\"1\":\"0.22\",\"2\":\"0.41\",\"3\":\"0.38\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:54:19\"}', '{\"employee\":\"IyQCRwXKqkE3oeer.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(36, 2, 'kspHZq1a', 104, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:55:39\"}', '{\"employee\":\"R6SXYWBXJn2FfqQp.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(37, 2, 'qJhDstEt', 163, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:55:56\"}', '{\"employee\":\"gwMZnVWZNG2VeEs8.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(38, 2, 'WgY67hku', 70, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:58:14\"}', '{\"employee\":\"g2ttYlQ4pY863Nie.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(39, 2, 'LupTtbag', 196, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:59:19\"}', '{\"employee\":\"StBa1vffz8erzaP1.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(40, 2, 'C3yvkZZJ', 184, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:00:48\"}', '{\"employee\":\"9rQJ8ycAllXko0LQ.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(41, 2, 'IFeG9JgU', 42, 'alcoholic', 'random', '{\"1\":\"0.25\",\"2\":\"0.25\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:00:31\"}', '{\"employee\":\"s9vP29asyZWy1KaG.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(42, 2, 'Gx318h2V', 152, 'alcoholic', 'random', '{\"1\":\"0.11\",\"2\":\"0.11\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:00:58\"}', '{\"employee\":\"N1SrW5PPWFloDNUq.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(43, 2, 'vQpgDnIo', 190, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:05:06\"}', '{\"employee\":\"nQVHvOckoxirOlwr.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(44, 2, 'nGwX3aBX', 79, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:07:11\"}', '{\"employee\":\"eh0swif18Ai7MOTL.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(45, 2, 'Bd8lLiak', 32, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:08:06\"}', '{\"employee\":\"J3ofTdjEMJ4m5CjE.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(46, 2, 'QpOjEfbR', 198, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:10:51\"}', '{\"employee\":\"fSIpKbQ3SspL3W89.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(47, 2, 'a2nUpQAC', 48, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:11:43\"}', '{\"employee\":\"62eCzhmikSRTxtG3.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(48, 2, 'f1XYnfYp', 186, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:19:42\"}', '{\"employee\":\"IaoDAJueuzSW13jH.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(49, 2, 'dfCyr6bg', 203, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:30:08\"}', '{\"employee\":\"qtYsJChfVV3q4TiY.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(50, 2, 'XzN9GS8s', 216, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:33:37\"}', '{\"employee\":\"lQcl83M3XQWaBTXi.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(51, 2, '9Fw9K14G', 34, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:54:12\"}', '{\"employee\":\"u1zoGBxv8EiJVk6L.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(52, 2, 'ztMHA6PU', 123, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:56:39\"}', '{\"employee\":\"SQZf4lpBL3FOoGmF.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(53, 2, 'UKMquMy5', 136, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:57:56\"}', '{\"employee\":\"Y7CVtKRSStKNagP3.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(54, 2, 'XUYFZVzS', 90, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:58:50\"}', '{\"employee\":\"uY2i3CJFSSfLYWAt.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(55, 2, 'gXHQd6nc', 129, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:59:29\"}', '{\"employee\":\"XB4HQywCqWqopbsd.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(56, 2, 'oYPvXlR1', 63, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"19:00:14\"}', '{\"employee\":\"U8S3V1RszxgAt5at.png\",\"collector\":\"gBUVwWs8K79hIbDS.png\"}', NULL, NULL, '2020-11-25', 1),
-(57, 2, 'GKyZVjhx', 161, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"19:01:36\"}', '{\"employee\":\"YtDUkQs06QWNT3Z8.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(58, 2, 'P130c3zu', 12, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"19:02:21\"}', '{\"employee\":\"dAqrMwQPiI3f8Ep3.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(59, 2, '014rVDur', 192, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"19:04:25\"}', '{\"employee\":\"HTJHV21LGgZFPC72.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(60, 2, 'Z9Fpnb0m', 122, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"19:09:09\"}', '{\"employee\":\"jdZYcThGPHVlupQr.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(61, 2, 'jxBCm43y', 10, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"19:14:57\"}', '{\"employee\":\"czZibUjVTYaSoQMr.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(62, 2, 'oD0rIF59', 209, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"19:15:00\"}', '{\"employee\":\"x7HYCLERmH6GjbYj.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(63, 2, 'sJEgfShK', 113, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, '{\"place\":\"Marina Chac chi\",\"hour\":\"19:15:03\"}', '{\"employee\":\"grhDqdpfUy6RzjfQ.png\",\"collector\":\"\"}', NULL, NULL, '2020-11-25', 1),
-(64, 2, 'KgvbbmU0', 14, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:22:59\"}', '{\"employee\":\"chv8AUeAtNTmIQic.png\",\"collector\":\"CGMNLEBUOvBQnOM4.png\"}', NULL, NULL, '2020-12-18', 1),
-(65, 2, 'iLSMavvy', 72, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:24:46\"}', '{\"employee\":\"5x8HJgLb8duGL2sG.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(66, 2, 'HC970SNq', 191, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:25:27\"}', '{\"employee\":\"nwFHtcxxt0ORxE2G.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(67, 2, 'cpjecfiu', 192, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"\",\"hour\":\"17:26:25\"}', '{\"employee\":\"VJ3hf263ywhbWizS.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(68, 2, 'SYVnbpJd', 41, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:27:19\"}', '{\"employee\":\"YzgwypUCalhIH7ZO.png\",\"collector\":\"Dr7uWd6O2JHNmpAV.png\"}', NULL, NULL, '2020-12-18', 1),
-(69, 2, 'PZTi9CiF', 206, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:29:27\"}', '{\"employee\":\"YuxkCIvQmMhK3HWL.png\",\"collector\":\"lno1uMhdZxSc9EFJ.png\"}', NULL, NULL, '2020-12-18', 1),
-(70, 2, 'rxsrsqdj', 85, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:30:23\"}', '{\"employee\":\"wjZqYLKzTYaLTP6a.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(71, 2, 'LxBEBPlR', 110, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:31:14\"}', '{\"employee\":\"jiqWslOXUR0pzRkJ.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(72, 2, 'agp2bGrI', 139, 'alcoholic', 'random', '{\"1\":\"0.20\",\"2\":\"0.13\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:32:55\"}', '{\"employee\":\"SRXcqXHJyNQtc0r5.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(73, 2, '9TzWklx8', 16, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:35:27\"}', '{\"employee\":\"NQrvvhlcNQy1cH7V.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(74, 2, 'EX7VJQSq', 102, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:39:02\"}', '{\"employee\":\"BcTTnpZ5psLejpnn.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(75, 2, 'kBQf4SSq', 28, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:41:34\"}', '{\"employee\":\"jW9qry7mHAhueeQs.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(76, 2, 'BokzcfVW', 31, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:45:35\"}', '{\"employee\":\"2U182eiWJY48dVQf.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(77, 2, 'KXfG1Yka', 95, 'alcoholic', 'random', '{\"1\":\"0.24\",\"2\":\"0.25\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:46:34\"}', '{\"employee\":\"e1JJhGw1sy4Qt4lR.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(78, 2, '3JoXNE3B', 17, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:47:16\"}', '{\"employee\":\"b5C9BpPHmtlcmrbY.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(79, 2, 'iP5CXbYc', 56, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:50:04\"}', '{\"employee\":\"MEDywh0vKuWi2YO7.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(80, 2, '4adSW1rs', 154, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"17:54:53\"}', '{\"employee\":\"L9DyWkeCrOQw9mq7.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(81, 2, 'gzrtDHNX', 174, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:05:59\"}', '{\"employee\":\"SbKPakP1kYjbhY5W.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(82, 2, '2iuJ4SMm', 19, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:06:59\"}', '{\"employee\":\"gxNrlSfA3IbVeAfT.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(83, 2, 'XDEtgnhf', 20, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:07:42\"}', '{\"employee\":\"8MBU0Y8Gi9OqTNqC.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(84, 2, 'BGCyafa0', 140, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:08:14\"}', '{\"employee\":\"1X5xrXsZMNNlkfpt.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(85, 2, 'rDvUvEue', 70, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:09:56\"}', '{\"employee\":\"G5zSPt6qFoDYFwS8.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(86, 2, 'CSurW0gV', 185, 'alcoholic', 'random', '{\"1\":\"0.24\",\"2\":\"0.00\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:21:21\"}', '{\"employee\":\"kuQhYjKuVhXSts8c.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(87, 2, 'kyL71Oz1', 42, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:22:45\"}', '{\"employee\":\"BLCDKL8prBej8ti0.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(88, 2, 'fIl2s9v3', 121, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:23:36\"}', '{\"employee\":\"idfY6NGq9U0SZKs8.png\",\"collector\":\"eIcyX6T4V4FRkr1n.png\"}', NULL, NULL, '2020-12-18', 1),
-(89, 2, 'q0lhMGJj', 130, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:32:40\"}', '{\"employee\":\"HK9ELSkbifIdGu1r.png\",\"collector\":\"0eZ6H8Fur3bAFGX0.png\"}', NULL, NULL, '2020-12-18', 1),
-(90, 2, '3FGlZ9Pf', 161, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:35:41\"}', '{\"employee\":\"dXmXjJpIUewpAaeQ.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(91, 2, 'cHvxfyUC', 43, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:39:56\"}', '{\"employee\":\"OFScaM0gXp2o7YO8.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(92, 2, 'KPA8CZ2S', 26, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:41:05\"}', '{\"employee\":\"yW0hzIQMDOvkZBDj.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1),
-(93, 2, 'VUpVZoL7', 91, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 2, '{\"place\":\"Marina Chac chi\",\"hour\":\"18:41:47\"}', '{\"employee\":\"spUmgUB0m7IZkwPD.png\",\"collector\":\"\"}', NULL, NULL, '2020-12-18', 1);
+INSERT INTO `custody_chanins` (`id`, `account`, `token`, `employee`, `contact`, `type`, `reason`, `results`, `medicines`, `prescription`, `collector`, `location`, `hour`, `date`, `comments`, `signatures`, `qr`, `closed`) VALUES
+(1, 2, 'Ntno6GPi', 7, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 1, '17:00:00', '2020-08-18', 'No puede trabajar', '{\"employee\":\"\",\"collector\":\"\"}', NULL, 1),
+(2, 2, 'p9VmgZZL', 7, NULL, 'alcoholic', 'random', '{\"1\":\"0.39\",\"2\":\"0.36\",\"3\":\"0.48\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 1, '17:00:00', '2020-09-18', 'No puede trabajar', '{\"employee\":\"\",\"collector\":\"\"}', NULL, 1),
+(3, 2, 'BPoFGA9Q', 7, NULL, 'alcoholic', 'random', '{\"1\":\"0.14\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 1, '17:00:00', '2020-10-18', 'No puede trabajar', '{\"employee\":\"\",\"collector\":\"\"}', NULL, 1),
+(4, 2, 'GsyM3647', 7, NULL, 'antidoping', 'random', '{\"COC\":\"positive\",\"THC\":\"positive\",\"ANF\":\"\",\"MET\":\"negative\",\"BZD\":\"\",\"OPI\":\"\",\"BAR\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 1, '17:00:00', '2020-10-18', 'No puede trabajar', '{\"employee\":\"\",\"collector\":\"\"}', NULL, 1),
+(5, 2, 'UntLOGQS', 7, NULL, 'alcoholic', 'reasonable_suspicion', '{\"1\":\"0.40\",\"2\":\"0.40\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 1, '09:11:59', '2020-10-23', 'No puede trabajar', '{\"employee\":\"\",\"collector\":\"\"}', NULL, 1),
+(6, 2, 'yBZ7VKLD', 7, NULL, 'antidoping', 'reasonable_suspicion', '{\"COC\":\"positive\",\"THC\":\"positive\",\"MET\":\"positive\",\"ANF\":\"positive\",\"BZD\":\"positive\",\"OPI\":\"positive\",\"BAR\":\"positive\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 1, '09:22:43', '2020-10-23', 'No puede trabajar', '{\"employee\":\"\",\"collector\":\"\"}', NULL, 1),
+(7, 1, 'rXDpvxmV', 5, NULL, 'alcoholic', 'periodic', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 4, '09:27:51', '2020-10-23', 'Todo perfecto', '{\"employee\":\"\",\"collector\":\"\"}', NULL, 1),
+(8, 1, 'ti0HX9Fy', 5, NULL, 'antidoping', 'periodic', '{\"COC\":\"negative\",\"THC\":\"negative\",\"MET\":\"negative\",\"ANF\":\"negative\",\"BZD\":\"negative\",\"OPI\":\"negative\",\"BAR\":\"negative\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 4, '09:30:14', '2020-10-23', 'Todo perfecto', '{\"employee\":\"\",\"collector\":\"\"}', NULL, 1),
+(9, 1, 'xuPLV6bs', 5, NULL, 'alcoholic', 'reasonable_suspicion', '{\"1\":\"0.45\",\"2\":\"0.45\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 4, '10:41:40', '2020-10-23', 'No puede trabajar', '{\"employee\":\"\",\"collector\":\"\"}', NULL, 1),
+(13, 1, 'yhhMCJuu', 5, NULL, 'alcoholic', 'reasonable_suspicion', '{\"1\":\"0.40\",\"2\":\"0.40\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 4, '22:20:07', '2020-10-27', 'No puede trabajar', '{\"employee\":\"fyOioaDax7xyoyGR.png\",\"collector\":\"Vi1S7Jxz0Eutzki5.png\"}', NULL, 1),
+(14, 1, '7sCKNS3D', 5, NULL, 'alcoholic', 'reasonable_suspicion', '{\"1\":\"0.40\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 4, '22:28:51', '2020-10-27', NULL, '{\"employee\":\"MgCakFp685Zd03Ra.png\",\"collector\":\"Dw9XlO9RGhCu8d8d.png\"}', NULL, 1),
+(15, 1, 'KLvZsb1b', 5, NULL, 'antidoping', 'reasonable_suspicion', '{\"COC\":\"positive\",\"THC\":\"positive\",\"MET\":\"positive\",\"ANF\":\"positive\",\"BZD\":\"positive\",\"OPI\":\"positive\",\"BAR\":\"positive\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 4, '12:13:19', '2020-10-29', NULL, '{\"employee\":\"PbOJudpeKoEzfVV8.png\",\"collector\":\"O2zOBMqw5ls5cUJN.png\"}', NULL, 1),
+(16, 1, 'dGJHaEbh', 5, NULL, 'alcoholic', 'random', '{\"1\":\"0.50\",\"2\":\"0.48\",\"3\":\"0.52\"}', 'Tratamiento de penicilina por 1 mes', '{\"issued_by\":\"Dr. Marcos Rojo\",\"date\":\"2020-10-06\"}', 1, 4, '15:14:11', '2020-11-25', NULL, '{\"employee\":\"H82LocfhYGFiCtkn.png\",\"collector\":\"RrsBIPIVeT7Zmbu1.png\"}', NULL, 1),
+(17, 2, 'ec7fRGmx', 7, NULL, 'alcoholic', 'random', '{\"1\":\"0.22\",\"2\":\"0.22\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:02:00', '2020-11-25', NULL, '{\"employee\":\"\",\"collector\":\"\"}', NULL, 1),
+(18, 2, 'LnS6lbtW', 43, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:03:50', '2020-11-25', NULL, '{\"employee\":\"\",\"collector\":\"\"}', NULL, 1),
+(19, 2, 'L5Uccujl', 26, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:04:42', '2020-11-25', NULL, '{\"employee\":\"\",\"collector\":\"\"}', NULL, 1),
+(20, 2, '77zLDFfl', 154, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:09:16', '2020-11-25', NULL, '{\"employee\":\"wSWFjIM7ciMmmtrV.png\",\"collector\":\"\"}', NULL, 1),
+(21, 2, 'mgCz8Gtt', 214, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:22:26', '2020-11-25', NULL, '{\"employee\":\"uPmP0o64RH09o4SZ.png\",\"collector\":\"\"}', NULL, 1),
+(22, 2, 'RftmZZPY', 206, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:28:03', '2020-11-25', NULL, '{\"employee\":\"XTc5heFczFSowjHQ.png\",\"collector\":\"\"}', NULL, 1),
+(23, 2, 'jRupnJJc', 30, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:30:21', '2020-11-25', NULL, '{\"employee\":\"6rxeFsLN0Aac5WSF.png\",\"collector\":\"\"}', NULL, 1),
+(24, 2, 'uveuGIEw', 64, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:31:35', '2020-11-25', NULL, '{\"employee\":\"CAoGaew7I3sezjIM.png\",\"collector\":\"\"}', NULL, 1),
+(25, 2, 'JT0FzdSf', 109, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:31:17', '2020-11-25', NULL, '{\"employee\":\"FK9oS49I473WlQFg.png\",\"collector\":\"2Z6EbgoCeGSGvJpi.png\"}', NULL, 1),
+(26, 2, 'RBEuL1De', 21, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:33:16', '2020-11-25', NULL, '{\"employee\":\"puw9ZbCErq9g6CXS.png\",\"collector\":\"\"}', NULL, 1),
+(27, 2, 'spBMEV6w', 85, NULL, 'alcoholic', 'random', '{\"1\":\"0.08\",\"2\":\"0.08\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:34:02', '2020-11-25', NULL, '{\"employee\":\"2ePYQfWQ7uZPe5aK.png\",\"collector\":\"\"}', NULL, 1),
+(28, 2, 'eFditevf', 92, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:36:18', '2020-11-25', NULL, '{\"employee\":\"9p7vuexfDc9OgRgi.png\",\"collector\":\"\"}', NULL, 1),
+(29, 2, 'lolI0JbX', 137, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:38:01', '2020-11-25', NULL, '{\"employee\":\"4XHqVibp7w84PTf7.png\",\"collector\":\"\"}', NULL, 1),
+(30, 2, 'omvPPDYx', 15, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:39:02', '2020-11-25', NULL, '{\"employee\":\"eDtPWj2SNGrcQPAh.png\",\"collector\":\"\"}', NULL, 1),
+(31, 2, 'hBG2UTZz', 14, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:40:43', '2020-11-25', NULL, '{\"employee\":\"PWyiWJeEJ3z2cFBu.png\",\"collector\":\"\"}', NULL, 1),
+(32, 2, 'BVIKQliC', 139, NULL, 'alcoholic', 'random', '{\"1\":\"0.22\",\"2\":\"0.22\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:39:51', '2020-11-25', NULL, '{\"employee\":\"QO1llSQxEPmWRuzM.png\",\"collector\":\"\"}', NULL, 1),
+(33, 2, '83lgTtRK', 165, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:48:57', '2020-11-25', NULL, '{\"employee\":\"RHeThgiRvNFoeZiv.png\",\"collector\":\"\"}', NULL, 1),
+(34, 2, 'VjcMZZCW', 125, NULL, 'alcoholic', 'random', '{\"1\":\"0o\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:50:52', '2020-11-25', NULL, '{\"employee\":\"Lm5XNFLNhJ2lzwT5.png\",\"collector\":\"\"}', NULL, 1),
+(35, 2, 'nH0hIcs3', 58, NULL, 'alcoholic', 'random', '{\"1\":\"0.22\",\"2\":\"0.41\",\"3\":\"0.38\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:54:19', '2020-11-25', NULL, '{\"employee\":\"IyQCRwXKqkE3oeer.png\",\"collector\":\"\"}', NULL, 1),
+(36, 2, 'kspHZq1a', 104, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:55:39', '2020-11-25', NULL, '{\"employee\":\"R6SXYWBXJn2FfqQp.png\",\"collector\":\"\"}', NULL, 1),
+(37, 2, 'qJhDstEt', 163, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:55:56', '2020-11-25', NULL, '{\"employee\":\"gwMZnVWZNG2VeEs8.png\",\"collector\":\"\"}', NULL, 1),
+(38, 2, 'WgY67hku', 70, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:58:14', '2020-11-25', NULL, '{\"employee\":\"g2ttYlQ4pY863Nie.png\",\"collector\":\"\"}', NULL, 1),
+(39, 2, 'LupTtbag', 196, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:59:19', '2020-11-25', NULL, '{\"employee\":\"StBa1vffz8erzaP1.png\",\"collector\":\"\"}', NULL, 1),
+(40, 2, 'C3yvkZZJ', 184, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:00:48', '2020-11-25', NULL, '{\"employee\":\"9rQJ8ycAllXko0LQ.png\",\"collector\":\"\"}', NULL, 1),
+(41, 2, 'IFeG9JgU', 42, NULL, 'alcoholic', 'random', '{\"1\":\"0.25\",\"2\":\"0.25\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:00:31', '2020-11-25', NULL, '{\"employee\":\"s9vP29asyZWy1KaG.png\",\"collector\":\"\"}', NULL, 1),
+(42, 2, 'Gx318h2V', 152, NULL, 'alcoholic', 'random', '{\"1\":\"0.11\",\"2\":\"0.11\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:00:58', '2020-11-25', NULL, '{\"employee\":\"N1SrW5PPWFloDNUq.png\",\"collector\":\"\"}', NULL, 1),
+(43, 2, 'vQpgDnIo', 190, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:05:06', '2020-11-25', NULL, '{\"employee\":\"nQVHvOckoxirOlwr.png\",\"collector\":\"\"}', NULL, 1),
+(44, 2, 'nGwX3aBX', 79, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:07:11', '2020-11-25', NULL, '{\"employee\":\"eh0swif18Ai7MOTL.png\",\"collector\":\"\"}', NULL, 1),
+(45, 2, 'Bd8lLiak', 32, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:08:06', '2020-11-25', NULL, '{\"employee\":\"J3ofTdjEMJ4m5CjE.png\",\"collector\":\"\"}', NULL, 1),
+(46, 2, 'QpOjEfbR', 198, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:10:51', '2020-11-25', NULL, '{\"employee\":\"fSIpKbQ3SspL3W89.png\",\"collector\":\"\"}', NULL, 1),
+(47, 2, 'a2nUpQAC', 48, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:11:43', '2020-11-25', NULL, '{\"employee\":\"62eCzhmikSRTxtG3.png\",\"collector\":\"\"}', NULL, 1),
+(48, 2, 'f1XYnfYp', 186, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:19:42', '2020-11-25', NULL, '{\"employee\":\"IaoDAJueuzSW13jH.png\",\"collector\":\"\"}', NULL, 1),
+(49, 2, 'dfCyr6bg', 203, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:30:08', '2020-11-25', NULL, '{\"employee\":\"qtYsJChfVV3q4TiY.png\",\"collector\":\"\"}', NULL, 1),
+(50, 2, 'XzN9GS8s', 216, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:33:37', '2020-11-25', NULL, '{\"employee\":\"lQcl83M3XQWaBTXi.png\",\"collector\":\"\"}', NULL, 1),
+(51, 2, '9Fw9K14G', 34, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:54:12', '2020-11-25', NULL, '{\"employee\":\"u1zoGBxv8EiJVk6L.png\",\"collector\":\"\"}', NULL, 1),
+(52, 2, 'ztMHA6PU', 123, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:56:39', '2020-11-25', NULL, '{\"employee\":\"SQZf4lpBL3FOoGmF.png\",\"collector\":\"\"}', NULL, 1),
+(53, 2, 'UKMquMy5', 136, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:57:56', '2020-11-25', NULL, '{\"employee\":\"Y7CVtKRSStKNagP3.png\",\"collector\":\"\"}', NULL, 1),
+(54, 2, 'XUYFZVzS', 90, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:58:50', '2020-11-25', NULL, '{\"employee\":\"uY2i3CJFSSfLYWAt.png\",\"collector\":\"\"}', NULL, 1),
+(55, 2, 'gXHQd6nc', 129, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:59:29', '2020-11-25', NULL, '{\"employee\":\"XB4HQywCqWqopbsd.png\",\"collector\":\"\"}', NULL, 1),
+(56, 2, 'oYPvXlR1', 63, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '19:00:14', '2020-11-25', NULL, '{\"employee\":\"U8S3V1RszxgAt5at.png\",\"collector\":\"gBUVwWs8K79hIbDS.png\"}', NULL, 1),
+(57, 2, 'GKyZVjhx', 161, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '19:01:36', '2020-11-25', NULL, '{\"employee\":\"YtDUkQs06QWNT3Z8.png\",\"collector\":\"\"}', NULL, 1),
+(58, 2, 'P130c3zu', 12, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '19:02:21', '2020-11-25', NULL, '{\"employee\":\"dAqrMwQPiI3f8Ep3.png\",\"collector\":\"\"}', NULL, 1),
+(59, 2, '014rVDur', 192, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '19:04:25', '2020-11-25', NULL, '{\"employee\":\"HTJHV21LGgZFPC72.png\",\"collector\":\"\"}', NULL, 1),
+(60, 2, 'Z9Fpnb0m', 122, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '19:09:09', '2020-11-25', NULL, '{\"employee\":\"jdZYcThGPHVlupQr.png\",\"collector\":\"\"}', NULL, 1),
+(61, 2, 'jxBCm43y', 10, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '19:14:57', '2020-11-25', NULL, '{\"employee\":\"czZibUjVTYaSoQMr.png\",\"collector\":\"\"}', NULL, 1),
+(62, 2, 'oD0rIF59', 209, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '19:15:00', '2020-11-25', NULL, '{\"employee\":\"x7HYCLERmH6GjbYj.png\",\"collector\":\"\"}', NULL, 1),
+(63, 2, 'sJEgfShK', 113, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '19:15:03', '2020-11-25', NULL, '{\"employee\":\"grhDqdpfUy6RzjfQ.png\",\"collector\":\"\"}', NULL, 1),
+(64, 2, 'KgvbbmU0', 14, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:22:59', '2020-12-18', NULL, '{\"employee\":\"chv8AUeAtNTmIQic.png\",\"collector\":\"CGMNLEBUOvBQnOM4.png\"}', NULL, 1),
+(65, 2, 'iLSMavvy', 72, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:24:46', '2020-12-18', NULL, '{\"employee\":\"5x8HJgLb8duGL2sG.png\",\"collector\":\"\"}', NULL, 1),
+(66, 2, 'HC970SNq', 191, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:25:27', '2020-12-18', NULL, '{\"employee\":\"nwFHtcxxt0ORxE2G.png\",\"collector\":\"\"}', NULL, 1),
+(67, 2, 'cpjecfiu', 192, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:26:25', '2020-12-18', NULL, '{\"employee\":\"VJ3hf263ywhbWizS.png\",\"collector\":\"\"}', NULL, 1),
+(68, 2, 'SYVnbpJd', 41, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:27:19', '2020-12-18', NULL, '{\"employee\":\"YzgwypUCalhIH7ZO.png\",\"collector\":\"Dr7uWd6O2JHNmpAV.png\"}', NULL, 1),
+(69, 2, 'PZTi9CiF', 206, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:29:27', '2020-12-18', NULL, '{\"employee\":\"YuxkCIvQmMhK3HWL.png\",\"collector\":\"lno1uMhdZxSc9EFJ.png\"}', NULL, 1),
+(70, 2, 'rxsrsqdj', 85, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:30:23', '2020-12-18', NULL, '{\"employee\":\"wjZqYLKzTYaLTP6a.png\",\"collector\":\"\"}', NULL, 1),
+(71, 2, 'LxBEBPlR', 110, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:31:14', '2020-12-18', NULL, '{\"employee\":\"jiqWslOXUR0pzRkJ.png\",\"collector\":\"\"}', NULL, 1),
+(72, 2, 'agp2bGrI', 139, NULL, 'alcoholic', 'random', '{\"1\":\"0.20\",\"2\":\"0.13\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:32:55', '2020-12-18', NULL, '{\"employee\":\"SRXcqXHJyNQtc0r5.png\",\"collector\":\"\"}', NULL, 1),
+(73, 2, '9TzWklx8', 16, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:35:27', '2020-12-18', NULL, '{\"employee\":\"NQrvvhlcNQy1cH7V.png\",\"collector\":\"\"}', NULL, 1),
+(74, 2, 'EX7VJQSq', 102, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:39:02', '2020-12-18', NULL, '{\"employee\":\"BcTTnpZ5psLejpnn.png\",\"collector\":\"\"}', NULL, 1),
+(75, 2, 'kBQf4SSq', 28, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:41:34', '2020-12-18', NULL, '{\"employee\":\"jW9qry7mHAhueeQs.png\",\"collector\":\"\"}', NULL, 1),
+(76, 2, 'BokzcfVW', 31, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:45:35', '2020-12-18', NULL, '{\"employee\":\"2U182eiWJY48dVQf.png\",\"collector\":\"\"}', NULL, 1),
+(77, 2, 'KXfG1Yka', 95, NULL, 'alcoholic', 'random', '{\"1\":\"0.24\",\"2\":\"0.25\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:46:34', '2020-12-18', NULL, '{\"employee\":\"e1JJhGw1sy4Qt4lR.png\",\"collector\":\"\"}', NULL, 1),
+(78, 2, '3JoXNE3B', 17, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:47:16', '2020-12-18', NULL, '{\"employee\":\"b5C9BpPHmtlcmrbY.png\",\"collector\":\"\"}', NULL, 1),
+(79, 2, 'iP5CXbYc', 56, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:50:04', '2020-12-18', NULL, '{\"employee\":\"MEDywh0vKuWi2YO7.png\",\"collector\":\"\"}', NULL, 1),
+(80, 2, '4adSW1rs', 154, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '17:54:53', '2020-12-18', NULL, '{\"employee\":\"L9DyWkeCrOQw9mq7.png\",\"collector\":\"\"}', NULL, 1),
+(81, 2, 'gzrtDHNX', 174, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:05:59', '2020-12-18', NULL, '{\"employee\":\"SbKPakP1kYjbhY5W.png\",\"collector\":\"\"}', NULL, 1),
+(82, 2, '2iuJ4SMm', 19, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:06:59', '2020-12-18', NULL, '{\"employee\":\"gxNrlSfA3IbVeAfT.png\",\"collector\":\"\"}', NULL, 1),
+(83, 2, 'XDEtgnhf', 20, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:07:42', '2020-12-18', NULL, '{\"employee\":\"8MBU0Y8Gi9OqTNqC.png\",\"collector\":\"\"}', NULL, 1),
+(84, 2, 'BGCyafa0', 140, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:08:14', '2020-12-18', NULL, '{\"employee\":\"1X5xrXsZMNNlkfpt.png\",\"collector\":\"\"}', NULL, 1),
+(85, 2, 'rDvUvEue', 70, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:09:56', '2020-12-18', NULL, '{\"employee\":\"G5zSPt6qFoDYFwS8.png\",\"collector\":\"\"}', NULL, 1),
+(86, 2, 'CSurW0gV', 185, NULL, 'alcoholic', 'random', '{\"1\":\"0.24\",\"2\":\"0.00\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:21:21', '2020-12-18', NULL, '{\"employee\":\"kuQhYjKuVhXSts8c.png\",\"collector\":\"\"}', NULL, 1),
+(87, 2, 'kyL71Oz1', 42, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:22:45', '2020-12-18', NULL, '{\"employee\":\"BLCDKL8prBej8ti0.png\",\"collector\":\"\"}', NULL, 1),
+(88, 2, 'fIl2s9v3', 121, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:23:36', '2020-12-18', NULL, '{\"employee\":\"idfY6NGq9U0SZKs8.png\",\"collector\":\"eIcyX6T4V4FRkr1n.png\"}', NULL, 1),
+(89, 2, 'q0lhMGJj', 130, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:32:40', '2020-12-18', NULL, '{\"employee\":\"HK9ELSkbifIdGu1r.png\",\"collector\":\"0eZ6H8Fur3bAFGX0.png\"}', NULL, 1),
+(90, 2, '3FGlZ9Pf', 161, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:35:41', '2020-12-18', NULL, '{\"employee\":\"dXmXjJpIUewpAaeQ.png\",\"collector\":\"\"}', NULL, 1),
+(91, 2, 'cHvxfyUC', 43, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:39:56', '2020-12-18', NULL, '{\"employee\":\"OFScaM0gXp2o7YO8.png\",\"collector\":\"\"}', NULL, 1),
+(92, 2, 'KPA8CZ2S', 26, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:41:05', '2020-12-18', NULL, '{\"employee\":\"yW0hzIQMDOvkZBDj.png\",\"collector\":\"\"}', NULL, 1),
+(93, 2, 'VUpVZoL7', 91, NULL, 'alcoholic', 'random', '{\"1\":\"0.00\",\"2\":\"\",\"3\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, 2, '18:41:47', '2020-12-18', NULL, '{\"employee\":\"spUmgUB0m7IZkwPD.png\",\"collector\":\"\"}', NULL, 1),
+(98, 1, 'BjnOGImf', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"ife\":\"0123456789\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"sex\":\"male\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"},\"travel_to\":\"Canad\\u00e1\"}', 'covid_pcr', 'random', '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, NULL, NULL, '2021-01-31', NULL, '{\"employee\":\"\",\"collector\":\"\"}', 'tmp_oneconsultores_covid_qr_BjnOGImf.png', 0),
+(99, 1, 'uRuz6Xe7', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez MAc\\u00edas\",\"ife\":\"0123456789\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"sex\":\"male\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"},\"travel_to\":\"Canad\\u00e1\"}', 'covid_an', 'random', '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', 1, NULL, NULL, '2021-01-31', NULL, '{\"employee\":\"\",\"collector\":\"\"}', 'tmp_oneconsultores_covid_qr_uRuz6Xe7.png', 0),
+(100, 1, 'joqSyrxh', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"ife\":\"0123456789\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"sex\":\"male\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"},\"travel_to\":\"Canad\\u00e1\"}', 'covid_ac', 'random', '{\"igm\":{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"},\"igg\":{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}}', NULL, '{\"issued_by\":\"\",\"date\":\"\"}', NULL, NULL, NULL, '2021-01-31', NULL, '{\"employee\":\"\",\"collector\":\"\"}', 'tmp_oneconsultores_covid_qr_joqSyrxh.png', 0);
 
 -- --------------------------------------------------------
 
@@ -485,7 +489,30 @@ CREATE TABLE `locations` (
 
 INSERT INTO `locations` (`id`, `account`, `name`, `blocked`) VALUES
 (1, 2, 'Muelle de Playa Las Perlas', 0),
-(2, 2, 'Marina Chac chi', 0);
+(2, 2, 'Marina Chac chi', 0),
+(4, 1, 'Oficinas centrales', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `system_collectors`
+--
+
+CREATE TABLE `system_collectors` (
+  `id` bigint(20) NOT NULL,
+  `name` text NOT NULL,
+  `signature` text NOT NULL,
+  `user` bigint(20) DEFAULT NULL,
+  `default` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `system_collectors`
+--
+
+INSERT INTO `system_collectors` (`id`, `name`, `signature`, `user`, `default`) VALUES
+(1, 'Miguel Parra Orduña', 'miguel_parra_signature.png', 2, 0),
+(2, 'QBC. Francisco Manuel Gutierrez Burboa', 'francisco_gutierrez_signature.png', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -765,20 +792,23 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password` text NOT NULL,
   `language` text NOT NULL,
-  `accounts` text NOT NULL
+  `accounts` text NOT NULL,
+  `settings` text NOT NULL,
+  `signup_date` date NOT NULL,
+  `blocked` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `avatar`, `firstname`, `lastname`, `email`, `password`, `language`, `accounts`) VALUES
-(1, NULL, 'Gersón Aarón', 'Gómez Macías', 'desarrollo@one-consultores.com', 'aff76a06ed02c05751326d143dd634d896bcd96c:0sSChO6OMgSEhONB8nq7oNTj0041KUKfDwnFWQ5GcwzF3EndySf7KeY3BqwpQ5jX', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"},{\"id\":3,\"permissions\":\"all\"},{\"id\":4,\"permissions\":\"all\"},{\"id\":5,\"permissions\":\"all\"},{\"id\":6,\"permissions\":\"all\"},{\"id\":7,\"permissions\":\"all\"},{\"id\":8,\"permissions\":\"all\"},{\"id\":9,\"permissions\":\"all\"},{\"id\":10,\"permissions\":\"all\"},{\"id\":11,\"permissions\":\"all\"},{\"id\":12,\"permissions\":\"all\"}]'),
-(2, NULL, 'Miguel', 'Parra', 'mparra@one-consultores.com', '1d2f6ba0c3e2eb2dce6e269e22145c6f5f03ccc6:FMEvpe68TmpuuWkKUiazRLHjpv5tcEcvyckIQUFmIJB07Ur4KlqENRVFpbL2Roux', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"},{\"id\":3,\"permissions\":\"all\"},{\"id\":4,\"permissions\":\"all\"},{\"id\":5,\"permissions\":\"all\"},{\"id\":6,\"permissions\":\"all\"},{\"id\":7,\"permissions\":\"all\"},{\"id\":8,\"permissions\":\"all\"},{\"id\":9,\"permissions\":\"all\"},{\"id\":10,\"permissions\":\"all\"},{\"id\":11,\"permissions\":\"all\"},{\"id\":12,\"permissions\":\"all\"}]'),
-(3, NULL, 'Noé', 'Cuxim', 'noec@one-consultores.com', 'aff76a06ed02c05751326d143dd634d896bcd96c:0sSChO6OMgSEhONB8nq7oNTj0041KUKfDwnFWQ5GcwzF3EndySf7KeY3BqwpQ5jX', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"},{\"id\":3,\"permissions\":\"all\"},{\"id\":4,\"permissions\":\"all\"},{\"id\":5,\"permissions\":\"all\"},{\"id\":6,\"permissions\":\"all\"},{\"id\":7,\"permissions\":\"all\"},{\"id\":8,\"permissions\":\"all\"},{\"id\":9,\"permissions\":\"all\"},{\"id\":10,\"permissions\":\"all\"},{\"id\":11,\"permissions\":\"all\"},{\"id\":12,\"permissions\":\"all\"}]'),
-(4, NULL, 'Yazmin', 'Morales', 'ymorales@one-consultores.com', 'aff76a06ed02c05751326d143dd634d896bcd96c:0sSChO6OMgSEhONB8nq7oNTj0041KUKfDwnFWQ5GcwzF3EndySf7KeY3BqwpQ5jX', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"},{\"id\":3,\"permissions\":\"all\"},{\"id\":4,\"permissions\":\"all\"},{\"id\":5,\"permissions\":\"all\"},{\"id\":6,\"permissions\":\"all\"},{\"id\":7,\"permissions\":\"all\"},{\"id\":8,\"permissions\":\"all\"},{\"id\":9,\"permissions\":\"all\"},{\"id\":10,\"permissions\":\"all\"},{\"id\":11,\"permissions\":\"all\"},{\"id\":12,\"permissions\":\"all\"}]'),
-(5, NULL, 'Eduar', 'Canúl', 'ecanul@one-consultores.com', 'aff76a06ed02c05751326d143dd634d896bcd96c:0sSChO6OMgSEhONB8nq7oNTj0041KUKfDwnFWQ5GcwzF3EndySf7KeY3BqwpQ5jX', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"},{\"id\":3,\"permissions\":\"all\"},{\"id\":4,\"permissions\":\"all\"},{\"id\":5,\"permissions\":\"all\"},{\"id\":6,\"permissions\":\"all\"},{\"id\":7,\"permissions\":\"all\"},{\"id\":8,\"permissions\":\"all\"},{\"id\":9,\"permissions\":\"all\"},{\"id\":10,\"permissions\":\"all\"},{\"id\":11,\"permissions\":\"all\"},{\"id\":12,\"permissions\":\"all\"}]'),
-(6, NULL, 'Jackeline', 'Verano', 'jverano@one-consultores.com', 'aff76a06ed02c05751326d143dd634d896bcd96c:0sSChO6OMgSEhONB8nq7oNTj0041KUKfDwnFWQ5GcwzF3EndySf7KeY3BqwpQ5jX', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"},{\"id\":3,\"permissions\":\"all\"},{\"id\":4,\"permissions\":\"all\"},{\"id\":5,\"permissions\":\"all\"},{\"id\":6,\"permissions\":\"all\"},{\"id\":7,\"permissions\":\"all\"},{\"id\":8,\"permissions\":\"all\"},{\"id\":9,\"permissions\":\"all\"},{\"id\":10,\"permissions\":\"all\"},{\"id\":11,\"permissions\":\"all\"},{\"id\":12,\"permissions\":\"all\"}]');
+INSERT INTO `users` (`id`, `avatar`, `firstname`, `lastname`, `email`, `password`, `language`, `accounts`, `settings`, `signup_date`, `blocked`) VALUES
+(1, NULL, 'Gersón Aarón', 'Gómez Macías', 'desarrollo@one-consultores.com', 'aff76a06ed02c05751326d143dd634d896bcd96c:0sSChO6OMgSEhONB8nq7oNTj0041KUKfDwnFWQ5GcwzF3EndySf7KeY3BqwpQ5jX', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"},{\"id\":3,\"permissions\":\"all\"},{\"id\":4,\"permissions\":\"all\"},{\"id\":5,\"permissions\":\"all\"},{\"id\":6,\"permissions\":\"all\"},{\"id\":7,\"permissions\":\"all\"},{\"id\":8,\"permissions\":\"all\"},{\"id\":9,\"permissions\":\"all\"},{\"id\":10,\"permissions\":\"all\"},{\"id\":11,\"permissions\":\"all\"},{\"id\":12,\"permissions\":\"all\"}]', '[]', '2020-10-20', 0),
+(2, NULL, 'Miguel', 'Parra', 'mparra@one-consultores.com', '1d2f6ba0c3e2eb2dce6e269e22145c6f5f03ccc6:FMEvpe68TmpuuWkKUiazRLHjpv5tcEcvyckIQUFmIJB07Ur4KlqENRVFpbL2Roux', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"},{\"id\":3,\"permissions\":\"all\"},{\"id\":4,\"permissions\":\"all\"},{\"id\":5,\"permissions\":\"all\"},{\"id\":6,\"permissions\":\"all\"},{\"id\":7,\"permissions\":\"all\"},{\"id\":8,\"permissions\":\"all\"},{\"id\":9,\"permissions\":\"all\"},{\"id\":10,\"permissions\":\"all\"},{\"id\":11,\"permissions\":\"all\"},{\"id\":12,\"permissions\":\"all\"}]', '[]', '2020-10-20', 0),
+(3, NULL, 'Noé', 'Cuxim', 'noec@one-consultores.com', 'aff76a06ed02c05751326d143dd634d896bcd96c:0sSChO6OMgSEhONB8nq7oNTj0041KUKfDwnFWQ5GcwzF3EndySf7KeY3BqwpQ5jX', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"},{\"id\":3,\"permissions\":\"all\"},{\"id\":4,\"permissions\":\"all\"},{\"id\":5,\"permissions\":\"all\"},{\"id\":6,\"permissions\":\"all\"},{\"id\":7,\"permissions\":\"all\"},{\"id\":8,\"permissions\":\"all\"},{\"id\":9,\"permissions\":\"all\"},{\"id\":10,\"permissions\":\"all\"},{\"id\":11,\"permissions\":\"all\"},{\"id\":12,\"permissions\":\"all\"}]', '[]', '2020-10-20', 0),
+(4, NULL, 'Yazmin', 'Morales', 'ymorales@one-consultores.com', 'aff76a06ed02c05751326d143dd634d896bcd96c:0sSChO6OMgSEhONB8nq7oNTj0041KUKfDwnFWQ5GcwzF3EndySf7KeY3BqwpQ5jX', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"},{\"id\":3,\"permissions\":\"all\"},{\"id\":4,\"permissions\":\"all\"},{\"id\":5,\"permissions\":\"all\"},{\"id\":6,\"permissions\":\"all\"},{\"id\":7,\"permissions\":\"all\"},{\"id\":8,\"permissions\":\"all\"},{\"id\":9,\"permissions\":\"all\"},{\"id\":10,\"permissions\":\"all\"},{\"id\":11,\"permissions\":\"all\"},{\"id\":12,\"permissions\":\"all\"}]', '[]', '2021-01-28', 0),
+(5, NULL, 'Eduar', 'Canúl', 'ecanul@one-consultores.com', 'aff76a06ed02c05751326d143dd634d896bcd96c:0sSChO6OMgSEhONB8nq7oNTj0041KUKfDwnFWQ5GcwzF3EndySf7KeY3BqwpQ5jX', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"},{\"id\":3,\"permissions\":\"all\"},{\"id\":4,\"permissions\":\"all\"},{\"id\":5,\"permissions\":\"all\"},{\"id\":6,\"permissions\":\"all\"},{\"id\":7,\"permissions\":\"all\"},{\"id\":8,\"permissions\":\"all\"},{\"id\":9,\"permissions\":\"all\"},{\"id\":10,\"permissions\":\"all\"},{\"id\":11,\"permissions\":\"all\"},{\"id\":12,\"permissions\":\"all\"}]', '[]', '2021-01-28', 0),
+(6, NULL, 'Jackeline', 'Verano', 'jverano@one-consultores.com', 'aff76a06ed02c05751326d143dd634d896bcd96c:0sSChO6OMgSEhONB8nq7oNTj0041KUKfDwnFWQ5GcwzF3EndySf7KeY3BqwpQ5jX', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"},{\"id\":3,\"permissions\":\"all\"},{\"id\":4,\"permissions\":\"all\"},{\"id\":5,\"permissions\":\"all\"},{\"id\":6,\"permissions\":\"all\"},{\"id\":7,\"permissions\":\"all\"},{\"id\":8,\"permissions\":\"all\"},{\"id\":9,\"permissions\":\"all\"},{\"id\":10,\"permissions\":\"all\"},{\"id\":11,\"permissions\":\"all\"},{\"id\":12,\"permissions\":\"all\"}]', '[]', '2021-01-28', 0);
 
 -- --------------------------------------------------------
 
@@ -845,6 +875,7 @@ ALTER TABLE `custody_chanins`
   ADD UNIQUE KEY `token` (`token`),
   ADD KEY `account` (`account`),
   ADD KEY `employee` (`employee`),
+  ADD KEY `location` (`location`),
   ADD KEY `collector` (`collector`);
 
 --
@@ -866,6 +897,13 @@ ALTER TABLE `employees`
 ALTER TABLE `locations`
   ADD PRIMARY KEY (`id`),
   ADD KEY `account` (`account`);
+
+--
+-- Indices de la tabla `system_collectors`
+--
+ALTER TABLE `system_collectors`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user` (`user`);
 
 --
 -- Indices de la tabla `system_countries`
@@ -906,7 +944,7 @@ ALTER TABLE `accounts_permissions`
 -- AUTO_INCREMENT de la tabla `custody_chanins`
 --
 ALTER TABLE `custody_chanins`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT de la tabla `employees`
@@ -918,7 +956,13 @@ ALTER TABLE `employees`
 -- AUTO_INCREMENT de la tabla `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `system_collectors`
+--
+ALTER TABLE `system_collectors`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `system_countries`
@@ -948,7 +992,8 @@ ALTER TABLE `users_permissions`
 ALTER TABLE `custody_chanins`
   ADD CONSTRAINT `custody_chanins_ibfk_1` FOREIGN KEY (`account`) REFERENCES `accounts` (`id`),
   ADD CONSTRAINT `custody_chanins_ibfk_2` FOREIGN KEY (`employee`) REFERENCES `employees` (`id`),
-  ADD CONSTRAINT `custody_chanins_ibfk_3` FOREIGN KEY (`collector`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `custody_chanins_ibfk_4` FOREIGN KEY (`location`) REFERENCES `locations` (`id`),
+  ADD CONSTRAINT `custody_chanins_ibfk_5` FOREIGN KEY (`collector`) REFERENCES `system_collectors` (`id`);
 
 --
 -- Filtros para la tabla `employees`
@@ -961,6 +1006,12 @@ ALTER TABLE `employees`
 --
 ALTER TABLE `locations`
   ADD CONSTRAINT `locations_ibfk_1` FOREIGN KEY (`account`) REFERENCES `accounts` (`id`);
+
+--
+-- Filtros para la tabla `system_collectors`
+--
+ALTER TABLE `system_collectors`
+  ADD CONSTRAINT `system_collectors_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

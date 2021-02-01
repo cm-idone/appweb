@@ -2,14 +2,14 @@
 
 $(document).ready(function()
 {
+    $('[name="ife"]').on('keyup', function()
+    {
+        validate_string(['uppercase','lowercase','int'], $(this).val(), $(this));
+    });
+
     $('[name="age"]').on('keyup', function()
     {
         validate_string('int', $(this).val(), $(this));
-    });
-
-    $('[name="id"]').on('keyup', function()
-    {
-        validate_string(['uppercase','lowercase','int'], $(this).val(), $(this));
     });
 
     $('[name="phone_number"]').on('keyup', function()
