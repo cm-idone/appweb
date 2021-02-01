@@ -64,7 +64,8 @@ class Covid_model extends Model
 			'comments' => null,
             'signatures' => null,
 			'qr' => $data['qr']['filename'],
-			'closed' => false
+			'closed' => false,
+			'user' => null
         ]);
 
 		if (!empty($query))

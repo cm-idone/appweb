@@ -33,6 +33,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js']);
                     </td>
                     <td class="mediumtag"><span><?php echo Dates::format_date($value['date'], 'long'); ?></span></td>
                     <td class="smalltag"><span><?php echo Dates::format_hour($value['hour'], '12-long'); ?></span></td>
+                    <td class="mediumtag"><span><?php echo (!empty($value['user']) ? $value['user_firstname'] . ' ' . $value['user_lastname'] : '{$lang.not_user}'); ?></span></td>
                     <td class="button">
                         <a href="/laboratory/update/<?php echo $value['token']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
                     </td>

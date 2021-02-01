@@ -61,7 +61,8 @@ class Laboratory_model extends Model
                 'collector' => ''
             ]),
 			'qr' => null,
-			'closed' => true
+			'closed' => true,
+			'user' => Session::get_value('vkye_user')['id']
         ]);
 
         return $query;
@@ -75,6 +76,9 @@ class Laboratory_model extends Model
 		$query = System::decode_json_to_array($this->database->select('custody_chanins', [
 			'[>]employees' => [
 				'employee' => 'id'
+			],
+			'[>]users' => [
+				'user' => 'id'
 			]
 		], [
 			'custody_chanins.id',
@@ -85,7 +89,10 @@ class Laboratory_model extends Model
 			'custody_chanins.contact',
 			'custody_chanins.type',
 			'custody_chanins.hour',
-			'custody_chanins.date'
+			'custody_chanins.date',
+			'custody_chanins.user',
+			'users.firstname(user_firstname)',
+			'users.lastname(user_lastname)'
 		], [
 			'AND' => [
 				'custody_chanins.account' => Session::get_value('vkye_account')['id'],
@@ -128,7 +135,8 @@ class Laboratory_model extends Model
 			'custody_chanins.comments',
 			'custody_chanins.signatures',
 			'custody_chanins.qr',
-			'custody_chanins.closed'
+			'custody_chanins.closed',
+			'custody_chanins.user'
 		], [
 			'custody_chanins.token' => $token
 		]));
@@ -196,7 +204,8 @@ class Laboratory_model extends Model
                 'employee' => !empty($data['employee_signature']) ? Fileloader::base64($data['employee_signature']) : $data['custody_chanin']['signatures']['employee'],
                 'collector' => ''
             ]) : null,
-			'closed' => true
+			'closed' => true,
+			'user' => (($data['custody_chanin']['type'] == 'covid_pcr' OR $data['custody_chanin']['type'] == 'covid_an' OR $data['custody_chanin']['type'] == 'covid_ac') AND empty($data['custody_chanin']['employee'])) ? Session::get_value('vkye_user')['id'] : $data['custody_chanin']['user']
         ], [
 			'id' => $data['custody_chanin']['id']
 		]);
