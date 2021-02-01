@@ -109,7 +109,8 @@ class Covid_controller extends Controller
 													<p>' . Configuration::$vars['marbu']['email'] . '</p>
 													<p>' . Configuration::$vars['marbu']['website'] . '</p>
 													<p>' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' <strong>' . Configuration::$web_page . ' ' . Configuration::$web_version . '</strong></p>
-													<p>Copyright (C) One Consultores | Software ' . Languages::email('development_by')[Session::get_value('vkye_lang')] . ' Code Monkey</p>
+													<p>Copyright (C) One Consultores</p>
+													<p>Software ' . Languages::email('development_by')[Session::get_value('vkye_lang')] . ' Code Monkey</p>
 												</td>
 											</tr>
 										</table>

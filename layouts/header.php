@@ -159,7 +159,6 @@
             </ul>
             <ul>
                 <li><a href="/about"><strong><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?></strong> by One Consultores</a></li>
-                <li><a href="/about">Software {$lang.development_by} Code Monkey</a></li>
                 <li><a href="/about">Power by Valkyrie</a></li>
             </ul>
             <ul>

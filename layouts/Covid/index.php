@@ -149,5 +149,5 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
 </main>
 <footer class="covid">
     <p><span><?php echo Configuration::$vars['marbu']['phone']; ?></span><span><?php echo Configuration::$vars['marbu']['email']; ?></span><span><?php echo Configuration::$vars['marbu']['website']; ?></span></p>
-    <p><span>{$lang.power_by} <strong><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?></strong></span><span>Copyright (C) One Consultores</span><span>Software {$lang.development_by} Code Monkey</span></p>
+    <p><span>{$lang.power_by} <strong><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?></strong></span><span>Copyright <i class="far fa-copyright"></i> One Consultores</span><span>Software {$lang.development_by} Code Monkey</span></p>
 </footer>
