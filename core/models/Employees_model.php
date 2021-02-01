@@ -14,7 +14,7 @@ class Employees_model extends Model
 	public function create_employee($data)
 	{
 		$data['qr']['filename'] = Session::get_value('vkye_account')['path'] . '_employee_qr_' . $data['nie'] . '.png';
-		$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . Session::get_value('vkye_account')['path'] . '/' . $data['nie'];
+		$data['qr']['content'] = 'https://' . Configuration::$domain . '/employees/profile/' . $data['nie'];
 		$data['qr']['dir'] = PATH_UPLOADS . $data['qr']['filename'];
 		$data['qr']['level'] = 'H';
 		$data['qr']['size'] = 5;
@@ -248,7 +248,7 @@ class Employees_model extends Model
 			if ($_POST['nie'] != $edited[0]['nie'])
 			{
 				$data['qr']['filename'] = Session::get_value('vkye_account')['path'] . '_employee_qr_' . $data['nie'] . '.png';
-				$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . Session::get_value('vkye_account')['path'] . '/' . $data['nie'];
+				$data['qr']['content'] = 'https://' . Configuration::$domain . '/employees/profile/' . $data['nie'];
 				$data['qr']['dir'] = PATH_UPLOADS . $data['qr']['filename'];
 				$data['qr']['level'] = 'H';
 				$data['qr']['size'] = 5;

@@ -13,7 +13,7 @@ class Urls_registered_vkye
                 'controller' => 'Index',
                 'method' => 'index'
             ],
-            '/%param%/covid/certificate' => [
+            '/%param%/covid' => [
                 'controller' => 'Covid',
                 'method' => 'index'
             ],
@@ -45,7 +45,7 @@ class Urls_registered_vkye
                 'controller' => 'Employees',
                 'method' => 'index'
             ],
-            '/%param%/%param%' => [
+            '/employees/profile/%param%' => [
                 'controller' => 'Employees',
                 'method' => 'profile'
             ],

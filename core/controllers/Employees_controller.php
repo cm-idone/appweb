@@ -166,11 +166,11 @@ class Employees_controller extends Controller
 	{
 		$go = false;
 
-        if (!empty($params[0]) AND !empty($params[1]))
+        if (!empty($params[0]))
         {
 			global $global;
 
-			$global['employee'] = $this->model->read_employee($params[1], true);
+			$global['employee'] = $this->model->read_employee($params[0], true);
 
 			if (!empty($global['employee']))
 			{
@@ -194,7 +194,7 @@ class Employees_controller extends Controller
 						Session::set_value('vkye_lang', $session['user']['language']);
 						Session::set_value('vkye_temporal', []);
 
-						header('Location: /' . $params[0] . '/' . $params[1]);
+						header('Location: /employees/profile/' . $params[0]);
 					}
 				}
 				else
