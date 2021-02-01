@@ -37,7 +37,7 @@
 <header class="leftbar">
     <nav>
         <ul>
-            <li><a href="/about" class="logotype"><img src="{$path.images}imagotype_white.png"><span><strong><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?></strong> by One Consultores & Code Monkey</span></a></li>
+            <li><a href="/about" class="logotype"><img src="{$path.images}imagotype_white.png"><span><strong><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?></strong> by One Consultores</span></a></li>
         </ul>
         <ul>
             <li><a href="/search"><i class="fas fa-search"></i><span>{$lang.search}</span></a></li>
@@ -158,7 +158,8 @@
                 <li><a>{$lang.privacy_policies}</a></li>
             </ul>
             <ul>
-                <li><a href="/about"><strong><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?></strong> by One Consultores & Code Monkey</a></li>
+                <li><a href="/about"><strong><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?></strong> by One Consultores</a></li>
+                <li><a href="/about">Software {$lang.development_by} Code Monkey</a></li>
                 <li><a href="/about">Power by Valkyrie</a></li>
             </ul>
             <ul>
