@@ -240,7 +240,7 @@ class Employees_controller extends Controller
 					]);
 				}
 
-				// if ($_POST['action'] == 'load_custody_chanin')
+				// if ($_POST['action'] == 'load_custody_chain')
 				// {
 				// 	$html =
 				// 	'';

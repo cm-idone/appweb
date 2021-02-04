@@ -94,10 +94,10 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                         <?php if (Permissions::user(['create_alcoholic']) == true) : ?>
                             <a href="/laboratory/create/alcoholic/<?php echo $global['employee']['nie']; ?>" class="success">{$lang.do_test}</a>
                         <?php endif; ?>
-                        <span><?php echo count($global['employee']['custody_chanins']['alcoholic']); ?> {$lang.performed_tests}</span>
+                        <span><?php echo count($global['employee']['custody_chains']['alcoholic']); ?> {$lang.performed_tests}</span>
                     </h4>
-                    <?php if (!empty($global['employee']['custody_chanins']['alcoholic'])) : ?>
-                        <?php foreach ($global['employee']['custody_chanins']['alcoholic'] as $key => $value) : ?>
+                    <?php if (!empty($global['employee']['custody_chains']['alcoholic'])) : ?>
+                        <?php foreach ($global['employee']['custody_chains']['alcoholic'] as $key => $value) : ?>
                             <div>
                                 <h5><?php echo Dates::format_date($value['date'], 'long'); ?></h5>
                                 <h6>
@@ -108,7 +108,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                                 <?php if (Permissions::user(['update_alcoholic']) == true) : ?>
                                     <a href="/laboratory/update/<?php echo $value['token']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
                                 <?php endif; ?>
-                                <!-- <a data-action="load_custody_chanin" data-type="alcoholic" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chanin}</span></a> -->
+                                <!-- <a data-action="load_custody_chain" data-type="alcoholic" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chain}</span></a> -->
                             </div>
                         <?php endforeach; ?>
                     <?php else : ?>
@@ -122,10 +122,10 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                         <?php if (Permissions::user(['create_antidoping']) == true) : ?>
                             <a href="/laboratory/create/antidoping/<?php echo $global['employee']['nie']; ?>" class="success">{$lang.do_test}</a>
                         <?php endif; ?>
-                        <span><?php echo count($global['employee']['custody_chanins']['antidoping']); ?> {$lang.performed_tests}</span>
+                        <span><?php echo count($global['employee']['custody_chains']['antidoping']); ?> {$lang.performed_tests}</span>
                     </h4>
-                    <?php if (!empty($global['employee']['custody_chanins']['antidoping'])) : ?>
-                        <?php foreach ($global['employee']['custody_chanins']['antidoping'] as $key => $value) : ?>
+                    <?php if (!empty($global['employee']['custody_chains']['antidoping'])) : ?>
+                        <?php foreach ($global['employee']['custody_chains']['antidoping'] as $key => $value) : ?>
                             <div>
                                 <h5><?php echo Dates::format_date($value['date'], 'long'); ?></h5>
                                 <h6>
@@ -140,7 +140,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                                 <?php if (Permissions::user(['update_antidoping']) == true) : ?>
                                     <a href="/laboratory/update/<?php echo $value['token']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
                                 <?php endif; ?>
-                                <!-- <a data-action="load_custody_chanin" data-type="antidoping" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chanin}</span></a> -->
+                                <!-- <a data-action="load_custody_chain" data-type="antidoping" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chain}</span></a> -->
                             </div>
                         <?php endforeach; ?>
                     <?php else : ?>
@@ -154,10 +154,10 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                         <?php if (Permissions::user(['create_covid']) == true) : ?>
                             <a href="/laboratory/create/covid_pcr/<?php echo $global['employee']['nie']; ?>" class="success">{$lang.do_test}</a>
                         <?php endif; ?>
-                        <span><?php echo count($global['employee']['custody_chanins']['covid_pcr']); ?> {$lang.performed_tests}</span>
+                        <span><?php echo count($global['employee']['custody_chains']['covid_pcr']); ?> {$lang.performed_tests}</span>
                     </h4>
-                    <?php if (!empty($global['employee']['custody_chanins']['covid_pcr'])) : ?>
-                        <?php foreach ($global['employee']['custody_chanins']['covid_pcr'] as $key => $value) : ?>
+                    <?php if (!empty($global['employee']['custody_chains']['covid_pcr'])) : ?>
+                        <?php foreach ($global['employee']['custody_chains']['covid_pcr'] as $key => $value) : ?>
                             <div>
                                 <h5><?php echo Dates::format_date($value['date'], 'long'); ?></h5>
                                 <h6>
@@ -168,7 +168,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                                 <?php if (Permissions::user(['update_covid']) == true) : ?>
                                     <a href="/laboratory/update/<?php echo $value['token']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
                                 <?php endif; ?>
-                                <!-- <a data-action="load_custody_chanin" data-type="covid_pcr" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chanin}</span></a> -->
+                                <!-- <a data-action="load_custody_chain" data-type="covid_pcr" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chain}</span></a> -->
                             </div>
                         <?php endforeach; ?>
                     <?php else : ?>
@@ -182,10 +182,10 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                         <?php if (Permissions::user(['create_covid']) == true) : ?>
                             <a href="/laboratory/create/covid_an/<?php echo $global['employee']['nie']; ?>" class="success">{$lang.do_test}</a>
                         <?php endif; ?>
-                        <span><?php echo count($global['employee']['custody_chanins']['covid_an']); ?> {$lang.performed_tests}</span>
+                        <span><?php echo count($global['employee']['custody_chains']['covid_an']); ?> {$lang.performed_tests}</span>
                     </h4>
-                    <?php if (!empty($global['employee']['custody_chanins']['covid_an'])) : ?>
-                        <?php foreach ($global['employee']['custody_chanins']['covid_an'] as $key => $value) : ?>
+                    <?php if (!empty($global['employee']['custody_chains']['covid_an'])) : ?>
+                        <?php foreach ($global['employee']['custody_chains']['covid_an'] as $key => $value) : ?>
                             <div>
                                 <h5><?php echo Dates::format_date($value['date'], 'long'); ?></h5>
                                 <h6>
@@ -196,7 +196,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                                 <?php if (Permissions::user(['update_covid']) == true) : ?>
                                     <a href="/laboratory/update/<?php echo $value['token']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
                                 <?php endif; ?>
-                                <!-- <a data-action="load_custody_chanin" data-type="covid_an" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chanin}</span></a> -->
+                                <!-- <a data-action="load_custody_chain" data-type="covid_an" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chain}</span></a> -->
                             </div>
                         <?php endforeach; ?>
                     <?php else : ?>
@@ -210,10 +210,10 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                         <?php if (Permissions::user(['create_covid']) == true) : ?>
                             <a href="/laboratory/create/covid_ac/<?php echo $global['employee']['nie']; ?>" class="success">{$lang.do_test}</a>
                         <?php endif; ?>
-                        <span><?php echo count($global['employee']['custody_chanins']['covid_ac']); ?> {$lang.performed_tests}</span>
+                        <span><?php echo count($global['employee']['custody_chains']['covid_ac']); ?> {$lang.performed_tests}</span>
                     </h4>
-                    <?php if (!empty($global['employee']['custody_chanins']['covid_ac'])) : ?>
-                        <?php foreach ($global['employee']['custody_chanins']['covid_ac'] as $key => $value) : ?>
+                    <?php if (!empty($global['employee']['custody_chains']['covid_ac'])) : ?>
+                        <?php foreach ($global['employee']['custody_chains']['covid_ac'] as $key => $value) : ?>
                             <div>
                                 <h5><?php echo Dates::format_date($value['date'], 'long'); ?></h5>
                                 <h6>
@@ -227,7 +227,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                                 <?php if (Permissions::user(['update_covid']) == true) : ?>
                                     <a href="/laboratory/update/<?php echo $value['token']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
                                 <?php endif; ?>
-                                <!-- <a data-action="load_custody_chanin" data-type="covid_ac" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chanin}</span></a> -->
+                                <!-- <a data-action="load_custody_chain" data-type="covid_ac" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chain}</span></a> -->
                             </div>
                         <?php endforeach; ?>
                     <?php else : ?>
@@ -250,7 +250,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
         </main>
     </div>
 </section>
-<section class="modal" data-modal="load_custody_chanin">
+<section class="modal" data-modal="load_custody_chain">
     <div class="content">
         <main>
             <article class="scanner-4"></article>

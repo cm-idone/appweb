@@ -12,15 +12,15 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js']);
         <fieldset class="fields-group big">
             <div class="compound st-4-left">
                 <span><i class="fas fa-search"></i></span>
-                <input type="text" data-search="custody_chanins" placeholder="{$lang.search}">
+                <input type="text" data-search="custody_chains" placeholder="{$lang.search}">
             </div>
         </fieldset>
     </div>
 </header>
 <main class="workspace">
-    <table class="tbl-st-1" data-table="custody_chanins">
+    <table class="tbl-st-1" data-table="custody_chains">
         <tbody>
-            <?php foreach ($global['custody_chanins'] as $value) : ?>
+            <?php foreach ($global['custody_chains'] as $value) : ?>
                 <tr>
                     <td class="smalltag"><span><?php echo $value['id']; ?></span></td>
                     <td class="smalltag"><span><?php echo $value['token']; ?></span></td>

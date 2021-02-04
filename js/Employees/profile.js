@@ -23,11 +23,11 @@ $(document).ready(function()
         });
     });
 
-    // $('[data-action="load_custody_chanin"]').on('click', function()
+    // $('[data-action="load_custody_chain"]').on('click', function()
     // {
     //     $.ajax({
     //         type: 'POST',
-    //         data: 'type=' + $(this).data('type') + '&key=' + $(this).data('key') + '&action=load_custody_chanin',
+    //         data: 'type=' + $(this).data('type') + '&key=' + $(this).data('key') + '&action=load_custody_chain',
     //         processData: false,
     //         cache: false,
     //         dataType: 'json',
@@ -35,8 +35,8 @@ $(document).ready(function()
     //         {
     //             if (response.status == 'success')
     //             {
-    //                 $('[data-modal="load_custody_chanin"]').find('article.scanner-4').html(response.html);
-    //                 $('[data-modal="load_custody_chanin"]').addClass('view');
+    //                 $('[data-modal="load_custody_chain"]').find('article.scanner-4').html(response.html);
+    //                 $('[data-modal="load_custody_chain"]').addClass('view');
     //             }
     //             else if (response.status == 'error')
     //                 open_notification_modal('alert', response.message);

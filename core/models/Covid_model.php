@@ -19,7 +19,7 @@ class Covid_model extends Model
 		$data['qr']['size'] = 5;
 		$data['qr']['frame'] = 3;
 
-        $query = $this->database->insert('custody_chanins', [
+        $query = $this->database->insert('custody_chains', [
             'account' => $data['account'],
 			'token' => $data['token'],
             'employee' => null,

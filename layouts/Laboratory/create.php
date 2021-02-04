@@ -15,13 +15,13 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
             <figure>
                 <img src="{$path.images}marbu_logotype_color.png">
             </figure>
-            <h1>{$lang.custody_chanin} | {$lang.<?php echo $global['type']; ?>} | {$lang.new_test}</h1>
+            <h1>{$lang.custody_chain} | {$lang.<?php echo $global['type']; ?>} | {$lang.new_test}</h1>
             <figure>
                 <img src="<?php echo (!empty(Session::get_value('vkye_account')['avatar']) ? '{$path.uploads}' . Session::get_value('vkye_account')['avatar'] : '{$path.images}logotype_color.png'); ?>">
             </figure>
         </header>
         <form name="create_custody_chain">
-            <p>{$lang.custody_chanin_alert_1}</p>
+            <p>{$lang.custody_chain_alert_1}</p>
             <h2>{$lang.donor_identification}</h2>
             <fieldset class="fields-group">
                 <div class="row">
@@ -370,7 +370,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                 </fieldset>
             <?php endif; ?>
             <h2>{$lang.authorization_donor}</h2>
-            <p>{$lang.custody_chanin_alert_<?php echo $global['type']; ?>_1}</p>
+            <p>{$lang.custody_chain_alert_<?php echo $global['type']; ?>_1}</p>
             <fieldset class="fields-group">
                 <div class="signature" id="employee_signature">
                     <canvas></canvas>
@@ -383,7 +383,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                 </div>
             </fieldset>
             <h2>{$lang.authorization_collector}</h2>
-            <p>{$lang.custody_chanin_alert_<?php echo $global['type']; ?>_2}</p>
+            <p>{$lang.custody_chain_alert_<?php echo $global['type']; ?>_2}</p>
             <fieldset class="fields-group">
                 <div class="row">
                     <div class="span4">

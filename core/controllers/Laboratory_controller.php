@@ -39,7 +39,7 @@ class Laboratory_controller extends Controller
 
 			global $global;
 
-			$global['custody_chanins'] = $this->model->read_custody_chanins($params[0]);
+			$global['custody_chains'] = $this->model->read_custody_chains($params[0]);
 
 			$template = $this->view->render($this, 'index');
 
@@ -150,24 +150,24 @@ class Laboratory_controller extends Controller
 		{
 			global $global;
 
-			$global['custody_chanin'] = $this->model->read_custody_chanin($params[0]);
+			$global['custody_chain'] = $this->model->read_custody_chain($params[0]);
 
-			if (!empty($global['custody_chanin']))
+			if (!empty($global['custody_chain']))
 			{
-				if ($global['custody_chanin']['account'] != Session::get_value('vkye_account')['id'])
+				if ($global['custody_chain']['account'] != Session::get_value('vkye_account')['id'])
 				{
 					$break = true;
 
 					foreach (Session::get_value('vkye_user')['accounts'] as $value)
 					{
-						if ($global['custody_chanin']['account'] == $value['id'])
+						if ($global['custody_chain']['account'] == $value['id'])
 							$break = false;
 					}
 
 					if ($break == false)
 					{
 						$session = new System_model();
-						$session = $session->read_session($global['custody_chanin']['account'], 'id');
+						$session = $session->read_session($global['custody_chain']['account'], 'id');
 
 						Session::set_value('vkye_account', $session['account']);
 						Session::set_value('vkye_user', $session['user']);
@@ -190,7 +190,7 @@ class Laboratory_controller extends Controller
 				{
 					$errors = [];
 
-					if (($global['custody_chanin']['type'] == 'covid_pcr' OR $global['custody_chanin']['type'] == 'covid_an' OR $global['custody_chanin']['type'] == 'covid_ac') AND empty($global['custody_chanin']['employee']))
+					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee']))
 					{
 						if (Validations::empty($_POST['firstname']) == false)
 	    					array_push($errors, ['firstname','{$lang.dont_leave_this_field_empty}']);
@@ -231,13 +231,13 @@ class Laboratory_controller extends Controller
     				if (Validations::empty($_POST['reason']) == false)
     					array_push($errors, ['reason','{$lang.dont_leave_this_field_empty}']);
 
-					if ($global['custody_chanin']['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_1'], true) == false)
+					if ($global['custody_chain']['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_1'], true) == false)
 					   array_push($errors, ['test_1','{$lang.invalid_field}']);
 
-					if ($global['custody_chanin']['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_2'], true) == false)
+					if ($global['custody_chain']['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_2'], true) == false)
 					   array_push($errors, ['test_2','{$lang.invalid_field}']);
 
-					if ($global['custody_chanin']['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_3'], true) == false)
+					if ($global['custody_chain']['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_3'], true) == false)
 					   array_push($errors, ['test_3','{$lang.invalid_field}']);
 
                     if (Validations::empty($_POST['date']) == false)
@@ -251,13 +251,13 @@ class Laboratory_controller extends Controller
 
     				if (empty($errors))
     				{
-						$_POST['custody_chanin'] = $global['custody_chanin'];
+						$_POST['custody_chain'] = $global['custody_chain'];
 
 						$query = $this->model->update_custody_chain($_POST);
 
     					if (!empty($query))
     					{
-							if (($global['custody_chanin']['type'] == 'covid_pcr' OR $global['custody_chanin']['type'] == 'covid_an' OR $global['custody_chanin']['type'] == 'covid_ac') AND empty($global['custody_chanin']['employee']))
+							if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee']))
 							{
 								$mail = new Mailer(true);
 
@@ -308,7 +308,7 @@ class Laboratory_controller extends Controller
     						echo json_encode([
     							'status' => 'success',
     							'message' => '{$lang.operation_success}',
-								'path' => (($global['custody_chanin']['type'] == 'covid_pcr' OR $global['custody_chanin']['type'] == 'covid_an' OR $global['custody_chanin']['type'] == 'covid_ac') AND empty($global['custody_chanin']['employee'])) ? '/laboratory/covid' : 'go_back'
+								'path' => (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee'])) ? '/laboratory/covid' : 'go_back'
     						]);
     					}
     					else

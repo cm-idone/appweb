@@ -177,7 +177,7 @@ class Employees_model extends Model
 		{
 			if ($profile == true)
 			{
-				$custody_chanins = System::decode_json_to_array($this->database->select('custody_chanins', [
+				$custody_chains = System::decode_json_to_array($this->database->select('custody_chains', [
 		            'id',
 					'token',
 					'type',
@@ -190,24 +190,24 @@ class Employees_model extends Model
 					]
 		        ]));
 
-				$query[0]['custody_chanins']['alcoholic'] = [];
-				$query[0]['custody_chanins']['antidoping'] = [];
-				$query[0]['custody_chanins']['covid_pcr'] = [];
-				$query[0]['custody_chanins']['covid_an'] = [];
-				$query[0]['custody_chanins']['covid_ac'] = [];
+				$query[0]['custody_chains']['alcoholic'] = [];
+				$query[0]['custody_chains']['antidoping'] = [];
+				$query[0]['custody_chains']['covid_pcr'] = [];
+				$query[0]['custody_chains']['covid_an'] = [];
+				$query[0]['custody_chains']['covid_ac'] = [];
 
-				foreach ($custody_chanins as $key => $value)
+				foreach ($custody_chains as $key => $value)
 				{
 					if ($value['type'] == 'alcoholic')
-						array_push($query[0]['custody_chanins']['alcoholic'], $value);
+						array_push($query[0]['custody_chains']['alcoholic'], $value);
 					else if ($value['type'] == 'antidoping')
-						array_push($query[0]['custody_chanins']['antidoping'], $value);
+						array_push($query[0]['custody_chains']['antidoping'], $value);
 					else if ($value['type'] == 'covid_pcr')
-						array_push($query[0]['custody_chanins']['covid_pcr'], $value);
+						array_push($query[0]['custody_chains']['covid_pcr'], $value);
 					else if ($value['type'] == 'covid_an')
-						array_push($query[0]['custody_chanins']['covid_an'], $value);
+						array_push($query[0]['custody_chains']['covid_an'], $value);
 					else if ($value['type'] == 'covid_ac')
-						array_push($query[0]['custody_chanins']['covid_ac'], $value);
+						array_push($query[0]['custody_chains']['covid_ac'], $value);
 				}
 			}
 
