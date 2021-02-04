@@ -1,29 +1,25 @@
 
 header.covid {
     width: 100%;
-    height: 200px;
-    padding: 40px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 40px 40px 0px 40px;
     box-sizing: border-box;
 }
 
-header.covid::after {
-    content: '';
-    display: block;
-    clear: both;
+@media (max-width: 768px) {
+
+    header.covid {
+        justify-content: center;
+    }
 }
 
 header.covid > figure,
 header.covid > figure > img {
     width: auto;
     height: 100%;
-}
-
-header.covid > figure:first-child {
-    float: left;
-}
-
-header.covid > figure:last-child {
-    float: right;
 }
 
 /*  */
@@ -104,7 +100,7 @@ footer.covid {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 40px;
+    padding: 0px 40px 40px 40px;
     box-sizing: border-box;
 }
 

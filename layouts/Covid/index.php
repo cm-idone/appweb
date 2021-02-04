@@ -11,9 +11,6 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
     <figure>
         <img src="{$path.images}marbu_logotype_color.png">
     </figure>
-    <figure>
-        <img src="<?php echo (!empty($global['account']['avatar']) ? '{$path.uploads}' . $global['account']['avatar'] : '{$path.images}logotype_color.png'); ?>">
-    </figure>
 </header>
 <main class="covid">
     <?php if (empty(System::temporal('get', 'covid', 'contact'))) : ?>

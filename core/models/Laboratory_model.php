@@ -2,6 +2,8 @@
 
 defined('_EXEC') or die;
 
+require 'plugins/php_qr_code/qrlib.php';
+
 class Laboratory_model extends Model
 {
 	public function __construct()
@@ -146,35 +148,45 @@ class Laboratory_model extends Model
 
 	public function update_custody_chain($data)
     {
-        $query = $this->database->update('custody_chains', [
+		if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']) AND $data['custody_chain']['closed'] == false)
+		{
+			$data['qr']['filename'] = Session::get_value('vkye_account')['path'] . '_covid_qr_' . $data['custody_chain']['token'] . '.png';
+			$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . Session::get_value('vkye_account')['path'] . '/covid/' . $data['custody_chain']['token'];
+			$data['qr']['dir'] = PATH_UPLOADS . $data['qr']['filename'];
+			$data['qr']['level'] = 'H';
+			$data['qr']['size'] = 5;
+			$data['qr']['frame'] = 3;
+		}
+
+		$query = $this->database->update('custody_chains', [
 			'contact' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee'])) ? json_encode([
-                'firstname' => $data['firstname'],
-                'lastname' => $data['lastname'],
+				'firstname' => $data['firstname'],
+				'lastname' => $data['lastname'],
 				'ife' => $data['ife'],
-                'birth_date' => $data['birth_date'],
-                'age' => $data['age'],
-                'sex' => $data['sex'],
-                'email' => $data['email'],
-                'phone' => [
-                    'country' => $data['phone_country'],
-                    'number' => $data['phone_number']
-                ],
-                'travel_to' => $data['travel_to']
-            ]) : null,
-            'reason' => $data['reason'],
+				'birth_date' => $data['birth_date'],
+				'age' => $data['age'],
+				'sex' => $data['sex'],
+				'email' => $data['email'],
+				'phone' => [
+					'country' => $data['phone_country'],
+					'number' => $data['phone_number']
+				],
+				'travel_to' => $data['travel_to']
+			]) : null,
+			'reason' => $data['reason'],
 			'results' => ($data['custody_chain']['type'] == 'alcoholic') ? json_encode([
-                '1' => !empty($data['test_1']) ? $data['test_1'] : '',
-                '2' => !empty($data['test_2']) ? $data['test_2'] : '',
-                '3' => !empty($data['test_3']) ? $data['test_3'] : ''
-            ]) : (($data['custody_chain']['type'] == 'antidoping') ? json_encode([
-                'COC' => !empty($data['test_COC']) ? $data['test_COC'] : '',
-                'THC' => !empty($data['test_THC']) ? $data['test_THC'] : '',
-                'MET' => !empty($data['test_MET']) ? $data['test_MET'] : '',
-                'ANF' => !empty($data['test_ANF']) ? $data['test_ANF'] : '',
-                'BZD' => !empty($data['test_BZD']) ? $data['test_BZD'] : '',
-                'OPI' => !empty($data['test_OPI']) ? $data['test_OPI'] : '',
-                'BAR' => !empty($data['test_BAR']) ? $data['test_BAR'] : ''
-            ]) : (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an') ? json_encode([
+				'1' => !empty($data['test_1']) ? $data['test_1'] : '',
+				'2' => !empty($data['test_2']) ? $data['test_2'] : '',
+				'3' => !empty($data['test_3']) ? $data['test_3'] : ''
+			]) : (($data['custody_chain']['type'] == 'antidoping') ? json_encode([
+				'COC' => !empty($data['test_COC']) ? $data['test_COC'] : '',
+				'THC' => !empty($data['test_THC']) ? $data['test_THC'] : '',
+				'MET' => !empty($data['test_MET']) ? $data['test_MET'] : '',
+				'ANF' => !empty($data['test_ANF']) ? $data['test_ANF'] : '',
+				'BZD' => !empty($data['test_BZD']) ? $data['test_BZD'] : '',
+				'OPI' => !empty($data['test_OPI']) ? $data['test_OPI'] : '',
+				'BAR' => !empty($data['test_BAR']) ? $data['test_BAR'] : ''
+			]) : (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an') ? json_encode([
 				'result' => $data['test_result'],
 				'unity' => $data['test_unity'],
 				'reference_values' => $data['test_reference_values']
@@ -190,28 +202,38 @@ class Laboratory_model extends Model
 					'reference_values' => $data['test_igg_reference_values']
 				]
 			]) : null))),
-            'medicines' => (($data['custody_chain']['type'] == 'alcoholic' OR $data['custody_chain']['type'] == 'antidoping') AND !empty($data['medicines'])) ? $data['medicines'] : null,
-            'prescription' => ($data['custody_chain']['type'] == 'alcoholic' OR $data['custody_chain']['type'] == 'antidoping') ? json_encode([
-                'issued_by' => !empty($data['prescription_issued_by']) ? $data['prescription_issued_by'] : '',
-                'date' => !empty($data['prescription_date']) ? $data['prescription_date'] : ''
-            ]) : null,
+			'medicines' => (($data['custody_chain']['type'] == 'alcoholic' OR $data['custody_chain']['type'] == 'antidoping') AND !empty($data['medicines'])) ? $data['medicines'] : null,
+			'prescription' => ($data['custody_chain']['type'] == 'alcoholic' OR $data['custody_chain']['type'] == 'antidoping') ? json_encode([
+				'issued_by' => !empty($data['prescription_issued_by']) ? $data['prescription_issued_by'] : '',
+				'date' => !empty($data['prescription_date']) ? $data['prescription_date'] : ''
+			]) : null,
 			'collector' => $data['collector'],
 			'location' => !empty($data['location']) ? $data['location'] : null,
 			'hour' => $data['hour'],
 			'date' => $data['date'],
 			'comments' => !empty($data['comments']) ? $data['comments'] : null,
-            'signatures' => (($data['custody_chain']['type'] == 'alcoholic' OR $data['custody_chain']['type'] == 'antidoping') OR (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND !empty($data['custody_chain']['employee']))) ? json_encode([
-                'employee' => !empty($data['employee_signature']) ? Fileloader::base64($data['employee_signature']) : $data['custody_chain']['signatures']['employee'],
-                'collector' => ''
-            ]) : null,
+			'signatures' => (($data['custody_chain']['type'] == 'alcoholic' OR $data['custody_chain']['type'] == 'antidoping') OR (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND !empty($data['custody_chain']['employee']))) ? json_encode([
+				'employee' => !empty($data['employee_signature']) ? Fileloader::base64($data['employee_signature']) : $data['custody_chain']['signatures']['employee'],
+				'collector' => ''
+			]) : null,
+			'qr' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']) AND $data['custody_chain']['closed'] == false) ? $data['qr']['filename'] : $data['custody_chain']['qr'],
 			'closed' => true,
 			'user' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee'])) ? Session::get_value('vkye_user')['id'] : $data['custody_chain']['user']
-        ], [
+		], [
 			'id' => $data['custody_chain']['id']
 		]);
 
-		if (!empty($query) AND !empty($data['custody_chain']['employee']) AND !empty($data['employee_signature']) AND !empty($data['custody_chain']['signatures']['employee']))
-			Fileloader::down($data['custody_chain']['signatures']['employee']);
+		if (!empty($query))
+		{
+			if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']) AND $data['custody_chain']['closed'] == false)
+			{
+				QRcode::png($data['qr']['content'], $data['qr']['dir'], $data['qr']['level'], $data['qr']['size'], $data['qr']['frame']);
+				Fileloader::down($data['custody_chain']['qr']);
+			}
+
+			if (!empty($data['custody_chain']['employee']) AND !empty($data['employee_signature']) AND !empty($data['custody_chain']['signatures']['employee']))
+				Fileloader::down($data['custody_chain']['signatures']['employee']);
+		}
 
         return $query;
     }

@@ -77,7 +77,7 @@ class Covid_controller extends Controller
 
 							try
 							{
-								$mail->setFrom(Configuration::$vars['marbu']['email'], Configuration::$web_page . ' | Marbu ' . Languages::email('laboratory')[Session::get_value('vkye_lang')]);
+								$mail->setFrom(Configuration::$vars['marbu']['email'], 'Marbu ' . Languages::email('laboratory')[Session::get_value('vkye_lang')]);
 								$mail->addAddress($_POST['email'], $_POST['firstname'] . ' ' . $_POST['lastname']);
 								$mail->Subject = Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'] ;
 								$mail->Body =
@@ -86,31 +86,30 @@ class Covid_controller extends Controller
 										<title>' . $mail->Subject . '</title>
 									</head>
 									<body>
-										<table style="width:600px;margin:0px;padding:0px;border:0px;background-color:#fff">
+										<table style="width:600px;margin:0px;padding:0px;border:1px dashed #757575;background-color:#fff;">
 											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 												<td style="width:100%;margin:0px;padding:40px;border:0px;box-sizing:border-box;background-color:#fff;">
 													<figure style="width:100%;margin:0px;padding:0px;text-align:center;">
-														<img style="width:auto;height:100px;" src="https://' . Configuration::$domain . '/images/marbu_logotype_color.png">
-														<img style="width:auto;height:100px;margin-left:40px;" src="https://' . Configuration::$domain . '/' . (!empty($global['account']['avatar']) ? 'uploads/' . $global['account']['avatar'] : 'images/logotype_color.png') . '">
+														<img style="width:auto;height:200px;" src="https://' . Configuration::$domain . '/images/marbu_logotype_color.png">
 													</figure>
 												</td>
 											</tr>
 											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 												<td style="width:100%;margin:0px;padding:40px;border:0px;box-sizing:border-box;background-color:#fff;">
-													<h4 style="width:100%;margin:0px 0px 20px 0px;padding:0px;font-size:18px;font-weight:600;text-align:center;color:#212121;">' . $mail->Subject . '</h4>
-													<figure style="width:100%;margin:0px;padding:0px;text-align:center;">
+													<h4 style="width:100%;margin:0px 0px 20px 0px;padding:0px;font-size:18px;font-weight:600;text-transform:uppercase;text-align:center;color:#212121;">' . $mail->Subject . '</h4>
+													<figure style="width:100%;margin:0px;padding:0px;border:1px solid #000;box-sizing:border-box;text-align:center;">
 														<img style="width:auto;height:300px;" src="https://' . Configuration::$domain . '/uploads/' . $_POST['qr']['filename'] . '">
 													</figure>
 												</td>
 											</tr>
 											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 												<td style="width:100%;margin:0px;padding:40px;border:0px;box-sizing:border-box;background-color:#fff;">
-													<p>' . Configuration::$vars['marbu']['phone'] . '</p>
-													<p>' . Configuration::$vars['marbu']['email'] . '</p>
-													<p>' . Configuration::$vars['marbu']['website'] . '</p>
-													<p>' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' <strong>' . Configuration::$web_page . ' ' . Configuration::$web_version . '</strong></p>
-													<p>Copyright (C) One Consultores</p>
-													<p>Software ' . Languages::email('development_by')[Session::get_value('vkye_lang')] . ' Code Monkey</p>
+													<p style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:14px;font-weight:400;text-align:center;color:#757575;">' . Configuration::$vars['marbu']['phone'] . '</p>
+													<p style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:14px;font-weight:400;text-align:center;color:#757575;">' . Configuration::$vars['marbu']['email'] . '</p>
+													<p style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:14px;font-weight:400;text-align:center;color:#757575;">' . Configuration::$vars['marbu']['website'] . '</p>
+													<p style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:14px;font-weight:400;text-align:center;color:#757575;">' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' <strong>' . Configuration::$web_page . ' ' . Configuration::$web_version . '</strong></p>
+													<p style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:14px;font-weight:400;text-align:center;color:#757575;">Copyright (C) One Consultores</p>
+													<p style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:14px;font-weight:400;text-align:center;color:#757575;">Software ' . Languages::email('development_by')[Session::get_value('vkye_lang')] . ' Code Monkey</p>
 												</td>
 											</tr>
 										</table>
@@ -154,7 +153,7 @@ class Covid_controller extends Controller
 	        }
 	        else
 	        {
-	            define('_title', Configuration::$web_page . ' | Marbu {$lang.laboratory} | Covid');
+	            define('_title', 'Marbu {$lang.laboratory} | Covid');
 
 	            if (System::temporal('get_if_exists', 'covid', 'contact') == false)
 	                System::temporal('set_forced', 'covid', 'contact', []);
