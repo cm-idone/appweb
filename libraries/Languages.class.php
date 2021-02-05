@@ -16,12 +16,16 @@ class Languages
                 'en' => 'Your token is'
             ],
             'your_results_are_ready' => [
-                'es' => 'Tu resultados están listos',
-                'en' => 'Your results are ready'
+                'es' => 'Resultados Marbu Laboratorio',
+                'en' => 'Marbu Laboratory Results'
             ],
             'your_results_are_ready_text' => [
-                'es' => 'Hemos adjuntado un <strong>PDF</strong> con los resultados de tu exámen. Muchas gracias por confiar en nosotros.',
-                'en' => 'We have attached a <strong>PDF</strong> with the results of your exam. Thank you very much for trusting us.'
+                'es' => '<strong>A quien corresponda</strong>. Por este medio le hacemos llegar los resultados de sus prueba de Covid. Sin mas por el momento quedamos en espera de su confirmación. Gracias.',
+                'en' => '<strong>To whom it may concern</strong>. We hereby send you the results of your Covid tests. Without further ado for the moment we are waiting for your confirmation. Thank you.'
+            ],
+            'call' => [
+                'es' => 'Llamada',
+                'en' => 'Call'
             ],
             'power_by' => [
                 'es' => 'Power by',

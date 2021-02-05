@@ -8,14 +8,24 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
 ?>
 
 <header class="covid">
-    <figure>
-        <img src="{$path.images}marbu_logotype_color.png">
-    </figure>
+    <div>
+        <figure>
+            <img src="{$path.images}marbu_logotype_color.png">
+        </figure>
+        <h1>Marbu Salud S.A. de C.V.</h1>
+    </div>
+    <div>
+        <h2>MSA1907259GA</h2>
+        <h3>Av. Nichupté SM51 M42 L1</h3>
+        <h3>CP: 77533 Cancún, Qroo. México</h3>
+        <h3><a href="?<?php echo Language::get_lang_url('es'); ?>">Español</a> - <a href="?<?php echo Language::get_lang_url('en'); ?>">English</a></h3>
+    </div>
 </header>
 <main class="covid">
     <?php if (empty(System::temporal('get', 'covid', 'contact'))) : ?>
         <form name="covid">
-            <p>{$lang.covid_alert_1}</p>
+            <h2>{$lang.registry_now}</h2>
+            <h3>{$lang.registry_your_covid_test}</h3>
             <fieldset class="fields-group">
                 <div class="row">
                     <div class="span4">
@@ -23,7 +33,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                             <input type="text" name="firstname">
                         </div>
                         <div class="title">
-                            <h6>{$lang.firstname}</h6>
+                            <h6>{$lang.firstname} (s)</h6>
                         </div>
                     </div>
                     <div class="span4">
@@ -31,7 +41,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                             <input type="text" name="lastname">
                         </div>
                         <div class="title">
-                            <h6>{$lang.lastname}</h6>
+                            <h6>{$lang.lastname} (s)</h6>
                         </div>
                     </div>
                     <div class="span4">
@@ -129,22 +139,33 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
             </fieldset>
             <fieldset class="fields-group">
                 <div class="button">
-                    <button type="submit" class="success"><i class="fas fa-check"></i>{$lang.end_and_send}</button>
+                    <button type="submit" class="success">{$lang.end_and_send}</button>
                 </div>
             </fieldset>
         </form>
     <?php else : ?>
-        <section>
-            <p>{$lang.covid_alert_2} <strong><?php echo System::temporal('get', 'covid', 'contact')['email']; ?></strong> {$lang.covid_alert_3}</p>
+        <div>
+            <p>{$lang.covid_alert_1} <strong><?php echo System::temporal('get', 'covid', 'contact')['email']; ?></strong> {$lang.covid_alert_2}</p>
             <h4>{$lang.your_token_is}: <?php echo System::temporal('get', 'covid', 'contact')['token']; ?></h4>
             <figure>
                 <img src="{$path.uploads}<?php echo System::temporal('get', 'covid', 'contact')['qr']['filename']; ?>">
             </figure>
             <a data-action="reload_form">{$lang.reload_form}</a>
-        </section>
+        </div>
     <?php endif; ?>
 </main>
 <footer class="covid">
-    <p><span><?php echo Configuration::$vars['marbu']['phone']; ?></span><span><?php echo Configuration::$vars['marbu']['email']; ?></span><span><?php echo Configuration::$vars['marbu']['website']; ?></span></p>
-    <p><span>{$lang.power_by} <strong><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?></strong></span><span>Copyright <i class="far fa-copyright"></i> One Consultores</span><span>Software {$lang.development_by} Code Monkey</span></p>
+    <div>
+        <a href="https://api.whatsapp.com/send?phone=<?php echo Configuration::$vars['marbu']['phone']; ?>"><i class="fab fa-whatsapp"></i><?php echo Configuration::$vars['marbu']['phone']; ?></a>
+        <a href="tel:<?php echo Configuration::$vars['marbu']['phone']; ?>"><i class="fas fa-phone"></i><?php echo Configuration::$vars['marbu']['phone']; ?></a>
+        <a href="mailto:<?php echo Configuration::$vars['marbu']['email']; ?>"><i class="fas fa-envelope"></i><?php echo Configuration::$vars['marbu']['email']; ?></a>
+        <a href="https://facebook.com/<?php echo Configuration::$vars['marbu']['facebook']; ?>" target="_blank"><i class="fab fa-facebook-square"></i>@<?php echo Configuration::$vars['marbu']['facebook']; ?></a>
+        <a href="https://linkedin.com/company/<?php echo Configuration::$vars['marbu']['linkedin']; ?>" target="_blank"><i class="fab fa-linkedin"></i>@<?php echo Configuration::$vars['marbu']['linkedin']; ?></a>
+        <a href="https://<?php echo Configuration::$vars['marbu']['website']; ?>" target="_blank"><i class="fas fa-globe"></i><?php echo Configuration::$vars['marbu']['website']; ?></a>
+    </div>
+    <div>
+        <a href="https://id.one-consultores.com" target="_blank">{$lang.power_by} <strong><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?></strong></a>
+        <a href="https://one-consultores.com" target="_blank">Copyright <i class="far fa-copyright"></i> One Consultores</a>
+        <a href="https://codemonkey.com.mx" target="_blank">Software {$lang.development_by} Code Monkey</a>
+    </div>
 </footer>

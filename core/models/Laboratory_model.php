@@ -55,14 +55,16 @@ class Laboratory_model extends Model
 			]) : null,
 			'collector' => $data['collector'],
 			'location' => !empty($data['location']) ? $data['location'] : null,
-			'hour' => $data['hour'],
 			'date' => $data['date'],
+			'hour' => $data['hour'],
 			'comments' => !empty($data['comments']) ? $data['comments'] : null,
 			'signatures' => json_encode([
                 'employee' => !empty($data['employee_signature']) ? Fileloader::base64($data['employee_signature']) : '',
                 'collector' => ''
             ]),
 			'qr' => null,
+			'pdf' => null,
+			'lang' => null,
 			'closed' => true,
 			'user' => Session::get_value('vkye_user')['id']
         ]);
@@ -90,8 +92,8 @@ class Laboratory_model extends Model
 			'employees.lastname(employee_lastname)',
 			'custody_chains.contact',
 			'custody_chains.type',
-			'custody_chains.hour',
 			'custody_chains.date',
+			'custody_chains.hour',
 			'custody_chains.user',
 			'users.firstname(user_firstname)',
 			'users.lastname(user_lastname)'
@@ -132,11 +134,13 @@ class Laboratory_model extends Model
 			'custody_chains.prescription',
 			'custody_chains.collector',
 			'custody_chains.location',
-			'custody_chains.hour',
 			'custody_chains.date',
+			'custody_chains.hour',
 			'custody_chains.comments',
 			'custody_chains.signatures',
 			'custody_chains.qr',
+			'custody_chains.pdf',
+			'custody_chains.lang',
 			'custody_chains.closed',
 			'custody_chains.user'
 		], [
@@ -156,6 +160,9 @@ class Laboratory_model extends Model
 			$data['qr']['level'] = 'H';
 			$data['qr']['size'] = 5;
 			$data['qr']['frame'] = 3;
+
+			$data['pdf']['filename'] = Session::get_value('vkye_account')['path'] . '_covid_pdf_' . $data['custody_chain']['token'] . '.pdf';
+			$data['pdf']['content'] = '';
 		}
 
 		$query = $this->database->update('custody_chains', [
@@ -209,14 +216,15 @@ class Laboratory_model extends Model
 			]) : null,
 			'collector' => $data['collector'],
 			'location' => !empty($data['location']) ? $data['location'] : null,
-			'hour' => $data['hour'],
 			'date' => $data['date'],
+			'hour' => $data['hour'],
 			'comments' => !empty($data['comments']) ? $data['comments'] : null,
 			'signatures' => (($data['custody_chain']['type'] == 'alcoholic' OR $data['custody_chain']['type'] == 'antidoping') OR (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND !empty($data['custody_chain']['employee']))) ? json_encode([
 				'employee' => !empty($data['employee_signature']) ? Fileloader::base64($data['employee_signature']) : $data['custody_chain']['signatures']['employee'],
 				'collector' => ''
 			]) : null,
 			'qr' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']) AND $data['custody_chain']['closed'] == false) ? $data['qr']['filename'] : $data['custody_chain']['qr'],
+			'pdf' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']) AND $data['custody_chain']['closed'] == false) ? $data['pdf']['filename'] : $data['custody_chain']['pdf'],
 			'closed' => true,
 			'user' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee'])) ? Session::get_value('vkye_user')['id'] : $data['custody_chain']['user']
 		], [

@@ -290,6 +290,8 @@ class Configuration
 		'marbu' => [
 			'phone' => '+52 (998) 313 2948',
 			'email' => 'marbu@one-consultores.com',
+			'facebook' => 'oneconsultoresmx',
+			'linkedin' => 'one-consultores-méxico',
 			'website' => 'marbu.one-consultores.com'
 		]
 	];

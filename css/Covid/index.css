@@ -1,64 +1,103 @@
 
 header.covid {
     width: 100%;
-    height: 300px;
+}
+
+header.covid > div:first-child {
+    width: 100%;
+    height: 80px;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: 40px 40px 0px 40px;
+    padding: 0px 40px;
+    box-sizing: border-box;
+    background-color: #004770;
+}
+
+header.covid > div:first-child > figure {
+    width: 100px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+header.covid > div:first-child > figure > img {
+    width: 100%;
+}
+
+header.covid > div:first-child > h1 {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: right;
+    color: #fff;
+}
+
+header.covid > div:last-child {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px 40px 0px 40px;
     box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
-
-    header.covid {
-        justify-content: center;
-    }
-}
-
-header.covid > figure,
-header.covid > figure > img {
-    width: auto;
-    height: 100%;
+header.covid > div:last-child > h2,
+header.covid > div:last-child > h3 {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: right;
+    color: #004770;
 }
 
 /*  */
 
 main.covid {
     width: 100%;
-    padding: 40px;
+    padding: 40px 20px;
     box-sizing: border-box;
 }
 
 /*  */
 
-main.covid > form > p {
-    margin-bottom: 40px;
-    font-size: 14px;
+main.covid > form > h2 {
+    width: 100%;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    color: #212121;
+    margin-bottom: 5px;
+}
+
+main.covid > form > h3 {
+    width: 100%;
+    font-size: 16px;
     font-weight: 400;
     text-align: center;
     color: #757575;
+    margin-bottom: 40px;
 }
 
 main.covid > form > fieldset > div.button > button {
-    width: auto !important;
-}
-
-main.covid > form > fieldset > div.button > button > i {
-    margin-right: 10px;
+    width: 100% !important;
 }
 
 /*  */
 
-main.covid > section {
+main.covid > div {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    padding: 0px 20px;
+    box-sizing: border-box;
 }
 
-main.covid > section > p {
+main.covid > div > p {
     margin-bottom: 40px;
     font-size: 14px;
     font-weight: 400;
@@ -66,7 +105,7 @@ main.covid > section > p {
     color: #757575;
 }
 
-main.covid > section > h4 {
+main.covid > div > h4 {
     margin-bottom: 40px;
     font-size: 24px;
     font-weight: 600;
@@ -75,74 +114,55 @@ main.covid > section > h4 {
     color: #212121;
 }
 
-main.covid > section > figure {
-    width: auto;
-    height: 200px;
+main.covid > div > figure {
+    width: 100%;
     margin-bottom: 40px;
     border: 1px solid #212121;
     box-sizing: border-box;
 }
 
-main.covid > section > figure > img {
-    width: auto;
-    height: 100%;
-}
-
-main.covid > section > a {
-
+main.covid > div > figure > img {
+    width: 100%;
 }
 
 /*  */
 
 footer.covid {
     width: 100%;
+}
+
+footer.covid > div {
+    width: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     flex-direction: column;
-    padding: 0px 40px 40px 40px;
+    padding: 40px;
     box-sizing: border-box;
 }
 
-footer.covid > p {
-    font-size: 14px;
+footer.covid > div:first-child {
+    background-color: #0b5178;
+}
+
+footer.covid > div:last-child {
+    background-color: #004770;
+}
+
+footer.covid > div > a {
     font-weight: 400;
-    text-align: center;
-    color: #757575;
+    color: #fff;
 }
 
-@media (max-width: 768px) {
-
-    footer.covid > p {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-    }
+footer.covid > div:first-child > a {
+    font-size: 14px;
 }
 
-footer.covid > p > span {
-    position: relative;
-    margin: 0px 10px;
+footer.covid > div:first-child > a > i {
+    min-width: 14px;
+    margin-right: 10px;
 }
 
-footer.covid > p > span::after {
-    content: '';
-    width: 1px;
-    height: 15px;
-    position: absolute;
-    top: 0px;
-    right: -10px;
-    background-color: #757575;
-}
-
-footer.covid > p > span:last-child::after {
-    display: none;
-}
-
-@media (max-width: 768px) {
-
-    footer.covid > p > span::after {
-        display: none;
-    }
+footer.covid > div:last-child > a {
+    font-size: 12px;
 }

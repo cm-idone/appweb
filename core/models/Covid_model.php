@@ -59,11 +59,13 @@ class Covid_model extends Model
             'prescription' => null,
 			'collector' => null,
 			'location' => null,
-			'hour' => null,
 			'date' => Dates::current_date(),
+			'hour' => null,
 			'comments' => null,
             'signatures' => null,
 			'qr' => $data['qr']['filename'],
+			'pdf' => null,
+			'lang' => Session::get_value('vkye_lang'),
 			'closed' => false,
 			'user' => null
         ]);
