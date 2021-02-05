@@ -3,6 +3,8 @@
 defined('_EXEC') or die;
 
 require 'plugins/php_qr_code/qrlib.php';
+require 'vendor/autoload.php';
+use Spipu\Html2Pdf\Html2Pdf;
 
 class Laboratory_model extends Model
 {
@@ -152,17 +154,20 @@ class Laboratory_model extends Model
 
 	public function update_custody_chain($data)
     {
-		if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']) AND $data['custody_chain']['closed'] == false)
+		if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']))
 		{
-			$data['qr']['filename'] = Session::get_value('vkye_account')['path'] . '_covid_qr_' . $data['custody_chain']['token'] . '.png';
-			$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . Session::get_value('vkye_account')['path'] . '/covid/' . $data['custody_chain']['token'];
-			$data['qr']['dir'] = PATH_UPLOADS . $data['qr']['filename'];
-			$data['qr']['level'] = 'H';
-			$data['qr']['size'] = 5;
-			$data['qr']['frame'] = 3;
+			if ($data['custody_chain']['closed'] == false)
+			{
+				$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . Session::get_value('vkye_account')['path'] . '/covid/' . $data['custody_chain']['token'];
+				$data['qr']['dir'] = PATH_UPLOADS . $data['qr']['filename'];
+				$data['qr']['level'] = 'H';
+				$data['qr']['size'] = 5;
+				$data['qr']['frame'] = 3;
+			}
 
-			$data['pdf']['filename'] = Session::get_value('vkye_account')['path'] . '_covid_pdf_' . $data['custody_chain']['token'] . '.pdf';
-			$data['pdf']['content'] = '';
+			$html2pdf = new Html2Pdf('P', 'A4', 'es', true, 'UTF-8');
+			$html2pdf->writeHTML('<h1>Prueba</h1>');
+			$html2pdf->output(PATH_UPLOADS . $data['pdf']['filename'], 'F');
 		}
 
 		$query = $this->database->update('custody_chains', [
@@ -224,7 +229,7 @@ class Laboratory_model extends Model
 				'collector' => ''
 			]) : null,
 			'qr' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']) AND $data['custody_chain']['closed'] == false) ? $data['qr']['filename'] : $data['custody_chain']['qr'],
-			'pdf' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']) AND $data['custody_chain']['closed'] == false) ? $data['pdf']['filename'] : $data['custody_chain']['pdf'],
+			'pdf' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee'])) ? $data['pdf']['filename'] : $data['custody_chain']['pdf'],
 			'closed' => true,
 			'user' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee'])) ? Session::get_value('vkye_user')['id'] : $data['custody_chain']['user']
 		], [
@@ -233,14 +238,19 @@ class Laboratory_model extends Model
 
 		if (!empty($query))
 		{
-			if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']) AND $data['custody_chain']['closed'] == false)
-			{
-				QRcode::png($data['qr']['content'], $data['qr']['dir'], $data['qr']['level'], $data['qr']['size'], $data['qr']['frame']);
-				Fileloader::down($data['custody_chain']['qr']);
-			}
-
 			if (!empty($data['custody_chain']['employee']) AND !empty($data['employee_signature']) AND !empty($data['custody_chain']['signatures']['employee']))
 				Fileloader::down($data['custody_chain']['signatures']['employee']);
+
+			if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']))
+			{
+				if ($data['custody_chain']['closed'] == false)
+				{
+					QRcode::png($data['qr']['content'], $data['qr']['dir'], $data['qr']['level'], $data['qr']['size'], $data['qr']['frame']);
+					Fileloader::down($data['custody_chain']['qr']);
+				}
+
+				Fileloader::down($data['custody_chain']['pdf']);
+			}
 		}
 
         return $query;

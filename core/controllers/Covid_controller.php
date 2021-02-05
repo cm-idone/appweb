@@ -77,7 +77,7 @@ class Covid_controller extends Controller
 
 							try
 							{
-								$mail->setFrom(Configuration::$vars['marbu']['email'], 'Marbu ' . Languages::email('laboratory')[Session::get_value('vkye_lang')]);
+								$mail->setFrom(Configuration::$vars['marbu']['email'], 'Marbu Salud');
 								$mail->addAddress($_POST['email'], $_POST['firstname'] . ' ' . $_POST['lastname']);
 								$mail->Subject = Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'] ;
 								$mail->Body =
@@ -156,7 +156,7 @@ class Covid_controller extends Controller
 	        }
 	        else
 	        {
-	            define('_title', 'Marbu {$lang.laboratory} | Covid');
+	            define('_title', 'Marbu Salud | Covid');
 
 	            if (System::temporal('get_if_exists', 'covid', 'contact') == false)
 	                System::temporal('set_forced', 'covid', 'contact', []);
