@@ -76,6 +76,28 @@ class Covid_model extends Model
         return $query;
     }
 
+	public function read_custody_chain($token)
+	{
+		$query = System::decode_json_to_array($this->database->select('custody_chains', [
+			'token',
+			'contact',
+			'type',
+			'results',
+			'collector',
+			'date',
+			'hour',
+			'comments',
+			'qr',
+			'pdf',
+			'lang',
+			'closed'
+		], [
+			'token' => $token
+		]));
+
+		return !empty($query) ? $query[0] : null;
+	}
+
     public function read_account($path)
     {
         $query = System::decode_json_to_array($this->database->select('accounts', [

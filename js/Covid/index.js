@@ -17,14 +17,14 @@ $(document).ready(function()
         validate_string('int', $(this).val(), $(this));
     });
 
-    $('form[name="covid"]').on('submit', function(event)
+    $('form[name="registry"]').on('submit', function(event)
     {
         event.preventDefault();
 
         var form = $(this);
         var data = new FormData(form[0]);
 
-        data.append('action','contact');
+        data.append('action','registry');
 
         $.ajax({
             type: 'POST',

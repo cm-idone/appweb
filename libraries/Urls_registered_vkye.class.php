@@ -17,6 +17,10 @@ class Urls_registered_vkye
                 'controller' => 'Covid',
                 'method' => 'index'
             ],
+            '/%param%/covid/%param%' => [
+                'controller' => 'Covid',
+                'method' => 'index'
+            ],
             '/login' => [
                 'controller' => 'Login',
                 'method' => 'index'
