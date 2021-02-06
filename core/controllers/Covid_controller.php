@@ -25,6 +25,8 @@ class Covid_controller extends Controller
 
 				if (!empty($global['custody_chain']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND $global['custody_chain']['closed'] == true)
 				{
+					Session::set_value('vkye_lang', $global['custody_chain']['lang']);
+
 					$global['render'] = 'results';
 					$go = true;
 				}

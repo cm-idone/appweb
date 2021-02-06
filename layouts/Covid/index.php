@@ -156,7 +156,65 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
         <?php endif; ?>
     <?php elseif ($global['render'] == 'results') : ?>
         <div class="results">
-            
+            <div class="test">
+                <i class="fas fa-qrcode"></i>
+                <h2>
+                    <strong>{$lang.covid_test_results}</strong>
+                    <span>{$lang.type}: {$lang.<?php echo $global['custody_chain']['type']; ?>} {$lang.token}: <?php echo $global['custody_chain']['token']; ?></span>
+                </h2>
+            </div>
+            <div class="counter">
+                <h3 id="counter"></h3>
+                <h2><?php echo Dates::format_date($global['custody_chain']['date'], 'long') . ' ' . Dates::format_hour($global['custody_chain']['hour'], '12-long'); ?></h2>
+            </div>
+            <div class="results">
+
+            </div>
+            <?php if (!empty($global['custody_chain']['comments'])) : ?>
+                <div class="comments">
+                    <p><?php echo $global['custody_chain']['comments']; ?></p>
+                </div>
+            <?php endif; ?>
+            <table class="contact">
+                <tr>
+                    <td>{$lang.name}:</td>
+                    <td><?php echo $global['custody_chain']['contact']['firstname'] . ' ' . $global['custody_chain']['contact']['lastname']; ?></td>
+                </tr>
+                <tr>
+                    <td>{$lang.id}:</td>
+                    <td><?php echo $global['custody_chain']['contact']['ife']; ?></td>
+                </tr>
+                <tr>
+                    <td>{$lang.birth_date}:</td>
+                    <td><?php echo Dates::format_date($global['custody_chain']['contact']['birth_date'], 'long'); ?></td>
+                </tr>
+                <tr>
+                    <td>{$lang.age}:</td>
+                    <td><?php echo $global['custody_chain']['contact']['age']; ?> {$lang.years}</td>
+                </tr>
+                <tr>
+                    <td>{$lang.sex}:</td>
+                    <td>{$lang.<?php echo $global['custody_chain']['contact']['sex']; ?>}</td>
+                </tr>
+                <tr>
+                    <td>{$lang.email}:</td>
+                    <td><?php echo $global['custody_chain']['contact']['email']; ?></td>
+                </tr>
+                <tr>
+                    <td>{$lang.phone}:</td>
+                    <td>+<?php echo $global['custody_chain']['contact']['phone']['country'] . ' ' . $global['custody_chain']['contact']['phone']['number']; ?></td>
+                </tr>
+                <tr>
+                    <td>{$lang.travel_to}:</td>
+                    <td><?php echo $global['custody_chain']['contact']['travel_to']; ?></td>
+                </tr>
+            </table>
+            <figure class="qr">
+                <img src="{$path.uploads}<?php echo $global['custody_chain']['qr']; ?>">
+            </figure>
+            <div class="pdf">
+                <a href="{$path.uploads}<?php echo $global['custody_chain']['pdf']; ?>" download="certificate.pdf">{$lang.download_certificate_pdf}</a>
+            </div>
         </div>
     <?php endif; ?>
 </main>
