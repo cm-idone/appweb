@@ -281,19 +281,44 @@ class Laboratory_controller extends Controller
 											<title>' . $mail->Subject . '</title>
 										</head>
 										<body>
-											<table style="width:600px;margin:0px;padding:0px;border: 1px dashed #757575;box-sizing:border-box;background-color:#fff;">
+											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:#004770;">
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
-														<figure style="width:100%;margin:0px;padding:0px;text-align:center;">
-															<img style="width:auto;height:160px;" src="https://' . Configuration::$domain . '/images/marbu_logotype_color.png">
-														</figure>
+													<td style="width:100px;margin:0px;padding:20px 0px 20px 20px;border:0px;box-sizing:border-box;vertical-align:middle;">
+														<img style="width:100px" src="https://' . Configuration::$domain . '/images/marbu_logotype_color.png">
+													</td>
+													<td style="width:auto;margin:0px;padding:20px;border:0px;box-sizing:border-box;vertical-align:middle;">
+														<table style="width:100%;margin:0px;padding:0px;border:0px;">
+															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:600;text-align:right;color:#fff;">Marbu Salud S.A. de C.V.</td>
+															</tr>
+															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">MSA1907259GA</td>
+															</tr>
+															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">Av. Nichupté SM51 M42 L1</td>
+															</tr>
+															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">CP: 77533 Cancún, Qroo. México</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</table>
+											<table style="width:100%;max-width:600px;margin:20px 0px;padding:0px;border:1px dashed #000;box-sizing:border-box;background-color:#fff;">
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:18px;font-weight:600;text-align:center;text-transform:uppercase;color:#000;">' . $mail->Subject . '</td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#000;">
+														' . Languages::email('get_covid_results_1')[$global['custody_chain']['lang']] . '
+														<a href="https://' . Configuration::$domain . '/' . Session::get_value('vkye_account')['path'] . '/covid/' . $global['custody_chain']['token'] . '">' . Languages::email('click_here')[$global['custody_chain']['lang']] . '</a>
+														' . Languages::email('get_covid_results_2')[$global['custody_chain']['lang']] . '
+														<strong>' . Dates::format_date($global['custody_chain']['date'], 'long') . '</strong>
+														' . Languages::email('get_covid_results_3')[$global['custody_chain']['lang']] . '
 													</td>
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
-														<h4 style="width:100%;margin:0px 0px 20px 0px;padding:0px;font-size:18px;font-weight:600;text-transform:uppercase;text-align:center;color:#000;">' . $mail->Subject . '</h4>
-														<p style="width:100%;margin:0px 0px 20px 0px;padding:0px;font-size:14px;font-weight:400;text-align:center;color:#757575;">' . Languages::email('your_results_are_ready_text')[$global['custody_chain']['lang']] . '</p>
-														<figure style="width:100%;margin:0px 0px 20px 0px;padding:0px;text-align:center;">';
+													<td style="width:100%;margin:0px;padding:20px;border:0px;box-sizing:border-box;">';
 
 									if ($global['custody_chain']['closed'] == false)
 										$mail->Body .= '<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $_POST['qr']['filename'] . '">';
@@ -301,30 +326,29 @@ class Laboratory_controller extends Controller
 										$mail->Body .= '<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $global['custody_chain']['qr'] . '">';
 
 									$mail->Body .=
-									'					</figure>
-														<p style="width:100%;margin:0px;padding:0px;font-size:14px;font-weight:400;text-align:center;color:#757575;">
-															' . Languages::email('get_covid_results_1')[$global['custody_chain']['lang']] . '
-															<a href="https://' . Configuration::$domain . '/' . Session::get_value('vkye_account')['path'] . '/covid/' . $global['custody_chain']['token'] . '">' . Languages::email('click_here')[$global['custody_chain']['lang']] . '</a>
-															' . Languages::email('get_covid_results_2')[$global['custody_chain']['lang']] . '
-														</p>
-													</td>
+									'				</td>
+												</tr>
+											</table>
+											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:#0b5178;">
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="tel:' . Configuration::$vars['marbu']['phone'] . '">' . Configuration::$vars['marbu']['phone'] . '</a></td>
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
-														<a href="https://api.whatsapp.com/send?phone=' . Configuration::$vars['marbu']['phone'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">Whatsapp: ' . Configuration::$vars['marbu']['phone'] . '</p><br>
-														<a href="tel:' . Configuration::$vars['marbu']['phone'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">' . Languages::email('call')[$global['custody_chain']['lang']] . ': ' . Configuration::$vars['marbu']['phone'] . '</p><br>
-														<a href="mailto:' . Configuration::$vars['marbu']['email'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">' . Configuration::$vars['marbu']['email'] . '</p><br>
-														<a href="https://facebook.com/' . Configuration::$vars['marbu']['facebook'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">FB: ' . Configuration::$vars['marbu']['facebook'] . '</p><br>
-														<a href="https://linkedin.com/company/' . Configuration::$vars['marbu']['linkedin'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">IN: ' . Configuration::$vars['marbu']['linkedin'] . '</p><br>
-														<a href="https://' . Configuration::$vars['marbu']['website'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">' . Configuration::$vars['marbu']['website'] . '</p><br>
-													</td>
+													<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="mailto:' . Configuration::$vars['marbu']['email'] . '">' . Configuration::$vars['marbu']['email'] . '</a></td>
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px;border:0px;box-sizing:border-box;">
-														<a href="https://id.one-consultores.com" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">' . Languages::email('power_by')[$global['custody_chain']['lang']] . ' <strong>' . Configuration::$web_page . ' ' . Configuration::$web_version . '</strong></a><br>
-														<a href="https://one-consultores.com" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">Copyright (C) One Consultores</a><br>
-														<a href="https://codemonkey.com.mx" style="width:100%;margin:0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">Software ' . Languages::email('development_by')[$global['custody_chain']['lang']] . ' Code Monkey</a>
-													</td>
+													<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="https://' . Configuration::$vars['marbu']['website'] . '">' . Configuration::$vars['marbu']['website'] . '</a></td>
+												</tr>
+											</table>
+											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:#004770;">
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">' . Languages::email('power_by')[$global['custody_chain']['lang']] . ' <a style="font-weight:600;text-decoration:none;color:#fff;" href="https://id.one-consultores.com">' . Configuration::$web_page . ' ' . Configuration::$web_version . '</a></td>
+												</tr
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Copyright (C) <a style="text-decoration:none;color:#fff;" href="https://one-consultores.com">One Consultores</a></td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Software ' . Languages::email('development_by')[$global['custody_chain']['lang']] . ' <a style="text-decoration:none;color:#fff;" href="https://codemonkey.com.mx">Code Monkey</a></td>
 												</tr>
 											</table>
 										</body>

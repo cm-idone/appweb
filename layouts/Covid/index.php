@@ -145,7 +145,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                 </fieldset>
             </form>
         <?php else : ?>
-            <div>
+            <div class="create">
                 <p>{$lang.covid_alert_1} <strong><?php echo System::temporal('get', 'covid', 'contact')['email']; ?></strong> {$lang.covid_alert_2}</p>
                 <h4>{$lang.your_token_is}: <?php echo System::temporal('get', 'covid', 'contact')['token']; ?></h4>
                 <figure>
@@ -155,7 +155,9 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
             </div>
         <?php endif; ?>
     <?php elseif ($global['render'] == 'results') : ?>
-        
+        <div class="results">
+            
+        </div>
     <?php endif; ?>
 </main>
 <footer class="covid">
