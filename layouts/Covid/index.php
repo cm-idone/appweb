@@ -156,7 +156,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
         <?php endif; ?>
     <?php elseif ($global['render'] == 'results') : ?>
         <div class="results">
-            <div class="test">
+            <div class="title">
                 <i class="fas fa-qrcode"></i>
                 <h2>
                     <strong>{$lang.covid_test_results}</strong>
@@ -167,21 +167,73 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                 <h3 id="counter"></h3>
                 <h2><?php echo Dates::format_date($global['custody_chain']['date'], 'long') . ' ' . Dates::format_hour($global['custody_chain']['hour'], '12-long'); ?></h2>
             </div>
-            <div class="results">
-
-            </div>
+            <table>
+                <?php if ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') : ?>
+                    <tr>
+                        <td>{$lang.exam}:</td>
+                        <td>PCR-SARS-CoV-2 (COVID-19)</td>
+                    </tr>
+                    <tr>
+                        <td>{$lang.result}:</td>
+                        <td>{$lang.<?php echo $global['custody_chain']['results']['result']; ?>}</td>
+                    </tr>
+                    <tr>
+                        <td>{$lang.unity}:</td>
+                        <td>{$lang.<?php echo $global['custody_chain']['results']['unity']; ?>}</td>
+                    </tr>
+                    <tr>
+                        <td>{$lang.reference_values}:</td>
+                        <td>{$lang.<?php echo $global['custody_chain']['results']['reference_values']; ?>}</td>
+                    </tr>
+                <?php elseif ($global['custody_chain']['type'] == 'covid_ac') : ?>
+                    <tr>
+                        <td>{$lang.exam}:</td>
+                        <td>SARS-CoV-2 (2019) IgG/IgM</td>
+                    </tr>
+                    <tr>
+                        <td><strong>{$lang.anticorps} IgM</strong></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>{$lang.result}:</td>
+                        <td>{$lang.<?php echo $global['custody_chain']['results']['igm']['result']; ?>}</td>
+                    </tr>
+                    <tr>
+                        <td>{$lang.unity}:</td>
+                        <td>- - -</td>
+                    </tr>
+                    <tr>
+                        <td>{$lang.reference_values}:</td>
+                        <td>{$lang.<?php echo $global['custody_chain']['results']['igm']['reference_values']; ?>}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>{$lang.anticorps} IgG</strong></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>{$lang.result}:</td>
+                        <td>{$lang.<?php echo $global['custody_chain']['results']['igm']['result']; ?>}</td>
+                    </tr>
+                    <tr>
+                        <td>{$lang.unity}:</td>
+                        <td>- - -</td>
+                    </tr>
+                    <tr>
+                        <td>{$lang.reference_values}:</td>
+                        <td>{$lang.<?php echo $global['custody_chain']['results']['igm']['reference_values']; ?>}</td>
+                    </tr>
+                <?php endif; ?>
+            </table>
             <?php if (!empty($global['custody_chain']['comments'])) : ?>
-                <div class="comments">
-                    <p><?php echo $global['custody_chain']['comments']; ?></p>
-                </div>
+                <p><?php echo $global['custody_chain']['comments']; ?></p>
             <?php endif; ?>
-            <table class="contact">
+            <table>
                 <tr>
                     <td>{$lang.name}:</td>
                     <td><?php echo $global['custody_chain']['contact']['firstname'] . ' ' . $global['custody_chain']['contact']['lastname']; ?></td>
                 </tr>
                 <tr>
-                    <td>{$lang.id}:</td>
+                    <td>{$lang.passport}:</td>
                     <td><?php echo $global['custody_chain']['contact']['ife']; ?></td>
                 </tr>
                 <tr>
@@ -209,12 +261,10 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                     <td><?php echo $global['custody_chain']['contact']['travel_to']; ?></td>
                 </tr>
             </table>
-            <figure class="qr">
+            <figure>
                 <img src="{$path.uploads}<?php echo $global['custody_chain']['qr']; ?>">
             </figure>
-            <div class="pdf">
-                <a href="{$path.uploads}<?php echo $global['custody_chain']['pdf']; ?>" download="certificate.pdf">{$lang.download_certificate_pdf}</a>
-            </div>
+            <a href="{$path.uploads}<?php echo $global['custody_chain']['pdf']; ?>" download="certificate.pdf">{$lang.download_certificate_pdf}</a>
         </div>
     <?php endif; ?>
 </main>
