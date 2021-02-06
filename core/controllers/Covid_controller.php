@@ -23,11 +23,25 @@ class Covid_controller extends Controller
 			{
 				$global['custody_chain'] = $this->model->read_custody_chain($params[1]);
 
-				if (!empty($global['custody_chain']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND $global['custody_chain']['closed'] == true)
+				if (!empty($global['custody_chain']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac'))
 				{
 					Session::set_value('vkye_lang', $global['custody_chain']['lang']);
 
-					$global['render'] = 'results';
+					if ($global['custody_chain']['closed'] == true)
+						$global['render'] = 'results';
+					else
+					{
+						$global['render'] = 'create';
+
+						System::temporal('set_forced', 'covid', 'contact', [
+							'token' => $global['custody_chain']['token'],
+							'qr' => [
+								'filename' => $global['custody_chain']['qr']
+							],
+							'email' => $global['custody_chain']['contact']['email']
+						]);
+					}
+
 					$go = true;
 				}
 			}
@@ -206,7 +220,7 @@ class Covid_controller extends Controller
 	        {
 	            define('_title', 'Marbu Salud | Covid');
 
-	            if (!empty($params[1]) OR System::temporal('get_if_exists', 'covid', 'contact') == false)
+	            if ($global['render'] == 'results' OR System::temporal('get_if_exists', 'covid', 'contact') == false)
 	                System::temporal('set_forced', 'covid', 'contact', []);
 
 	            $template = $this->view->render($this, 'index');

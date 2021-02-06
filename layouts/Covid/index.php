@@ -26,7 +26,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
         <?php if (empty(System::temporal('get', 'covid', 'contact'))) : ?>
             <form name="registry">
                 <h2>{$lang.registry_now}</h2>
-                <h3>{$lang.registry_your_covid_test}</h3>
+                <h3>{$lang.covid_test}</h3>
                 <fieldset class="fields-group">
                     <div class="row">
                         <div class="span4">
@@ -146,26 +146,26 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
             </form>
         <?php else : ?>
             <div class="create">
-                <p>{$lang.covid_alert_1} <strong><?php echo System::temporal('get', 'covid', 'contact')['email']; ?></strong> {$lang.covid_alert_2}</p>
                 <h4>{$lang.your_token_is}: <?php echo System::temporal('get', 'covid', 'contact')['token']; ?></h4>
                 <figure>
                     <img src="{$path.uploads}<?php echo System::temporal('get', 'covid', 'contact')['qr']['filename']; ?>">
                 </figure>
+                <p>{$lang.covid_alert_1} <strong><?php echo System::temporal('get', 'covid', 'contact')['email']; ?></strong> {$lang.covid_alert_2}</p>
                 <a data-action="reload_form">{$lang.reload_form}</a>
             </div>
         <?php endif; ?>
     <?php elseif ($global['render'] == 'results') : ?>
         <div class="results">
+            <h2>{$lang.ready_results}</h2>
+            <h3>{$lang.covid_test}</h3>
             <div class="title">
                 <i class="fas fa-qrcode"></i>
-                <h2>
-                    <strong>{$lang.covid_test_results}</strong>
-                    <span>{$lang.type}: {$lang.<?php echo $global['custody_chain']['type']; ?>} {$lang.token}: <?php echo $global['custody_chain']['token']; ?></span>
-                </h2>
+                <h2><strong>{$lang.type}: {$lang.<?php echo $global['custody_chain']['type']; ?>} </strong>{$lang.token}: <?php echo $global['custody_chain']['token']; ?></h2>
             </div>
             <div class="counter">
-                <h3 id="counter"></h3>
+                <h3 id="counter">72:00:00</h3>
                 <h2><?php echo Dates::format_date($global['custody_chain']['date'], 'long') . ' ' . Dates::format_hour($global['custody_chain']['hour'], '12-long'); ?></h2>
+                <h4>{$lang.72_validation}</h4>
             </div>
             <table>
                 <?php if ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') : ?>
@@ -191,7 +191,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                         <td>SARS-CoV-2 (2019) IgG/IgM</td>
                     </tr>
                     <tr>
-                        <td><strong>{$lang.anticorps} IgM</strong></td>
+                        <td style="padding-top:10px;"><strong>{$lang.anticorps} IgM</strong></td>
                         <td></td>
                     </tr>
                     <tr>
@@ -207,7 +207,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                         <td>{$lang.<?php echo $global['custody_chain']['results']['igm']['reference_values']; ?>}</td>
                     </tr>
                     <tr>
-                        <td><strong>{$lang.anticorps} IgG</strong></td>
+                        <td style="padding-top:10px;"><strong>{$lang.anticorps} IgG</strong></td>
                         <td></td>
                     </tr>
                     <tr>
@@ -265,6 +265,13 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                 <img src="{$path.uploads}<?php echo $global['custody_chain']['qr']; ?>">
             </figure>
             <a href="{$path.uploads}<?php echo $global['custody_chain']['pdf']; ?>" download="certificate.pdf">{$lang.download_certificate_pdf}</a>
+            <div class="collector">
+                <figure>
+                    <img src="{$path.uploads}<?php echo $global['custody_chain']['collector_signature']; ?>">
+                </figure>
+                <h2><?php echo $global['custody_chain']['collector_name']; ?></h2>
+                <h3>{$lang.this_certificate_available_by}</h3>
+            </div>
         </div>
     <?php endif; ?>
 </main>

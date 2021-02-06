@@ -12,8 +12,12 @@ class Languages
                 'en' => 'Your token is'
             ],
             'your_results_are_ready' => [
-                'es' => 'Resultados de prueba Covid',
-                'en' => 'Covid test results'
+                'es' => 'Resultados listos',
+                'en' => 'Ready results'
+            ],
+            'covid_test' => [
+                'es' => 'Prueba Covid',
+                'en' => 'Covid Test'
             ],
             'get_covid_results_1' => [
                 'es' => '<strong>A quien corresponda</strong>. Por este medio le hacemos llegar los resultados de sus prueba de Covid. Puedes escanera el siguiente QR para consutar tus resultados en linea, o dar ',

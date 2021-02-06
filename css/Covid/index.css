@@ -97,14 +97,6 @@ main.covid > div.create {
     box-sizing: border-box;
 }
 
-main.covid > div.create > p {
-    margin-bottom: 40px;
-    font-size: 14px;
-    font-weight: 400;
-    text-align: center;
-    color: #757575;
-}
-
 main.covid > div.create > h4 {
     margin-bottom: 40px;
     font-size: 24px;
@@ -123,6 +115,189 @@ main.covid > div.create > figure {
 
 main.covid > div.create > figure > img {
     width: 100%;
+}
+
+main.covid > div.create > p {
+    margin-bottom: 40px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    color: #757575;
+}
+
+main.covid > div.create > a {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: #009688;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+}
+
+/*  */
+
+main.covid > div.results {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0px 20px;
+    box-sizing: border-box;
+}
+
+main.covid > div.results > h2 {
+    width: 100%;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    color: #212121;
+    margin-bottom: 5px;
+}
+
+main.covid > div.results > h3 {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: #757575;
+    margin-bottom: 40px;
+}
+
+main.covid > div.results > div.title {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+main.covid > div.results > div.title > i {
+    padding: 5px 10px;
+    border: 1px dashed #009688;
+    box-sizing: border-box;
+    font-size: 60px;
+    color: #000;
+}
+
+main.covid > div.results > div.title > h2 {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 16px;
+    font-weight: 400;
+    color: #757575;
+}
+
+main.covid > div.results > div.title > h2 > strong {
+    display: block;
+    font-size: 24px;
+    font-weight: 600;
+    color: #000;
+}
+
+main.covid > div.results > div.counter {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+
+main.covid > div.results > div.counter > h2 {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #757575;
+}
+
+main.covid > div.results > div.counter > h3 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 48px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #009688
+}
+
+main.covid > div.results > div.counter > h4 {
+    font-size: 14px;
+    font-weight: 400;
+    color: #757575;
+}
+
+main.covid > div.results > table {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+main.covid > div.results > figure {
+    width: 100%;
+    margin-bottom: 40px;
+    border: 1px dashed #212121;
+    box-sizing: border-box;
+}
+
+main.covid > div.results > figure > img {
+    width: 100%;
+}
+
+main.covid > div.results > a {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    border-radius: 5px;
+    background-color: #009688;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+}
+
+main.covid > div.results > div.collector {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+main.covid > div.results > div.collector > figure,
+main.covid > div.results > div.collector > figure > img {
+    width: auto;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+main.covid > div.results > div.collector > h2 {
+    width: 100%;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    color: #212121;
+}
+
+main.covid > div.results > div.collector > h3 {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    color: #757575;
 }
 
 /*  */

@@ -79,20 +79,25 @@ class Covid_model extends Model
 	public function read_custody_chain($token)
 	{
 		$query = System::decode_json_to_array($this->database->select('custody_chains', [
-			'token',
-			'contact',
-			'type',
-			'results',
-			'collector',
-			'date',
-			'hour',
-			'comments',
-			'qr',
-			'pdf',
-			'lang',
-			'closed'
+			'[>]system_collectors' => [
+				'collector' => 'id'
+			]
 		], [
-			'token' => $token
+			'custody_chains.token',
+			'custody_chains.contact',
+			'custody_chains.type',
+			'custody_chains.results',
+			'system_collectors.name(collector_name)',
+			'system_collectors.signature(collector_signature)',
+			'custody_chains.date',
+			'custody_chains.hour',
+			'custody_chains.comments',
+			'custody_chains.qr',
+			'custody_chains.pdf',
+			'custody_chains.lang',
+			'custody_chains.closed'
+		], [
+			'custody_chains.token' => $token
 		]));
 
 		return !empty($query) ? $query[0] : null;
