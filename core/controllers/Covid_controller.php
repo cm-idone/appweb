@@ -104,19 +104,19 @@ class Covid_controller extends Controller
 											</tr>
 											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 												<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
-													<a href="https://api.whatsapp.com/send?phone=' . Configuration::$vars['marbu']['phone'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;color:#757575;">Whatsapp: ' . Configuration::$vars['marbu']['phone'] . '</p><br>
-													<a href="tel:' . Configuration::$vars['marbu']['phone'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;color:#757575;">' . Languages::email('call')[$global['custody_chain']['lang']] . ': ' . Configuration::$vars['marbu']['phone'] . '</p><br>
-													<a href="mailto:' . Configuration::$vars['marbu']['email'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;color:#757575;">' . Configuration::$vars['marbu']['email'] . '</p><br>
-													<a href="https://facebook.com/' . Configuration::$vars['marbu']['facebook'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;color:#757575;">FB: ' . Configuration::$vars['marbu']['facebook'] . '</p><br>
-													<a href="https://linkedin.com/company/' . Configuration::$vars['marbu']['linkedin'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;color:#757575;">IN: ' . Configuration::$vars['marbu']['linkedin'] . '</p><br>
-													<a href="https://' . Configuration::$vars['marbu']['website'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;color:#757575;">' . Configuration::$vars['marbu']['website'] . '</p><br>
+													<a href="https://api.whatsapp.com/send?phone=' . Configuration::$vars['marbu']['phone'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">Whatsapp: ' . Configuration::$vars['marbu']['phone'] . '</p><br>
+													<a href="tel:' . Configuration::$vars['marbu']['phone'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">' . Languages::email('call')[$global['custody_chain']['lang']] . ': ' . Configuration::$vars['marbu']['phone'] . '</p><br>
+													<a href="mailto:' . Configuration::$vars['marbu']['email'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">' . Configuration::$vars['marbu']['email'] . '</p><br>
+													<a href="https://facebook.com/' . Configuration::$vars['marbu']['facebook'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">FB: ' . Configuration::$vars['marbu']['facebook'] . '</p><br>
+													<a href="https://linkedin.com/company/' . Configuration::$vars['marbu']['linkedin'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">IN: ' . Configuration::$vars['marbu']['linkedin'] . '</p><br>
+													<a href="https://' . Configuration::$vars['marbu']['website'] . '" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">' . Configuration::$vars['marbu']['website'] . '</p><br>
 												</td>
 											</tr>
 											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 												<td style="width:100%;margin:0px;padding:20px;border:0px;box-sizing:border-box;">
-													<a href="https://id.one-consultores.com" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;color:#757575;">' . Languages::email('power_by')[$global['custody_chain']['lang']] . ' <strong>' . Configuration::$web_page . ' ' . Configuration::$web_version . '</strong></a><br>
-													<a href="https://one-consultores.com" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;color:#757575;">Copyright (C) One Consultores</a><br>
-													<a href="https://codemonkey.com.mx" style="width:100%;margin:0px;padding:0px;font-size:12px;font-weight:400;text-align:left;color:#757575;">Software ' . Languages::email('development_by')[$global['custody_chain']['lang']] . ' Code Monkey</a>
+													<a href="https://id.one-consultores.com" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">' . Languages::email('power_by')[$global['custody_chain']['lang']] . ' <strong>' . Configuration::$web_page . ' ' . Configuration::$web_version . '</strong></a><br>
+													<a href="https://one-consultores.com" style="width:100%;margin:0px 0px 5px 0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">Copyright (C) One Consultores</a><br>
+													<a href="https://codemonkey.com.mx" style="width:100%;margin:0px;padding:0px;font-size:12px;font-weight:400;text-align:left;text-decoration:none;color:#757575;">Software ' . Languages::email('development_by')[$global['custody_chain']['lang']] . ' Code Monkey</a>
 												</td>
 											</tr>
 										</table>
@@ -170,7 +170,5 @@ class Covid_controller extends Controller
 	            echo $template;
 	        }
 		}
-		else
-			header('Location: /');
 	}
 }
