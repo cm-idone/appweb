@@ -151,7 +151,6 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                     <img src="{$path.uploads}<?php echo System::temporal('get', 'covid', 'contact')['qr']['filename']; ?>">
                 </figure>
                 <p>{$lang.covid_alert_1} <strong><?php echo System::temporal('get', 'covid', 'contact')['email']; ?></strong> {$lang.covid_alert_2}</p>
-                <a data-action="reload_form">{$lang.reload_form}</a>
             </div>
         <?php endif; ?>
     <?php elseif ($global['render'] == 'results') : ?>

@@ -42,22 +42,4 @@ $(document).ready(function()
             }
         });
     });
-
-    $('[data-action="reload_form"]').on('click', function()
-    {
-        $.ajax({
-            type: 'POST',
-            data: 'action=reload_form',
-            processData: false,
-            cache: false,
-            dataType: 'json',
-            success: function(response)
-            {
-                if (response.status == 'success')
-                    open_notification_modal('success', response.message);
-                else if (response.status == 'error')
-                    open_notification_modal('alert', response.message);
-            }
-        });
-    });
 });
