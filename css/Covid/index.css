@@ -165,7 +165,7 @@ main.covid > div.results > div.title {
 
 main.covid > div.results > div.title > i {
     padding: 5px 10px;
-    border: 1px dashed #009688;
+    border: 1px dashed #000;
     box-sizing: border-box;
     font-size: 60px;
     color: #000;
@@ -215,8 +215,16 @@ main.covid > div.results > div.counter > h3 {
     box-sizing: border-box;
     font-size: 48px;
     font-weight: 600;
+}
+
+main.covid > div.results > div.counter > h3.time_on {
+    background-color: #009688;
     color: #fff;
-    background-color: #009688
+}
+
+main.covid > div.results > div.counter > h3.time_out {
+    background-color: #eee;
+    color: #757575;
 }
 
 main.covid > div.results > div.counter > h4 {

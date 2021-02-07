@@ -22,8 +22,8 @@ class Dates
     */
     static public function set_default_timezone()
     {
-        if (Session::exists_var('session') == true)
-            date_default_timezone_set(Session::get_value('vkye_account')['time_zone']);
+        if (Session::exists_var('vkye_time_zone') == true)
+            date_default_timezone_set(Session::get_value('vkye_time_zone'));
         else
             date_default_timezone_set(Configuration::$time_zone);
     }
@@ -231,6 +231,122 @@ class Dates
     }
 
     /**
+    * @summary Entrega la resta de un tiempo a una fecha y hora.
+    *
+    * @param date $date_hour: Fecha y hora a restar.
+    * @param int $number: Numero de $lapse que se va a restar a $date.
+    * @param string $lapse: (year, month, week, days) Lapso de tiempo que se va a restar a $date.
+    * @param string $format: (<Formato de fecha y hora de PHP>) Formato en el que retornará la fecha y hora.
+    *
+    * @return date
+    */
+    static public function past_date_hour($date_hour, $number, $lapse, $format = 'Y-m-d H:i:s')
+    {
+        Dates::set_default_timezone();
+
+        return date($format, strtotime(date('d-m-Y H:i:s', strtotime($date_hour)) . ' - ' . $number . ' ' . $lapse));
+    }
+
+    /**
+    * @summary Entrega la suma de un tiempo a una fecha y hora.
+    *
+    * @param time $date_hour: Fecha y hora a sumar.
+    * @param int $number: Numero de $lapse que se va a sumar a $hour.
+    * @param string $lapse: (hour, minute, second) Lapso de tiempo que se va a sumar a $hour.
+    * @param string $format: (<Formato de fecha y hora de PHP>) Formato en el que retornará la fecha y hora.
+    *
+    * @return date
+    */
+    static public function future_date_hour($date_hour, $number, $lapse, $format = 'Y-m-d H:i:s')
+    {
+        Dates::set_default_timezone();
+
+        return date($format, strtotime(date('d-m-Y H:i:s', strtotime($date_hour)) . ' + ' . $number . ' ' . $lapse));
+    }
+
+    /**
+    * @summary Entrega una fecha y hora con formato.
+    *
+    * @param date $date: Fecha a dar formato.
+    * @param time $hour: Hora a dar formato.
+    * @param string $format_date: (long, short, <Formato de fecha de PHP>) Formato en el que retornará la fecha.
+    * @param string $format_hour: (12, 24, <Formato de hora de PHP>) Formato en el que retornará la hora.
+    * @param string $language: (es, en) Lenguage en el que retornará la fecha en caso de que el $format sea long o short.
+    *
+    * @return string
+    * @return date
+    */
+    static public function format_date_hour($date, $hour, $format_date = 'Y-m-d', $format_hour = 'H:i:s', $language = 'es')
+    {
+        if ($format_date == 'long' OR $format_date == 'long_month' OR $format_date == 'long_year' OR $format_date == 'short')
+        {
+            $date = date('Y-m-d', strtotime($date));
+            $date = explode('-', $date);
+
+            $months = [
+                'es' => [
+                    '01' => 'enero',
+                    '02' => 'febrero',
+                    '03' => 'marzo',
+                    '04' => 'abril',
+                    '05' => 'mayo',
+                    '06' => 'junio',
+                    '07' => 'julio',
+                    '08' => 'agosto',
+                    '09' => 'septiembre',
+                    '10' => 'octubre',
+                    '11' => 'noviembre',
+                    '12' => 'diciembre'
+                ],
+                'en' => [
+                    '01' => 'january',
+                    '02' => 'february',
+                    '03' => 'march',
+                    '04' => 'april',
+                    '05' => 'may',
+                    '06' => 'june',
+                    '07' => 'july',
+                    '08' => 'august',
+                    '09' => 'september',
+                    '10' => 'october',
+                    '11' => 'november',
+                    '12' => 'december'
+                ]
+            ];
+
+            if ($format_date == 'long')
+                $date = $date[2] . ' {$lang.of} ' . $months[$language][$date[1]] . ' {$lang.from} ' . $date[0];
+            else if ($format_date == 'long_month')
+                $date = $date[2] . ' ' . $months[$language][$date[1]] . ' ' . substr($date[0], -2);
+            else if ($format_date == 'long_year')
+                $date = $date[2] . ' ' . substr($months[$language][$date[1]], -strlen($months[$language][$date[1]]), 3) . ' ' . $date[0];
+            else if ($format_date == 'short')
+                $date = $date[2] . ' ' . substr($months[$language][$date[1]], -strlen($months[$language][$date[1]]), 3) . ' ' . substr($date[0], -2);
+        }
+        else
+            $date = date($format_date, strtotime($date));
+
+        if ($format_hour == '12-short' OR $format_hour == '12-long')
+        {
+            $hour = explode(':', $hour);
+            $hour[3] = ($hour[0] < 12) ? 'am' : 'pm';
+            $hour[0] = ($hour[0] > 12) ? $hour[0] - 12 : $hour[0];
+            $hour[0] = ($hour[0] <= 9 AND $hour[3] == 'pm') ? '0' . $hour[0] : $hour[0];
+
+            if ($format_hour == '12-short')
+                $hour = $hour[0] . ':' . (array_key_exists(1, $hour) ? $hour[1] : '00') . ' ' . $hour[3];
+            else if ($format_hour == '12-long')
+                $hour = $hour[0] . ':' . (array_key_exists(1, $hour) ? $hour[1] : '00') . ':' . (array_key_exists(2, $hour) ? $hour[2] : '00') . ' ' . $hour[3];
+        }
+        else if ($format_hour == '24')
+            $hour = $hour . ' Hrs';
+        else
+            $hour = date($format_hour, strtotime($hour));
+
+        return $date . ' ' . $hour;
+    }
+
+    /**
     * @summary Entrega la diferencia entre dos fechas, horas o fechas y horas.
     *
     * @param date-time-datetime $date_hour1: Fecha inicial.
@@ -260,35 +376,17 @@ class Dates
         $s = $a1->s;
 
         if ($lapse == 'year')
-        {
-            $y = round($a2 / 365);
             $a3 .= $y . (($format == true) ? (($y == 1) ? ' año' : ' años') : '');
-        }
         else if ($lapse == 'month')
-        {
-            $m = round($a2 / 30);
             $a3 .= $m . (($format == true) ? (($m == 1) ? ' mes' : ' meses') : '');
-        }
         else if ($lapse == 'days')
-        {
-            $d = round($a2);
             $a3 .= $d . (($format == true) ? (($d == 1) ? ' día' : ' días') : '');
-        }
         else if ($lapse == 'hours')
-        {
-            $h = round($a2 * 24);
             $a3 .= $h . (($format == true) ? (($h == 1) ? ' hora' : ' horas') : '');
-        }
         else if ($lapse == 'minutes')
-        {
-            $i = round($a2 * 1440);
             $a3 .= $i . (($format == true) ? (($i == 1) ? ' minuto' : ' minutos') : '');
-        }
         else if ($lapse == 'seconds')
-        {
-            $s = round($a2 * 86400);
             $a3 .= $s . (($format == true) ? (($s == 1) ? ' segundo' : ' segundos') : '');
-        }
         else if ($lapse == 'all')
         {
             if ($format == true)

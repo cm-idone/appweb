@@ -107,7 +107,8 @@ class Covid_model extends Model
     {
         $query = System::decode_json_to_array($this->database->select('accounts', [
             'id',
-            'avatar'
+            'avatar',
+            'time_zone'
         ], [
             'path' => $path
         ]));

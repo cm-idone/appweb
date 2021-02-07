@@ -324,7 +324,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
                         </div>
                     <?php endif; ?>
                     <?php if ($global['custody_chain']['type'] == 'covid_ac') : ?>
-                        <div class="span3">
+                        <div class="span2">
                             <div class="text">
                                 <select name="test_igm_result">
                                     <option value="">{$lang.undefined}</option>
@@ -336,7 +336,17 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
                                 <h6>IgM {$lang.result}</h6>
                             </div>
                         </div>
-                        <div class="span3">
+                        <div class="span2">
+                            <div class="text">
+                                <select name="test_igm_unity">
+                                    <option value="">{$lang.undefined}</option>
+                                </select>
+                            </div>
+                            <div class="title">
+                                <h6>IgM {$lang.unity}</h6>
+                            </div>
+                        </div>
+                        <div class="span2">
                             <div class="text">
                                 <select name="test_igm_reference_values">
                                     <option value="">{$lang.undefined}</option>
@@ -348,7 +358,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
                                 <h6>IgM {$lang.reference_values}</h6>
                             </div>
                         </div>
-                        <div class="span3">
+                        <div class="span2">
                             <div class="text">
                                 <select name="test_igg_result">
                                     <option value="">{$lang.undefined}</option>
@@ -360,7 +370,17 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
                                 <h6>IgG {$lang.result}</h6>
                             </div>
                         </div>
-                        <div class="span3">
+                        <div class="span2">
+                            <div class="text">
+                                <select name="test_igg_unity">
+                                    <option value="">{$lang.undefined}</option>
+                                </select>
+                            </div>
+                            <div class="title">
+                                <h6>IgG {$lang.unity}</h6>
+                            </div>
+                        </div>
+                        <div class="span2">
                             <div class="text">
                                 <select name="test_igg_reference_values">
                                     <option value="">{$lang.undefined}</option>

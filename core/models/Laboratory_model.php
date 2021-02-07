@@ -41,12 +41,12 @@ class Laboratory_model extends Model
 			]) : (($data['type'] == 'covid_ac') ? json_encode([
 				'igm' => [
 					'result' => $data['test_igm_result'],
-					'unity' => '',
+					'unity' => $data['test_igm_unity'],
 					'reference_values' => $data['test_igm_reference_values']
 				],
 				'igg' => [
 					'result' => $data['test_igg_result'],
-					'unity' => '',
+					'unity' => $data['test_igg_unity'],
 					'reference_values' => $data['test_igg_reference_values']
 				]
 			]) : null))),
@@ -205,12 +205,12 @@ class Laboratory_model extends Model
 			]) : (($data['custody_chain']['type'] == 'covid_ac') ? json_encode([
 				'igm' => [
 					'result' => $data['test_igm_result'],
-					'unity' => '',
+					'unity' => $data['test_igm_unity'],
 					'reference_values' => $data['test_igm_reference_values']
 				],
 				'igg' => [
 					'result' => $data['test_igg_result'],
-					'unity' => '',
+					'unity' => $data['test_igg_unity'],
 					'reference_values' => $data['test_igg_reference_values']
 				]
 			]) : null))),

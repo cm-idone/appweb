@@ -20,24 +20,16 @@ class Languages
                 'en' => 'Covid Test'
             ],
             'get_covid_results_1' => [
-                'es' => '<strong>A quien corresponda</strong>. Por este medio le hacemos llegar los resultados de sus prueba de Covid. Puedes escanera el siguiente QR para consutar tus resultados en linea, o dar ',
-                'en' => '<strong>To whom it May concern</strong>. We hereby send you the results of your Covid tests. You can scan the following QR to view your results online, or give'
+                'es' => '<strong>A quien corresponda</strong>. Por este medio le hacemos llegar los resultados de su prueba de Covid. Puedes escanera el siguiente QR para consutar tus resultados en linea, o dar click en el enlace mas abajo. Igualmente te hemos adjuntado tu certificado como PDF en este correo. Este certificado tiene una validez de <strong>72 horas</strong>, a partir del día ',
+                'en' => '<strong>To whom it May concern</strong>. We hereby send you the results of your Covid test. You can scan the following QR to view your results online, or click on the link below. We have also attached your certificate as a PDF in this email. This certificate is valid for <strong> 72 hours </strong>, from the day '
             ],
             'get_covid_results_2' => [
-                'es' => '. Igualmente te hemos adjuntado tu certificado como PDF en este correo. Este certificado tiene una validez de <strong>72 horas</strong>, a partir del día ',
-                'en' => '. We have also attached your certificate as a PDF in this email. This certificate is valid for <strong>72 hours</strong>, starting from the day '
-            ],
-            'get_covid_results_3' => [
                 'es' => '. Sin mas por el momento quedamos en espera de su confirmación. Gracias.',
                 'en' => '. Without further ado for the moment we are awaiting confirmation from him. Thank you.'
             ],
-            'click_here' => [
-                'es' => 'Click aquí',
-                'en' => 'Click here'
-            ],
-            'call' => [
-                'es' => 'Llamada',
-                'en' => 'Call'
+            'view_online_results' => [
+                'es' => 'Ver resultados online',
+                'en' => 'View online results'
             ],
             'power_by' => [
                 'es' => 'Power by',
