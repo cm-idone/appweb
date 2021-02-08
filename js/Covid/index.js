@@ -48,12 +48,10 @@ $(document).ready(function()
     if (counter)
     {
         var date = new Date(counter.data('date'));
-
         var initial_seconds = 1000;
         var initial_minutes = initial_seconds * 60;
         var initial_hours = initial_minutes * 60;
         var initial_days = initial_hours * 24;
-
         var interval = setInterval(function()
         {
             var today = new Date(moment().tz(counter.data('time-zone')).format('YYYY-MM-DD HH:mm:ss'));

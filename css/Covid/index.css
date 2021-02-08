@@ -53,6 +53,12 @@ header.covid > div:last-child > h3 {
     color: #004770;
 }
 
+header.covid > div:last-child > h3 > a > img {
+    width: auto;
+    height: 15px;
+    margin: 5px 0px 0px 5px;
+}
+
 /*  */
 
 main.covid {

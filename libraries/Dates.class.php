@@ -351,7 +351,7 @@ class Dates
     *
     * @param date-time-datetime $date_hour1: Fecha inicial.
     * @param date-time-datetime $date_hour2: Fecha final.
-    * @param string $lapse: (year, month, days, hours, minutes, seconds, all) Lapso de tiempo en el que retornara la función.
+    * @param string $lapse: (years, months, days, hours, minutes, seconds, all) Lapso de tiempo en el que retornara la función.
     * @param boolean $format: Identificador para saber si retornará la función con su formato en cadena de texto.
     *
     * @return string
@@ -375,18 +375,27 @@ class Dates
         $i = $a1->i;
         $s = $a1->s;
 
-        if ($lapse == 'year')
-            $a3 .= $y . (($format == true) ? (($y == 1) ? ' año' : ' años') : '');
-        else if ($lapse == 'month')
-            $a3 .= $m . (($format == true) ? (($m == 1) ? ' mes' : ' meses') : '');
-        else if ($lapse == 'days')
-            $a3 .= $d . (($format == true) ? (($d == 1) ? ' día' : ' días') : '');
-        else if ($lapse == 'hours')
-            $a3 .= $h . (($format == true) ? (($h == 1) ? ' hora' : ' horas') : '');
-        else if ($lapse == 'minutes')
-            $a3 .= $i . (($format == true) ? (($i == 1) ? ' minuto' : ' minutos') : '');
-        else if ($lapse == 'seconds')
-            $a3 .= $s . (($format == true) ? (($s == 1) ? ' segundo' : ' segundos') : '');
+        if ($lapse == 'years' OR $lapse == 'months' OR $lapse == 'days' OR $lapse == 'hours' OR $lapse == 'minutes' OR $lapse == 'seconds')
+        {
+            $m = ($y * 12) + $m;
+            $d = ($m * 30) + $d;
+            $h = ($d * 24) + $h;
+            $i = ($h * 60) + $i;
+            $s = ($i * 60) + $s;
+
+            if ($lapse == 'years')
+                $a3 .= $y . (($format == true) ? (($y == 1) ? ' año' : ' años') : '');
+            else if ($lapse == 'months')
+                $a3 .= $m . (($format == true) ? (($m == 1) ? ' mes' : ' meses') : '');
+            else if ($lapse == 'days')
+                $a3 .= $d . (($format == true) ? (($d == 1) ? ' día' : ' días') : '');
+            else if ($lapse == 'hours')
+                $a3 .= $h . (($format == true) ? (($h == 1) ? ' hora' : ' horas') : '');
+            else if ($lapse == 'minutes')
+                $a3 .= $i . (($format == true) ? (($i == 1) ? ' minuto' : ' minutos') : '');
+            else if ($lapse == 'seconds')
+                $a3 .= $s . (($format == true) ? (($s == 1) ? ' segundo' : ' segundos') : '');
+        }
         else if ($lapse == 'all')
         {
             if ($format == true)

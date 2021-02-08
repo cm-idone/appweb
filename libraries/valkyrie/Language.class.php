@@ -152,6 +152,6 @@ class Language
      */
     public static function get_lang_url( $lang )
 	{
-		return "lang={$lang}&ref=" . base64_encode($_SERVER['REQUEST_URI']);
+		return (new Security)->protocol() . "{$_SERVER['HTTP_HOST']}:{$_SERVER['SERVER_PORT']}{$_SERVER['REQUEST_URI']}?lang={$lang}&ref=" . base64_encode($_SERVER['REQUEST_URI']);
 	}
 }

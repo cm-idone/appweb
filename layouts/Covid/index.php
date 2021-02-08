@@ -21,7 +21,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
         <h3>Av. Nichupté SM51 M42 L1</h3>
         <h3>CP: 77533 Cancún, Qroo. México</h3>
         <?php if ($global['render'] == 'create' AND empty(System::temporal('get', 'covid', 'contact'))) : ?>
-            <h3><a href="?<?php echo Language::get_lang_url('es'); ?>">Español</a> - <a href="?<?php echo Language::get_lang_url('en'); ?>">English</a></h3>
+            <h3><a href="<?php echo Language::get_lang_url('es'); ?>"><img src="https://cdn.codemonkey.com.mx/monkeyboard/assets/images/es.png"></a><a href="<?php echo Language::get_lang_url('en'); ?>"><img src="https://cdn.codemonkey.com.mx/monkeyboard/assets/images/en.png"></a></h3>
         <?php endif; ?>
     </div>
 </header>
