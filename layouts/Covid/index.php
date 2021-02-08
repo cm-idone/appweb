@@ -20,7 +20,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
         <h2>MSA1907259GA</h2>
         <h3>Av. Nichupté SM51 M42 L1</h3>
         <h3>CP: 77533 Cancún, Qroo. México</h3>
-        <?php if ($global['render'] == 'create') : ?>
+        <?php if ($global['render'] == 'create' AND empty(System::temporal('get', 'covid', 'contact'))) : ?>
             <h3><a href="?<?php echo Language::get_lang_url('es'); ?>">Español</a> - <a href="?<?php echo Language::get_lang_url('en'); ?>">English</a></h3>
         <?php endif; ?>
     </div>
