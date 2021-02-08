@@ -105,9 +105,6 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                                     <?php echo (!empty($value['results']['2']) ? '<span class="' . (($value['results']['2'] <= '0') ? 'success' : (($value['results']['2'] > '0' AND $value['results']['2'] < '0.20') ? 'warning' : 'alert')) . '">' . number_format($value['results']['2'], 2, '.', '') . '</span>' : ''); ?>
                                     <?php echo (!empty($value['results']['3']) ? '<span class="' . (($value['results']['3'] <= '0') ? 'success' : (($value['results']['3'] > '0' AND $value['results']['3'] < '0.20') ? 'warning' : 'alert')) . '">' . number_format($value['results']['3'], 2, '.', '') . '</span>' : ''); ?>
                                 </h6>
-                                <?php if (Permissions::user(['update_alcoholic']) == true) : ?>
-                                    <a href="/laboratory/update/<?php echo $value['token']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
-                                <?php endif; ?>
                                 <!-- <a data-action="load_custody_chain" data-type="alcoholic" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chain}</span></a> -->
                             </div>
                         <?php endforeach; ?>
@@ -137,9 +134,6 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                                     <?php echo (!empty($value['results']['OPI']) ? '<span class="' . (!empty($value['results']['OPI']) ? (($value['results']['OPI'] == 'positive') ? 'alert' : 'success') : '') . '">OPI</span>' : ''); ?>
                                     <?php echo (!empty($value['results']['BAR']) ? '<span class="' . (!empty($value['results']['BAR']) ? (($value['results']['BAR'] == 'positive') ? 'alert' : 'success') : '') . '">BAR</span>' : ''); ?>
                                 </h6>
-                                <?php if (Permissions::user(['update_antidoping']) == true) : ?>
-                                    <a href="/laboratory/update/<?php echo $value['token']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
-                                <?php endif; ?>
                                 <!-- <a data-action="load_custody_chain" data-type="antidoping" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chain}</span></a> -->
                             </div>
                         <?php endforeach; ?>
@@ -165,9 +159,6 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                                     <?php echo (!empty($value['results']['unity']) ? '<span>{$lang.unity}: ' . $value['results']['unity'] . '</span>' : ''); ?>
                                     <?php echo (!empty($value['results']['reference_values']) ? '<span class="' . (!empty($value['results']['reference_values']) ? (($value['results']['reference_values'] == 'detected') ? 'alert' : 'success') : '') . '">{$lang.reference_values}: {$lang.' . $value['results']['reference_values'] . '}</span>' : ''); ?>
                                 </h6>
-                                <?php if (Permissions::user(['update_covid']) == true) : ?>
-                                    <a href="/laboratory/update/<?php echo $value['token']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
-                                <?php endif; ?>
                                 <!-- <a data-action="load_custody_chain" data-type="covid_pcr" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chain}</span></a> -->
                             </div>
                         <?php endforeach; ?>
@@ -193,9 +184,6 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                                     <?php echo (!empty($value['results']['unity']) ? '<span>{$lang.unity}: ' . $value['results']['unity'] . '</span>' : ''); ?>
                                     <?php echo (!empty($value['results']['reference_values']) ? '<span class="' . (!empty($value['results']['reference_values']) ? (($value['results']['reference_values'] == 'detected') ? 'alert' : 'success') : '') . '">{$lang.reference_values}: {$lang.' . $value['results']['reference_values'] . '}</span>' : ''); ?>
                                 </h6>
-                                <?php if (Permissions::user(['update_covid']) == true) : ?>
-                                    <a href="/laboratory/update/<?php echo $value['token']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
-                                <?php endif; ?>
                                 <!-- <a data-action="load_custody_chain" data-type="covid_an" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chain}</span></a> -->
                             </div>
                         <?php endforeach; ?>
@@ -224,9 +212,6 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
                                     <?php echo (!empty($value['results']['igg']['unity']) ? '<span>IgG {$lang.unity}: ' . $value['results']['igg']['unity'] . '</span>' : ''); ?>
                                     <?php echo (!empty($value['results']['igg']['reference_values']) ? '<span class="' . (!empty($value['results']['igg']['reference_values']) ? (($value['results']['igg']['reference_values'] == 'reactive') ? 'alert' : 'success') : '') . '">IgG {$lang.reference_values}: {$lang.' . $value['results']['igg']['reference_values'] . '}</span>' : ''); ?>
                                 </h6>
-                                <?php if (Permissions::user(['update_covid']) == true) : ?>
-                                    <a href="/laboratory/update/<?php echo $value['token']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
-                                <?php endif; ?>
                                 <!-- <a data-action="load_custody_chain" data-type="covid_ac" data-key="<?php echo $key; ?>"><i class="fas fa-info-circle"></i><span>{$lang.load_custody_chain}</span></a> -->
                             </div>
                         <?php endforeach; ?>
