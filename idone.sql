@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 05-02-2021 a las 10:30:56
+-- Tiempo de generación: 08-02-2021 a las 07:43:38
 -- Versión del servidor: 10.0.38-MariaDB-0+deb8u1
 -- Versión de PHP: 7.3.18
 
@@ -219,7 +219,7 @@ INSERT INTO `custody_chains` (`id`, `account`, `token`, `employee`, `contact`, `
 (101, 1, '6gjTonep', 5, NULL, 'covid_pcr', 'random', '{\"result\":\"negative\",\"unity\":\"INDEX\",\"reference_values\":\"not_detected\"}', NULL, NULL, 2, 4, '2021-02-01', '11:19:27', NULL, '{\"employee\":\"AqMTqlchqsnttAgm.png\",\"collector\":\"\"}', NULL, NULL, NULL, 1, 1),
 (102, 1, 'xY5IC7ek', 5, NULL, 'covid_an', 'random', '{\"result\":\"negative\",\"unity\":\"INDEX\",\"reference_values\":\"not_detected\"}', NULL, NULL, 2, 4, '2021-02-01', '11:21:41', NULL, '{\"employee\":\"5At7xAqKQAKPfCMu.png\",\"collector\":\"\"}', NULL, NULL, NULL, 1, 1),
 (103, 1, 'Auc77xko', 5, NULL, 'covid_ac', 'random', '{\"igm\":{\"result\":\"not_reactive\",\"unity\":\"\",\"reference_values\":\"not_reactive\"},\"igg\":{\"result\":\"not_reactive\",\"unity\":\"\",\"reference_values\":\"not_reactive\"}}', NULL, NULL, 2, 4, '2021-02-01', '11:25:47', NULL, '{\"employee\":\"ZLLiE02otci22EQM.png\",\"collector\":\"\"}', NULL, NULL, NULL, 1, 1),
-(113, 1, 'Osr9fPxd', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"ife\":\"0987654321\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"sex\":\"male\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"},\"travel_to\":\"Canad\\u00e1\"}', 'covid_pcr', 'random', '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, NULL, '2021-02-04', NULL, NULL, NULL, 'tmp_oneconsultores_covid_qr_Osr9fPxd.png', NULL, 'es', 0, NULL);
+(121, 14, 'Y5IwaADT', NULL, '{\"firstname\":\"Zeferino \",\"lastname\":\"Ortiz\",\"ife\":\"12335\",\"birth_date\":\"2021-02-06\",\"age\":\"28\",\"sex\":\"male\",\"email\":\"GIGO0892@GMAIL.COM\",\"phone\":{\"country\":\"52\",\"number\":\"55488488968\"},\"travel_to\":\"Uruapan\"}', 'covid_pcr', 'random', '{\"result\":\"negative\",\"unity\":\"\",\"reference_values\":\"not_detected\"}', NULL, NULL, 2, NULL, '2021-02-06', '20:08:36', NULL, NULL, 'cancunbay_covid_qr_Y5IwaADT.png', 'cancunbay_covid_pdf_Y5IwaADT_vcJJ0enn.pdf', 'es', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -953,7 +953,7 @@ ALTER TABLE `accounts_permissions`
 -- AUTO_INCREMENT de la tabla `custody_chains`
 --
 ALTER TABLE `custody_chains`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 
 --
 -- AUTO_INCREMENT de la tabla `employees`
