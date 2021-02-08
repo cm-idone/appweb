@@ -192,7 +192,7 @@ class Covid_controller extends Controller
 							{
 								$mail2->setFrom(Configuration::$vars['marbu']['email'], 'Marbu Salud');
 								$mail2->addAddress(Configuration::$vars['marbu']['email'], 'Marbu Salud');
-								$mail2->Subject = $_POST['firstname'] . ' ' . $_POST['lastname'] . ' necesita un prueba Covid. Folio: ' . $_POST['token'];
+								$mail2->Subject = 'Nueva prueba Covid. ' . $_POST['firstname'] . ' ' . $_POST['lastname'] . '. Folio: ' . $_POST['token'];
 								$mail2->Body =
 								'<html>
 									<head>
