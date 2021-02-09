@@ -510,6 +510,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
                 <div class="button">
                     <a class="alert" data-action="go_back"><i class="fas fa-times"></i></a>
                     <button type="submit" class="success"><i class="fas fa-check"></i></button>
+                    <?php if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee'])) : ?>
+                        <input type="hidden" name="recaptcha_update_covid_test" id="recaptcha_update_covid_test">
+                    <?php endif; ?>
                 </div>
             </fieldset>
         </form>

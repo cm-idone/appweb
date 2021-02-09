@@ -141,6 +141,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                 <fieldset class="fields-group">
                     <div class="button">
                         <button type="submit" class="success">{$lang.end_and_send}</button>
+                        <input type="hidden" name="recaptcha_request_covid_test" id="recaptcha_request_covid_test">
                     </div>
                 </fieldset>
             </form>
