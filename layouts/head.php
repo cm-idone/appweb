@@ -20,18 +20,5 @@
 		<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet" />
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 		{$dependencies.css}
-
-		<!-- Recaptcha v3 -->
-		<script src="https://www.google.com/recaptcha/api.js?render=6LdgUVAaAAAAANKpVofcI5u1yMxq_dXlnPd3iitu"></script>
-		<script>
-		    grecaptcha.ready(function() {
-			    grecaptcha.execute('6LdgUVAaAAAAANKpVofcI5u1yMxq_dXlnPd3iitu', {action: 'submit'}).then(function(token) {
-				    var recaptcha_request_covid_test = document.getElementById('recaptcha_request_covid_test');
-				    recaptcha_request_covid_test.value = token;
-				    var recaptcha_update_covid_test = document.getElementById('recaptcha_update_covid_test');
-				    recaptcha_update_covid_test.value = token;
-			    });
-			});
-		</script>
 	</head>
 	<body>

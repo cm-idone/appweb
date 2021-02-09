@@ -267,103 +267,97 @@ class Laboratory_controller extends Controller
     					{
 							if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee']))
 							{
-								$recaptcha = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=6LdgUVAaAAAAAKRUlNJfgsAdnXcjIA9eWRd0BIss&response=' . $_POST['recaptcha_update_covid_test']);
-								$recaptcha = json_decode($recaptcha);
+								$mail = new Mailer(true);
 
-								if ($recaptcha->success = true AND $recaptcha->score >= 0.7)
+								try
 								{
-									$mail = new Mailer(true);
+									$mail->setFrom(Configuration::$vars['marbu']['email'], 'Marbu Salud');
+									$mail->addAddress($_POST['email'], $_POST['firstname'] . ' ' . $_POST['lastname']);
+									$mail->addAttachment(PATH_UPLOADS . $_POST['pdf']['filename']);
+									$mail->Subject = Languages::email('your_results_are_ready')[$global['custody_chain']['lang']];
+									$mail->Body =
+									'<html>
+										<head>
+											<title>' . $mail->Subject . '</title>
+										</head>
+										<body>
+											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:#004770;">
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100px;margin:0px;padding:20px 0px 20px 20px;border:0px;box-sizing:border-box;vertical-align:middle;">
+														<img style="width:100px" src="https://' . Configuration::$domain . '/images/marbu_logotype_color.png">
+													</td>
+													<td style="width:auto;margin:0px;padding:20px;border:0px;box-sizing:border-box;vertical-align:middle;">
+														<table style="width:100%;margin:0px;padding:0px;border:0px;">
+															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:600;text-align:right;color:#fff;">Marbu Salud S.A. de C.V.</td>
+															</tr>
+															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">MSA1907259GA</td>
+															</tr>
+															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">Av. Nichupté SM51 M42 L1</td>
+															</tr>
+															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">CP: 77533 Cancún, Qroo. México</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</table>
+											<table style="width:100%;max-width:600px;margin:20px 0px;padding:0px;border:1px dashed #000;box-sizing:border-box;background-color:#fff;">
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:18px;font-weight:600;text-align:center;color:#000;">' . $mail->Subject . '</td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:center;color:#757575;">' . Languages::email('covid_test')[$global['custody_chain']['lang']] . '</td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#000;">' . Languages::email('get_covid_results_1')[$global['custody_chain']['lang']] . ' <strong>' . Dates::format_date($global['custody_chain']['date'], 'short') . '</strong> ' . Languages::email('get_covid_results_2')[$global['custody_chain']['lang']] . '</td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">';
 
-									try
-									{
-										$mail->setFrom(Configuration::$vars['marbu']['email'], 'Marbu Salud');
-										$mail->addAddress($_POST['email'], $_POST['firstname'] . ' ' . $_POST['lastname']);
-										$mail->addAttachment(PATH_UPLOADS . $_POST['pdf']['filename']);
-										$mail->Subject = Languages::email('your_results_are_ready')[$global['custody_chain']['lang']];
-										$mail->Body =
-										'<html>
-											<head>
-												<title>' . $mail->Subject . '</title>
-											</head>
-											<body>
-												<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:#004770;">
-													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-														<td style="width:100px;margin:0px;padding:20px 0px 20px 20px;border:0px;box-sizing:border-box;vertical-align:middle;">
-															<img style="width:100px" src="https://' . Configuration::$domain . '/images/marbu_logotype_color.png">
-														</td>
-														<td style="width:auto;margin:0px;padding:20px;border:0px;box-sizing:border-box;vertical-align:middle;">
-															<table style="width:100%;margin:0px;padding:0px;border:0px;">
-																<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-																	<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:600;text-align:right;color:#fff;">Marbu Salud S.A. de C.V.</td>
-																</tr>
-																<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-																	<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">MSA1907259GA</td>
-																</tr>
-																<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-																	<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">Av. Nichupté SM51 M42 L1</td>
-																</tr>
-																<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-																	<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">CP: 77533 Cancún, Qroo. México</td>
-																</tr>
-															</table>
-														</td>
-													</tr>
-												</table>
-												<table style="width:100%;max-width:600px;margin:20px 0px;padding:0px;border:1px dashed #000;box-sizing:border-box;background-color:#fff;">
-													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:18px;font-weight:600;text-align:center;color:#000;">' . $mail->Subject . '</td>
-													</tr>
-													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-														<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:center;color:#757575;">' . Languages::email('covid_test')[$global['custody_chain']['lang']] . '</td>
-													</tr>
-													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#000;">' . Languages::email('get_covid_results_1')[$global['custody_chain']['lang']] . ' <strong>' . Dates::format_date($global['custody_chain']['date'], 'short') . '</strong> ' . Languages::email('get_covid_results_2')[$global['custody_chain']['lang']] . '</td>
-													</tr>
-													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">';
+									if ($global['custody_chain']['closed'] == false)
+										$mail->Body .= '<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $_POST['qr']['filename'] . '">';
+									else
+										$mail->Body .= '<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $global['custody_chain']['qr'] . '">';
 
-										if ($global['custody_chain']['closed'] == false)
-											$mail->Body .= '<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $_POST['qr']['filename'] . '">';
-										else
-											$mail->Body .= '<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $global['custody_chain']['qr'] . '">';
-
-										$mail->Body .=
-										'				</td>
-													</tr>
-													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-														<td style="width:100%;margin:0px;padding:20px;border:0px;box-sizing:border-box;">
-															<a style="width:100%;display:block;margin:0px;padding:10px;border:0px;border-radius:5px;box-sizing:border-box;background-color:#009688;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#fff;" href="https://' . Configuration::$domain . '/' . Session::get_value('vkye_account')['path'] . '/covid/' . $global['custody_chain']['token'] . '">' . Languages::email('view_online_results')[$global['custody_chain']['lang']] . '</a>
-														</td>
-													</tr>
-												</table>
-												<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:#0b5178;">
-													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="tel:' . Configuration::$vars['marbu']['phone'] . '">' . Configuration::$vars['marbu']['phone'] . '</a></td>
-													</tr>
-													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-														<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="mailto:' . Configuration::$vars['marbu']['email'] . '">' . Configuration::$vars['marbu']['email'] . '</a></td>
-													</tr>
-													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-														<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="https://' . Configuration::$vars['marbu']['website'] . '">' . Configuration::$vars['marbu']['website'] . '</a></td>
-													</tr>
-												</table>
-												<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:#004770;">
-													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">' . Languages::email('power_by')[$global['custody_chain']['lang']] . ' <a style="font-weight:600;text-decoration:none;color:#fff;" href="https://id.one-consultores.com">' . Configuration::$web_page . ' ' . Configuration::$web_version . '</a></td>
-													</tr
-													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-														<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Copyright (C) <a style="text-decoration:none;color:#fff;" href="https://one-consultores.com">One Consultores</a></td>
-													</tr>
-													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-														<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Software ' . Languages::email('development_by')[$global['custody_chain']['lang']] . ' <a style="text-decoration:none;color:#fff;" href="https://codemonkey.com.mx">Code Monkey</a></td>
-													</tr>
-												</table>
-											</body>
-										</html>';
-										$mail->send();
-									}
-									catch (Exception $e) {}
+									$mail->Body .=
+									'				</td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px;border:0px;box-sizing:border-box;">
+														<a style="width:100%;display:block;margin:0px;padding:10px;border:0px;border-radius:5px;box-sizing:border-box;background-color:#009688;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#fff;" href="https://' . Configuration::$domain . '/' . Session::get_value('vkye_account')['path'] . '/covid/' . $global['custody_chain']['token'] . '">' . Languages::email('view_online_results')[$global['custody_chain']['lang']] . '</a>
+													</td>
+												</tr>
+											</table>
+											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:#0b5178;">
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="tel:' . Configuration::$vars['marbu']['phone'] . '">' . Configuration::$vars['marbu']['phone'] . '</a></td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="mailto:' . Configuration::$vars['marbu']['email'] . '">' . Configuration::$vars['marbu']['email'] . '</a></td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="https://' . Configuration::$vars['marbu']['website'] . '">' . Configuration::$vars['marbu']['website'] . '</a></td>
+												</tr>
+											</table>
+											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:#004770;">
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">' . Languages::email('power_by')[$global['custody_chain']['lang']] . ' <a style="font-weight:600;text-decoration:none;color:#fff;" href="https://id.one-consultores.com">' . Configuration::$web_page . ' ' . Configuration::$web_version . '</a></td>
+												</tr
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Copyright (C) <a style="text-decoration:none;color:#fff;" href="https://one-consultores.com">One Consultores</a></td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Software ' . Languages::email('development_by')[$global['custody_chain']['lang']] . ' <a style="text-decoration:none;color:#fff;" href="https://codemonkey.com.mx">Code Monkey</a></td>
+												</tr>
+											</table>
+										</body>
+									</html>';
+									$mail->send();
 								}
+								catch (Exception $e) {}
 							}
 
     						echo json_encode([
