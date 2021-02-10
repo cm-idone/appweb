@@ -175,8 +175,8 @@ class Laboratory_model extends Model
 					'id' => $data['collector']
 				]);
 
-				$data['custody_chain']['collector_name'] = $data['custody_chain']['collector']['name'];
-				$data['custody_chain']['collector_signature'] = $data['custody_chain']['collector']['signature'];
+				$data['custody_chain']['collector_name'] = $data['custody_chain']['collector'][0]['name'];
+				$data['custody_chain']['collector_signature'] = $data['custody_chain']['collector'][0]['signature'];
 			}
 
 			$html2pdf = new Html2Pdf('P', 'A4', 'es', true, 'UTF-8');
