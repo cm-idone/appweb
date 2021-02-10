@@ -204,7 +204,7 @@ class Laboratory_model extends Model
 			</table>
 			<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-			        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:24px;font-weight:600;text-align:center;text-transform:uppercase;color:#004770;">' . Languages::email('result_report')[$data['custody_chain']['lang']] . '</td>
+			        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:28px;font-weight:600;text-align:center;text-transform:uppercase;color:#004770;">' . Languages::email('result_report')[$data['custody_chain']['lang']] . '</td>
 			    </tr>
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
 			        <td style="width:100%;margin:0px;padding:10px 10px 10px 10px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:center;text-transform:uppercase;color:#004770;">' . Languages::email('marbu_laboratory_analisys')[$data['custody_chain']['lang']] . '</td>
