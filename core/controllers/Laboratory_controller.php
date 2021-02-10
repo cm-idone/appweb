@@ -200,8 +200,6 @@ class Laboratory_controller extends Controller
 
 						if (Validations::empty($_POST['ife']) == false)
 	    					array_push($errors, ['ife','{$lang.dont_leave_this_field_empty}']);
-						else if (Validations::string(['uppercase','int'], $_POST['ife']) == false)
-			                array_push($errors, ['ife','{$lang.invalid_field}']);
 
 						if (Validations::empty($_POST['birth_date']) == false)
 					   		array_push($errors, ['birth_date','{$lang.dont_leave_this_field_empty}']);

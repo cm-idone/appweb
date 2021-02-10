@@ -2,11 +2,6 @@
 
 $(document).ready(function()
 {
-    $('[name="ife"]').on('keyup', function()
-    {
-        validate_string(['uppercase','int'], $(this).val(), $(this));
-    });
-
     $('[name="age"]').on('keyup', function()
     {
         validate_string('int', $(this).val(), $(this));
