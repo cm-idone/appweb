@@ -251,10 +251,8 @@ class Laboratory_controller extends Controller
     				{
 						if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee']))
 						{
-							if ($global['custody_chain']['closed'] == false)
-								$_POST['qr']['filename'] = Session::get_value('vkye_account')['path'] . '_covid_qr_' . $global['custody_chain']['token'] . '.png';
-
-							$_POST['pdf']['filename'] = Session::get_value('vkye_account')['path'] . '_covid_pdf_' . $global['custody_chain']['token'] . '_' . System::generate_random_string() . '.pdf';
+							$_POST['qr']['filename'] = 'tmp_' . Session::get_value('vkye_account')['path'] . '_covid_qr_' . $global['custody_chain']['token'] . '_' . System::generate_random_string() . '.png';
+							$_POST['pdf']['filename'] = 'tmp_' . Session::get_value('vkye_account')['path'] . '_covid_pdf_' . $global['custody_chain']['token'] . '_' . System::generate_random_string() . '.pdf';
 						}
 
 						$_POST['custody_chain'] = $global['custody_chain'];
@@ -313,15 +311,9 @@ class Laboratory_controller extends Controller
 													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#000;">' . Languages::email('get_covid_results_1')[$global['custody_chain']['lang']] . ' <strong>' . Dates::format_date($global['custody_chain']['date'], 'short') . '</strong> ' . Languages::email('get_covid_results_2')[$global['custody_chain']['lang']] . '</td>
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">';
-
-									if ($global['custody_chain']['closed'] == false)
-										$mail->Body .= '<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $_POST['qr']['filename'] . '">';
-									else
-										$mail->Body .= '<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $global['custody_chain']['qr'] . '">';
-
-									$mail->Body .=
-									'				</td>
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
+														<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $_POST['qr']['filename'] . '">
+													</td>
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 													<td style="width:100%;margin:0px;padding:20px;border:0px;box-sizing:border-box;">

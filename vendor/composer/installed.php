@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'ea008bb55f1a540babed15c90f16cbaef77bd92b',
+    'reference' => 'bb1d1130708cdea986bd16de3c4d7f2893367b0c',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'ea008bb55f1a540babed15c90f16cbaef77bd92b',
+      'reference' => 'bb1d1130708cdea986bd16de3c4d7f2893367b0c',
     ),
     'spipu/html2pdf' => 
     array (
