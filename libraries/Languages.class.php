@@ -47,6 +47,10 @@ class Languages
                 'es' => 'N. petición',
                 'en' => 'N. petition'
             ],
+            'years' => [
+                'es' => 'años',
+                'en' => 'years'
+            ],
             'registry_date' => [
                 'es' => 'Fecha de registro',
                 'en' => 'Registry date'
