@@ -168,7 +168,7 @@ class Laboratory_model extends Model
 
 			if ($data['custody_chain']['closed'] == false)
 			{
-				$data['custody_chain']['collector'] = $this->model->select('system_collectors', [
+				$data['custody_chain']['collector'] = $this->database->select('system_collectors', [
 					'name',
 					'signature'
 				], [
