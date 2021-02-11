@@ -88,6 +88,8 @@ class Covid_model extends Model
 			'custody_chains.token',
 			'custody_chains.contact',
 			'custody_chains.type',
+			'custody_chains.start_process',
+			'custody_chains.end_process',
 			'custody_chains.results',
 			'system_collectors.name(collector_name)',
 			'system_collectors.signature(collector_signature)',
