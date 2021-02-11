@@ -239,7 +239,7 @@ class Configuration
 	 *
      * @var string $smtp_host
      */
-	public static $smtp_host = 'mail.codemonkey.com.mx';
+	public static $smtp_host = 'in-v3.mailjet.com';
 
 	/**
      * Usuario de la cuenta smtp.
@@ -249,7 +249,7 @@ class Configuration
 	 *
      * @var string $smtp_user
      */
-	public static $smtp_user = 'noreply@one-consultores.com';
+	public static $smtp_user = '9a081ab83df22318bf3a5930d02756f1';
 
 	/**
      * Contraseña de la cuenta smtp.
@@ -258,7 +258,7 @@ class Configuration
 	 *
      * @var string $smtp_pass
      */
-	public static $smtp_pass = '2#5igqR3';
+	public static $smtp_pass = '4cc859e52ce78839a18d6fb20d2c181d';
 
 	/**
      * Seguridad de la encriptacion para el envio de SMTP.
