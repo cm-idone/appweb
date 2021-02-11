@@ -184,10 +184,10 @@ class Laboratory_model extends Model
 			$writing =
 			'<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-			        <td style="width:100px;margin:0px;padding:10px;border:0px;box-sizing:border-box;vertical-align:middle;">
-			            <img style="width:100px" src="https://' . Configuration::$domain . '/images/marbu_logotype_color.png">
+			        <td style="width:20%;margin:0px;padding:10px;border:0px;box-sizing:border-box;vertical-align:middle;">
+			            <img style="width:100%;" src="https://' . Configuration::$domain . '/images/marbu_logotype_color.png">
 			        </td>
-			        <td style="width:auto;margin:0px;padding:0px;border:0px;box-sizing:border-box;vertical-align:middle;">
+			        <td style="width:60%;margin:0px;padding:0px 0px 0px 10px;border:0px;box-sizing:border-box;vertical-align:middle;">
 			            <table style="width:100%;margin:0px;padding:0px;border:0px;">
 			                <tr style="width:100%;margin:0px;padding:0px;border:0px;">
 			                    <td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#004770;">Marbu Salud S.A. de C.V.</td>
@@ -203,8 +203,8 @@ class Laboratory_model extends Model
 			                </tr>
 			            </table>
 			        </td>
-			        <td style="width:100px;margin:0px;padding:10px;border:0px;box-sizing:border-box;vertical-align:middle;">
-			            <img style="width:100px" src="https://' . Configuration::$domain . '/uploads/' . $data['qr']['filename'] . '">
+			        <td style="width:20%;margin:0px;padding:10px;border:0px;box-sizing:border-box;vertical-align:middle;">
+			            <img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $data['qr']['filename'] . '">
 			        </td>
 			    </tr>
 			</table>
