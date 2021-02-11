@@ -38,6 +38,24 @@ $(document).ready(function()
         });
     });
 
+    $('[data-action="restore_form"]').on('click', function()
+    {
+        $.ajax({
+            type: 'POST',
+            data: 'action=restore_form',
+            processData: false,
+            cache: false,
+            dataType: 'json',
+            success: function(response)
+            {
+                if (response.status == 'success')
+                    location.reload();
+                else if (response.status == 'error')
+                    open_notification_modal('alert', response.message);
+            }
+        });
+    });
+
     var counter = $('#counter');
 
     if (counter)

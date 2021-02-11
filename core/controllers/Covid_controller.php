@@ -262,6 +262,16 @@ class Covid_controller extends Controller
 		                ]);
 		            }
 				}
+
+				if ($_POST['action'] == 'restore_form')
+				{
+					System::temporal('set_forced', 'covid', 'contact', []);
+
+					echo json_encode([
+						'status' => 'success',
+						'message' => '{$lang.operation_success}'
+					]);
+				}
 	        }
 	        else
 	        {
