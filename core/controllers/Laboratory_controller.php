@@ -263,8 +263,8 @@ class Laboratory_controller extends Controller
     				{
 						if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee']))
 						{
-							$_POST['qr']['filename'] = 'tmp_' . Session::get_value('vkye_account')['path'] . '_covid_qr_' . $global['custody_chain']['token'] . '_' . System::generate_random_string() . '.png';
-							$_POST['pdf']['filename'] = 'tmp_' . Session::get_value('vkye_account')['path'] . '_covid_pdf_' . $global['custody_chain']['token'] . '_' . System::generate_random_string() . '.pdf';
+							$_POST['qr']['filename'] = 'results_covid_qr_' . $global['custody_chain']['token'] . '_' . System::generate_random_string() . '.png';
+							$_POST['pdf']['filename'] = 'results_covid_pdf_' . $global['custody_chain']['token'] . '_' . System::generate_random_string() . '.pdf';
 						}
 
 						$_POST['custody_chain'] = $global['custody_chain'];
