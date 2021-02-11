@@ -394,8 +394,8 @@ class Laboratory_model extends Model
 				'travel_to' => $data['travel_to']
 			]) : null,
 			'reason' => $data['reason'],
-			'start_process' => ($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an' OR $data['type'] == 'covid_ac') ? $data['start_process'] : null,
-			'end_process' => ($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an' OR $data['type'] == 'covid_ac') ? $data['end_process'] : null,
+			'start_process' => ($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') ? $data['start_process'] : null,
+			'end_process' => ($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') ? $data['end_process'] : null,
 			'results' => ($data['custody_chain']['type'] == 'alcoholic') ? json_encode([
 				'1' => !empty($data['test_1']) ? $data['test_1'] : '',
 				'2' => !empty($data['test_2']) ? $data['test_2'] : '',
