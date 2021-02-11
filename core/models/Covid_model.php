@@ -62,7 +62,7 @@ class Covid_model extends Model
 			'collector' => null,
 			'location' => null,
 			'date' => Dates::current_date(),
-			'hour' => null,
+			'hour' => Dates::current_hour(),
 			'comments' => null,
             'signatures' => null,
 			'qr' => $data['qr']['filename'],
