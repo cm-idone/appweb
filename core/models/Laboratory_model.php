@@ -171,8 +171,6 @@ class Laboratory_model extends Model
 
 			QRcode::png($data['qr']['content'], $data['qr']['dir'], $data['qr']['level'], $data['qr']['size'], $data['qr']['frame']);
 
-			sleep(5);
-
 			$data['collector'] = $this->database->select('system_collectors', [
 				'id',
 				'name',
