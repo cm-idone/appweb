@@ -47,7 +47,7 @@
             <?php if (Permissions::account(['laboratory']) == true AND Permissions::user(['laboratory','alcoholic','antidoping','covid'], true) == true) : ?>
                 <ul>
                     <?php if (Permissions::user(['laboratory'], true) == true) : ?>
-                        <li><a href="/laboratory/marbu"><img src="{$path.images}marbu_logotype_color.png"><span>Marbu Salud</span></a></li>
+                        <li><a href="/laboratory/marbu"><img src="{$path.images}marbu_logotype_color_circle.png"><span>Marbu Salud</span></a></li>
                     <?php endif; ?>
                     <?php if (Permissions::user(['alcoholic'], true) == true) : ?>
                         <li><a href="/laboratory/alcoholic"><i class="fas fa-cocktail"></i><span>{$lang.alcoholic}</span></a></li>
@@ -108,7 +108,7 @@
                     <ul>
                         <li><h4>{$lang.laboratory}</h4></li>
                         <?php if (Permissions::user(['laboratory'], true) == true) : ?>
-                            <li><a href="/laboratory/marbu"><figure><img src="{$path.images}marbu_logotype_color.png"></figure>Marbu Salud</a></li>
+                            <li><a href="/laboratory/marbu"><figure><img src="{$path.images}marbu_logotype_color_circle.png"></figure>Marbu Salud</a></li>
                         <?php endif; ?>
                         <?php if (Permissions::user(['alcoholic'], true) == true) : ?>
                             <li><a href="/laboratory/alcoholic"><i class="fas fa-cocktail"></i>{$lang.alcoholic}</a></li>

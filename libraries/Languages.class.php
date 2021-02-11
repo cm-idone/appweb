@@ -91,7 +91,7 @@ class Languages
                 'es' => 'Hora de toma',
                 'en' => 'Get hour'
             ],
-            'start_proess' => [
+            'start_process' => [
                 'es' => 'Inicio de proceso',
                 'en' => 'Start process'
             ],

@@ -77,6 +77,12 @@ class Laboratory_controller extends Controller
 					if (Validations::empty($_POST['reason']) == false)
     					array_push($errors, ['reason','{$lang.dont_leave_this_field_empty}']);
 
+					if (($global['type'] == 'covid_pcr' OR $global['type'] == 'covid_an' OR $global['type'] == 'covid_ac') AND Validations::empty($_POST['start_process']) == false)
+    					array_push($errors, ['start_process','{$lang.dont_leave_this_field_empty}']);
+
+					if (($global['type'] == 'covid_pcr' OR $global['type'] == 'covid_an' OR $global['type'] == 'covid_ac') AND Validations::empty($_POST['end_process']) == false)
+    					array_push($errors, ['end_process','{$lang.dont_leave_this_field_empty}']);
+
 					if ($global['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_1'], true) == false)
 					   array_push($errors, ['test_1','{$lang.invalid_field}']);
 
@@ -228,6 +234,12 @@ class Laboratory_controller extends Controller
 
     				if (Validations::empty($_POST['reason']) == false)
     					array_push($errors, ['reason','{$lang.dont_leave_this_field_empty}']);
+
+					if (($global['type'] == 'covid_pcr' OR $global['type'] == 'covid_an' OR $global['type'] == 'covid_ac') AND Validations::empty($_POST['start_process']) == false)
+    					array_push($errors, ['start_process','{$lang.dont_leave_this_field_empty}']);
+
+					if (($global['type'] == 'covid_pcr' OR $global['type'] == 'covid_an' OR $global['type'] == 'covid_ac') AND Validations::empty($_POST['end_process']) == false)
+    					array_push($errors, ['end_process','{$lang.dont_leave_this_field_empty}']);
 
 					if ($global['custody_chain']['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_1'], true) == false)
 					   array_push($errors, ['test_1','{$lang.invalid_field}']);

@@ -13,7 +13,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
     <article class="scanner-4 create">
         <header>
             <figure>
-                <img src="{$path.images}marbu_logotype_color.png">
+                <img src="{$path.images}marbu_logotype_color_circle.png">
             </figure>
             <h1>{$lang.custody_chain} | {$lang.<?php echo $global['custody_chain']['type']; ?>} | {$lang.token}: <?php echo $global['custody_chain']['token']; ?></h1>
             <figure>
@@ -164,11 +164,31 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
             </fieldset>
             <?php if ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') : ?>
                 <fieldset class="fields-group">
-                    <div class="text">
-                        <input type="text" value="{$lang.<?php echo $global['custody_chain']['type']; ?>_exam}" disabled>
-                    </div>
-                    <div class="title">
-                        <h6>{$lang.exam}</h6>
+                    <div class="row">
+                        <div class="span4">
+                            <div class="text">
+                                <input type="text" value="{$lang.<?php echo $global['custody_chain']['type']; ?>_exam}" disabled>
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.exam}</h6>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="text">
+                                <input type="date" name="start_process" value="<?php echo $global['custody_chain']['start_process']; ?>">
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.start_process}</h6>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="text">
+                                <input type="date" name="end_process" value="<?php echo $global['custody_chain']['end_process']; ?>">
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.end_process}</h6>
+                            </div>
+                        </div>
                     </div>
                 </fieldset>
             <?php endif; ?>

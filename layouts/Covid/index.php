@@ -12,7 +12,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
 <header class="covid">
     <div>
         <figure>
-            <img src="{$path.images}marbu_logotype_color.png">
+            <img src="{$path.images}marbu_logotype_color_circle.png">
         </figure>
         <h1>Marbu Salud S.A. de C.V.</h1>
     </div>
@@ -130,7 +130,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                         <select name="type">
                             <option value="" class="hidden">{$lang.choose_an_option}</option>
                             <option value="covid_pcr">PCR (PCR-SARS-CoV-2 (COVID-19))</option>
-                            <option value="covid_an">{$lang.antigen} (PCR-SARS-CoV-2 (COVID-19))</option>
+                            <option value="covid_an">{$lang.antigen} (Ag-SARS-CoV-2 (COVID-19))</option>
                             <option value="covid_ac">{$lang.anticorps} (SARS-CoV-2 (2019) IgG/IgM)</option>
                         </select>
                     </div>
@@ -172,7 +172,19 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                 <?php if ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') : ?>
                     <tr>
                         <td>{$lang.exam}:</td>
-                        <td>PCR-SARS-CoV-2 (COVID-19)</td>
+                        <?php if ($global['custody_chain']['type'] == 'covid_pcr') : ?>
+                            <td>PCR-SARS-CoV-2 (COVID-19)</td>
+                        <?php elseif ($global['custody_chain']['type'] == 'covid_an') : ?>
+                            <td>Ag-SARS-CoV-2 (COVID-19)</td>
+                        <?php endif; ?>
+                    </tr>
+                    <tr>
+                        <td>{$lang.start_process}:</td>
+                        <td><?php echo Dates::format_date($global['custody_chain']['start_process'], 'long'); ?></td>
+                    </tr>
+                    <tr>
+                        <td>{$lang.end_process}:</td>
+                        <td><?php echo Dates::format_date($global['custody_chain']['end_process'], 'long'); ?></td>
                     </tr>
                     <tr>
                         <td>{$lang.result}:</td>
@@ -190,6 +202,14 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                     <tr>
                         <td>{$lang.exam}:</td>
                         <td>SARS-CoV-2 (2019) IgG/IgM</td>
+                    </tr>
+                    <tr>
+                        <td>{$lang.start_process}:</td>
+                        <td><?php echo Dates::format_date($global['custody_chain']['start_process'], 'long'); ?></td>
+                    </tr>
+                    <tr>
+                        <td>{$lang.end_process}:</td>
+                        <td><?php echo Dates::format_date($global['custody_chain']['end_process'], 'long'); ?></td>
                     </tr>
                     <tr>
                         <td style="padding-top:10px;"><strong>{$lang.anticorps} IgM</strong></td>

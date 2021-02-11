@@ -13,7 +13,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
     <article class="scanner-4 create">
         <header>
             <figure>
-                <img src="{$path.images}marbu_logotype_color.png">
+                <img src="{$path.images}marbu_logotype_color_circle.png">
             </figure>
             <h1>{$lang.custody_chain} | {$lang.<?php echo $global['type']; ?>} | {$lang.new_test}</h1>
             <figure>
@@ -127,11 +127,31 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
             </fieldset>
             <?php if ($global['type'] == 'covid_pcr' OR $global['type'] == 'covid_an' OR $global['type'] == 'covid_ac') : ?>
                 <fieldset class="fields-group">
-                    <div class="text">
-                        <input type="text" value="{$lang.<?php echo $global['type']; ?>_exam}" disabled>
-                    </div>
-                    <div class="title">
-                        <h6>{$lang.exam}</h6>
+                    <div class="row">
+                        <div class="span4">
+                            <div class="text">
+                                <input type="text" value="{$lang.<?php echo $global['type']; ?>_exam}" disabled>
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.exam}</h6>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="text">
+                                <input type="date" name="start_process">
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.start_process}</h6>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="text">
+                                <input type="date" name="end_process">
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.end_process}</h6>
+                            </div>
+                        </div>
                     </div>
                 </fieldset>
             <?php endif; ?>

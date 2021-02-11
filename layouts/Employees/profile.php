@@ -79,7 +79,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
         </div>
     </div>
     <div class="scanner-3">
-        <h4><img src="{$path.images}marbu_logotype_color.png">Marbu Salud | {$lang.tests_results}</h4>
+        <h4><img src="{$path.images}marbu_logotype_color_circle.png">Marbu Salud | {$lang.tests_results}</h4>
         <div class="tabs" data-tab-active="tab1">
             <ul>
                 <li data-tab-target="tab1" class="view">{$lang.alcoholic}</li>

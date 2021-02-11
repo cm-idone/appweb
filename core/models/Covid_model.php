@@ -39,6 +39,8 @@ class Covid_model extends Model
             ]),
             'type' => $_POST['type'],
             'reason' => 'random',
+			'start_process' => Dates::current_date(),
+			'end_process' => Dates::current_date(),
             'results' => ($_POST['type'] == 'covid_pcr' OR $_POST['type'] == 'covid_an') ? json_encode([
 				'result' => '',
 				'unity' => '',
