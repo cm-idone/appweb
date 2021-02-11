@@ -109,7 +109,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
                             <div class="compound st-1-left">
                                 <select name="phone_country">
                                     <?php foreach (Functions::countries() as $value) : ?>
-                                        <option value="<?php echo $value['lada']; ?>" <?php echo (($global['custody_chain']['contact']['phone']['country'] == $value['lada']) ? 'selected' : ''); ?>><?php echo $value['name'][Session::get_value('vkye_lang')]; ?></option>
+                                        <option value="<?php echo $value['lada']; ?>" <?php echo (($global['custody_chain']['contact']['phone']['country'] == $value['lada']) ? 'selected' : ''); ?>><?php echo $value['name'][Session::get_value('vkye_lang')] . ' +' . $value['lada']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <input type="number" name="phone_number" value="<?php echo $global['custody_chain']['contact']['phone']['number']; ?>" placeholder="{$lang.number}">
