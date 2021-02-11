@@ -174,7 +174,8 @@ class Laboratory_model extends Model
 			$data['collector'] = $this->database->select('system_collectors', [
 				'id',
 				'name',
-				'signature'
+				'signature',
+				'card'
 			], [
 				'id' => $data['collector']
 			]);
