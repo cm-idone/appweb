@@ -216,7 +216,7 @@ class Laboratory_model extends Model
 			        <td style="width:100%;margin:0px;padding:10px 10px 10px 10px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:center;text-transform:uppercase;color:#004770;">' . Languages::email('marbu_laboratory_analisys')[$data['custody_chain']['lang']] . '</td>
 			    </tr>
 			</table>
-			<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
+			<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#deeaf6;">
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;border-top:2px solid #5b9bd5;border-bottom:2px solid #5b9bd5;">
 			        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('n_petition')[$data['custody_chain']['lang']] . ': ' . $data['custody_chain']['token'] . '</td>
 			    </tr>
