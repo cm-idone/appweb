@@ -353,7 +353,7 @@ class Laboratory_model extends Model
 			    </tr>
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
 			        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;text-align:center;">
-			            <img style="width:200px" src="https://' . Configuration::$domain . '/uploads/' . $data['collector'][0]['signature'] . '">
+			            <img style="width:100px" src="https://' . Configuration::$domain . '/uploads/' . $data['collector'][0]['signature'] . '">
 			        </td>
 			    </tr>
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
