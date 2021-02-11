@@ -106,7 +106,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                                 <select name="phone_country">
                                     <option value="" class="hidden">{$lang.country}</option>
                                     <?php foreach (Functions::countries() as $value) : ?>
-                                        <option value="<?php echo $value['lada']; ?>"><?php echo $value['name'][Session::get_value('vkye_lang')]; ?></option>
+                                        <option value="<?php echo $value['lada']; ?>"><?php echo $value['name'][Session::get_value('vkye_lang')] . ' +' . $value['lada']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <input type="number" name="phone_number" placeholder="{$lang.number}">
