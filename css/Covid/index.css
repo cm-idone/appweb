@@ -139,8 +139,6 @@ main.covid > div.results {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 0px 20px;
-    box-sizing: border-box;
 }
 
 main.covid > div.results > h2 {
