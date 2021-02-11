@@ -292,7 +292,7 @@ class Laboratory_controller extends Controller
 											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:#004770;">
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 													<td style="width:100px;margin:0px;padding:20px 0px 20px 20px;border:0px;box-sizing:border-box;vertical-align:middle;">
-														<img style="width:100px" src="https://' . Configuration::$domain . '/images/marbu_logotype_color.png">
+														<img style="width:100px" src="https://' . Configuration::$domain . '/images/marbu_logotype_color_circle.png">
 													</td>
 													<td style="width:auto;margin:0px;padding:20px;border:0px;box-sizing:border-box;vertical-align:middle;">
 														<table style="width:100%;margin:0px;padding:0px;border:0px;">
