@@ -26,7 +26,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js']);
                     <td class="smalltag"><span>{$lang.<?php echo $value['type']; ?>}</span></td>
                     <td>
                         <?php if (($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') AND empty($value['employee'])) : ?>
-                            <?php echo $value['contact']['firstname'] . ' ' . $value['contact']['lastname']; ?>
+                            <span class="hidden"><?php echo $value['contact']['email']; ?></span><?php echo $value['contact']['firstname'] . ' ' . $value['contact']['lastname']; ?>
                         <?php else: ?>
                             <?php echo $value['employee_firstname'] . ' ' . $value['employee_lastname']; ?>
                         <?php endif; ?>
