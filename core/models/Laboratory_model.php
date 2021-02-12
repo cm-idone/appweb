@@ -282,7 +282,7 @@ class Laboratory_model extends Model
 				$writing .= '<tr style="width:100%;margin:0px;padding:0px;border:0px;">';
 
 				if ($data['custody_chain']['type'] == 'covid_pcr')
-					$writing .= '<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">PCR-SARS-CoV-2 (COVID-19) <br> ' . Languages::email('atila_biosystem') . '</td>';
+					$writing .= '<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">PCR-SARS-CoV-2 (COVID-19) <br> ' . Languages::email('atila_biosystem')[$data['custody_chain']['lang']] . '</td>';
 				else if ($data['custody_chain']['type'] == 'covid_an')
 					$writing .= '<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">Ag-SARS-CoV-2 (COVID-19)</td>';
 
