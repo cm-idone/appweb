@@ -529,7 +529,12 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
             <fieldset class="fields-group">
                 <div class="button">
                     <a class="alert" data-action="go_back"><i class="fas fa-times"></i></a>
-                    <button type="submit" class="success"><i class="fas fa-check"></i></button>
+                    <?php if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee'])) : ?>
+                        <button type="submit" class="auto warning" data-save="only_save"><i class="fas fa-save"></i>{$lang.only_save}</button>
+                        <button type="submit" class="auto success" data-save="save_and_send"><i class="fas fa-envelope"></i>{$lang.save_and_send}</button>
+                    <?php else : ?>
+                        <button type="submit" class="auto success" data-save="only_save"><i class="fas fa-save"></i>{$lang.save}</button>
+                    <?php endif; ?>
                 </div>
             </fieldset>
         </form>

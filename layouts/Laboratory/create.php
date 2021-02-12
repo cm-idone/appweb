@@ -485,7 +485,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
             <fieldset class="fields-group">
                 <div class="button">
                     <a class="alert" data-action="go_back"><i class="fas fa-times"></i></a>
-                    <button type="submit" class="success"><i class="fas fa-check"></i></button>
+                    <button type="submit" class="auto success"><i class="fas fa-save"></i>{$lang.save}</button>
                 </div>
             </fieldset>
         </form>

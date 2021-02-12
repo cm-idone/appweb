@@ -44,6 +44,13 @@ $(document).ready(function()
         employee_pad.clear();
     });
 
+    var save;
+
+    $('button[type="submit"]').on('click', function()
+    {
+        save = $(this).data('save');
+    });
+
     $('form[name="update_custody_chain"]').on('submit', function(event)
     {
         event.preventDefault();
@@ -58,6 +65,7 @@ $(document).ready(function()
             data.append('employee_signature', ((employee_pad.isEmpty()) ? '' : employee_pad.toDataURL('image/jpeg')));
         }
 
+        data.append('save', save);
         data.append('action', 'update_custody_chain');
 
         $.ajax({

@@ -273,7 +273,7 @@ class Laboratory_controller extends Controller
 
     					if (!empty($query))
     					{
-							if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee']))
+							if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee']) AND $_POST['save'] == 'save_and_send')
 							{
 								$mail = new Mailer(true);
 
