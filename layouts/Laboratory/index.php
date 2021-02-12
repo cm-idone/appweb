@@ -31,7 +31,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js']);
                             <?php echo $value['employee_firstname'] . ' ' . $value['employee_lastname']; ?>
                         <?php endif; ?>
                     </td>
-                    <td><?php echo (($value['closed'] == true) ? '<i class="fas fa-envelope"></i> {$lang.sended}' : ''); ?></td>
+                    <td><?php echo (($value['closed'] == true) ? '<i class="fas fa-envelope"></i> {$lang.sended} | <a href="{$path.uploads}' . $value['pdf'] . '" download="' . $value['pdf'] . '">Descargar PDF</a>' : ''); ?></td>
                     <td class="mediumtag"><span><?php echo Dates::format_date_hour($value['date'], $value['hour'], 'long_year', '12-short'); ?></span></td>
                     <td class="mediumtag"><span><?php echo (!empty($value['user']) ? $value['user_firstname'] . ' ' . $value['user_lastname'] : '{$lang.not_user}'); ?></span></td>
                     <?php if (Session::get_value('vkye_user')['god'] == true) : ?>

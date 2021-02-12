@@ -109,6 +109,7 @@ class Laboratory_model extends Model
 			'custody_chains.type',
 			'custody_chains.date',
 			'custody_chains.hour',
+			'custody_chains.pdf',
 			'custody_chains.closed',
 			'custody_chains.user',
 			'users.firstname(user_firstname)',
