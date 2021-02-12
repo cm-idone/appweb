@@ -155,13 +155,9 @@ class Languages
                 'es' => 'Anticuerpos',
                 'en' => 'Anticorps'
             ],
-            'show' => [
-                'es' => 'Muestra',
-                'en' => 'Show'
-            ],
             'nasopharynx_secretion' => [
-                'es' => 'Secrecion Nasofaríngea',
-                'en' => 'Nasopharynx Secretion'
+                'es' => 'Muestra: Secrecion Nasofaríngea',
+                'en' => 'Test: Nasopharynx Secretion'
             ],
             'notes' => [
                 'es' => 'Notas',

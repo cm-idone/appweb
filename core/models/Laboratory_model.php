@@ -291,17 +291,6 @@ class Laboratory_model extends Model
 					<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_unity'])[$data['custody_chain']['lang']] . '</td>
 					<td style="width:25%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_reference_values'])[$data['custody_chain']['lang']] . '</td>
 				</tr>';
-
-				if ($data['custody_chain']['type'] == 'covid_pcr')
-				{
-					$writing .=
-					'<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-				        <td style="width:25%;margin:0px;padding:10px 0px 0px 10px;border:0px;box-sizing:border-box;font-size:10px;font-weight:600;text-align:left;color:#004770;">' . Languages::email('atila_biosystem')[$data['custody_chain']['lang']] . '</td>
-				        <td style="width:25%;margin:0px;padding:10px 0px 0px 10px;border:0px;box-sizing:border-box;"></td>
-				        <td style="width:25%;margin:0px;padding:10px 0px 0px 10px;border:0px;box-sizing:border-box;"></td>
-				        <td style="width:25%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;"></td>
-				    </tr>';
-				}
 			}
 			else if ($data['custody_chain']['type'] == 'covid_ac')
 			{
@@ -333,7 +322,7 @@ class Laboratory_model extends Model
 				$writing .=
 				'<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 				    <tr style="width:100%;margin:0px;padding:0px;border:0px;border-top:2px solid #5b9bd5;border-bottom:2px solid #5b9bd5;">
-				        <td style="width:100%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:left;color:#004770;">' . Languages::email('show')[$data['custody_chain']['lang']] . ': ' . Languages::email('nasopharynx_secretion')[$data['custody_chain']['lang']] . '</td>
+				        <td style="width:100%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:left;color:#004770;">' . (($data['custody_chain']['type'] == 'covid_pcr') ? Languages::email('atila_biosystem')[$data['custody_chain']['lang']] . ' | ' : '') . Languages::email('nasopharynx_secretion')[$data['custody_chain']['lang']] . '</td>
 				    </tr>
 				</table>
 				<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
