@@ -19,7 +19,8 @@ class System_model extends Model
 			'email',
 			'password',
 			'language',
-			'accounts'
+			'accounts',
+			'god'
 		], [
 			'id' => Session::get_value('vkye_user')['id']
 		]));

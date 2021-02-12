@@ -19,7 +19,8 @@ class Login_model extends Model
 			'email',
 			'password',
 			'language',
-			'accounts'
+			'accounts',
+			'god'
 		], [
 			'email' => $email
 		]));

@@ -78,7 +78,20 @@ class Laboratory_model extends Model
 
 	public function read_custody_chains($type)
 	{
+		if (Session::get_value('vkye_user')['god'] == true)
+		{
+			$accounts = [];
+
+			foreach (Session::get_value('vkye_user')['accounts'] as $value)
+				array_push($accounts, $value['id']);
+		}
+		else
+			$accounts = Session::get_value('vkye_account')['id'];
+
 		$query = System::decode_json_to_array($this->database->select('custody_chains', [
+			'[>]accounts' => [
+				'account' => 'id'
+			],
 			'[>]employees' => [
 				'employee' => 'id'
 			],
@@ -87,6 +100,7 @@ class Laboratory_model extends Model
 			]
 		], [
 			'custody_chains.id',
+			'accounts.name(account_name)',
 			'custody_chains.token',
 			'custody_chains.employee',
 			'employees.firstname(employee_firstname)',
@@ -95,12 +109,13 @@ class Laboratory_model extends Model
 			'custody_chains.type',
 			'custody_chains.date',
 			'custody_chains.hour',
+			'custody_chains.closed',
 			'custody_chains.user',
 			'users.firstname(user_firstname)',
 			'users.lastname(user_lastname)'
 		], [
 			'AND' => [
-				'custody_chains.account' => Session::get_value('vkye_account')['id'],
+				'custody_chains.account' => $accounts,
 				'custody_chains.type' => ($type == 'covid') ? ['covid_pcr','covid_an','covid_ac'] : $type
 			],
 			'ORDER' => [
