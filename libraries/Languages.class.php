@@ -211,6 +211,10 @@ class Languages
                 'es' => 'Cédula',
                 'en' => 'Identification card'
             ],
+            'atila_biosystem' => [
+                'es' => 'Médoto: RT-PCR (Atila BioSystems)',
+                'en' => 'Method: RT-PCR (Atila BioSystems)'
+            ],
             'alert_pdf_covid' => [
                 'es' => 'Este informe no podrá reproducirse parcialmente sin autorización del laboratorio que lo emite. Este documento se dirige a su destinatario y contiene información confidencial. Queda notificado que la utilización, divulgación y/o copias sin autorización está prohibido en virtud de la legislación vigente.',
                 'en' => 'This report may not be partially reproduced without authorization from the issuing laboratory. This document is addressed to its recipient and contains confidential information. You are hereby notified that unauthorized use, disclosure and / or copies are prohibited under current legislation.'
