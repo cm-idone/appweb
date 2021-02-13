@@ -432,4 +432,100 @@ class Dates
 
         return $a3;
     }
+
+    /**
+    * @summary Calcula los lapsos de año, mes y días.
+    *
+    * @param string $format: (years, months, days) Formato en el que retornará la fecha.
+    * @param string $param: Parámetro libre.
+    *
+    * @return array
+    */
+    static public function create_lapse_date($format, $param = null)
+    {
+        $date = explode('-', date('Y-m-d'));
+
+        if ($format == 'years')
+        {
+            $years = [];
+
+            for ($i=0; $i < $param; $i++)
+                array_push($years, ($date[0] - $i));
+
+            return $years;
+        }
+        else if ($format == 'months')
+        {
+            $months = [
+                'es' => [
+                    '01' => 'Enero',
+                    '02' => 'Febrero',
+                    '03' => 'Marzo',
+                    '04' => 'Abril',
+                    '05' => 'Mayo',
+                    '06' => 'Junio',
+                    '07' => 'Julio',
+                    '08' => 'Agosto',
+                    '09' => 'Septiembre',
+                    '10' => 'Octubre',
+                    '11' => 'Noviembre',
+                    '12' => 'Diciembre'
+                ],
+                'en' => [
+                    '01' => 'January',
+                    '02' => 'February',
+                    '03' => 'March',
+                    '04' => 'April',
+                    '05' => 'May',
+                    '06' => 'June',
+                    '07' => 'July',
+                    '08' => 'August',
+                    '09' => 'September',
+                    '10' => 'October',
+                    '11' => 'November',
+                    '12' => 'December'
+                ]
+            ];
+
+            return $months[$param];
+        }
+        else if ($format == 'days')
+        {
+            $days = [
+                '01',
+                '02',
+                '03',
+                '04',
+                '05',
+                '06',
+                '07',
+                '08',
+                '09',
+                '10',
+                '11',
+                '12',
+                '13',
+                '14',
+                '15',
+                '16',
+                '17',
+                '18',
+                '19',
+                '20',
+                '21',
+                '22',
+                '23',
+                '24',
+                '25',
+                '26',
+                '27',
+                '28',
+                '29',
+                '30',
+                '31'
+            ];
+
+            return $days;
+        }
+    }
 }
