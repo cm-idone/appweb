@@ -125,6 +125,34 @@ class Laboratory_model extends Model
 			]
 		]));
 
+		foreach ($query as $key => $value)
+		{
+			$query[$key]['status'] = 'success';
+
+			if ($value['type'] == 'alcoholic')
+			{
+				if (($value['results']['1'] > 0 AND $value['results']['1'] < 0.20) OR ($value['results']['2'] > 0 AND $value['results']['2'] < 0.20) OR ($value['results']['3'] > 0 AND $value['results']['3'] < 0.20))
+					$query[$key]['status'] = 'warning';
+				else if ($value['results']['1'] >= 0.20 OR $value['results']['2'] >= 0.20 OR $value['results']['3'] >= 0.20)
+					$query[$key]['status'] = 'alert';
+			}
+			else if ($value['type'] == 'antidoping')
+			{
+				if ($value['results']['COC'] == 'positive' OR $value['results']['THC'] == 'positive' OR $value['results']['ANF'] == 'positive' OR $value['results']['MET'] == 'positive' OR $value['results']['BZD'] == 'positive' OR $value['results']['OPI'] == 'positive' OR $value['results']['BAR'] == 'positive')
+					$query[$key]['status'] = 'alert';
+			}
+			else if ($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an')
+			{
+				if ($value['results']['result'] == 'positive')
+					$query[$key]['status'] = 'alert';
+			}
+			else if ($value['type'] == 'covid_ac')
+			{
+				if ($value['results']['igm']['result'] == 'positive' OR $value['results']['igg']['result'] == 'positive')
+					$query[$key]['status'] = 'alert';
+			}
+		}
+
 		return $query;
 	}
 
