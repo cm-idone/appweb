@@ -53,7 +53,9 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                 <fieldset class="fields-group">
                     <div class="row">
                         <div class="span4">
-                            <input type="date" name="birth_date" placeholder="{$lang.birth_date}">
+                            <div class="text">
+                                <input type="date" name="birth_date" placeholder="{$lang.birth_date}">
+                            </div>
                         </div>
                         <div class="span4">
                             <div class="text">
