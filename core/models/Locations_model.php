@@ -22,14 +22,29 @@ class Locations_model extends Model
 
 	public function read_locations()
 	{
+		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up')
+		{
+			$accounts = [];
+
+			foreach (Session::get_value('vkye_user')['accounts'] as $value)
+				array_push($accounts, $value['id']);
+		}
+		else
+			$accounts = Session::get_value('vkye_account')['id'];
+
 		$query = $this->database->select('locations', [
-			'id',
-			'name',
-			'blocked'
+			'[>]accounts' => [
+				'account' => 'id'
+			]
 		], [
-            'account' => Session::get_value('vkye_account')['id'],
+			'locations.id',
+			'accounts.name(account_name)',
+			'locations.name',
+			'locations.blocked'
+		], [
+            'locations.account' => $accounts,
             'ORDER' => [
-    			'name' => 'ASC'
+    			'locations.name' => 'ASC'
     		]
         ]);
 

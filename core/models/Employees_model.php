@@ -112,20 +112,35 @@ class Employees_model extends Model
 
 	public function read_employees()
 	{
+		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up')
+		{
+			$accounts = [];
+
+			foreach (Session::get_value('vkye_user')['accounts'] as $value)
+				array_push($accounts, $value['id']);
+		}
+		else
+			$accounts = Session::get_value('vkye_account')['id'];
+
 		$query = System::decode_json_to_array($this->database->select('employees', [
-			'id',
-			'avatar',
-			'firstname',
-			'lastname',
-			'nie',
-			'qr',
-			'blocked'
+			'[>]accounts' => [
+				'account' => 'id'
+			]
 		], [
-            'account' => Session::get_value('vkye_account')['id'],
+			'employees.id',
+			'accounts.name(account_name)',
+			'employees.avatar',
+			'employees.firstname',
+			'employees.lastname',
+			'employees.nie',
+			'employees.qr',
+			'employees.blocked'
+		], [
+            'employees.account' => $accounts,
             'ORDER' => [
-    			'admission_date' => 'DESC',
-    			'firstname' => 'ASC',
-    			'lastname' => 'ASC'
+    			'employees.admission_date' => 'DESC',
+    			'employees.firstname' => 'ASC',
+    			'employees.lastname' => 'ASC'
     		]
         ]));
 

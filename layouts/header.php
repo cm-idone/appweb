@@ -7,7 +7,7 @@
                 <img src="<?php echo (!empty(Session::get_value('vkye_account')['avatar']) ? '{$path.uploads}' . Session::get_value('vkye_account')['avatar'] : 'https://cdn.codemonkey.com.mx/monkeyboard/assets/images/account.png'); ?>">
             </figure>
             <div>
-                <h4 class="<?php echo ((Session::get_value('vkye_account')['blocked'] == false) ? 'online' : 'offline'); ?>"><i class="fas fa-circle"></i><?php echo Session::get_value('vkye_account')['name']; ?></h4>
+                <h4 class="<?php echo ((Session::get_value('vkye_account')['blocked'] == false) ? 'online' : 'offline'); ?>"><i class="fas fa-circle"></i><?php echo Session::get_value('vkye_account')['name'] . ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? ' ({$lang.god_mode_activated})' : ''); ?></h4>
                 <span>{$lang.<?php echo Session::get_value('vkye_account')['type']; ?>}</span>
             </div>
         </div>
@@ -31,6 +31,7 @@
             <li><a><i class="fas fa-star"></i></a></li>
             <li><a><i class="fas fa-heart"></i></a></li>
             <li><a><i class="fas fa-meteor"></i></a></li>
+            <li><a><i class="fas fa-th"></i></a></li>
         </ul>
     </nav>
 </header>
@@ -71,6 +72,23 @@
 <header class="rightbar">
     <div>
         <div class="accounts">
+            <?php if (Session::get_value('vkye_user')['god'] == 'activate_but_sleep' OR Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
+                <div class="item">
+                    <figure>
+                        <img src="{$path.images}god.png">
+                    </figure>
+                    <div>
+                        <?php if (Session::get_value('vkye_user')['god'] == 'activate_but_sleep') : ?>
+                            <h4>{$lang.activate_god_mode}</h4>
+                            <span class="offline"><i class="fas fa-circle"></i>{$lang.offline}</span>
+                        <?php elseif (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
+                            <h4>{$lang.deactivate_god_mode}</h4>
+                            <span class="online"><i class="fas fa-circle"></i>{$lang.online}</span>
+                        <?php endif; ?>
+                    </div>
+                    <a data-action="change_god_mode"></a>
+                </div>
+            <?php endif; ?>
             <?php if (!empty(Session::get_value('vkye_user')['accounts'])) : ?>
                 <?php foreach (Session::get_value('vkye_user')['accounts'] as $key => $value) : ?>
                     <div class="item">

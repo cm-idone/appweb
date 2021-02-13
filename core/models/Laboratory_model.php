@@ -78,7 +78,7 @@ class Laboratory_model extends Model
 
 	public function read_custody_chains($type)
 	{
-		if (Session::get_value('vkye_user')['god'] == true)
+		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up')
 		{
 			$accounts = [];
 
@@ -107,6 +107,7 @@ class Laboratory_model extends Model
 			'employees.lastname(employee_lastname)',
 			'custody_chains.contact',
 			'custody_chains.type',
+			'custody_chains.results',
 			'custody_chains.date',
 			'custody_chains.hour',
 			'custody_chains.pdf',
@@ -120,7 +121,7 @@ class Laboratory_model extends Model
 				'custody_chains.type' => ($type == 'covid') ? ['covid_pcr','covid_an','covid_ac'] : $type
 			],
 			'ORDER' => [
-				'id' => 'DESC'
+				'custody_chains.id' => 'DESC'
 			]
 		]));
 

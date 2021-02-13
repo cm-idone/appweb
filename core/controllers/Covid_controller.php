@@ -263,7 +263,7 @@ class Covid_controller extends Controller
 		            }
 				}
 
-				if ($_POST['action'] == 'restore_form')
+				if ($_POST['action'] == 'restore_registry')
 				{
 					System::temporal('set_forced', 'covid', 'contact', []);
 

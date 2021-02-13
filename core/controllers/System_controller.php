@@ -37,6 +37,22 @@ class System_controller extends Controller
 				}
 			}
 
+			if ($_POST['action'] == 'change_god_mode')
+			{
+				$user = Session::get_value('vkye_user');
+
+				if ($user['god'] == 'activate_but_sleep')
+					$user['god'] = 'activate_and_wake_up';
+				else if ($user['god'] == 'activate_and_wake_up')
+					$user['god'] = 'activate_but_sleep';
+
+				Session::set_value('vkye_user', $user);
+
+				echo json_encode([
+					'status' => 'success'
+				]);
+			}
+
 			if ($_POST['action'] == 'logout')
 			{
 				Session::destroy();

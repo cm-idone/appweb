@@ -117,6 +117,12 @@ class System_model extends Model
 			if (isset($bigkey) AND $bigkey >= 0)
 			{
 				$session['account'] = $session['user'][0]['accounts'][$bigkey];
+
+				if ($session['user'][0]['god'] == true)
+					$session['user'][0]['god'] = Session::get_value('vkye_user')['god'];
+				else if ($session['user'][0]['god'] == false)
+					$session['user'][0]['god'] = 'deactivate';
+
 				$session['user'] = $session['user'][0];
 			}
 			else

@@ -28,6 +28,9 @@ $this->dependencies->add(['js', '{$path.js}Locations/index.js']);
                     <img src="{$path.images}location.png">
                 </figure>
                 <h4><?php echo $value['name']; ?></h4>
+                <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
+                    <span><?php echo $value['account_name']; ?></span>
+                <?php endif; ?>
                 <div class="button">
                     <?php if (Permissions::user(['block_locations','unblock_locations']) == true) : ?>
                         <?php if ($value['blocked'] == true) : ?>

@@ -28,7 +28,7 @@ $this->dependencies->add(['js', '{$path.js}Employees/index.js']);
                     <img src="<?php echo (!empty($value['avatar']) ? '{$path.uploads}' . $value['avatar'] : '{$path.images}employee.png'); ?>">
                 </figure>
                 <h4><?php echo $value['firstname'] . ' ' . $value['lastname']; ?></h4>
-                <span><?php echo $value['nie']; ?></span>
+                <span><?php echo $value['nie'] . ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? ' | ' . $value['account_name'] : ''); ?></span>
                 <div class="button">
                     <?php if (Permissions::user(['block_employees','unblock_employees']) == true) : ?>
                         <?php if ($value['blocked'] == true) : ?>

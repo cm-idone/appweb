@@ -36,7 +36,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js']);
                     <?php endif; ?>
                     <td class="mediumtag"><span><?php echo Dates::format_date_hour($value['date'], $value['hour'], 'long_year', '12-short'); ?></span></td>
                     <td class="mediumtag"><span><?php echo (!empty($value['user']) ? $value['user_firstname'] . ' ' . $value['user_lastname'] : '{$lang.not_user}'); ?></span></td>
-                    <?php if (Session::get_value('vkye_user')['god'] == true) : ?>
+                    <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
                         <td class="mediumtag"><span><?php echo $value['account_name']; ?></span></td>
                     <?php endif; ?>
                     <td class="button">

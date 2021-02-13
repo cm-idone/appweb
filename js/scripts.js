@@ -2,7 +2,24 @@
 
 $(document).ready(function()
 {
-
+    $('[data-action="change_god_mode"]').on('click', function()
+    {
+        $.ajax({
+            url: '/system',
+            type: 'POST',
+            data: 'action=change_god_mode',
+            processData: false,
+            cache: false,
+            dataType: 'json',
+            success: function(response)
+            {
+                if (response.status == 'success')
+                    location.reload();
+                else if (response.status == 'error')
+                    open_notification_modal('alert', response.message);
+            }
+        });
+    });
 });
 
 /* ------------------------------------------------------------- */

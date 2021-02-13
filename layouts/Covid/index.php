@@ -35,26 +35,17 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                     <div class="row">
                         <div class="span4">
                             <div class="text">
-                                <input type="text" name="firstname">
-                            </div>
-                            <div class="title">
-                                <h6>{$lang.firstname} (s)</h6>
+                                <input type="text" name="firstname" placeholder="{$lang.firstname} (s)">
                             </div>
                         </div>
                         <div class="span4">
                             <div class="text">
-                                <input type="text" name="lastname">
-                            </div>
-                            <div class="title">
-                                <h6>{$lang.lastname} (s)</h6>
+                                <input type="text" name="lastname" placeholder="{$lang.lastname} (s)">
                             </div>
                         </div>
                         <div class="span4">
                             <div class="text">
-                                <input type="text" name="ife">
-                            </div>
-                            <div class="title">
-                                <h6>{$lang.passport}</h6>
+                                <input type="text" name="ife" placeholder="{$lang.passport}">
                             </div>
                         </div>
                     </div>
@@ -62,31 +53,20 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                 <fieldset class="fields-group">
                     <div class="row">
                         <div class="span4">
-                            <div class="text">
-                                <input type="date" name="birth_date">
-                            </div>
-                            <div class="title">
-                                <h6>{$lang.birth_date}</h6>
-                            </div>
+                            <input type="date" name="birth_date" placeholder="{$lang.birth_date}">
                         </div>
                         <div class="span4">
                             <div class="text">
-                                <input type="number" name="age">
-                            </div>
-                            <div class="title">
-                                <h6>{$lang.age}</h6>
+                                <input type="number" name="age" placeholder="{$lang.age}">
                             </div>
                         </div>
                         <div class="span4">
                             <div class="text">
                                 <select name="sex">
-                                    <option value="" class="hidden">{$lang.choose_an_option}</option>
+                                    <option value="" class="hidden">{$lang.sex}</option>
                                     <option value="male">{$lang.male}</option>
                                     <option value="female">{$lang.female}</option>
                                 </select>
-                            </div>
-                            <div class="title">
-                                <h6>{$lang.sex}</h6>
                             </div>
                         </div>
                     </div>
@@ -95,10 +75,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                     <div class="row">
                         <div class="span4">
                             <div class="text">
-                                <input type="email" name="email">
-                            </div>
-                            <div class="title">
-                                <h6>{$lang.email}</h6>
+                                <input type="email" name="email" placeholder="{$lang.email}">
                             </div>
                         </div>
                         <div class="span4">
@@ -109,18 +86,12 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                                         <option value="<?php echo $value['lada']; ?>"><?php echo $value['name'][Session::get_value('vkye_lang')] . ' +' . $value['lada']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                                <input type="number" name="phone_number" placeholder="{$lang.number}">
-                            </div>
-                            <div class="title">
-                                <h6>{$lang.phone}</h6>
+                                <input type="number" name="phone_number" placeholder="{$lang.phone}">
                             </div>
                         </div>
                         <div class="span4">
                             <div class="text">
-                                <input type="text" name="travel_to">
-                            </div>
-                            <div class="title">
-                                <h6>{$lang.where_you_travel}</h6>
+                                <input type="text" name="travel_to" placeholder="{$lang.where_you_travel}">
                             </div>
                         </div>
                     </div>
@@ -128,14 +99,11 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                 <fieldset class="fields-group">
                     <div class="text">
                         <select name="type">
-                            <option value="" class="hidden">{$lang.choose_an_option}</option>
+                            <option value="" class="hidden">{$lang.test_to_do}</option>
                             <option value="covid_pcr">PCR (PCR-SARS-CoV-2 (COVID-19))</option>
                             <option value="covid_an">{$lang.antigen} (Ag-SARS-CoV-2 (COVID-19))</option>
                             <option value="covid_ac">{$lang.anticorps} (SARS-CoV-2 (2019) IgG/IgM)</option>
                         </select>
-                    </div>
-                    <div class="title">
-                        <h6>{$lang.test_to_do}</h6>
                     </div>
                 </fieldset>
                 <fieldset class="fields-group">
@@ -151,7 +119,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                     <img src="{$path.uploads}<?php echo System::temporal('get', 'covid', 'contact')['qr']['filename']; ?>">
                 </figure>
                 <p>{$lang.covid_alert_1} <strong><?php echo System::temporal('get', 'covid', 'contact')['email']; ?></strong> {$lang.covid_alert_2}</p>
-                <a data-action="restore_form">{$lang.restore_form}</a>
+                <a data-action="restore_registry">{$lang.restore_registry}</a>
             </div>
         <?php endif; ?>
     <?php elseif ($global['render'] == 'results') : ?>

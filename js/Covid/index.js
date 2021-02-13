@@ -38,11 +38,11 @@ $(document).ready(function()
         });
     });
 
-    $('[data-action="restore_form"]').on('click', function()
+    $('[data-action="restore_registry"]').on('click', function()
     {
         $.ajax({
             type: 'POST',
-            data: 'action=restore_form',
+            data: 'action=restore_registry',
             processData: false,
             cache: false,
             dataType: 'json',
