@@ -62,8 +62,25 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
                 <fieldset class="fields-group">
                     <div class="row">
                         <div class="span4">
-                            <div class="text">
-                                <input type="date" name="birth_date">
+                            <div class="compound st-10">
+                                <select name="birth_date_year">
+                                    <option value="" class="hidden">{$lang.year}</option>
+                                    <?php foreach (Dates::create_lapse_date('years', 100) as $value) : ?>
+                                        <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <select name="birth_date_month">
+                                    <option value="" class="hidden">{$lang.month}</option>
+                                    <?php foreach (Dates::create_lapse_date('months', Session::get_value('vkye_lang')) as $key => $value) : ?>
+                                        <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <select name="birth_date_day">
+                                    <option value="" class="hidden">{$lang.day}</option>
+                                    <?php foreach (Dates::create_lapse_date('days') as $value) : ?>
+                                        <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                             <div class="title">
                                 <h6>{$lang.birth_date}</h6>

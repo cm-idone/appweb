@@ -71,8 +71,14 @@ class Covid_controller extends Controller
 					if (Validations::empty($_POST['ife']) == false)
 		                array_push($errors, ['ife','{$lang.dont_leave_this_field_empty}']);
 
-		            if (Validations::empty($_POST['birth_date']) == false)
-		                array_push($errors, ['birth_date','{$lang.dont_leave_this_field_empty}']);
+		            if (Validations::empty($_POST['birth_date_year']) == false)
+		                array_push($errors, ['birth_date_year','{$lang.dont_leave_this_field_empty}']);
+
+		            if (Validations::empty($_POST['birth_date_month']) == false)
+		                array_push($errors, ['birth_date_month','{$lang.dont_leave_this_field_empty}']);
+
+		            if (Validations::empty($_POST['birth_date_day']) == false)
+		                array_push($errors, ['birth_date_day','{$lang.dont_leave_this_field_empty}']);
 
 		            if (Validations::empty($_POST['age']) == false)
 		                array_push($errors, ['age','{$lang.dont_leave_this_field_empty}']);
@@ -101,6 +107,7 @@ class Covid_controller extends Controller
 		            if (empty($errors))
 		            {
 		                $_POST['token'] = System::generate_random_string();
+						$_POST['birth_date'] = $_POST['birth_date_year'] . '-' . $_POST['birth_date_month'] . '-' . $_POST['birth_date_day'];
 						$_POST['qr']['filename'] = 'tmp_' . $params[0] . '_covid_qr_' . $_POST['token'] . '.png';
 						$_POST['account'] = $global['account']['id'];
 
