@@ -128,6 +128,17 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
                         </div>
                     </div>
                 </fieldset>
+                <fieldset class="fields-group">
+                    <div class="text">
+                        <select name="lang">
+                            <option value="es" <?php echo (($global['custody_chain']['lang'] == 'es') ? 'selected' : '') ?>>{$lang.es}</option>
+                            <option value="en" <?php echo (($global['custody_chain']['lang'] == 'en') ? 'selected' : '') ?>>{$lang.en}</option>
+                        </select>
+                    </div>
+                    <div class="title">
+                        <h6>{$lang.language}</h6>
+                    </div>
+                </fieldset>
             <?php endif; ?>
             <h2>{$lang.exam_reasons}</h2>
             <fieldset class="fields-group">
@@ -310,9 +321,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
                         <div class="span4">
                             <div class="text">
                                 <select name="test_result">
-                                    <option value="">{$lang.undefined}</option>
-                                    <option value="positive" <?php echo (($global['custody_chain']['results']['result'] == 'positive') ? 'selected' : '') ?>>{$lang.positive}</option>
                                     <option value="negative" <?php echo (($global['custody_chain']['results']['result'] == 'negative') ? 'selected' : '') ?>>{$lang.negative}</option>
+                                    <option value="positive" <?php echo (($global['custody_chain']['results']['result'] == 'positive') ? 'selected' : '') ?>>{$lang.positive}</option>
                                 </select>
                             </div>
                             <div class="title">
@@ -322,7 +332,6 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
                         <div class="span4">
                             <div class="text">
                                 <select name="test_unity">
-                                    <option value="">{$lang.undefined}</option>
                                     <option value="INDEX" <?php echo (($global['custody_chain']['results']['unity'] == 'INDEX') ? 'selected' : '') ?>>{$lang.index}</option>
                                 </select>
                             </div>
@@ -333,9 +342,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
                         <div class="span4">
                             <div class="text">
                                 <select name="test_reference_values">
-                                    <option value="">{$lang.undefined}</option>
-                                    <option value="detected" <?php echo (($global['custody_chain']['results']['reference_values'] == 'detected') ? 'selected' : '') ?>>{$lang.detected}</option>
                                     <option value="not_detected" <?php echo (($global['custody_chain']['results']['reference_values'] == 'not_detected') ? 'selected' : '') ?>>{$lang.not_detected}</option>
+                                    <option value="detected" <?php echo (($global['custody_chain']['results']['reference_values'] == 'detected') ? 'selected' : '') ?>>{$lang.detected}</option>
                                 </select>
                             </div>
                             <div class="title">
@@ -347,9 +355,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
                         <div class="span2">
                             <div class="text">
                                 <select name="test_igm_result">
-                                    <option value="">{$lang.undefined}</option>
-                                    <option value="reactive" <?php echo (($global['custody_chain']['results']['igm']['result'] == 'reactive') ? 'selected' : '') ?>>{$lang.reactive}</option>
                                     <option value="not_reactive" <?php echo (($global['custody_chain']['results']['igm']['result'] == 'not_reactive') ? 'selected' : '') ?>>{$lang.not_reactive}</option>
+                                    <option value="reactive" <?php echo (($global['custody_chain']['results']['igm']['result'] == 'reactive') ? 'selected' : '') ?>>{$lang.reactive}</option>
                                 </select>
                             </div>
                             <div class="title">
@@ -369,9 +376,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
                         <div class="span2">
                             <div class="text">
                                 <select name="test_igm_reference_values">
-                                    <option value="">{$lang.undefined}</option>
-                                    <option value="reactive" <?php echo (($global['custody_chain']['results']['igm']['reference_values'] == 'reactive') ? 'selected' : '') ?>>{$lang.reactive}</option>
                                     <option value="not_reactive" <?php echo (($global['custody_chain']['results']['igm']['reference_values'] == 'not_reactive') ? 'selected' : '') ?>>{$lang.not_reactive}</option>
+                                    <option value="reactive" <?php echo (($global['custody_chain']['results']['igm']['reference_values'] == 'reactive') ? 'selected' : '') ?>>{$lang.reactive}</option>
                                 </select>
                             </div>
                             <div class="title">
@@ -381,9 +387,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
                         <div class="span2">
                             <div class="text">
                                 <select name="test_igg_result">
-                                    <option value="">{$lang.undefined}</option>
-                                    <option value="reactive" <?php echo (($global['custody_chain']['results']['igg']['result'] == 'reactive') ? 'selected' : '') ?>>{$lang.reactive}</option>
                                     <option value="not_reactive" <?php echo (($global['custody_chain']['results']['igg']['result'] == 'not_reactive') ? 'selected' : '') ?>>{$lang.not_reactive}</option>
+                                    <option value="reactive" <?php echo (($global['custody_chain']['results']['igg']['result'] == 'reactive') ? 'selected' : '') ?>>{$lang.reactive}</option>
                                 </select>
                             </div>
                             <div class="title">
@@ -403,9 +408,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
                         <div class="span2">
                             <div class="text">
                                 <select name="test_igg_reference_values">
-                                    <option value="">{$lang.undefined}</option>
-                                    <option value="reactive" <?php echo (($global['custody_chain']['results']['igg']['reference_values'] == 'reactive') ? 'selected' : '') ?>>{$lang.reactive}</option>
                                     <option value="not_reactive" <?php echo (($global['custody_chain']['results']['igg']['reference_values'] == 'not_reactive') ? 'selected' : '') ?>>{$lang.not_reactive}</option>
+                                    <option value="reactive" <?php echo (($global['custody_chain']['results']['igg']['reference_values'] == 'reactive') ? 'selected' : '') ?>>{$lang.reactive}</option>
                                 </select>
                             </div>
                             <div class="title">
@@ -530,6 +534,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
                 <div class="button">
                     <a class="alert" data-action="go_back"><i class="fas fa-times"></i></a>
                     <?php if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee'])) : ?>
+                        <?php if ($global['custody_chain']['closed'] == true) : ?>
+                            <a class="auto btn busy" href="<?php echo '{$path.uploads}' . $global['custody_chain']['pdf']; ?>" download="<?php echo $global['custody_chain']['pdf']; ?>"><i class="fas fa-save"></i>{$lang.download_pdf}</a>
+                        <?php endif; ?>
                         <button type="submit" class="auto warning" data-save="only_save"><i class="fas fa-save"></i>{$lang.only_save}</button>
                         <button type="submit" class="auto success" data-save="save_and_send"><i class="fas fa-envelope"></i>{$lang.save_and_send}</button>
                     <?php else : ?>

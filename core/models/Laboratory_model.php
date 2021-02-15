@@ -255,37 +255,37 @@ class Laboratory_model extends Model
 			</table>
 			<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-			        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:28px;font-weight:600;text-align:center;text-transform:uppercase;color:#004770;">' . Languages::email('result_report')[$data['custody_chain']['lang']] . '</td>
+			        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:28px;font-weight:600;text-align:center;text-transform:uppercase;color:#004770;">' . Languages::email('result_report')[$data['lang']] . '</td>
 			    </tr>
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-			        <td style="width:100%;margin:0px;padding:10px 10px 10px 10px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:center;text-transform:uppercase;color:#004770;">' . Languages::email('marbu_laboratory_analisys')[$data['custody_chain']['lang']] . '</td>
+			        <td style="width:100%;margin:0px;padding:10px 10px 10px 10px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:center;text-transform:uppercase;color:#004770;">' . Languages::email('marbu_laboratory_analisys')[$data['lang']] . '</td>
 			    </tr>
 			</table>
 			<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#deeaf6;">
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;border-top:2px solid #5b9bd5;border-bottom:2px solid #5b9bd5;">
-			        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('n_petition')[$data['custody_chain']['lang']] . ': ' . $data['custody_chain']['token'] . '</td>
+			        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('n_petition')[$data['lang']] . ': ' . $data['custody_chain']['token'] . '</td>
 			    </tr>
 			</table>
 			<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;border-top:2px solid #5b9bd5;border-bottom:2px solid #5b9bd5;">
-			        <td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('registry_date')[$data['custody_chain']['lang']] . ': ' . $data['date'] . '</td>
-			        <td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('company')[$data['custody_chain']['lang']] . ': N/A</td>
-					<td style="width:33.33%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('patient')[$data['custody_chain']['lang']] . ': ' . $data['firstname'] . ' ' . $data['lastname'] . '</td>
+			        <td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('registry_date')[$data['lang']] . ': ' . $data['date'] . '</td>
+			        <td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('company')[$data['lang']] . ': N/A</td>
+					<td style="width:33.33%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('patient')[$data['lang']] . ': ' . $data['firstname'] . ' ' . $data['lastname'] . '</td>
 				</tr>
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;background-color:#deeaf6;">
-	        		<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('birth_date')[$data['custody_chain']['lang']] . ': ' . $data['birth_date'] . '</td>
-	        		<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('age')[$data['custody_chain']['lang']] . ': ' . $data['age'] . ' ' . Languages::email('years')[$data['custody_chain']['lang']] . '</td>
-	        		<td style="width:33.33%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('sex')[$data['custody_chain']['lang']] . ': ' . Languages::email($data['sex'])[$data['custody_chain']['lang']] . '</td>
+	        		<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('birth_date')[$data['lang']] . ': ' . $data['birth_date'] . '</td>
+	        		<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('age')[$data['lang']] . ': ' . $data['age'] . ' ' . Languages::email('years')[$data['lang']] . '</td>
+	        		<td style="width:33.33%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('sex')[$data['lang']] . ': ' . Languages::email($data['sex'])[$data['lang']] . '</td>
 				</tr>
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-			        <td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('get_date')[$data['custody_chain']['lang']] . ': ' . $data['date'] . '</td>
-			        <td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('get_hour')[$data['custody_chain']['lang']] . ': ' . $data['hour'] . '</td>
+			        <td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('get_date')[$data['lang']] . ': ' . $data['date'] . '</td>
+			        <td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('get_hour')[$data['lang']] . ': ' . $data['hour'] . '</td>
 			        <td style="width:33.33%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . $data['collector'][0]['name'] . '</td>
 			    </tr>
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;background-color:#deeaf6;">
-			        <td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('start_process')[$data['custody_chain']['lang']] . ': ' . $data['start_process'] . '</td>
-			        <td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('end_process')[$data['custody_chain']['lang']] . ': ' . $data['end_process'] . '</td>
-			        <td style="width:33.33%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('id_patient')[$data['custody_chain']['lang']] . ': ' . $data['ife'] . '</td>
+			        <td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('start_process')[$data['lang']] . ': ' . $data['start_process'] . '</td>
+			        <td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('end_process')[$data['lang']] . ': ' . $data['end_process'] . '</td>
+			        <td style="width:33.33%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('id_patient')[$data['lang']] . ': ' . $data['ife'] . '</td>
 			    </tr>
 			</table>
 			<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
@@ -295,15 +295,15 @@ class Laboratory_model extends Model
 			</table>
 			<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#deeaf6;">
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-			        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:14px;font-weight:600;text-align:left;color:#004770;">' . Languages::email('immunological_analysis')[$data['custody_chain']['lang']] . '</td>
+			        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:14px;font-weight:600;text-align:left;color:#004770;">' . Languages::email('immunological_analysis')[$data['lang']] . '</td>
 			    </tr>
 			</table>
 			<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#deeaf6;">
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-			        <td style="width:25%;margin:0px;padding:10px 0px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:left;color:#004770;">' . Languages::email('exam')[$data['custody_chain']['lang']] . '</td>
-			        <td style="width:25%;margin:0px;padding:10px 0px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:left;color:#004770;">' . Languages::email('result')[$data['custody_chain']['lang']] . '</td>
-			        <td style="width:25%;margin:0px;padding:10px 0px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:left;color:#004770;">' . Languages::email('unity')[$data['custody_chain']['lang']] . '</td>
-			        <td style="width:25%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:left;color:#004770;">' . Languages::email('reference_values')[$data['custody_chain']['lang']] . '</td>
+			        <td style="width:25%;margin:0px;padding:10px 0px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:left;color:#004770;">' . Languages::email('exam')[$data['lang']] . '</td>
+			        <td style="width:25%;margin:0px;padding:10px 0px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:left;color:#004770;">' . Languages::email('result')[$data['lang']] . '</td>
+			        <td style="width:25%;margin:0px;padding:10px 0px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:left;color:#004770;">' . Languages::email('unity')[$data['lang']] . '</td>
+			        <td style="width:25%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:left;color:#004770;">' . Languages::email('reference_values')[$data['lang']] . '</td>
 			    </tr>';
 
 			if ($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an')
@@ -316,9 +316,9 @@ class Laboratory_model extends Model
 					$writing .= '<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">Ag-SARS-CoV-2 (COVID-19)</td>';
 
 				$writing .=
-				'	<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_result'])[$data['custody_chain']['lang']] . '</td>
-					<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_unity'])[$data['custody_chain']['lang']] . '</td>
-					<td style="width:25%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_reference_values'])[$data['custody_chain']['lang']] . '</td>
+				'	<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_result'])[$data['lang']] . '</td>
+					<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_unity'])[$data['lang']] . '</td>
+					<td style="width:25%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_reference_values'])[$data['lang']] . '</td>
 				</tr>';
 			}
 			else if ($data['custody_chain']['type'] == 'covid_ac')
@@ -331,16 +331,16 @@ class Laboratory_model extends Model
 					<td style="width:25%;margin:0px;padding:10px;border:0px;box-sizing:border-box;"></td>
 				</tr>
 				<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-					<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('anticorps')[$data['custody_chain']['lang']] . ' IgM</td>
-					<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_igm_result'])[$data['custody_chain']['lang']] . '</td>
-					<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_igm_unity'])[$data['custody_chain']['lang']] . '</td>
-					<td style="width:25%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_igm_reference_values'])[$data['custody_chain']['lang']] . '</td>
+					<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('anticorps')[$data['lang']] . ' IgM</td>
+					<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_igm_result'])[$data['lang']] . '</td>
+					<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_igm_unity'])[$data['lang']] . '</td>
+					<td style="width:25%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_igm_reference_values'])[$data['lang']] . '</td>
 				</tr>
 				<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-					<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('anticorps')[$data['custody_chain']['lang']] . ' IgG</td>
-					<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_igg_result'])[$data['custody_chain']['lang']] . '</td>
-					<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_igg_unity'])[$data['custody_chain']['lang']] . '</td>
-					<td style="width:25%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_igg_reference_values'])[$data['custody_chain']['lang']] . '</td>
+					<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('anticorps')[$data['lang']] . ' IgG</td>
+					<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_igg_result'])[$data['lang']] . '</td>
+					<td style="width:25%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_igg_unity'])[$data['lang']] . '</td>
+					<td style="width:25%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email($data['test_igg_reference_values'])[$data['lang']] . '</td>
 				</tr>';
 			}
 
@@ -351,21 +351,21 @@ class Laboratory_model extends Model
 				$writing .=
 				'<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 				    <tr style="width:100%;margin:0px;padding:0px;border:0px;border-top:2px solid #5b9bd5;border-bottom:2px solid #5b9bd5;">
-				        <td style="width:100%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:left;color:#004770;">' . (($data['custody_chain']['type'] == 'covid_pcr') ? Languages::email('atila_biosystem')[$data['custody_chain']['lang']] . ' | ' : '') . Languages::email('nasopharynx_secretion')[$data['custody_chain']['lang']] . '</td>
+				        <td style="width:100%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:left;color:#004770;">' . (($data['custody_chain']['type'] == 'covid_pcr') ? Languages::email('atila_biosystem')[$data['lang']] . ' | ' : '') . Languages::email('nasopharynx_secretion')[$data['lang']] . '</td>
 				    </tr>
 				</table>
 				<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 				    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-				        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:justify;color:#004770;">' . Languages::email('notes')[$data['custody_chain']['lang']] . ':</td>
+				        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:justify;color:#004770;">' . Languages::email('notes')[$data['lang']] . ':</td>
 				    </tr>
 				    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-				        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_pcr_an_1')[$data['custody_chain']['lang']] . '</td>
+				        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_pcr_an_1')[$data['lang']] . '</td>
 				    </tr>
 				    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-				        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_pcr_an_2')[$data['custody_chain']['lang']] . '</td>
+				        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_pcr_an_2')[$data['lang']] . '</td>
 				    </tr>
 				    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-				        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_pcr_an_3')[$data['custody_chain']['lang']] . '</td>
+				        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_pcr_an_3')[$data['lang']] . '</td>
 				    </tr>
 				</table>';
 			}
@@ -374,19 +374,19 @@ class Laboratory_model extends Model
 				$writing .=
 				'<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 					<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-						<td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:justify;color:#004770;">' . Languages::email('notes_ac_1')[$data['custody_chain']['lang']] . '</td>
+						<td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:justify;color:#004770;">' . Languages::email('notes_ac_1')[$data['lang']] . '</td>
 					</tr>
 					<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-						<td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_ac_2')[$data['custody_chain']['lang']] . '</td>
+						<td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_ac_2')[$data['lang']] . '</td>
 					</tr>
 					<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-						<td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_ac_3')[$data['custody_chain']['lang']] . '</td>
+						<td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_ac_3')[$data['lang']] . '</td>
 					</tr>
 					<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-						<td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_ac_4')[$data['custody_chain']['lang']] . '</td>
+						<td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_ac_4')[$data['lang']] . '</td>
 					</tr>
 					<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-						<td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_ac_5')[$data['custody_chain']['lang']] . '</td>
+						<td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_ac_5')[$data['lang']] . '</td>
 					</tr>
 				</table>';
 			}
@@ -394,7 +394,7 @@ class Laboratory_model extends Model
 			$writing .=
 			'<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-			        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:center;color:#004770;">' . Languages::email('valid_results_by')[$data['custody_chain']['lang']] . '</td>
+			        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:center;color:#004770;">' . Languages::email('valid_results_by')[$data['lang']] . '</td>
 			    </tr>
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
 			        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;text-align:center;">
@@ -405,15 +405,15 @@ class Laboratory_model extends Model
 			        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:center;color:#004770;">' . $data['collector'][0]['name'] . '</td>
 			    </tr>
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-			        <td style="width:100%;margin:0px;padding:0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:center;color:#004770;">' . Languages::email('health_manager')[$data['custody_chain']['lang']] . '</td>
+			        <td style="width:100%;margin:0px;padding:0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:center;color:#004770;">' . Languages::email('health_manager')[$data['lang']] . '</td>
 			    </tr>
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-			        <td style="width:100%;margin:0px;padding:0px 10px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:center;color:#004770;">' . Languages::email('identification_card')[$data['custody_chain']['lang']] . ': ' . $data['collector'][0]['card'] . '</td>
+			        <td style="width:100%;margin:0px;padding:0px 10px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:center;color:#004770;">' . Languages::email('identification_card')[$data['lang']] . ': ' . $data['collector'][0]['card'] . '</td>
 			    </tr>
 			</table>
 			<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-			        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#000;">' . Languages::email('alert_pdf_covid')[$data['custody_chain']['lang']] . '</td>
+			        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#000;">' . Languages::email('alert_pdf_covid')[$data['lang']] . '</td>
 			    </tr>
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
 			        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:center;color:#004770;">+ (52) 998 313 2948 - 998 440 3302 | marbu@one-consultores.com | marbu.one-consultores.com</td>
@@ -485,6 +485,7 @@ class Laboratory_model extends Model
 			]) : null,
 			'qr' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee'])) ? $data['qr']['filename'] : $data['custody_chain']['qr'],
 			'pdf' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee'])) ? $data['pdf']['filename'] : $data['custody_chain']['pdf'],
+			'lang' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee'])) ? $data['lang'] : $data['custody_chain']['lang'],
 			'closed' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']) AND $data['custody_chain']['closed'] == false AND $data['save'] == 'only_save') ? false : true,
 			'user' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee'])) ? Session::get_value('vkye_user')['id'] : $data['custody_chain']['user']
 		], [

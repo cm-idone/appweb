@@ -92,6 +92,27 @@ class Laboratory_controller extends Controller
 					if ($global['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_3'], true) == false)
 					   array_push($errors, ['test_3','{$lang.invalid_field}']);
 
+					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validation::empty($_POST['test_result']) == true)
+						array_push($errors, ['test_result','{$lang.dont_leave_this_field_empty}']);
+
+					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validation::empty($_POST['test_unity']) == true)
+						array_push($errors, ['test_unity','{$lang.dont_leave_this_field_empty}']);
+
+					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validation::empty($_POST['test_reference_values']) == true)
+						array_push($errors, ['test_reference_values','{$lang.dont_leave_this_field_empty}']);
+
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validation::empty($_POST['test_igm_result']) == true)
+						array_push($errors, ['test_igm_result','{$lang.dont_leave_this_field_empty}']);
+
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validation::empty($_POST['test_igm_reference_values']) == true)
+						array_push($errors, ['test_igm_reference_values','{$lang.dont_leave_this_field_empty}']);
+
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validation::empty($_POST['test_igg_result']) == true)
+						array_push($errors, ['test_igg_result','{$lang.dont_leave_this_field_empty}']);
+
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validation::empty($_POST['test_igg_reference_values']) == true)
+						array_push($errors, ['test_igg_reference_values','{$lang.dont_leave_this_field_empty}']);
+
                     if (Validations::empty($_POST['date']) == false)
     					array_push($errors, ['date','{$lang.dont_leave_this_field_empty}']);
 
@@ -230,6 +251,9 @@ class Laboratory_controller extends Controller
 
 						if (Validations::empty($_POST['travel_to']) == false)
 						   array_push($errors, ['travel_to','{$lang.dont_leave_this_field_empty}']);
+
+						if (Validations::empty($_POST['lang']) == false)
+						   array_push($errors, ['lang','{$lang.dont_leave_this_field_empty}']);
 					}
 
     				if (Validations::empty($_POST['reason']) == false)
@@ -249,6 +273,27 @@ class Laboratory_controller extends Controller
 
 					if ($global['custody_chain']['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_3'], true) == false)
 					   array_push($errors, ['test_3','{$lang.invalid_field}']);
+
+					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validation::empty($_POST['test_result']) == true)
+						array_push($errors, ['test_result','{$lang.dont_leave_this_field_empty}']);
+
+					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validation::empty($_POST['test_unity']) == true)
+						array_push($errors, ['test_unity','{$lang.dont_leave_this_field_empty}']);
+
+					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validation::empty($_POST['test_reference_values']) == true)
+						array_push($errors, ['test_reference_values','{$lang.dont_leave_this_field_empty}']);
+
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validation::empty($_POST['test_igm_result']) == true)
+						array_push($errors, ['test_igm_result','{$lang.dont_leave_this_field_empty}']);
+
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validation::empty($_POST['test_igm_reference_values']) == true)
+						array_push($errors, ['test_igm_reference_values','{$lang.dont_leave_this_field_empty}']);
+
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validation::empty($_POST['test_igg_result']) == true)
+						array_push($errors, ['test_igg_result','{$lang.dont_leave_this_field_empty}']);
+
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validation::empty($_POST['test_igg_reference_values']) == true)
+						array_push($errors, ['test_igg_reference_values','{$lang.dont_leave_this_field_empty}']);
 
                     if (Validations::empty($_POST['date']) == false)
     					array_push($errors, ['date','{$lang.dont_leave_this_field_empty}']);
@@ -282,7 +327,7 @@ class Laboratory_controller extends Controller
 									$mail->setFrom(Configuration::$vars['marbu']['email'], 'Marbu Salud');
 									$mail->addAddress($_POST['email'], $_POST['firstname'] . ' ' . $_POST['lastname']);
 									$mail->addAttachment(PATH_UPLOADS . $_POST['pdf']['filename']);
-									$mail->Subject = Languages::email('your_results_are_ready')[$global['custody_chain']['lang']];
+									$mail->Subject = Languages::email('your_results_are_ready')[$_POST['lang']];
 									$mail->Body =
 									'<html>
 										<head>
@@ -317,10 +362,10 @@ class Laboratory_controller extends Controller
 													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:18px;font-weight:600;text-align:center;color:#000;">' . $mail->Subject . '</td>
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:center;color:#757575;">' . Languages::email('covid_test')[$global['custody_chain']['lang']] . '</td>
+													<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:center;color:#757575;">' . Languages::email('covid_test')[$_POST['lang']] . '</td>
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#000;">' . Languages::email('get_covid_results_1')[$global['custody_chain']['lang']] . ' <strong>' . Dates::format_date($global['custody_chain']['date'], 'short') . '</strong> ' . Languages::email('get_covid_results_2')[$global['custody_chain']['lang']] . '</td>
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#000;">' . Languages::email('get_covid_results_1')[$_POST['lang']] . ' <strong>' . Dates::format_date($global['custody_chain']['date'], 'short') . '</strong> ' . Languages::email('get_covid_results_2')[$_POST['lang']] . '</td>
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
@@ -329,7 +374,7 @@ class Laboratory_controller extends Controller
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 													<td style="width:100%;margin:0px;padding:20px;border:0px;box-sizing:border-box;">
-														<a style="width:100%;display:block;margin:0px;padding:10px;border:0px;border-radius:5px;box-sizing:border-box;background-color:#009688;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#fff;" href="https://' . Configuration::$domain . '/' . Session::get_value('vkye_account')['path'] . '/covid/' . $global['custody_chain']['token'] . '">' . Languages::email('view_online_results')[$global['custody_chain']['lang']] . '</a>
+														<a style="width:100%;display:block;margin:0px;padding:10px;border:0px;border-radius:5px;box-sizing:border-box;background-color:#009688;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#fff;" href="https://' . Configuration::$domain . '/' . Session::get_value('vkye_account')['path'] . '/covid/' . $global['custody_chain']['token'] . '">' . Languages::email('view_online_results')[$_POST['lang']] . '</a>
 													</td>
 												</tr>
 											</table>
@@ -346,13 +391,13 @@ class Laboratory_controller extends Controller
 											</table>
 											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:#004770;">
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">' . Languages::email('power_by')[$global['custody_chain']['lang']] . ' <a style="font-weight:600;text-decoration:none;color:#fff;" href="https://id.one-consultores.com">' . Configuration::$web_page . ' ' . Configuration::$web_version . '</a></td>
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">' . Languages::email('power_by')[$_POST['lang']] . ' <a style="font-weight:600;text-decoration:none;color:#fff;" href="https://id.one-consultores.com">' . Configuration::$web_page . ' ' . Configuration::$web_version . '</a></td>
 												</tr
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 													<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Copyright (C) <a style="text-decoration:none;color:#fff;" href="https://one-consultores.com">One Consultores</a></td>
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Software ' . Languages::email('development_by')[$global['custody_chain']['lang']] . ' <a style="text-decoration:none;color:#fff;" href="https://codemonkey.com.mx">Code Monkey</a></td>
+													<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Software ' . Languages::email('development_by')[$_POST['lang']] . ' <a style="text-decoration:none;color:#fff;" href="https://codemonkey.com.mx">Code Monkey</a></td>
 												</tr>
 											</table>
 										</body>

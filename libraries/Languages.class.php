@@ -16,8 +16,8 @@ class Languages
                 'en' => 'Your token is'
             ],
             'your_results_are_ready' => [
-                'es' => 'Resultados listos',
-                'en' => 'Ready results'
+                'es' => '¡Tus resultados están listos!',
+                'en' => 'Your results are ready!'
             ],
             'covid_test' => [
                 'es' => 'Prueba Covid',
@@ -120,16 +120,16 @@ class Languages
                 'en' => 'Unity'
             ],
             'reference_values' => [
-                'es' => 'Valores de referencia',
-                'en' => 'Reference values'
+                'es' => 'Valor de referencia',
+                'en' => 'Reference value'
             ],
             'positive' => [
-                'es' => 'Positivo',
-                'en' => 'Positive'
+                'es' => 'Detectado',
+                'en' => 'Detected'
             ],
             'negative' => [
-                'es' => 'Negativo',
-                'en' => 'Negative'
+                'es' => 'No detectado',
+                'en' => 'No detected'
             ],
             'INDEX' => [
                 'es' => 'INDEX',

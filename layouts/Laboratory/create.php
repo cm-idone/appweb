@@ -273,9 +273,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                         <div class="span4">
                             <div class="text">
                                 <select name="test_result">
-                                    <option value="">{$lang.undefined}</option>
-                                    <option value="positive">{$lang.positive}</option>
                                     <option value="negative">{$lang.negative}</option>
+                                    <option value="positive">{$lang.positive}</option>
                                 </select>
                             </div>
                             <div class="title">
@@ -285,7 +284,6 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                         <div class="span4">
                             <div class="text">
                                 <select name="test_unity">
-                                    <option value="">{$lang.undefined}</option>
                                     <option value="INDEX">{$lang.index}</option>
                                 </select>
                             </div>
@@ -296,9 +294,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                         <div class="span4">
                             <div class="text">
                                 <select name="test_reference_values">
-                                    <option value="">{$lang.undefined}</option>
-                                    <option value="detected">{$lang.detected}</option>
                                     <option value="not_detected">{$lang.not_detected}</option>
+                                    <option value="detected">{$lang.detected}</option>
                                 </select>
                             </div>
                             <div class="title">
@@ -310,9 +307,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                         <div class="span2">
                             <div class="text">
                                 <select name="test_igm_result">
-                                    <option value="">{$lang.undefined}</option>
-                                    <option value="reactive">{$lang.reactive}</option>
                                     <option value="not_reactive">{$lang.not_reactive}</option>
+                                    <option value="reactive">{$lang.reactive}</option>
                                 </select>
                             </div>
                             <div class="title">
@@ -332,9 +328,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                         <div class="span2">
                             <div class="text">
                                 <select name="test_igm_reference_values">
-                                    <option value="">{$lang.undefined}</option>
-                                    <option value="reactive">{$lang.reactive}</option>
                                     <option value="not_reactive">{$lang.not_reactive}</option>
+                                    <option value="reactive">{$lang.reactive}</option>
                                 </select>
                             </div>
                             <div class="title">
@@ -344,9 +339,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                         <div class="span2">
                             <div class="text">
                                 <select name="test_igg_result">
-                                    <option value="">{$lang.undefined}</option>
-                                    <option value="reactive">{$lang.reactive}</option>
                                     <option value="not_reactive">{$lang.not_reactive}</option>
+                                    <option value="reactive">{$lang.reactive}</option>
                                 </select>
                             </div>
                             <div class="title">
@@ -366,9 +360,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js']);
                         <div class="span2">
                             <div class="text">
                                 <select name="test_igg_reference_values">
-                                    <option value="">{$lang.undefined}</option>
-                                    <option value="reactive">{$lang.reactive}</option>
                                     <option value="not_reactive">{$lang.not_reactive}</option>
+                                    <option value="reactive">{$lang.reactive}</option>
                                 </select>
                             </div>
                             <div class="title">
