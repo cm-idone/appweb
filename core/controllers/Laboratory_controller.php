@@ -92,25 +92,25 @@ class Laboratory_controller extends Controller
 					if ($global['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_3'], true) == false)
 					   array_push($errors, ['test_3','{$lang.invalid_field}']);
 
-					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validation::empty($_POST['test_result']) == true)
+					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validations::empty($_POST['test_result']) == true)
 						array_push($errors, ['test_result','{$lang.dont_leave_this_field_empty}']);
 
-					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validation::empty($_POST['test_unity']) == true)
+					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validations::empty($_POST['test_unity']) == true)
 						array_push($errors, ['test_unity','{$lang.dont_leave_this_field_empty}']);
 
-					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validation::empty($_POST['test_reference_values']) == true)
+					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validations::empty($_POST['test_reference_values']) == true)
 						array_push($errors, ['test_reference_values','{$lang.dont_leave_this_field_empty}']);
 
-					if ($global['custody_chain']['type'] == 'covid_ac' AND Validation::empty($_POST['test_igm_result']) == true)
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igm_result']) == true)
 						array_push($errors, ['test_igm_result','{$lang.dont_leave_this_field_empty}']);
 
-					if ($global['custody_chain']['type'] == 'covid_ac' AND Validation::empty($_POST['test_igm_reference_values']) == true)
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igm_reference_values']) == true)
 						array_push($errors, ['test_igm_reference_values','{$lang.dont_leave_this_field_empty}']);
 
-					if ($global['custody_chain']['type'] == 'covid_ac' AND Validation::empty($_POST['test_igg_result']) == true)
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igg_result']) == true)
 						array_push($errors, ['test_igg_result','{$lang.dont_leave_this_field_empty}']);
 
-					if ($global['custody_chain']['type'] == 'covid_ac' AND Validation::empty($_POST['test_igg_reference_values']) == true)
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igg_reference_values']) == true)
 						array_push($errors, ['test_igg_reference_values','{$lang.dont_leave_this_field_empty}']);
 
                     if (Validations::empty($_POST['date']) == false)
@@ -274,25 +274,25 @@ class Laboratory_controller extends Controller
 					if ($global['custody_chain']['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_3'], true) == false)
 					   array_push($errors, ['test_3','{$lang.invalid_field}']);
 
-					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validation::empty($_POST['test_result']) == true)
+					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validations::empty($_POST['test_result']) == true)
 						array_push($errors, ['test_result','{$lang.dont_leave_this_field_empty}']);
 
-					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validation::empty($_POST['test_unity']) == true)
+					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validations::empty($_POST['test_unity']) == true)
 						array_push($errors, ['test_unity','{$lang.dont_leave_this_field_empty}']);
 
-					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validation::empty($_POST['test_reference_values']) == true)
+					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validations::empty($_POST['test_reference_values']) == true)
 						array_push($errors, ['test_reference_values','{$lang.dont_leave_this_field_empty}']);
 
-					if ($global['custody_chain']['type'] == 'covid_ac' AND Validation::empty($_POST['test_igm_result']) == true)
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igm_result']) == true)
 						array_push($errors, ['test_igm_result','{$lang.dont_leave_this_field_empty}']);
 
-					if ($global['custody_chain']['type'] == 'covid_ac' AND Validation::empty($_POST['test_igm_reference_values']) == true)
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igm_reference_values']) == true)
 						array_push($errors, ['test_igm_reference_values','{$lang.dont_leave_this_field_empty}']);
 
-					if ($global['custody_chain']['type'] == 'covid_ac' AND Validation::empty($_POST['test_igg_result']) == true)
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igg_result']) == true)
 						array_push($errors, ['test_igg_result','{$lang.dont_leave_this_field_empty}']);
 
-					if ($global['custody_chain']['type'] == 'covid_ac' AND Validation::empty($_POST['test_igg_reference_values']) == true)
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igg_reference_values']) == true)
 						array_push($errors, ['test_igg_reference_values','{$lang.dont_leave_this_field_empty}']);
 
                     if (Validations::empty($_POST['date']) == false)
