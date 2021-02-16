@@ -2,7 +2,7 @@
 
 defined('_EXEC') or die;
 
-$this->dependencies->add(['js', '{$path.js}Employees/profile.js']);
+$this->dependencies->add(['js', '{$path.js}Employees/profile.js?v=1.0']);
 
 ?>
 

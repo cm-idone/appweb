@@ -22,7 +22,7 @@
         <script src="https://cdn.codemonkey.com.mx/monkeyboard/assets/js/jquery-2.1.4.min.js"></script>
         <script src="https://cdn.codemonkey.com.mx/monkeyboard/assets/js/valkyrie.min.js"></script>
         <script src="https://cdn.codemonkey.com.mx/monkeyboard/assets/js/scripts.js"></script>
-        <script src="{$path.js}scripts.js?v=1.4"></script>
+        <script src="{$path.js}scripts.js?v=1.0"></script>
         <script defer src="https://kit.fontawesome.com/743152b0c5.js"></script>
         {$dependencies.js}
         {$dependencies.other}

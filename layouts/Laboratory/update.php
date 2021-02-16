@@ -4,7 +4,7 @@ defined('_EXEC') or die;
 
 $this->dependencies->add(['js', '{$path.plugins}signature_pad/signature_pad.css']);
 $this->dependencies->add(['js', '{$path.plugins}signature_pad/signature_pad.js']);
-$this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
+$this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
 
 ?>
 

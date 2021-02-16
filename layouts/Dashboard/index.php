@@ -3,7 +3,7 @@
 defined('_EXEC') or die;
 
 // $this->dependencies->add(['js', 'https://rawgit.com/schmich/instascan-builds/master/instascan.min.js']);
-$this->dependencies->add(['js', '{$path.js}Dashboard/index.js']);
+$this->dependencies->add(['js', '{$path.js}Dashboard/index.js?v=1.0']);
 
 ?>
 
