@@ -31,6 +31,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js']);
             <form name="registry">
                 <h2>{$lang.registry_now}</h2>
                 <h3>{$lang.covid_test}</h3>
+                <p>{$lang.disclaimer}</p>
                 <fieldset class="fields-group">
                     <div class="row">
                         <div class="span4">

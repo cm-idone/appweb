@@ -87,6 +87,19 @@ main.covid > form > h3 {
     margin-bottom: 40px;
 }
 
+main.covid > form > p {
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #f44336;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: justify;
+    color: #fff;
+}
+
 main.covid > form > fieldset > div.button > button {
     width: 100% !important;
 }

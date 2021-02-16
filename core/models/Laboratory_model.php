@@ -356,18 +356,14 @@ class Laboratory_model extends Model
 				</table>
 				<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 				    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-				        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:justify;color:#004770;">' . Languages::email('notes')[$data['lang']] . ':</td>
-				    </tr>
-				    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
 				        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_pcr_an_1')[$data['lang']] . '</td>
 				    </tr>
 				    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
 				        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_pcr_an_2')[$data['lang']] . '</td>
 				    </tr>
 				    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-				        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_pcr_an_3')[$data['lang']] . '</td>
-				    </tr>
-				</table>';
+				        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_pcr_an_3')[$data['lang']] . '</td>
+				    </tr>';
 			}
 			else if ($data['custody_chain']['type'] == 'covid_ac')
 			{
@@ -386,13 +382,16 @@ class Laboratory_model extends Model
 						<td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_ac_4')[$data['lang']] . '</td>
 					</tr>
 					<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-						<td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_ac_5')[$data['lang']] . '</td>
-					</tr>
-				</table>';
+						<td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_ac_5')[$data['lang']] . '</td>
+					</tr>';
 			}
 
 			$writing .=
-			'<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
+			'	<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+					<td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('disclaimer')[$data['lang']] . '</td>
+				</tr>
+			</table>
+			<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
 			        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:center;color:#004770;">' . Languages::email('valid_results_by')[$data['lang']] . '</td>
 			    </tr>

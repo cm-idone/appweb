@@ -285,7 +285,7 @@ class Covid_controller extends Controller
 	            define('_title', 'Marbu Salud | Covid');
 
 	            if ($global['render'] == 'results' OR System::temporal('get_if_exists', 'covid', 'contact') == false)
-	                System::temporal('set_forced', 'covid', 'contact', []);
+					System::temporal('set_forced', 'covid', 'contact', []);
 
 	            $template = $this->view->render($this, 'index');
 
