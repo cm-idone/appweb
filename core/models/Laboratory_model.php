@@ -410,7 +410,7 @@ class Laboratory_model extends Model
 			</table>
 			<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-			        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#000;">' . Languages::email('alert_pdf_covid')[$data['lang']] . ' <strong>' . Languages::email('disclaimer')[$data['lang']] . '</strong>' . '</td>
+			        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#000;">' . Languages::email('alert_pdf_covid')[$data['lang']] . ' <strong style="color:#f44336;">' . Languages::email('disclaimer')[$data['lang']] . '</strong>' . '</td>
 			    </tr>
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
 			        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:center;color:#004770;">+ (52) 998 313 2948 - 998 440 3302 | marbu@one-consultores.com | marbu.one-consultores.com</td>
