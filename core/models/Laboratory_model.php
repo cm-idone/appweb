@@ -363,7 +363,8 @@ class Laboratory_model extends Model
 				    </tr>
 				    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
 				        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_pcr_an_3')[$data['lang']] . '</td>
-				    </tr>';
+				    </tr>
+				</table>';
 			}
 			else if ($data['custody_chain']['type'] == 'covid_ac')
 			{
@@ -383,15 +384,12 @@ class Laboratory_model extends Model
 					</tr>
 					<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 						<td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('notes_ac_5')[$data['lang']] . '</td>
-					</tr>';
+					</tr>
+				</table>';
 			}
 
 			$writing .=
-			'	<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-					<td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#004770;">' . Languages::email('disclaimer')[$data['lang']] . '</td>
-				</tr>
-			</table>
-			<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
+			'<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
 			        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:center;color:#004770;">' . Languages::email('valid_results_by')[$data['lang']] . '</td>
 			    </tr>
@@ -412,7 +410,7 @@ class Laboratory_model extends Model
 			</table>
 			<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-			        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#000;">' . Languages::email('alert_pdf_covid')[$data['lang']] . '</td>
+			        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#000;">' . Languages::email('alert_pdf_covid')[$data['lang']] . ' <strong>' . Languages::email('disclaimer')[$data['lang']] . '</strong>' . '</td>
 			    </tr>
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
 			        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:center;color:#004770;">+ (52) 998 313 2948 - 998 440 3302 | marbu@one-consultores.com | marbu.one-consultores.com</td>
