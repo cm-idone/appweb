@@ -216,8 +216,8 @@ class Languages
                 'en' => 'This report may not be partially reproduced without authorization from the issuing laboratory. This document is addressed to its recipient and contains confidential information. You are hereby notified that unauthorized use, disclosure and / or copies are prohibited under current legislation.'
             ],
             'disclaimer' => [
-                'es' => 'La captura de datos es responsabilidad del cliente. Marbu Salud S.A. de C.V. no se hace responsable por cualquier percance producido por la mal captura de estos datos. La corrección de datos tendrá un costo extra.',
-                'en' => 'Data capture is the responsibility of the customer. Marbu Salud S.A. de C.V. It is not responsible for any mishap produced by the wrong capture of this data. Data correction will cost extra.'
+                'es' => 'La captura de datos fue responsabilidad del cliente. Marbu Salud S.A. de C.V. no se hace responsable por cualquier percance producido por la mal captura de estos datos. La corrección de datos tendrá un costo extra.',
+                'en' => 'Data capture was responsibility of the customer. Marbu Salud S.A. de C.V. It is not responsible for any mishap produced by the wrong capture of this data. Data correction will cost extra.'
             ],
             'power_by' => [
                 'es' => 'Power by',
