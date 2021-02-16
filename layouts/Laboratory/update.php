@@ -194,7 +194,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js']);
                         </div>
                         <div class="span4">
                             <div class="text">
-                                <input type="date" name="end_process" value="<?php echo $global['custody_chain']['end_process']; ?>">
+                                <input type="date" name="end_process" value="<?php echo Dates::current_date(); ?>">
                             </div>
                             <div class="title">
                                 <h6>{$lang.end_process}</h6>

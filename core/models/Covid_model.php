@@ -69,7 +69,8 @@ class Covid_model extends Model
 			'pdf' => null,
 			'lang' => Session::get_value('vkye_lang'),
 			'closed' => false,
-			'user' => null
+			'user' => null,
+			'accept_terms' => true
         ]);
 
 		if (!empty($query))
