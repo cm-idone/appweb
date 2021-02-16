@@ -124,12 +124,12 @@ class Languages
                 'en' => 'Reference value'
             ],
             'positive' => [
-                'es' => 'Detectado',
-                'en' => 'Detected'
+                'es' => 'Detectado (Positivo)',
+                'en' => 'Detected (Positive)'
             ],
             'negative' => [
-                'es' => 'No detectado',
-                'en' => 'No detected'
+                'es' => 'No detectado (Negativo)',
+                'en' => 'No detected (Negative)'
             ],
             'INDEX' => [
                 'es' => 'INDEX',
