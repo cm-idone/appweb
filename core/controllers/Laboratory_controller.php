@@ -11,6 +11,22 @@ class Laboratory_controller extends Controller
 		parent::__construct();
 	}
 
+	public function marbu()
+    {
+        if (Format::exist_ajax_request() == true)
+		{
+
+		}
+		else
+		{
+			define('_title', Configuration::$web_page . ' | Marbu Salud');
+
+			$template = $this->view->render($this, 'marbu');
+
+			echo $template;
+		}
+    }
+
 	public function index($params)
     {
         if (Format::exist_ajax_request() == true)
@@ -77,22 +93,6 @@ class Laboratory_controller extends Controller
 			$global['custody_chains'] = $this->model->read_custody_chains($params[0]);
 
 			$template = $this->view->render($this, 'index');
-
-			echo $template;
-		}
-    }
-
-	public function marbu()
-    {
-        if (Format::exist_ajax_request() == true)
-		{
-
-		}
-		else
-		{
-			define('_title', Configuration::$web_page . ' | Marbu Salud');
-
-			$template = $this->view->render($this, 'marbu');
 
 			echo $template;
 		}

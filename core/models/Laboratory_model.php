@@ -158,21 +158,12 @@ class Laboratory_model extends Model
 				else if ($value['results']['1'] >= 0.20 OR $value['results']['2'] >= 0.20 OR $value['results']['3'] >= 0.20)
 					$query[$key]['status'] = 'alert';
 			}
-			else if ($value['type'] == 'antidoping')
-			{
-				if ($value['results']['COC'] == 'positive' OR $value['results']['THC'] == 'positive' OR $value['results']['ANF'] == 'positive' OR $value['results']['MET'] == 'positive' OR $value['results']['BZD'] == 'positive' OR $value['results']['OPI'] == 'positive' OR $value['results']['BAR'] == 'positive')
-					$query[$key]['status'] = 'alert';
-			}
-			else if ($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an')
-			{
-				if ($value['results']['result'] == 'positive')
-					$query[$key]['status'] = 'alert';
-			}
-			else if ($value['type'] == 'covid_ac')
-			{
-				if ($value['results']['igm']['result'] == 'positive' OR $value['results']['igg']['result'] == 'positive')
-					$query[$key]['status'] = 'alert';
-			}
+			else if ($value['type'] == 'antidoping' AND ($value['results']['COC'] == 'positive' OR $value['results']['THC'] == 'positive' OR $value['results']['ANF'] == 'positive' OR $value['results']['MET'] == 'positive' OR $value['results']['BZD'] == 'positive' OR $value['results']['OPI'] == 'positive' OR $value['results']['BAR'] == 'positive'))
+				$query[$key]['status'] = 'alert';
+			else if (($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an') AND $value['results']['result'] == 'positive')
+				$query[$key]['status'] = 'alert';
+			else if ($value['type'] == 'covid_ac' AND ($value['results']['igm']['result'] == 'positive' OR $value['results']['igg']['result'] == 'positive'))
+				$query[$key]['status'] = 'alert';
 		}
 
 		return $query;
@@ -221,7 +212,10 @@ class Laboratory_model extends Model
 			'custody_chains.user',
 			'custody_chains.deleted'
 		], [
-			'custody_chains.token' => $token
+			'AND' => [
+				'custody_chains.token' => $token,
+				'custody_chains.deleted' => false
+			]
 		]));
 
 		return !empty($query) ? $query[0] : null;
@@ -523,11 +517,8 @@ class Laboratory_model extends Model
 				Fileloader::down($data['custody_chain']['pdf']);
 			}
 		}
-		else
-		{
-			if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']))
-				Fileloader::down($data['qr']['filename']);
-		}
+		else if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']))
+			Fileloader::down($data['qr']['filename']);
 
         return $query;
     }

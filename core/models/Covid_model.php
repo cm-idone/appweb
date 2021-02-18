@@ -103,7 +103,10 @@ class Covid_model extends Model
 			'custody_chains.lang',
 			'custody_chains.closed'
 		], [
-			'custody_chains.token' => $token
+			'AND' => [
+				'custody_chains.token' => $token,
+				'custody_chains.deleted' => false
+			]
 		]));
 
 		return !empty($query) ? $query[0] : null;
