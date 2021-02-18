@@ -120,7 +120,10 @@ class Covid_model extends Model
             'path',
             'time_zone'
         ], [
-            'path' => $path
+            'AND' => [
+				'path' => $path,
+				'blocked' => false
+			]
         ]));
 
         return !empty($query) ? $query[0] : null;
