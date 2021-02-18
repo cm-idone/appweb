@@ -11,29 +11,45 @@ class Languages
                 'es' => '- - -',
                 'en' => '- - -'
             ],
+            'hi' => [
+                'es' => 'Hola',
+                'en' => 'Hi'
+            ],
             'your_token_is' => [
                 'es' => 'Tu folio es',
                 'en' => 'Your token is'
             ],
+            'certificate_valid_to' => [
+                'es' => 'Certificado válido para',
+                'en' => 'Certificate valid for'
+            ],
+            'your_results_next_email' => [
+                'es' => 'Este es solo un correo de confirmación de tu registro. Tu resultados llegaran en próximamente, en este mismo correo, con tu certificado online y en PDF.',
+                'en' => 'This is just a confirmation email of your registration. Your results will arrive soon, in this same email, with your online certificate and in PDF.'
+            ],
             'your_results_are_ready' => [
-                'es' => '¡Tus resultados están listos!',
-                'en' => 'Your results are ready!'
+                'es' => 'Tus resultados están listos',
+                'en' => 'Your results are ready'
+            ],
+            'ready_results' => [
+                'es' => '¡Resultados listos!',
+                'en' => '¡Ready results!'
             ],
             'covid_test' => [
                 'es' => 'Prueba Covid',
                 'en' => 'Covid Test'
             ],
             'get_covid_results_1' => [
-                'es' => '<strong>A quien corresponda</strong>. Por este medio le hacemos llegar los resultados de su prueba de Covid. Puedes escanera el siguiente QR para consutar tus resultados en linea, o dar click en el enlace mas abajo. Igualmente te hemos adjuntado tu certificado como PDF en este correo. Este certificado tiene una validez de <strong>72 horas</strong>, a partir del día ',
-                'en' => '<strong>To whom it May concern</strong>. We hereby send you the results of your Covid test. You can scan the following QR to view your results online, or click on the link below. We have also attached your certificate as a PDF in this email. This certificate is valid for <strong> 72 hours </strong>, from the day '
+                'es' => 'Por este medio te hacemos llegar tus resultados de tu prueba de Covid. Puedes escanera el siguiente QR para consutar tus resultados en linea, o dar click en el enlace mas abajo. Igualmente te hemos adjuntado tu certificado como PDF. Este certificado tiene una validez de <strong>72 horas</strong>, a partir del día ',
+                'en' => 'By this means we send you your results of your Covid test. You can scan the following QR to view your results online, or click on the link below. We have also attached your certificate as a PDF. This certificate is valid for <strong> 72 hours </strong>, from the day '
             ],
             'get_covid_results_2' => [
                 'es' => '. Sin mas por el momento quedamos en espera de su confirmación. Gracias.',
                 'en' => '. Without further ado for the moment we are awaiting confirmation from him. Thank you.'
             ],
             'view_online_results' => [
-                'es' => 'Ver resultados online',
-                'en' => 'View online results'
+                'es' => 'Consultar resultados online',
+                'en' => 'Consult online results'
             ],
             'result_report' => [
                 'es' => 'Reporte de resultados',

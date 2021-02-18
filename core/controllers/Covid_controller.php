@@ -29,21 +29,7 @@ class Covid_controller extends Controller
 				{
 					Session::set_value('vkye_lang', $global['custody_chain']['lang']);
 
-					if ($global['custody_chain']['closed'] == true)
-						$global['render'] = 'results';
-					else
-					{
-						$global['render'] = 'create';
-
-						System::temporal('set_forced', 'covid', 'contact', [
-							'token' => $global['custody_chain']['token'],
-							'qr' => [
-								'filename' => $global['custody_chain']['qr']
-							],
-							'email' => $global['custody_chain']['contact']['email']
-						]);
-					}
-
+					$global['render'] = 'results';
 					$go = true;
 				}
 			}
@@ -109,7 +95,11 @@ class Covid_controller extends Controller
 			            if (empty($errors))
 			            {
 			                $_POST['token'] = System::generate_random_string();
+							$_POST['firstname'] = ucwords($_POST['firstname']);
+							$_POST['lastname'] = ucwords($_POST['lastname']);
 							$_POST['birth_date'] = $_POST['birth_date_year'] . '-' . $_POST['birth_date_month'] . '-' . $_POST['birth_date_day'];
+							$_POST['email'] = strtolower($_POST['email']);
+							$_POST['travel_to'] = ucwords($_POST['travel_to']);
 							$_POST['qr']['filename'] = 'tmp_' . $params[0] . '_covid_qr_' . $_POST['token'] . '.png';
 							$_POST['account'] = $global['account']['id'];
 
@@ -125,7 +115,7 @@ class Covid_controller extends Controller
 								{
 									$mail1->setFrom(Configuration::$vars['marbu']['email'], 'Marbu Salud');
 									$mail1->addAddress($_POST['email'], $_POST['firstname'] . ' ' . $_POST['lastname']);
-									$mail1->Subject = Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'];
+									$mail1->Subject = '¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' ' . explode(' ',  $_POST['firstname'])[0] . '! ' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'];
 									$mail1->Body =
 									'<html>
 										<head>
@@ -157,11 +147,19 @@ class Covid_controller extends Controller
 											</table>
 											<table style="width:100%;max-width:600px;margin:20px 0px;padding:0px;border:1px dashed #000;box-sizing:border-box;background-color:#fff;">
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:18px;font-weight:600;text-align:center;text-transform:uppercase;color:#000;">' . $mail1->Subject . '</td>
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:18px;font-weight:600;text-align:center;text-transform:uppercase;color:#000;">' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'] . '</td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#757575;">¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' <strong>' . explode(' ', $_POST['firstname'])[0] . '</strong>! ' . Languages::email('your_results_next_email')[Session::get_value('vkye_lang')] . '</td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
+														<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $_POST['qr']['filename'] . '">
+													</td>
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 													<td style="width:100%;margin:0px;padding:20px;border:0px;box-sizing:border-box;">
-														<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $_POST['qr']['filename'] . '">
+														<a style="width:100%;display:block;margin:0px;padding:10px;border:0px;border-radius:5px;box-sizing:border-box;background-color:#009688;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#fff;" href="https://' . Configuration::$domain . '/' . $global['account']['path'] . '/covid/' . $_POST['token'] . '">' . Languages::email('view_online_results')[Session::get_value('vkye_lang')] . '</a>
 													</td>
 												</tr>
 											</table>
@@ -193,62 +191,62 @@ class Covid_controller extends Controller
 								}
 								catch (Exception $e) {}
 
-								$mail2 = new Mailer(true);
-
-								try
-								{
-									$mail2->setFrom(Configuration::$vars['marbu']['email'], 'Marbu Salud');
-									$mail2->addAddress(Configuration::$vars['marbu']['email'], 'Marbu Salud');
-									$mail2->Subject = 'Nueva prueba Covid. ' . $_POST['firstname'] . ' ' . $_POST['lastname'] . '. Folio: ' . $_POST['token'];
-									$mail2->Body =
-									'<html>
-										<head>
-											<title>' . $mail1->Subject . '</title>
-										</head>
-										<body>
-											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:#fff;">
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Nombre:</td>
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">' . $_POST['firstname'] . ' ' . $_POST['lastname'] . '</td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Pasaporte:</td>
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">' . $_POST['ife'] . '</td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Nacimiento:</td>
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">' . $_POST['birth_date'] . '</td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Edad:</td>
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">' . $_POST['age'] . ' Años</td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Sexo:</td>
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">' . $_POST['sex'] . '</td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Email:</td>
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">' . $_POST['email'] . '</td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Teléfono:</td>
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">+' . $_POST['phone_country'] . ' ' . $_POST['phone_number'] . '</td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Viaja a:</td>
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">' . $_POST['travel_to'] . '</td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Tipo de prueba:</td>
-													<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">' . $_POST['type'] . '</td>
-												</tr>
-											</table>
-										</body>
-									</html>';
-									$mail2->send();
-								}
-								catch (Exception $e) {}
+								// $mail2 = new Mailer(true);
+								//
+								// try
+								// {
+								// 	$mail2->setFrom(Configuration::$vars['marbu']['email'], 'Marbu Salud');
+								// 	$mail2->addAddress(Configuration::$vars['marbu']['email'], 'Marbu Salud');
+								// 	$mail2->Subject = 'Nueva prueba Covid. ' . $_POST['firstname'] . ' ' . $_POST['lastname'] . '. Folio: ' . $_POST['token'];
+								// 	$mail2->Body =
+								// 	'<html>
+								// 		<head>
+								// 			<title>' . $mail1->Subject . '</title>
+								// 		</head>
+								// 		<body>
+								// 			<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:#fff;">
+								// 				<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Nombre:</td>
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">' . $_POST['firstname'] . ' ' . $_POST['lastname'] . '</td>
+								// 				</tr>
+								// 				<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Pasaporte:</td>
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">' . $_POST['ife'] . '</td>
+								// 				</tr>
+								// 				<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Nacimiento:</td>
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">' . $_POST['birth_date'] . '</td>
+								// 				</tr>
+								// 				<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Edad:</td>
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">' . $_POST['age'] . ' Años</td>
+								// 				</tr>
+								// 				<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Sexo:</td>
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">' . $_POST['sex'] . '</td>
+								// 				</tr>
+								// 				<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Email:</td>
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">' . $_POST['email'] . '</td>
+								// 				</tr>
+								// 				<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Teléfono:</td>
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">+' . $_POST['phone_country'] . ' ' . $_POST['phone_number'] . '</td>
+								// 				</tr>
+								// 				<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Viaja a:</td>
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">' . $_POST['travel_to'] . '</td>
+								// 				</tr>
+								// 				<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:600;text-align:left;color:#000;">Tipo de prueba:</td>
+								// 					<td style="width:50%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:left;color:#757575;">' . $_POST['type'] . '</td>
+								// 				</tr>
+								// 			</table>
+								// 		</body>
+								// 	</html>';
+								// 	$mail2->send();
+								// }
+								// catch (Exception $e) {}
 
 			                    echo json_encode([
 			                        'status' => 'success',

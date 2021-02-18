@@ -229,14 +229,15 @@ main.covid > div.results > div.title > h2 {
     align-items: flex-end;
     justify-content: center;
     flex-direction: column;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
+    text-transform: uppercase;
     color: #757575;
 }
 
 main.covid > div.results > div.title > h2 > strong {
     display: block;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 600;
     color: #000;
 }
@@ -288,6 +289,14 @@ main.covid > div.results > div.counter > h4 {
 main.covid > div.results > table {
     width: 100%;
     margin-bottom: 40px;
+}
+
+main.covid > div.results > table > tbody > tr > td {
+    font-size: 14px;
+}
+
+main.covid > div.results > table > tbody > tr > td:last-child {
+    color: #757575;
 }
 
 main.covid > div.results > figure {

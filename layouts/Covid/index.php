@@ -4,7 +4,7 @@ defined('_EXEC') or die;
 
 $this->dependencies->add(['js', '{$path.plugins}moment/moment.min.js']);
 $this->dependencies->add(['js', '{$path.plugins}moment/moment-timezone-with-data.min.js']);
-$this->dependencies->add(['css', '{$path.css}Covid/index.css?v=1.2']);
+$this->dependencies->add(['css', '{$path.css}Covid/index.css?v=1.3']);
 $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.0']);
 
 ?>
@@ -175,17 +175,17 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.0']);
         <?php else : ?>
             <div class="create">
                 <h4>{$lang.your_token_is}: <?php echo System::temporal('get', 'covid', 'contact')['token']; ?></h4>
+                <p>¡{$lang.hi} <strong><?php echo explode(' ', System::temporal('get', 'covid', 'contact')['firstname'])[0]; ?></strong>! {$lang.covid_alert_1} <strong><?php echo System::temporal('get', 'covid', 'contact')['email']; ?></strong> {$lang.covid_alert_2}</p>
                 <figure>
                     <img src="{$path.uploads}<?php echo System::temporal('get', 'covid', 'contact')['qr']['filename']; ?>">
                 </figure>
-                <p>{$lang.covid_alert_1} <strong><?php echo System::temporal('get', 'covid', 'contact')['email']; ?></strong> {$lang.covid_alert_2}</p>
                 <a data-action="restore_registry">{$lang.restore_registry}</a>
             </div>
         <?php endif; ?>
     <?php elseif ($global['render'] == 'results') : ?>
         <div class="results">
             <?php if (Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) : ?>
-                <h2>{$lang.ready_results}</h2>
+                <h2><?php echo (($global['custody_chain']['closed'] == true) ? '{$lang.ready_results}' : '{$lang.results_in_process}'); ?></h2>
                 <h3>{$lang.covid_test}</h3>
             <?php endif; ?>
             <div class="title">
@@ -213,19 +213,19 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.0']);
                     </tr>
                     <tr>
                         <td>{$lang.end_process}:</td>
-                        <td><?php echo Dates::format_date($global['custody_chain']['end_process'], 'long'); ?></td>
+                        <td><?php echo (($global['custody_chain']['closed'] == true) ? Dates::format_date($global['custody_chain']['end_process'], 'long') : '{$lang.results_in_process}'); ?></td>
                     </tr>
                     <tr>
                         <td>{$lang.result}:</td>
-                        <td><?php echo (!empty($global['custody_chain']['results']['result']) ? '{$lang.' . $global['custody_chain']['results']['result'] . '}' : '- - -'); ?></td>
+                        <td><?php echo (($global['custody_chain']['closed'] == true) ? '{$lang.' . $global['custody_chain']['results']['result'] . '}' : '{$lang.results_in_process}'); ?></td>
                     </tr>
                     <tr>
                         <td>{$lang.unity}:</td>
-                        <td><?php echo (!empty($global['custody_chain']['results']['unity']) ? '{$lang.' . $global['custody_chain']['results']['unity'] . '}' : '- - -'); ?></td>
+                        <td><?php echo (($global['custody_chain']['closed'] == true) ? '{$lang.' . $global['custody_chain']['results']['unity'] . '}' : '{$lang.results_in_process}'); ?></td>
                     </tr>
                     <tr>
                         <td>{$lang.reference_values}:</td>
-                        <td><?php echo (!empty($global['custody_chain']['results']['reference_values']) ? '{$lang.' . $global['custody_chain']['results']['reference_values'] . '}' : '- - -'); ?></td>
+                        <td><?php echo (($global['custody_chain']['closed'] == true) ? '{$lang.' . $global['custody_chain']['results']['reference_values'] . '}' : '{$lang.results_in_process}'); ?></td>
                     </tr>
                 <?php elseif ($global['custody_chain']['type'] == 'covid_ac') : ?>
                     <tr>
@@ -238,7 +238,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.0']);
                     </tr>
                     <tr>
                         <td>{$lang.end_process}:</td>
-                        <td><?php echo Dates::format_date($global['custody_chain']['end_process'], 'long'); ?></td>
+                        <td><?php echo (($global['custody_chain']['closed'] == true) ? Dates::format_date($global['custody_chain']['end_process'], 'long') : '{$lang.results_in_process}'); ?></td>
                     </tr>
                     <tr>
                         <td style="padding-top:10px;"><strong>{$lang.anticorps} IgM</strong></td>
@@ -246,15 +246,15 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.0']);
                     </tr>
                     <tr>
                         <td>{$lang.result}:</td>
-                        <td><?php echo (!empty($global['custody_chain']['results']['igm']['result']) ? '{$lang.' . $global['custody_chain']['results']['igm']['result'] . '}' : '- - -'); ?></td>
+                        <td><?php echo (($global['custody_chain']['closed'] == true) ? '{$lang.' . $global['custody_chain']['results']['igm']['result'] . '}' : '{$lang.results_in_process}'); ?></td>
                     </tr>
                     <tr>
                         <td>{$lang.unity}:</td>
-                        <td><?php echo (!empty($global['custody_chain']['results']['igm']['unity']) ? '{$lang.' . $global['custody_chain']['results']['igm']['unity'] . '}' : '- - -'); ?></td>
+                        <td><?php echo (($global['custody_chain']['closed'] == true) ? (!empty($global['custody_chain']['results']['igm']['unity']) ? '{$lang.' . $global['custody_chain']['results']['igm']['unity'] . '}' : '- - -') : '{$lang.results_in_process}'); ?></td>
                     </tr>
                     <tr>
                         <td>{$lang.reference_values}:</td>
-                        <td><?php echo (!empty($global['custody_chain']['results']['igm']['reference_values']) ? '{$lang.' . $global['custody_chain']['results']['igm']['reference_values'] . '}' : '- - -'); ?></td>
+                        <td><?php echo (($global['custody_chain']['closed'] == true) ? '{$lang.' . $global['custody_chain']['results']['igm']['reference_values'] . '}' : '{$lang.results_in_process}'); ?></td>
                     </tr>
                     <tr>
                         <td style="padding-top:10px;"><strong>{$lang.anticorps} IgG</strong></td>
@@ -262,15 +262,15 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.0']);
                     </tr>
                     <tr>
                         <td>{$lang.result}:</td>
-                        <td><?php echo (!empty($global['custody_chain']['results']['igg']['result']) ? '{$lang.' . $global['custody_chain']['results']['igg']['result'] . '}' : '- - -'); ?></td>
+                        <td><?php echo (($global['custody_chain']['closed'] == true) ? '{$lang.' . $global['custody_chain']['results']['igg']['result'] . '}' : '{$lang.results_in_process}'); ?></td>
                     </tr>
                     <tr>
                         <td>{$lang.unity}:</td>
-                        <td><?php echo (!empty($global['custody_chain']['results']['igg']['unity']) ? '{$lang.' . $global['custody_chain']['results']['igg']['unity'] . '}' : '- - -'); ?></td>
+                        <td><?php echo (($global['custody_chain']['closed'] == true) ? (!empty($global['custody_chain']['results']['igg']['unity']) ? '{$lang.' . $global['custody_chain']['results']['igg']['unity'] . '}' : '- - -') : '{$lang.results_in_process}'); ?></td>
                     </tr>
                     <tr>
                         <td>{$lang.reference_values}:</td>
-                        <td><?php echo (!empty($global['custody_chain']['results']['igg']['reference_values']) ? '{$lang.' . $global['custody_chain']['results']['igg']['reference_values'] . '}' : '- - -'); ?></td>
+                        <td><?php echo (($global['custody_chain']['closed'] == true) ? '{$lang.' . $global['custody_chain']['results']['igg']['reference_values'] . '}' : '{$lang.results_in_process}'); ?></td>
                     </tr>
                 <?php endif; ?>
             </table>
@@ -311,19 +311,21 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.0']);
                     <td><?php echo $global['custody_chain']['contact']['travel_to']; ?></td>
                 </tr>
             </table>
-            <?php if (Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) : ?>
-                <figure>
-                    <img src="{$path.uploads}<?php echo $global['custody_chain']['qr']; ?>">
-                </figure>
-                <a href="{$path.uploads}<?php echo $global['custody_chain']['pdf']; ?>" download="certificate.pdf">{$lang.download_certificate_pdf}</a>
+            <?php if ($global['custody_chain']['closed'] == true) : ?>
+                <?php if (Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) : ?>
+                    <figure>
+                        <img src="{$path.uploads}<?php echo $global['custody_chain']['qr']; ?>">
+                    </figure>
+                    <a href="{$path.uploads}<?php echo $global['custody_chain']['pdf']; ?>" download="certificate.pdf">{$lang.download_certificate_pdf}</a>
+                <?php endif; ?>
+                <div class="collector">
+                    <figure>
+                        <img src="{$path.uploads}<?php echo $global['custody_chain']['collector_signature']; ?>">
+                    </figure>
+                    <h2><?php echo $global['custody_chain']['collector_name']; ?></h2>
+                    <h3>{$lang.this_certificate_available_by}</h3>
+                </div>
             <?php endif; ?>
-            <div class="collector">
-                <figure>
-                    <img src="{$path.uploads}<?php echo $global['custody_chain']['collector_signature']; ?>">
-                </figure>
-                <h2><?php echo $global['custody_chain']['collector_name']; ?></h2>
-                <h3>{$lang.this_certificate_available_by}</h3>
-            </div>
         </div>
     <?php endif; ?>
 </main>
