@@ -299,6 +299,15 @@ main.covid > div.results > table > tbody > tr > td:last-child {
     color: #757575;
 }
 
+main.covid > div.results > p {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: justify;
+    color: #757575;
+    margin-bottom: 40px;
+}
+
 main.covid > div.results > figure {
     width: 100%;
     margin-bottom: 40px;
