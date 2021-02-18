@@ -9,6 +9,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
 %{header}%
 <header class="modbar">
     <div class="buttons">
+        <a data-action="filter_custody_chains" class="btn <?php echo (!empty(System::temporal('get', 'laboratory', 'filter')) ? 'success' : ''); ?> auto"><i class="fas fa-filter"></i>{$lang.filter}</a>
         <fieldset class="fields-group big">
             <div class="compound st-4-left">
                 <span><i class="fas fa-search"></i></span>
@@ -47,3 +48,99 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
         </tbody>
     </table>
 </main>
+<section class="modal" data-modal="filter_custody_chains">
+    <div class="content">
+        <main>
+            <form>
+                <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
+                    <fieldset class="fields-group">
+                        <div class="text">
+                            <select name="account">
+                                <option value="all" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['account'] == 'all') ? 'selected' : '') ?>>{$lang.view_all}</option>
+                                <?php foreach (Session::get_value('vkye_user')['accounts'] as $value) : ?>
+                                    <option value="<?php echo $value['id']; ?>" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['account'] == $value['id']) ? 'selected' : '') ?>><?php echo $value['name']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="title">
+                            <h6>{$lang.account}</h6>
+                        </div>
+                    </fieldset>
+                <?php endif; ?>
+                <?php if ($global['render'] == 'covid') : ?>
+                    <fieldset class="fields-group">
+                        <div class="text">
+                            <select name="type">
+                                <option value="all" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['type'] == 'all') ? 'selected' : '') ?>>{$lang.view_all}</option>
+                                <option value="covid_pcr" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['type'] == 'covid_pcr') ? 'selected' : '') ?>>{$lang.covid_pcr}</option>
+                                <option value="covid_an" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['type'] == 'covid_an') ? 'selected' : '') ?>>{$lang.covid_an}</option>
+                                <option value="covid_ac" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['type'] == 'covid_ac') ? 'selected' : '') ?>>{$lang.covid_ac}</option>
+                            </select>
+                        </div>
+                        <div class="title">
+                            <h6>{$lang.type}</h6>
+                        </div>
+                    </fieldset>
+                <?php endif; ?>
+                <fieldset class="fields-group">
+                    <div class="row">
+                        <div class="span6">
+                            <div class="text">
+                                <input type="date" name="start_date" value="<?php echo (!empty(System::temporal('get', 'laboratory', 'filter')) ? System::temporal('get', 'laboratory', 'filter')['start_date'] : Dates::past_date(Dates::current_date(), 1, 'days')); ?>">
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.start_date}</h6>
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <div class="text">
+                                <input type="date" name="end_date" value="<?php echo (!empty(System::temporal('get', 'laboratory', 'filter')) ? System::temporal('get', 'laboratory', 'filter')['end_date'] : Dates::current_date()); ?>">
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.end_date}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="fields-group">
+                    <div class="row">
+                        <div class="span6">
+                            <div class="text">
+                                <input type="time" name="start_hour" value="<?php echo (!empty(System::temporal('get', 'laboratory', 'filter')) ? System::temporal('get', 'laboratory', 'filter')['start_hour'] : '00:00'); ?>">
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.start_hour}</h6>
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <div class="text">
+                                <input type="time" name="end_hour" value="<?php echo (!empty(System::temporal('get', 'laboratory', 'filter')) ? System::temporal('get', 'laboratory', 'filter')['end_hour'] : '23:59'); ?>">
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.end_hour}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="fields-group">
+                    <div class="text">
+                        <select name="closed">
+                            <option value="all" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['closed'] == 'all') ? 'selected' : '') ?>>{$lang.view_all}</option>
+                            <option value="sended" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['closed'] == 'sended') ? 'selected' : '') ?>>{$lang.all_sended}</option>
+                            <option value="pending" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['closed'] == 'pending') ? 'selected' : '') ?>>{$lang.only_send_pending}</option>
+                        </select>
+                    </div>
+                    <div class="title">
+                        <h6>{$lang.send_status}</h6>
+                    </div>
+                </fieldset>
+                <fieldset class="fields-group">
+                    <div class="button">
+                        <a class="btn auto warning" button-cancel><i class="fas fa-sync"></i>{$lang.end_filter}</a>
+                        <button type="submit" class="success"><i class="fas fa-check"></i></button>
+                    </div>
+                </fieldset>
+            </form>
+        </main>
+    </div>
+</section>

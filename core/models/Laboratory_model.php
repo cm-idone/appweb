@@ -79,6 +79,8 @@ class Laboratory_model extends Model
 
 	public function read_custody_chains($type)
 	{
+		$AND = [];
+
 		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up')
 		{
 			$accounts = [];
@@ -86,8 +88,25 @@ class Laboratory_model extends Model
 			foreach (Session::get_value('vkye_user')['accounts'] as $value)
 				array_push($accounts, $value['id']);
 		}
+
+		if (!empty(System::temporal('get', 'laboratory', 'filter')))
+		{
+			$AND['custody_chains.account'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? ((System::temporal('get', 'laboratory', 'filter')['account'] == 'all') ? $accounts : System::temporal('get', 'laboratory', 'filter')['account']) : Session::get_value('vkye_account')['id'];
+			$AND['custody_chains.type'] = ($type == 'covid') ? ((System::temporal('get', 'laboratory', 'filter')['type'] == 'all') ? ['covid_pcr','covid_an','covid_ac'] : System::temporal('get', 'laboratory', 'filter')['type']) : $type;
+			$AND['custody_chains.date[<>]'] = [System::temporal('get', 'laboratory', 'filter')['start_date'], System::temporal('get', 'laboratory', 'filter')['end_date']];
+			$AND['custody_chains.hour[<>]'] = [System::temporal('get', 'laboratory', 'filter')['start_hour'], System::temporal('get', 'laboratory', 'filter')['end_hour']];
+
+			if (System::temporal('get', 'laboratory', 'filter')['closed'] == 'sended')
+				$AND['custody_chains.closed'] = true;
+			else if (System::temporal('get', 'laboratory', 'filter')['closed'] == 'pending')
+				$AND['custody_chains.closed'] = false;
+		}
 		else
-			$accounts = Session::get_value('vkye_account')['id'];
+		{
+			$AND['custody_chains.account'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $accounts : Session::get_value('vkye_account')['id'];
+			$AND['custody_chains.type'] = ($type == 'covid') ? ['covid_pcr','covid_an','covid_ac'] : $type;
+			$AND['custody_chains.date[<>]'] = [Dates::past_date(Dates::current_date(), 1, 'days'), Dates::current_date()];
+		}
 
 		$query = System::decode_json_to_array($this->database->select('custody_chains', [
 			'[>]accounts' => [
@@ -117,10 +136,7 @@ class Laboratory_model extends Model
 			'users.firstname(user_firstname)',
 			'users.lastname(user_lastname)'
 		], [
-			'AND' => [
-				'custody_chains.account' => $accounts,
-				'custody_chains.type' => ($type == 'covid') ? ['covid_pcr','covid_an','covid_ac'] : $type
-			],
+			'AND' => $AND,
 			'ORDER' => [
 				'custody_chains.id' => 'DESC'
 			]

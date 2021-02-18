@@ -540,7 +540,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                         <button type="submit" class="auto warning" data-save="only_save"><i class="fas fa-save"></i>{$lang.only_save}</button>
                         <button type="submit" class="auto success" data-save="save_and_send"><i class="fas fa-envelope"></i>{$lang.save_and_send}</button>
                     <?php else : ?>
-                        <button type="submit" class="auto success" data-save="only_save"><i class="fas fa-save"></i>{$lang.save}</button>
+                        <button type="submit" class="auto success" data-save="only_save"><i class="fas fa-check"></i>{$lang.save}</button>
                     <?php endif; ?>
                 </div>
             </fieldset>

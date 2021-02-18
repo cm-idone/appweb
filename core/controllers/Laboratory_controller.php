@@ -15,14 +15,41 @@ class Laboratory_controller extends Controller
     {
         if (Format::exist_ajax_request() == true)
 		{
+			if ($_POST['action'] == 'filter_custody_chains')
+			{
+				$filter = System::temporal('get', 'laboratory', 'filter');
 
+				if ($_POST['filter'] == 'true')
+				{
+					$filter['account'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $_POST['account'] : '';
+					$filter['type'] = ($params[0] == 'covid') ? $_POST['type'] : $params[0];
+					$filter['start_date'] = $_POST['start_date'];
+					$filter['end_date'] = $_POST['end_date'];
+					$filter['start_hour'] = $_POST['start_hour'];
+					$filter['end_hour'] = $_POST['end_hour'];
+					$filter['closed'] = $_POST['closed'];
+				}
+				else if ($_POST['filter'] == 'false')
+					$filter = [];
+
+				System::temporal('set_forced', 'laboratory', 'filter', $filter);
+
+				echo json_encode([
+					'status' => 'success',
+					'message' => '{$lang.operation_success}'
+				]);
+			}
 		}
 		else
 		{
 			define('_title', Configuration::$web_page . ' | {$lang.laboratory} | {$lang.' . $params[0] . '}');
 
+			if (System::temporal('get_if_exists', 'laboratory', 'filter') == false)
+				System::temporal('set_forced', 'laboratory', 'filter', []);
+
 			global $global;
 
+			$global['render'] = $params[0];
 			$global['custody_chains'] = $this->model->read_custody_chains($params[0]);
 
 			$template = $this->view->render($this, 'index');
