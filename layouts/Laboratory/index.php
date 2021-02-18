@@ -2,7 +2,7 @@
 
 defined('_EXEC') or die;
 
-$this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
+$this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
 
 ?>
 
@@ -56,7 +56,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
                     <fieldset class="fields-group">
                         <div class="text">
                             <select name="account">
-                                <option value="all" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['account'] == 'all') ? 'selected' : '') ?>>{$lang.view_all}</option>
+                                <option value="all" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['account'] == 'all') ? 'selected' : '') ?>>{$lang.all}</option>
                                 <?php foreach (Session::get_value('vkye_user')['accounts'] as $value) : ?>
                                     <option value="<?php echo $value['id']; ?>" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['account'] == $value['id']) ? 'selected' : '') ?>><?php echo $value['name']; ?></option>
                                 <?php endforeach; ?>
@@ -71,7 +71,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
                     <fieldset class="fields-group">
                         <div class="text">
                             <select name="type">
-                                <option value="all" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['type'] == 'all') ? 'selected' : '') ?>>{$lang.view_all}</option>
+                                <option value="all" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['type'] == 'all') ? 'selected' : '') ?>>{$lang.all}</option>
                                 <option value="covid_pcr" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['type'] == 'covid_pcr') ? 'selected' : '') ?>>{$lang.covid_pcr}</option>
                                 <option value="covid_an" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['type'] == 'covid_an') ? 'selected' : '') ?>>{$lang.covid_an}</option>
                                 <option value="covid_ac" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['type'] == 'covid_ac') ? 'selected' : '') ?>>{$lang.covid_ac}</option>
@@ -122,21 +122,27 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
                         </div>
                     </div>
                 </fieldset>
-                <fieldset class="fields-group">
-                    <div class="text">
-                        <select name="closed">
-                            <option value="all" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['closed'] == 'all') ? 'selected' : '') ?>>{$lang.view_all}</option>
-                            <option value="sended" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['closed'] == 'sended') ? 'selected' : '') ?>>{$lang.all_sended}</option>
-                            <option value="pending" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['closed'] == 'pending') ? 'selected' : '') ?>>{$lang.only_send_pending}</option>
-                        </select>
-                    </div>
-                    <div class="title">
-                        <h6>{$lang.send_status}</h6>
-                    </div>
-                </fieldset>
+                <?php if ($global['render'] == 'covid') : ?>
+                    <fieldset class="fields-group">
+                        <div class="text">
+                            <select name="closed">
+                                <option value="all" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['closed'] == 'all') ? 'selected' : '') ?>>{$lang.all}</option>
+                                <option value="sended" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['closed'] == 'sended') ? 'selected' : '') ?>>{$lang.all_sended}</option>
+                                <option value="pending" <?php echo ((!empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['closed'] == 'pending') ? 'selected' : '') ?>>{$lang.only_send_pending}</option>
+                            </select>
+                        </div>
+                        <div class="title">
+                            <h6>{$lang.send_status}</h6>
+                        </div>
+                    </fieldset>
+                <?php endif; ?>
                 <fieldset class="fields-group">
                     <div class="button">
-                        <a class="btn auto warning" button-cancel><i class="fas fa-sync"></i>{$lang.end_filter}</a>
+                        <?php if (!empty(System::temporal('get', 'laboratory', 'filter'))) : ?>
+                            <a class="btn auto warning" button-cancel><i class="fas fa-sync"></i>{$lang.end_filter}</a>
+                        <?php else : ?>
+                            <a class="alert" button-close><i class="fas fa-times"></i></a>
+                        <?php endif; ?>
                         <button type="submit" class="success"><i class="fas fa-check"></i></button>
                     </div>
                 </fieldset>

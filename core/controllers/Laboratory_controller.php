@@ -27,7 +27,7 @@ class Laboratory_controller extends Controller
 					$filter['end_date'] = $_POST['end_date'];
 					$filter['start_hour'] = $_POST['start_hour'];
 					$filter['end_hour'] = $_POST['end_hour'];
-					$filter['closed'] = $_POST['closed'];
+					$filter['closed'] = ($params[0] == 'covid') ? $_POST['closed'] : '';
 				}
 				else if ($_POST['filter'] == 'false')
 					$filter = [];

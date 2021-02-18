@@ -96,9 +96,9 @@ class Laboratory_model extends Model
 			$AND['custody_chains.date[<>]'] = [System::temporal('get', 'laboratory', 'filter')['start_date'], System::temporal('get', 'laboratory', 'filter')['end_date']];
 			$AND['custody_chains.hour[<>]'] = [System::temporal('get', 'laboratory', 'filter')['start_hour'], System::temporal('get', 'laboratory', 'filter')['end_hour']];
 
-			if (System::temporal('get', 'laboratory', 'filter')['closed'] == 'sended')
+			if ($type == 'covid' AND System::temporal('get', 'laboratory', 'filter')['closed'] == 'sended')
 				$AND['custody_chains.closed'] = true;
-			else if (System::temporal('get', 'laboratory', 'filter')['closed'] == 'pending')
+			else if ($type == 'covid' AND System::temporal('get', 'laboratory', 'filter')['closed'] == 'pending')
 				$AND['custody_chains.closed'] = false;
 		}
 		else
