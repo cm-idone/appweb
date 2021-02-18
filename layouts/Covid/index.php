@@ -273,7 +273,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.0']);
                 <?php endif; ?>
             </table>
             <?php if (!empty($global['custody_chain']['comments'])) : ?>
-                <p><?php echo $global['custody_chain']['comments']; ?></p>
+                <p>{$lang.comments}: <?php echo (!empty($global['custody_chain']['comments']) ? $global['custody_chain']['comments'] : '{$lang.not_comments}'); ?></p>
             <?php endif; ?>
             <table>
                 <tr>
