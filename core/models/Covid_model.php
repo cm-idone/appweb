@@ -13,14 +13,14 @@ class Covid_model extends Model
 
     public function create_custody_chain($data)
     {
-		$data['qr']['content'] = 'https://' . Configuration::$domain . '/laboratory/update/' . $data['token'];
+		$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . $data['account']['path'] . '/covid/' . $data['token'];
 		$data['qr']['dir'] = PATH_UPLOADS . $data['qr']['filename'];
 		$data['qr']['level'] = 'H';
 		$data['qr']['size'] = 5;
 		$data['qr']['frame'] = 3;
 
         $query = $this->database->insert('custody_chains', [
-            'account' => $data['account'],
+            'account' => $data['account']['id'],
 			'token' => $data['token'],
             'employee' => null,
 			'contact' => json_encode([

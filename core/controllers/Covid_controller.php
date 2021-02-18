@@ -100,8 +100,8 @@ class Covid_controller extends Controller
 							$_POST['birth_date'] = $_POST['birth_date_year'] . '-' . $_POST['birth_date_month'] . '-' . $_POST['birth_date_day'];
 							$_POST['email'] = strtolower($_POST['email']);
 							$_POST['travel_to'] = ucwords($_POST['travel_to']);
-							$_POST['qr']['filename'] = 'tmp_' . $params[0] . '_covid_qr_' . $_POST['token'] . '.png';
-							$_POST['account'] = $global['account']['id'];
+							$_POST['qr']['filename'] = 'covid_qr_' . $_POST['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
+							$_POST['account'] = $global['account'];
 
 			                $query = $this->model->create_custody_chain($_POST);
 
@@ -290,7 +290,7 @@ class Covid_controller extends Controller
 	        }
 	        else
 	        {
-	            define('_title', 'Marbu Salud | Covid');
+	            define('_title', 'Marbu Salud | {$lang.covid}');
 
 	            if ($global['render'] == 'results' OR System::temporal('get_if_exists', 'covid', 'contact') == false)
 					System::temporal('set_forced', 'covid', 'contact', []);

@@ -231,33 +231,7 @@ class Laboratory_controller extends Controller
 			$global['custody_chain'] = $this->model->read_custody_chain($params[0]);
 
 			if (!empty($global['custody_chain']))
-			{
-				if ($global['custody_chain']['account'] != Session::get_value('vkye_account')['id'])
-				{
-					$break = true;
-
-					foreach (Session::get_value('vkye_user')['accounts'] as $value)
-					{
-						if ($global['custody_chain']['account'] == $value['id'])
-							$break = false;
-					}
-
-					if ($break == false)
-					{
-						$session = new System_model();
-						$session = $session->read_session($global['custody_chain']['account'], 'id');
-
-						Session::set_value('vkye_account', $session['account']);
-						Session::set_value('vkye_user', $session['user']);
-						Session::set_value('vkye_lang', $session['user']['language']);
-						Session::set_value('vkye_temporal', []);
-
-						header('Location: /laboratory/update/' . $params[0]);
-					}
-				}
-				else
-					$go = true;
-			}
+				$go = true;
 		}
 
 		if ($go == true)
@@ -359,8 +333,8 @@ class Laboratory_controller extends Controller
     				{
 						if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee']))
 						{
-							$_POST['qr']['filename'] = 'results_covid_qr_' . $global['custody_chain']['token'] . '_' . System::generate_random_string() . '.png';
-							$_POST['pdf']['filename'] = 'results_covid_pdf_' . $global['custody_chain']['token'] . '_' . System::generate_random_string() . '.pdf';
+							$_POST['qr']['filename'] = 'covid_qr_' . $global['custody_chain']['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
+							$_POST['pdf']['filename'] = 'covid_pdf_' . $global['custody_chain']['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
 						}
 
 						$_POST['custody_chain'] = $global['custody_chain'];
