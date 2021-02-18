@@ -184,10 +184,8 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.0']);
         <?php endif; ?>
     <?php elseif ($global['render'] == 'results') : ?>
         <div class="results">
-            <?php if (Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) : ?>
-                <h2><?php echo (($global['custody_chain']['closed'] == true) ? '{$lang.ready_results}' : '{$lang.results_in_process}'); ?></h2>
-                <h3>{$lang.covid_test}</h3>
-            <?php endif; ?>
+            <h2><?php echo ((Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) ? (($global['custody_chain']['closed'] == true) ? '{$lang.ready_results}' : '{$lang.results_in_process}') : '{$lang.expired_results}'); ?></h2>
+            <h3>{$lang.covid_test}</h3>
             <div class="title">
                 <i class="fas fa-qrcode"></i>
                 <h2><strong>{$lang.type}: {$lang.<?php echo $global['custody_chain']['type']; ?>} </strong>{$lang.token}: <?php echo $global['custody_chain']['token']; ?></h2>
