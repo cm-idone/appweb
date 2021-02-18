@@ -70,7 +70,8 @@ class Covid_model extends Model
 			'lang' => Session::get_value('vkye_lang'),
 			'closed' => false,
 			'user' => null,
-			'accept_terms' => true
+			'accept_terms' => true,
+			'deleted' => false
         ]);
 
 		if (!empty($query))

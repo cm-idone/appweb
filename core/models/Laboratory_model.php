@@ -71,7 +71,8 @@ class Laboratory_model extends Model
 			'lang' => null,
 			'closed' => true,
 			'user' => Session::get_value('vkye_user')['id'],
-			'accept_terms' => null
+			'accept_terms' => null,
+			'deleted' => false
         ]);
 
         return $query;
@@ -96,16 +97,19 @@ class Laboratory_model extends Model
 			$AND['custody_chains.date[<>]'] = [System::temporal('get', 'laboratory', 'filter')['start_date'], System::temporal('get', 'laboratory', 'filter')['end_date']];
 			$AND['custody_chains.hour[<>]'] = [System::temporal('get', 'laboratory', 'filter')['start_hour'], System::temporal('get', 'laboratory', 'filter')['end_hour']];
 
-			if ($type == 'covid' AND System::temporal('get', 'laboratory', 'filter')['closed'] == 'sended')
-				$AND['custody_chains.closed'] = true;
-			else if ($type == 'covid' AND System::temporal('get', 'laboratory', 'filter')['closed'] == 'pending')
+			if ($type == 'covid' AND System::temporal('get', 'laboratory', 'filter')['sended_status'] == 'not_sended')
 				$AND['custody_chains.closed'] = false;
+			else if ($type == 'covid' AND System::temporal('get', 'laboratory', 'filter')['sended_status'] == 'sended')
+				$AND['custody_chains.closed'] = true;
+
+			$AND['custody_chains.deleted'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? ((System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'deleted') ? true : false) : false;
 		}
 		else
 		{
 			$AND['custody_chains.account'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $accounts : Session::get_value('vkye_account')['id'];
 			$AND['custody_chains.type'] = ($type == 'covid') ? ['covid_pcr','covid_an','covid_ac'] : $type;
 			$AND['custody_chains.date[<>]'] = [Dates::past_date(Dates::current_date(), 1, 'days'), Dates::current_date()];
+			$AND['custody_chains.deleted'] = false;
 		}
 
 		$query = System::decode_json_to_array($this->database->select('custody_chains', [
@@ -134,7 +138,8 @@ class Laboratory_model extends Model
 			'custody_chains.closed',
 			'custody_chains.user',
 			'users.firstname(user_firstname)',
-			'users.lastname(user_lastname)'
+			'users.lastname(user_lastname)',
+			'custody_chains.deleted'
 		], [
 			'AND' => $AND,
 			'ORDER' => [
@@ -213,7 +218,8 @@ class Laboratory_model extends Model
 			'custody_chains.pdf',
 			'custody_chains.lang',
 			'custody_chains.closed',
-			'custody_chains.user'
+			'custody_chains.user',
+			'custody_chains.deleted'
 		], [
 			'custody_chains.token' => $token
 		]));
@@ -521,6 +527,68 @@ class Laboratory_model extends Model
 		{
 			if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']))
 				Fileloader::down($data['qr']['filename']);
+		}
+
+        return $query;
+    }
+
+	public function restore_custody_chain($id)
+	{
+		$query = $this->database->update('custody_chains', [
+			'deleted' => false
+		], [
+			'id' => $id
+		]);
+
+        return $query;
+	}
+
+	public function delete_custody_chain($id)
+    {
+		$query = null;
+
+		$deleted = System::decode_json_to_array($this->database->select('custody_chains', [
+			'type',
+			'employee',
+			'signatures',
+			'qr',
+			'pdf',
+			'deleted'
+        ], [
+            'id' => $id
+        ]));
+
+		if (!empty($deleted))
+		{
+			if ($deleted[0]['deleted'] == false)
+			{
+				$query = $this->database->update('custody_chains', [
+					'deleted' => true
+				], [
+					'id' => $id
+				]);
+			}
+			else if ($deleted[0]['deleted'] == true)
+			{
+				$query = $this->database->delete('custody_chains', [
+					'id' => $id
+				]);
+
+				if (!empty($query))
+				{
+					if (!empty($deleted[0]['employee']) AND !empty($deleted[0]['signatures']['employee']))
+						Fileloader::down($deleted[0]['signatures']['employee']);
+
+					if (($deleted[0]['type'] == 'covid_pcr' OR $deleted[0]['type'] == 'covid_an' OR $deleted[0]['type'] == 'covid_ac') AND empty($deleted[0]['employee']))
+					{
+						if (!empty($deleted[0]['qr']))
+							Fileloader::down($deleted[0]['qr']);
+
+						if (!empty($deleted[0]['pdf']))
+							Fileloader::down($deleted[0]['pdf']);
+					}
+				}
+			}
 		}
 
         return $query;

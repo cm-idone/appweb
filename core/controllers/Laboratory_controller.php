@@ -22,12 +22,13 @@ class Laboratory_controller extends Controller
 				if ($_POST['filter'] == 'true')
 				{
 					$filter['account'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $_POST['account'] : '';
+					$filter['deleted_status'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $_POST['deleted_status'] : '';
 					$filter['type'] = ($params[0] == 'covid') ? $_POST['type'] : $params[0];
 					$filter['start_date'] = $_POST['start_date'];
 					$filter['end_date'] = $_POST['end_date'];
 					$filter['start_hour'] = $_POST['start_hour'];
 					$filter['end_hour'] = $_POST['end_hour'];
-					$filter['closed'] = ($params[0] == 'covid') ? $_POST['closed'] : '';
+					$filter['sended_status'] = ($params[0] == 'covid') ? $_POST['sended_status'] : '';
 				}
 				else if ($_POST['filter'] == 'false')
 					$filter = [];
@@ -38,6 +39,29 @@ class Laboratory_controller extends Controller
 					'status' => 'success',
 					'message' => '{$lang.operation_success}'
 				]);
+			}
+
+			if ($_POST['action'] == 'restore_custody_chain' OR $_POST['action'] == 'delete_custody_chain')
+			{
+				if ($_POST['action'] == 'restore_custody_chain')
+					$query = $this->model->restore_custody_chain($_POST['id']);
+				else if ($_POST['action'] == 'delete_custody_chain')
+					$query = $this->model->delete_custody_chain($_POST['id']);
+
+				if (!empty($query))
+				{
+					echo json_encode([
+						'status' => 'success',
+						'message' => '{$lang.operation_success}'
+					]);
+				}
+				else
+				{
+					echo json_encode([
+						'status' => 'error',
+						'message' => '{$lang.operation_error}'
+					]);
+				}
 			}
 		}
 		else
