@@ -31,6 +31,10 @@ class Languages
                 'es' => 'con tus resultados. Puedes consultar tus resultados aquí',
                 'en' => 'with your results. You can check your results here'
             ],
+            'share_us_your_token' => [
+                'es' => 'Compártenos tu folio para agendarte una cita',
+                'en' => 'Share your page with us to schedule an appointment'
+            ],
             'your_results_are_ready' => [
                 'es' => 'Tus resultados están listos',
                 'en' => 'Your results are ready'
@@ -52,8 +56,8 @@ class Languages
                 'en' => '. Without further ado for the moment we are awaiting confirmation from him. Thank you.'
             ],
             'view_online_results' => [
-                'es' => 'Consultar resultados online',
-                'en' => 'Consult online results'
+                'es' => 'Consulta tus resultados online',
+                'en' => 'Consult your online results'
             ],
             'result_report' => [
                 'es' => 'Reporte de resultados',
