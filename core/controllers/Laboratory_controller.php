@@ -394,7 +394,7 @@ class Laboratory_controller extends Controller
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
-														<a style="width:100%;display:block;margin:0px;padding:10px;border:1px solid #bdbdbd;border-radius:5px;box-sizing:border-box;background-color:#fff;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#757575;" href="https://api.whatsapp.com/send?phone=' . Configuration::$vars['marbu']['phone'] . '&text=Hola, soy ' . $_POST['firstname'] . ' ' . $_POST['lastname'] . '. Mi folio es: ' . $_POST['token'] . '. ">' . Languages::email('whatsapp_us_to_support')[Session::get_value('vkye_lang')] . '</a>
+														<a style="width:100%;display:block;margin:0px;padding:10px;border:1px solid #bdbdbd;border-radius:5px;box-sizing:border-box;background-color:#fff;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#757575;" href="https://api.whatsapp.com/send?phone=' . Configuration::$vars['marbu']['phone'] . '&text=Hola, soy ' . $_POST['firstname'] . ' ' . $_POST['lastname'] . '. Mi folio es: ' . $global['custody_chain']['token'] . '. ">' . Languages::email('whatsapp_us_to_support')[Session::get_value('vkye_lang')] . '</a>
 													</td>
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
