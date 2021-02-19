@@ -3,7 +3,7 @@
 defined('_EXEC') or die;
 
 include_once(PATH_MODELS . 'System_model.php');
-require_once 'plugins/nexmo/vendor/autoload.php';
+// require_once 'plugins/nexmo/vendor/autoload.php';
 
 class Laboratory_controller extends Controller
 {

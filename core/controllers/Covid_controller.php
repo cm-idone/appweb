@@ -2,7 +2,7 @@
 
 defined('_EXEC') or die;
 
-require_once 'plugins/nexmo/vendor/autoload.php';
+// require_once 'plugins/nexmo/vendor/autoload.php';
 
 class Covid_controller extends Controller
 {
