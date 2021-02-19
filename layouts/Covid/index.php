@@ -182,7 +182,9 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.1']);
         <?php else : ?>
             <div class="create">
                 <h4>{$lang.your_token_is}: <?php echo System::temporal('get', 'covid', 'contact')['token']; ?></h4>
-                <p>¡{$lang.hi} <strong><?php echo explode(' ', System::temporal('get', 'covid', 'contact')['firstname'])[0]; ?></strong>! {$lang.covid_alert_1} <strong><?php echo System::temporal('get', 'covid', 'contact')['email']; ?></strong> {$lang.covid_alert_2}</p>
+                <?php if ($global['account']['path'] != 'moonpalace') : ?>
+                    <p>¡{$lang.hi} <strong><?php echo explode(' ', System::temporal('get', 'covid', 'contact')['firstname'])[0]; ?></strong>! {$lang.covid_alert_1} <strong><?php echo System::temporal('get', 'covid', 'contact')['email']; ?></strong> {$lang.covid_alert_2}</p>
+                <?php endif; ?>
                 <div class="share">
                     <div>
                         <a href="https://api.whatsapp.com/send?phone=<?php echo Configuration::$vars['marbu']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
