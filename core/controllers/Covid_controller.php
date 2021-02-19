@@ -2,7 +2,7 @@
 
 defined('_EXEC') or die;
 
-// require_once 'plugins/nexmo/vendor/autoload.php';
+require_once 'plugins/nexmo/vendor/autoload.php';
 
 class Covid_controller extends Controller
 {
@@ -193,18 +193,18 @@ class Covid_controller extends Controller
 								}
 								catch (Exception $e) {}
 
-								// $sms = new \Nexmo\Client\Credentials\Basic('51db0b68', 'd2TTUheuHp6BqYep');
-								// $sms = new \Nexmo\Client($sms);
-								//
-								// try
-								// {
-								// 	$sms->message()->send([
-								// 		'to' => $_POST['phone_country'] . $_POST['phone_number'],
-								// 		'from' => 'Marbu Salud',
-								// 		'text' => '¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' ' . explode(' ',  $_POST['firstname'])[0] . '! ' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'] . '. ' . Languages::email('we_send_email_1')[Session::get_value('vkye_lang')] . ' ' . $_POST['email'] . ' ' . Languages::email('we_send_email_2')[Session::get_value('vkye_lang')] . ': https://' . Configuration::$domain . '/' . $global['account']['path'] . '/covid/' . $_POST['token'] . '. ' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' ' . Configuration::$web_page . ' ' . Configuration::$web_version . '.'
-								// 	]);
-								// }
-								// catch (Exception $e) {}
+								$sms = new \Nexmo\Client\Credentials\Basic('51db0b68', 'd2TTUheuHp6BqYep');
+								$sms = new \Nexmo\Client($sms);
+
+								try
+								{
+									$sms->message()->send([
+										'to' => '+' . $_POST['phone_country'] . $_POST['phone_number'],
+										'from' => 'Marbu Salud',
+										'text' => '¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' ' . explode(' ',  $_POST['firstname'])[0] . '! ' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'] . '. ' . Languages::email('we_send_email_1')[Session::get_value('vkye_lang')] . ' ' . $_POST['email'] . ' ' . Languages::email('we_send_email_2')[Session::get_value('vkye_lang')] . ': https://' . Configuration::$domain . '/' . $global['account']['path'] . '/covid/' . $_POST['token'] . '. ' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' ' . Configuration::$web_page . ' ' . Configuration::$web_version . '.'
+									]);
+								}
+								catch (Exception $e) {}
 
 								$mail2 = new Mailer(true);
 

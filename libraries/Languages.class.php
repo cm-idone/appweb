@@ -7,10 +7,6 @@ class Languages
     static public function email($key, $subkey = null)
     {
         $langs = [
-            '' => [
-                'es' => '- - -',
-                'en' => '- - -'
-            ],
             'hi' => [
                 'es' => 'Hola',
                 'en' => 'Hi'
@@ -19,40 +15,36 @@ class Languages
                 'es' => 'Tu folio es',
                 'en' => 'Your token is'
             ],
-            'certificate_valid_to' => [
-                'es' => 'Certificado válido para',
-                'en' => 'Certificate valid for'
-            ],
             'your_results_next_email' => [
-                'es' => 'Este es solo un correo de confirmación de tu registro. Tu resultados llegaran en próximamente, en este mismo correo, con tu certificado online y en PDF.',
-                'en' => 'This is just a confirmation email of your registration. Your results will arrive soon, in this same email, with your online certificate and in PDF.'
+                'es' => 'Este es solo un email de confirmación de tu registro. Tu resultados llegaran próximamente, en esta misma dirección, con tu certificado online y en PDF.',
+                'en' => 'This is just a confirmation email of your registration. Your results will arrive soon, at this same address, with your online certificate and in PDF.'
             ],
             'we_send_email_1' => [
-                'es' => 'Te hemos enviado un correo electrónico a',
+                'es' => 'Te hemos enviado un email a',
                 'en' => 'We have sent you an email to'
             ],
             'we_send_email_2' => [
-                'es' => 'con la confirmación de tu registro. Consulta tus resultados aquí',
-                'en' => 'with the confirmation of your registration. Check your results here'
+                'es' => 'con la confirmación de tu registro. Puedes consultar tus resultados aquí',
+                'en' => 'with the confirmation of your registration. You can check your results here'
             ],
             'we_send_email_3' => [
-                'es' => 'con tus resultados. Igualmente puedes consultarlos aquí',
-                'en' => 'with the confirmation of your registration. Check your results here'
+                'es' => 'con tus resultados. Puedes consultar tus resultados aquí',
+                'en' => 'with your results. You can check your results here'
             ],
             'your_results_are_ready' => [
                 'es' => 'Tus resultados están listos',
                 'en' => 'Your results are ready'
             ],
             'ready_results' => [
-                'es' => '¡Resultados listos!',
-                'en' => '¡Ready results!'
+                'es' => 'Resultados listos',
+                'en' => 'Ready results'
             ],
             'covid_test' => [
-                'es' => 'Prueba Covid',
-                'en' => 'Covid Test'
+                'es' => 'Prueba de Covid 19',
+                'en' => 'Covid 19 Test'
             ],
             'get_covid_results_1' => [
-                'es' => 'Por este medio te hacemos llegar tus resultados de tu prueba de Covid. Puedes escanera el siguiente QR para consutar tus resultados en linea, o dar click en el enlace mas abajo. Igualmente te hemos adjuntado tu certificado como PDF. Este certificado tiene una validez de <strong>72 horas</strong>, a partir del día ',
+                'es' => 'Por este medio te hacemos llegar tus resultados de tu prueba de Covid. Puedes escanear el siguiente QR para consutar tus resultados en linea, o dar click en el enlace mas abajo. Igualmente te hemos adjuntado tu certificado como PDF. Este certificado tiene una validez de <strong>72 horas</strong>, a partir del día ',
                 'en' => 'By this means we send you your results of your Covid test. You can scan the following QR to view your results online, or click on the link below. We have also attached your certificate as a PDF. This certificate is valid for <strong> 72 hours </strong>, from the day '
             ],
             'get_covid_results_2' => [

@@ -29,13 +29,13 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.0']);
     <?php if ($global['render'] == 'create') : ?>
         <?php if (empty(System::temporal('get', 'covid', 'contact'))) : ?>
             <form name="registry">
-                <h2>{$lang.registry_now}</h2>
-                <h3>{$lang.covid_test}</h3>
-                <!-- <div class="share">
-                    <a data-action="share" data-text="" data-url=""><i class="fas fa-share-alt"></i>{$lang.share}</a>
-                    <a href="tel:<?php echo Configuration::$vars['marbu']['phone']; ?>" target="_blank"><i class="fas fa-headset"></i>{$lang.call_us}</a>
+                <div class="share">
                     <a href="https://api.whatsapp.com/send?phone=<?php echo Configuration::$vars['marbu']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
-                </div> -->
+                    <a href="tel:<?php echo Configuration::$vars['marbu']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
+                    <a data-action="share" data-text="{$lang.share_us_now}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['account']['path']; ?>/covid"><i class="fas fa-share-alt"></i>{$lang.share}</a>
+                </div>
+                <h2>¡{$lang.registry_now}!</h2>
+                <h3>{$lang.covid_test}</h3>
                 <div class="accept_terms">
                     <div class="caption">
                         <p>{$lang.accept_terms}</p>

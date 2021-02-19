@@ -2,14 +2,14 @@
 
 $(document).ready(function()
 {
-    // $('[data-action="share"]').on('click', function()
-    // {
-    //     navigator.share({
-    //         title: 'Marbu Salud',
-    //         text: 'Share',
-    //         url: 'https://id.one-consultores.com/oneconsultores/covid'
-    //     });
-    // });
+    $('[data-action="share"]').on('click', function()
+    {
+        navigator.share({
+            title: 'Marbu Salud',
+            text: $(this).data('text'),
+            url: $(this).data('url')
+        });
+    });
 
     $('[name="age"]').on('keyup', function()
     {
