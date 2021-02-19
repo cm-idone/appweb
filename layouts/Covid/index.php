@@ -28,6 +28,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.0']);
 <main class="covid">
     <?php if ($global['render'] == 'create') : ?>
         <?php if (empty(System::temporal('get', 'covid', 'contact'))) : ?>
+            <a data-action="share">Eviar por WhatsApp</a>
             <form name="registry">
                 <h2>{$lang.registry_now}</h2>
                 <h3>{$lang.covid_test}</h3>

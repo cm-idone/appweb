@@ -2,6 +2,15 @@
 
 $(document).ready(function()
 {
+    $('[data-action="share"]').on('click', function()
+    {
+        navigator.share({
+            title: 'Share',
+            text: 'Share',
+            url: 'https://id.one-consultores.com/oneconsultores/covid'
+        });
+    });
+
     $('[name="age"]').on('keyup', function()
     {
         validate_string('int', $(this).val(), $(this));
