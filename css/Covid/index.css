@@ -412,28 +412,34 @@ footer.covid > div:last-child > a {
 
 main.covid > form > div.share,
 main.covid > div.create > div.share,
-main.covid > div.create > div.share > div {
+main.covid > div.create > div.share > div,
+main.covid > div.results > div.share,
+main.covid > div.results > div.share > div {
     width: 100%;
 }
 
 main.covid > form > div.share,
-main.covid > div.create > div.share {
+main.covid > div.create > div.share,
+main.covid > div.results > div.share {
     margin-bottom: 40px;
 }
 
 main.covid > form > div.share,
-main.covid > div.create > div.share > div {
+main.covid > div.create > div.share > div,
+main.covid > div.results > div.share > div {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-main.covid > div.create > div.share > div:last-child {
+main.covid > div.create > div.share > div:last-child,
+main.covid > div.results > div.share > div:last-child {
     flex-direction: column;
 }
 
 main.covid > form > div.share > a,
-main.covid > div.create > div.share > div:first-child > a {
+main.covid > div.create > div.share > div:first-child > a,
+main.covid > div.results > div.share > div:first-child > a {
     width: calc(100% / 3);
     display: flex;
     align-items: center;
@@ -445,13 +451,15 @@ main.covid > div.create > div.share > div:first-child > a {
 }
 
 main.covid > form > div.share > a > i,
-main.covid > div.create > div.share > div:first-child > a > i {
+main.covid > div.create > div.share > div:first-child > a > i,
+main.covid > div.results > div.share > div:first-child > a > i {
     margin-bottom: 10px;
     font-size: 30px;
     color: #bdbdbd;
 }
 
-main.covid > div.create > div.share > div:last-child > a {
+main.covid > div.create > div.share > div:last-child > a,
+main.covid > div.results > div.share > div:last-child > a {
     width: 100%;
     display: flex;
     align-items: center;
@@ -466,7 +474,8 @@ main.covid > div.create > div.share > div:last-child > a {
     color: #757575;
 }
 
-main.covid > div.create > div.share > div:last-child > a > i {
+main.covid > div.create > div.share > div:last-child > a > i,
+main.covid > div.results > div.share > div:last-child > a > i {
     margin-right: 10px;
     font-size: 30px;
     color: #bdbdbd;
