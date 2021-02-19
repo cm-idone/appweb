@@ -32,7 +32,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.0']);
                 <div class="share">
                     <a href="https://api.whatsapp.com/send?phone=<?php echo Configuration::$vars['marbu']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
                     <a href="tel:<?php echo Configuration::$vars['marbu']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
-                    <a data-action="share" data-text="{$lang.share_us_now}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['account']['path']; ?>/covid"><i class="fas fa-share-alt"></i>{$lang.share}</a>
+                    <a data-action="share" data-title="Marbu Salud" data-text="{$lang.share_registry}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['account']['path']; ?>/covid"><i class="fas fa-share-alt"></i>{$lang.share}</a>
                 </div>
                 <h2>¡{$lang.registry_now}!</h2>
                 <h3>{$lang.covid_test}</h3>
@@ -181,6 +181,17 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.0']);
             <div class="create">
                 <h4>{$lang.your_token_is}: <?php echo System::temporal('get', 'covid', 'contact')['token']; ?></h4>
                 <p>¡{$lang.hi} <strong><?php echo explode(' ', System::temporal('get', 'covid', 'contact')['firstname'])[0]; ?></strong>! {$lang.covid_alert_1} <strong><?php echo System::temporal('get', 'covid', 'contact')['email']; ?></strong> {$lang.covid_alert_2}</p>
+                <div class="share">
+                    <div>
+                        <a href="https://api.whatsapp.com/send?phone=<?php echo Configuration::$vars['marbu']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
+                        <a href="tel:<?php echo Configuration::$vars['marbu']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
+                        <a data-action="share" data-title="Marbu Salud" data-text="{$lang.share_registry}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['account']['path']; ?>/covid"><i class="fas fa-share-alt"></i>{$lang.share}</a>
+                    </div>
+                    <div>
+                        <a href="https://api.whatsapp.com/send?phone=<?php echo Configuration::$vars['marbu']['phone']; ?>&text=Hola, soy <?php echo System::temporal('get', 'covid', 'contact')['firstname'] . ' ' . System::temporal('get', 'covid', 'contact')['lastname']; ?>. Me gustaría agendar mi cita. Ya he registrado mis datos. Mi folio es: <?php echo System::temporal('get', 'covid', 'contact')['token']; ?>" target="_blank"><i class="fas fa-headset"></i><span>{$lang.share_us_your_token}</span></a>
+                        <a data-action="share" data-title="Marbu Salud" data-text="{$lang.share_token} <?php echo System::temporal('get', 'covid', 'contact')['token']; ?>" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['account']['path']; ?>/covid/<?php echo System::temporal('get', 'covid', 'contact')['token']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_token_with_friends}</span></a>
+                    </div>
+                </div>
                 <figure>
                     <img src="{$path.uploads}<?php echo System::temporal('get', 'covid', 'contact')['qr']['filename']; ?>">
                 </figure>

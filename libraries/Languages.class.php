@@ -16,11 +16,11 @@ class Languages
                 'en' => 'Your token is'
             ],
             'your_results_next_email' => [
-                'es' => 'Este es solo un email de confirmación de tu registro. Tu resultados llegaran próximamente, en esta misma dirección, con tu certificado online y en PDF.',
+                'es' => 'Este es solo un correo electrónico de confirmación de tu registro. Tu resultados llegaran próximamente, en esta misma dirección, con tu certificado online y en PDF.',
                 'en' => 'This is just a confirmation email of your registration. Your results will arrive soon, at this same address, with your online certificate and in PDF.'
             ],
             'we_send_email_1' => [
-                'es' => 'Te hemos enviado un email a',
+                'es' => 'Te hemos enviado un correo electrónico a',
                 'en' => 'We have sent you an email to'
             ],
             'we_send_email_2' => [
