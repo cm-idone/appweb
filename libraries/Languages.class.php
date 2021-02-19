@@ -27,6 +27,18 @@ class Languages
                 'es' => 'Este es solo un correo de confirmación de tu registro. Tu resultados llegaran en próximamente, en este mismo correo, con tu certificado online y en PDF.',
                 'en' => 'This is just a confirmation email of your registration. Your results will arrive soon, in this same email, with your online certificate and in PDF.'
             ],
+            'we_send_email_1' => [
+                'es' => 'Te hemos enviado un correo electrónico a',
+                'en' => 'We have sent you an email to'
+            ],
+            'we_send_email_2' => [
+                'es' => 'con la confirmación de tu registro. Consulta tus resultados aquí',
+                'en' => 'with the confirmation of your registration. Check your results here'
+            ],
+            'we_send_email_3' => [
+                'es' => 'con tus resultados. Igualmente puedes consultarlos aquí',
+                'en' => 'with the confirmation of your registration. Check your results here'
+            ],
             'your_results_are_ready' => [
                 'es' => 'Tus resultados están listos',
                 'en' => 'Your results are ready'

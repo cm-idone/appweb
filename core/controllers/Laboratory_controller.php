@@ -3,6 +3,7 @@
 defined('_EXEC') or die;
 
 include_once(PATH_MODELS . 'System_model.php');
+require_once 'plugins/nexmo/vendor/autoload.php';
 
 class Laboratory_controller extends Controller
 {
@@ -427,6 +428,19 @@ class Laboratory_controller extends Controller
 									$mail->send();
 								}
 								catch (Exception $e) {}
+
+								// $sms = new \Nexmo\Client\Credentials\Basic('51db0b68', 'd2TTUheuHp6BqYep');
+								// $sms = new \Nexmo\Client($sms);
+								//
+								// try
+								// {
+								// 	$sms->message()->send([
+								// 		'to' => $_POST['phone_country'] . $_POST['phone_number'],
+								// 		'from' => 'Marbu Salud',
+								// 		'text' => '¡' . Languages::email('hi')[$_POST['lang']] . ' ' . explode(' ',  $_POST['firstname'])[0] . '! ' . Languages::email('your_results_are_ready')[$_POST['lang']] . '. ' . Languages::email('we_send_email_1')[Session::get_value('vkye_lang')] . ' ' . $_POST['email'] . ' ' . Languages::email('we_send_email_3')[Session::get_value('vkye_lang')] . ': https://' . Configuration::$domain . '/' . Session::get_value('vkye_account')['path'] . '/covid/' . $global['custody_chain']['token'] . '. ' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' ' . Configuration::$web_page . ' ' . Configuration::$web_version . '.'
+								// 	]);
+								// }
+								// catch (Exception $e) {}
 							}
 
     						echo json_encode([
