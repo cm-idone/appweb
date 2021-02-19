@@ -118,6 +118,8 @@ class Covid_model extends Model
             'id',
             'avatar',
             'path',
+            'email',
+            'phone',
             'time_zone'
         ], [
             'AND' => [

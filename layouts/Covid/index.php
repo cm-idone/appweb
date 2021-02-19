@@ -124,53 +124,55 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.0']);
                         </div>
                     </div>
                 </fieldset>
-                <fieldset class="fields-group">
-                    <div class="row">
-                        <div class="span4">
-                            <div class="text">
-                                <input type="email" name="email">
+                <?php if ($global['account']['path'] != 'moonpalace'): ?>
+                    <fieldset class="fields-group">
+                        <div class="row">
+                            <div class="span4">
+                                <div class="text">
+                                    <input type="email" name="email">
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.email}</h6>
+                                </div>
                             </div>
-                            <div class="title">
-                                <h6>{$lang.email}</h6>
+                            <div class="span4">
+                                <div class="compound st-1-left">
+                                    <select name="phone_country">
+                                        <option value="" class="hidden">{$lang.country}</option>
+                                        <?php foreach (Functions::countries() as $value) : ?>
+                                            <option value="<?php echo $value['lada']; ?>"><?php echo $value['name'][Session::get_value('vkye_lang')] . ' +' . $value['lada']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <input type="number" name="phone_number" placeholder="{$lang.number}">
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.phone}</h6>
+                                </div>
+                            </div>
+                            <div class="span4">
+                                <div class="text">
+                                    <input type="text" name="travel_to">
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.where_you_travel}</h6>
+                                </div>
                             </div>
                         </div>
-                        <div class="span4">
-                            <div class="compound st-1-left">
-                                <select name="phone_country">
-                                    <option value="" class="hidden">{$lang.country}</option>
-                                    <?php foreach (Functions::countries() as $value) : ?>
-                                        <option value="<?php echo $value['lada']; ?>"><?php echo $value['name'][Session::get_value('vkye_lang')] . ' +' . $value['lada']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <input type="number" name="phone_number" placeholder="{$lang.number}">
-                            </div>
-                            <div class="title">
-                                <h6>{$lang.phone}</h6>
-                            </div>
+                    </fieldset>
+                    <fieldset class="fields-group">
+                        <div class="text">
+                            <select name="type">
+                                <option value="" class="hidden">{$lang.choose_an_option}</option>
+                                <option value="covid_pcr">PCR (PCR-SARS-CoV-2 (COVID-19))</option>
+                                <option value="covid_an">{$lang.antigen} (Ag-SARS-CoV-2 (COVID-19))</option>
+                                <option value="covid_ac">{$lang.anticorps} (SARS-CoV-2 (2019) IgG/IgM)</option>
+                            </select>
                         </div>
-                        <div class="span4">
-                            <div class="text">
-                                <input type="text" name="travel_to">
-                            </div>
-                            <div class="title">
-                                <h6>{$lang.where_you_travel}</h6>
-                            </div>
+                        <div class="title">
+                            <h6>{$lang.test_to_do}</h6>
                         </div>
-                    </div>
-                </fieldset>
-                <fieldset class="fields-group">
-                    <div class="text">
-                        <select name="type">
-                            <option value="" class="hidden">{$lang.choose_an_option}</option>
-                            <option value="covid_pcr">PCR (PCR-SARS-CoV-2 (COVID-19))</option>
-                            <option value="covid_an">{$lang.antigen} (Ag-SARS-CoV-2 (COVID-19))</option>
-                            <option value="covid_ac">{$lang.anticorps} (SARS-CoV-2 (2019) IgG/IgM)</option>
-                        </select>
-                    </div>
-                    <div class="title">
-                        <h6>{$lang.test_to_do}</h6>
-                    </div>
-                </fieldset>
+                    </fieldset>
+                <?php endif; ?>
                 <fieldset class="fields-group">
                     <div class="button">
                         <button type="submit" class="success">{$lang.end_and_send}</button>

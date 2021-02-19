@@ -78,21 +78,24 @@ class Covid_controller extends Controller
 			            if (Validations::empty($_POST['sex']) == false)
 			                array_push($errors, ['sex','{$lang.dont_leave_this_field_empty}']);
 
-			            if (Validations::empty($_POST['email']) == false)
-			                array_push($errors, ['email','{$lang.dont_leave_this_field_empty}']);
-						else if (Validations::email($_POST['email']) == false)
-					   		array_push($errors, ['email','{$lang.invalid_field}']);
+						if ($global['account']['path'] != 'moonpalace')
+						{
+							if (Validations::empty($_POST['email']) == false)
+							   array_push($errors, ['email','{$lang.dont_leave_this_field_empty}']);
+						   else if (Validations::email($_POST['email']) == false)
+							   array_push($errors, ['email','{$lang.invalid_field}']);
 
-			            if (Validations::empty([$_POST['phone_country'],$_POST['phone_number']]) == false)
-			                array_push($errors, ['phone_number','{$lang.dont_leave_this_field_empty}']);
-						else if (Validations::number('int', $_POST['phone_number']) == false)
-							array_push($errors, ['phone_number','{$lang.invalid_field}']);
+						   if (Validations::empty([$_POST['phone_country'],$_POST['phone_number']]) == false)
+							   array_push($errors, ['phone_number','{$lang.dont_leave_this_field_empty}']);
+						   else if (Validations::number('int', $_POST['phone_number']) == false)
+							   array_push($errors, ['phone_number','{$lang.invalid_field}']);
 
-			            if (Validations::empty($_POST['type']) == false)
-			                array_push($errors, ['type','{$lang.dont_leave_this_field_empty}']);
+						   if (Validations::empty($_POST['travel_to']) == false)
+							   array_push($errors, ['travel_to','{$lang.dont_leave_this_field_empty}']);
 
-			            if (Validations::empty($_POST['travel_to']) == false)
-			                array_push($errors, ['travel_to','{$lang.dont_leave_this_field_empty}']);
+						   if (Validations::empty($_POST['type']) == false)
+							   array_push($errors, ['type','{$lang.dont_leave_this_field_empty}']);
+						}
 
 			            if (empty($errors))
 			            {
@@ -100,8 +103,21 @@ class Covid_controller extends Controller
 							$_POST['firstname'] = ucwords($_POST['firstname']);
 							$_POST['lastname'] = ucwords($_POST['lastname']);
 							$_POST['birth_date'] = $_POST['birth_date_year'] . '-' . $_POST['birth_date_month'] . '-' . $_POST['birth_date_day'];
-							$_POST['email'] = strtolower($_POST['email']);
-							$_POST['travel_to'] = ucwords($_POST['travel_to']);
+
+							if ($global['account']['path'] != 'moonpalace')
+							{
+								$_POST['email'] = strtolower($_POST['email']);
+								$_POST['travel_to'] = ucwords($_POST['travel_to']);
+							}
+							else
+							{
+								$_POST['email'] = $global['account']['email'];
+								$_POST['phone_country'] = $global['account']['phone']['country'];
+								$_POST['phone_number'] = $global['account']['phone']['number'];
+								$_POST['travel_to'] = 'No aplica';
+								$_POST['type'] = 'covid_pcr';
+							}
+
 							$_POST['qr']['filename'] = 'covid_qr_' . $_POST['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
 							$_POST['account'] = $global['account'];
 
