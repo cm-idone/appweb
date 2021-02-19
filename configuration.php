@@ -288,7 +288,7 @@ class Configuration
      */
 	public static $vars = [
 		'marbu' => [
-			'phone' => '+52 (998) 313 2948',
+			'phone' => '+52 (998) 121 4013',
 			'email' => 'marbu@one-consultores.com',
 			'facebook' => 'oneconsultoresmx',
 			'linkedin' => 'one-consultores-méxico',
