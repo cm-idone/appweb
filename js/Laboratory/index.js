@@ -11,6 +11,7 @@ $(document).ready(function()
 
     var filter_action = 'filter_custody_chains';
     var restore_action = 'restore_custody_chain';
+    var empty_action = 'empty_custody_chains';
     var delete_action = 'delete_custody_chain';
 
     $(document).on('click', '[data-action="' + filter_action + '"]', function()
@@ -49,6 +50,14 @@ $(document).ready(function()
         id = $(this).data('id');
 
         send_form_modal('restore');
+    });
+
+    $(document).on('click', '[data-action="' + empty_action + '"]', function()
+    {
+        action = empty_action;
+        id = null;
+
+        open_form_modal('delete', $('[data-modal="' + delete_action + '"]'));
     });
 
     $(document).on('click', '[data-action="' + delete_action + '"]', function()

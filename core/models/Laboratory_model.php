@@ -534,6 +534,55 @@ class Laboratory_model extends Model
         return $query;
 	}
 
+	public function empty_custody_chains()
+    {
+		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up')
+		{
+			$accounts = [];
+
+			foreach (Session::get_value('vkye_user')['accounts'] as $value)
+				array_push($accounts, $value['id']);
+		}
+
+		$deleteds = System::decode_json_to_array($this->database->select('custody_chains', [
+			'id',
+			'type',
+			'employee',
+			'signatures',
+			'qr',
+			'pdf'
+        ], [
+            'AND' => [
+				'account' => (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $accounts : Session::get_value('vkye_account')['id'],
+				'deleted' => true
+			]
+        ]));
+
+		foreach ($deleteds as $value)
+		{
+			$query = $this->database->delete('custody_chains', [
+				'id' => $value['id']
+			]);
+
+			if (!empty($query))
+			{
+				if (!empty($value['employee']) AND !empty($value['signatures']['employee']))
+					Fileloader::down($value['signatures']['employee']);
+
+				if (($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') AND empty($value['employee']))
+				{
+					if (!empty($value['qr']))
+						Fileloader::down($value['qr']);
+
+					if (!empty($value['pdf']))
+						Fileloader::down($value['pdf']);
+				}
+			}
+		}
+
+        return true;
+    }
+
 	public function delete_custody_chain($id)
     {
 		$query = null;

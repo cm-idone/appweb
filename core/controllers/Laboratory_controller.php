@@ -58,10 +58,12 @@ class Laboratory_controller extends Controller
 				]);
 			}
 
-			if ($_POST['action'] == 'restore_custody_chain' OR $_POST['action'] == 'delete_custody_chain')
+			if ($_POST['action'] == 'restore_custody_chain' OR $_POST['action'] == 'empty_custody_chains' OR $_POST['action'] == 'delete_custody_chain')
 			{
 				if ($_POST['action'] == 'restore_custody_chain')
 					$query = $this->model->restore_custody_chain($_POST['id']);
+				else if ($_POST['action'] == 'empty_custody_chains')
+					$query = $this->model->empty_custody_chains();
 				else if ($_POST['action'] == 'delete_custody_chain')
 					$query = $this->model->delete_custody_chain($_POST['id']);
 

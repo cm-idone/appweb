@@ -9,6 +9,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
 %{header}%
 <header class="modbar">
     <div class="buttons">
+        <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND !empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'deleted') : ?>
+            <a data-action="empty_custody_chains" class="btn alert auto"><i class="fas fa-trash"></i>{$lang.empty_trash}</a>
+        <?php endif; ?>
         <a data-action="filter_custody_chains" class="btn <?php echo (!empty(System::temporal('get', 'laboratory', 'filter')) ? 'success' : ''); ?> auto"><i class="fas fa-filter"></i>{$lang.filter}</a>
         <fieldset class="fields-group big">
             <div class="compound st-4-left">
