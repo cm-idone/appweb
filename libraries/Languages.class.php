@@ -35,6 +35,10 @@ class Languages
                 'es' => 'Compártenos tu folio para agendarte una cita',
                 'en' => 'Share your page with us to schedule an appointment'
             ],
+            'whatsapp_us_to_support' => [
+                'es' => 'Escribenos para cualquier duda o aclaración',
+                'en' => 'Write us for any questions or clarification'
+            ],
             'your_results_are_ready' => [
                 'es' => 'Tus resultados están listos',
                 'en' => 'Your results are ready'
