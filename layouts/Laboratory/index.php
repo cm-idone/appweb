@@ -50,7 +50,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                             <a data-action="delete_custody_chain" data-id="<?php echo $value['id']; ?>" class="alert"><i class="fas fa-trash"></i><span>{$lang.delete}</span></a>
                         </td>
                     <?php endif; ?>
-                    <?php if ($value['deleted'] == false AND (($global['render'] == 'alcoholic' AND Permissions::user(['delete_alcoholic']) == true) OR ($global['render'] == 'antidoping' AND Permissions::user(['delete_antidoping']) == true) OR ($global['render'] == 'covid' AND Permissions::user(['delete_covid']) == true))) : ?>
+                    <?php if ($value['deleted'] == false AND (($global['render'] == 'alcoholic' AND Permissions::user(['update_alcoholic']) == true) OR ($global['render'] == 'antidoping' AND Permissions::user(['update_antidoping']) == true) OR ($global['render'] == 'covid' AND Permissions::user(['update_covid']) == true))) : ?>
                         <td class="button">
                             <a href="/laboratory/update/<?php echo $value['token']; ?>" class="warning"><i class="fas fa-pen"></i><span>{$lang.update}</span></a>
                         </td>
@@ -167,9 +167,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                     <div class="button">
                         <?php if (!empty(System::temporal('get', 'laboratory', 'filter'))) : ?>
                             <a class="btn auto warning" button-cancel><i class="fas fa-sync"></i>{$lang.end_filter}</a>
-                        <?php else : ?>
-                            <a class="alert" button-close><i class="fas fa-times"></i></a>
                         <?php endif; ?>
+                        <a class="alert" button-close><i class="fas fa-times"></i></a>
                         <button type="submit" class="success"><i class="fas fa-check"></i></button>
                     </div>
                 </fieldset>

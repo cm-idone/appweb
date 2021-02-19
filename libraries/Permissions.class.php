@@ -90,6 +90,10 @@ class Permissions
                                 array_push($paths, '/Laboratory/update');
                                 break;
 
+                            case 'restore_alcoholic' :
+                                array_push($paths, '/Laboratory/index');
+                                break;
+
                             case 'delete_alcoholic' :
                                 array_push($paths, '/Laboratory/index');
                                 break;
@@ -104,6 +108,10 @@ class Permissions
                                 array_push($paths, '/Laboratory/update');
                                 break;
 
+                            case 'restore_antidoping' :
+                                array_push($paths, '/Laboratory/index');
+                                break;
+
                             case 'delete_antidoping' :
                                 array_push($paths, '/Laboratory/index');
                                 break;
@@ -116,6 +124,10 @@ class Permissions
                             case 'update_covid' :
                                 array_push($paths, '/Laboratory/index');
                                 array_push($paths, '/Laboratory/update');
+                                break;
+
+                            case 'restore_covid' :
+                                array_push($paths, '/Laboratory/index');
                                 break;
 
                             case 'delete_covid' :
