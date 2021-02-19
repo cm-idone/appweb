@@ -28,11 +28,15 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.0']);
 <main class="covid">
     <?php if ($global['render'] == 'create') : ?>
         <?php if (empty(System::temporal('get', 'covid', 'contact'))) : ?>
-            <a data-action="share">Eviar por WhatsApp</a>
             <form name="registry">
                 <h2>{$lang.registry_now}</h2>
                 <h3>{$lang.covid_test}</h3>
-                <fieldset class="fields-group accept_terms">
+                <!-- <div class="share">
+                    <a data-action="share" data-text="" data-url=""><i class="fas fa-share-alt"></i>{$lang.share}</a>
+                    <a href="tel:<?php echo Configuration::$vars['marbu']['phone']; ?>" target="_blank"><i class="fas fa-headset"></i>{$lang.call_us}</a>
+                    <a href="https://api.whatsapp.com/send?phone=<?php echo Configuration::$vars['marbu']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
+                </div> -->
+                <div class="accept_terms">
                     <div class="caption">
                         <p>{$lang.accept_terms}</p>
                     </div>
@@ -42,7 +46,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.0']);
                             <input type="checkbox" name="accept_terms">
                         </label>
                     </div>
-                </fieldset>
+                </div>
                 <fieldset class="fields-group">
                     <div class="row">
                         <div class="span4">
