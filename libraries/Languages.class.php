@@ -7,6 +7,10 @@ class Languages
     static public function email($key, $subkey = null)
     {
         $langs = [
+            '' => [
+                'es' => '- - -',
+                'en' => '- - -'
+            ],
             'hi' => [
                 'es' => 'Hola',
                 'en' => 'Hi'

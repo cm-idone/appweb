@@ -691,8 +691,12 @@ class Laboratory_model extends Model
 	// 		'start_process',
 	// 		'end_process',
 	// 		'results',
+	// 		'pdf',
 	// 	], [
-	// 		'account' => 19
+	// 		'AND' => [
+	// 			'account' => 19,
+	// 			'closed' => true
+	// 		]
 	// 	]));
 	//
 	// 	foreach ($query as $value)
@@ -730,7 +734,7 @@ class Laboratory_model extends Model
 	// 					</table>
 	// 				</td>
 	// 				<td style="width:20%;margin:0px;padding:10px;border:0px;box-sizing:border-box;vertical-align:middle;">
-	// 					<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $value['qr'] . '">
+	//
 	// 				</td>
 	// 			</tr>
 	// 		</table>
@@ -837,21 +841,11 @@ class Laboratory_model extends Model
 	// 			</tr>
 	// 		</table>';
 	// 		$html2pdf->writeHTML($writing);
-	// 		$pdf_filename = 'covid_pdf_' . $value['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
-	// 		$html2pdf->output(PATH_UPLOADS . $pdf_filename, 'F');
+	// 		// $pdf_filename = 'covid_pdf_' . $value['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
+	// 		$html2pdf->output(PATH_UPLOADS . $value['pdf'], 'F');
 	//
 	// 		// $query = $this->database->update('custody_chains', [
-	// 		// 	'start_process' => '2021-02-22',
-	// 		// 	'end_process' => '2021-02-22',
-	// 		// 	'results' => json_encode([
-	// 		// 		'result' => 'negative',
-	// 		// 		'unity' => 'INDEX',
-	// 		// 		'reference_values' => 'not_detected'
-	// 		// 	]),
-	// 		// 	'collector' => 2,
-	// 		// 	'pdf' => $pdf_filename,
-	// 		// 	'closed' => true,
-	// 		// 	'user' => 1
+	// 		// 	'end_process' => '2021-02-23'
 	// 		// ], [
 	// 		// 	'id' => $value['id']
 	// 		// ]);
