@@ -22,8 +22,6 @@ class Laboratory_controller extends Controller
 		{
 			define('_title', Configuration::$web_page . ' | Marbu Salud');
 
-			// $this->model->sql();
-
 			$template = $this->view->render($this, 'marbu');
 
 			echo $template;
@@ -32,6 +30,8 @@ class Laboratory_controller extends Controller
 
 	public function index($params)
     {
+		// $this->model->sql();
+
         if (Format::exist_ajax_request() == true)
 		{
 			if ($_POST['action'] == 'filter_custody_chains')
