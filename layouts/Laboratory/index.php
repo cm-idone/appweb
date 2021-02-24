@@ -26,11 +26,15 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
         <tbody>
             <?php foreach ($global['custody_chains'] as $value) : ?>
                 <tr>
+                    <?php if (($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') AND empty($value['employee'])) : ?>
+                        <td class="hidden"><?php echo $value['contact']['email']; ?></td>
+                        <td class="hidden"><?php echo $value['contact']['ife']; ?></td>
+                    <?php endif; ?>
                     <td class="smalltag"><span><?php echo $value['token']; ?></span></td>
                     <td class="smalltag"><span class="<?php echo $value['status'] ?>">{$lang.<?php echo $value['type']; ?>}</span></td>
                     <td>
                         <?php if (($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') AND empty($value['employee'])) : ?>
-                            <span class="hidden"><?php echo $value['contact']['email']; ?></span><?php echo $value['contact']['firstname'] . ' ' . $value['contact']['lastname']; ?>
+                            <?php echo $value['contact']['firstname'] . ' ' . $value['contact']['lastname']; ?>
                         <?php else: ?>
                             <?php echo $value['employee_firstname'] . ' ' . $value['employee_lastname']; ?>
                         <?php endif; ?>
