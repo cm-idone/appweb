@@ -239,7 +239,7 @@ class Configuration
 	 *
      * @var string $smtp_host
      */
-	public static $smtp_host = 'in-v3.mailjet.com';
+	public static $smtp_host = 'smtp.gmail.com';
 
 	/**
      * Usuario de la cuenta smtp.
@@ -249,7 +249,7 @@ class Configuration
 	 *
      * @var string $smtp_user
      */
-	public static $smtp_user = '9a081ab83df22318bf3a5930d02756f1';
+	public static $smtp_user = 'marbu@one-consultores.com';
 
 	/**
      * Contraseña de la cuenta smtp.
@@ -258,7 +258,7 @@ class Configuration
 	 *
      * @var string $smtp_pass
      */
-	public static $smtp_pass = 'c6d358d8f2a1fa3c8d1ce2c32b71a3f5';
+	public static $smtp_pass = '89kv#3Ha';
 
 	/**
      * Seguridad de la encriptacion para el envio de SMTP.
@@ -268,7 +268,7 @@ class Configuration
 	 *
      * @var string $smtp_secure
      */
-	public static $smtp_secure = 'ssl';
+	public static $smtp_secure = 'tls';
 
 	/**
      * Puerto de conexion al servidor SMTP.
@@ -277,7 +277,7 @@ class Configuration
 	 *
      * @var integer $smtp_port
      */
-	public static $smtp_port = 465;
+	public static $smtp_port = 587;
 
 	/**
      * Variables extras del sitio web.
