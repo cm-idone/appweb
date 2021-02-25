@@ -30,8 +30,6 @@ class Laboratory_controller extends Controller
 
 	public function index($params)
     {
-		// $this->model->sql();
-
         if (Format::exist_ajax_request() == true)
 		{
 			if ($_POST['action'] == 'filter_custody_chains')
@@ -338,7 +336,9 @@ class Laboratory_controller extends Controller
     				{
 						if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee']))
 						{
-							$_POST['qr']['filename'] = 'covid_qr_' . $global['custody_chain']['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
+							if ($global['custody_chain']['account_path'] != 'moonpalace')
+								$_POST['qr']['filename'] = 'covid_qr_' . $global['custody_chain']['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
+
 							$_POST['pdf']['filename'] = 'covid_pdf_' . $global['custody_chain']['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
 						}
 
@@ -348,7 +348,7 @@ class Laboratory_controller extends Controller
 
     					if (!empty($query))
     					{
-							if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee']) AND $_POST['save'] == 'save_and_send')
+							if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee']) AND $_POST['save'] == 'save_and_send' AND $global['custody_chain']['account_path'] != 'moonpalace')
 							{
 								$mail = new Mailer(true);
 
@@ -478,6 +478,8 @@ class Laboratory_controller extends Controller
 			else
 			{
 				define('_title', Configuration::$web_page . ' | {$lang.update_test} | ' . $params[0]);
+
+				// this->model->sql();
 
 				$global['locations'] = $this->model->read_locations();
 

@@ -13,11 +13,14 @@ class Covid_model extends Model
 
     public function create_custody_chain($data)
     {
-		$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . $data['account']['path'] . '/covid/' . $data['token'];
-		$data['qr']['dir'] = PATH_UPLOADS . $data['qr']['filename'];
-		$data['qr']['level'] = 'H';
-		$data['qr']['size'] = 5;
-		$data['qr']['frame'] = 3;
+		if ($data['account']['path'] != 'moonpalace')
+		{
+			$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . $data['account']['path'] . '/covid/' . $data['token'];
+			$data['qr']['dir'] = PATH_UPLOADS . $data['qr']['filename'];
+			$data['qr']['level'] = 'H';
+			$data['qr']['size'] = 5;
+			$data['qr']['frame'] = 3;
+		}
 
         $query = $this->database->insert('custody_chains', [
             'account' => $data['account']['id'],
@@ -65,7 +68,7 @@ class Covid_model extends Model
 			'hour' => Dates::current_hour(),
 			'comments' => null,
             'signatures' => null,
-			'qr' => $data['qr']['filename'],
+			'qr' => ($data['account']['path'] != 'moonpalace') ? $data['qr']['filename'] : null,
 			'pdf' => null,
 			'lang' => Session::get_value('vkye_lang'),
 			'closed' => false,
@@ -74,7 +77,7 @@ class Covid_model extends Model
 			'deleted' => false
         ]);
 
-		if (!empty($query))
+		if (!empty($query) AND $data['account']['path'] != 'moonpalace')
 			QRcode::png($data['qr']['content'], $data['qr']['dir'], $data['qr']['level'], $data['qr']['size'], $data['qr']['frame']);
 
         return $query;

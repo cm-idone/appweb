@@ -172,6 +172,9 @@ class Laboratory_model extends Model
 	public function read_custody_chain($token)
 	{
 		$query = System::decode_json_to_array($this->database->select('custody_chains', [
+			'[>]accounts' => [
+				'account' => 'id'
+			],
 			'[>]employees' => [
 				'employee' => 'id'
 			],
@@ -181,6 +184,7 @@ class Laboratory_model extends Model
 		], [
 			'custody_chains.id',
 			'custody_chains.account',
+			'accounts.path(account_path)',
 			'custody_chains.token',
 			'custody_chains.employee',
 			'employees.firstname(employee_firstname)',
@@ -225,13 +229,16 @@ class Laboratory_model extends Model
     {
 		if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']))
 		{
-			$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . Session::get_value('vkye_account')['path'] . '/covid/' . $data['custody_chain']['token'];
-			$data['qr']['dir'] = PATH_UPLOADS . $data['qr']['filename'];
-			$data['qr']['level'] = 'H';
-			$data['qr']['size'] = 5;
-			$data['qr']['frame'] = 3;
+			if ($data['custody_chain']['account_path'] != 'moonpalace')
+			{
+				$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . Session::get_value('vkye_account')['path'] . '/covid/' . $data['custody_chain']['token'];
+				$data['qr']['dir'] = PATH_UPLOADS . $data['qr']['filename'];
+				$data['qr']['level'] = 'H';
+				$data['qr']['size'] = 5;
+				$data['qr']['frame'] = 3;
 
-			QRcode::png($data['qr']['content'], $data['qr']['dir'], $data['qr']['level'], $data['qr']['size'], $data['qr']['frame']);
+				QRcode::png($data['qr']['content'], $data['qr']['dir'], $data['qr']['level'], $data['qr']['size'], $data['qr']['frame']);
+			}
 
 			$data['collector'] = $this->database->select('system_collectors', [
 				'id',
@@ -266,7 +273,7 @@ class Laboratory_model extends Model
 			            </table>
 			        </td>
 			        <td style="width:20%;margin:0px;padding:10px;border:0px;box-sizing:border-box;vertical-align:middle;">
-			            <img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $data['qr']['filename'] . '">
+			            ' . (($data['custody_chain']['account_path'] != 'moonpalace') ? '<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $data['qr']['filename'] . '">' : '') . '
 			        </td>
 			    </tr>
 			</table>
@@ -428,11 +435,17 @@ class Laboratory_model extends Model
 			<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
 			        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#000;">' . Languages::email('alert_pdf_covid')[$data['lang']] . ' <strong style="color:#f44336;">' . Languages::email('accept_terms')[$data['lang']] . '</strong>' . '</td>
-			    </tr>
-			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
+			    </tr>';
+
+			if ($data['custody_chain']['account_path'] != 'moonpalace')
+			{
+				$writing .=
+				'<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 			        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:center;color:#004770;">+ (52) 998 313 2948 - 998 440 3302 | marbu@one-consultores.com | marbu.one-consultores.com</td>
-			    </tr>
-			</table>';
+			    </tr>';
+			}
+
+			$writing .= '</table>';
 			$html2pdf->writeHTML($writing);
 			$html2pdf->output(PATH_UPLOADS . $data['pdf']['filename'], 'F');
 		}
@@ -497,7 +510,7 @@ class Laboratory_model extends Model
 				'employee' => !empty($data['employee_signature']) ? Fileloader::base64($data['employee_signature']) : $data['custody_chain']['signatures']['employee'],
 				'collector' => ''
 			]) : null,
-			'qr' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee'])) ? $data['qr']['filename'] : $data['custody_chain']['qr'],
+			'qr' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']) AND $data['custody_chain']['account_path'] != 'moonpalace') ? $data['qr']['filename'] : $data['custody_chain']['qr'],
 			'pdf' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee'])) ? $data['pdf']['filename'] : $data['custody_chain']['pdf'],
 			'lang' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee'])) ? $data['lang'] : $data['custody_chain']['lang'],
 			'closed' => (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']) AND $data['custody_chain']['closed'] == false AND $data['save'] == 'only_save') ? false : true,
@@ -513,11 +526,13 @@ class Laboratory_model extends Model
 
 			if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']))
 			{
-				Fileloader::down($data['custody_chain']['qr']);
+				if ($data['custody_chain']['account_path'] != 'moonpalace')
+					Fileloader::down($data['custody_chain']['qr']);
+
 				Fileloader::down($data['custody_chain']['pdf']);
 			}
 		}
-		else if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']))
+		else if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']) AND $data['custody_chain']['account_path'] != 'moonpalace')
 			Fileloader::down($data['qr']['filename']);
 
         return $query;
@@ -693,10 +708,7 @@ class Laboratory_model extends Model
 	// 		'results',
 	// 		'pdf',
 	// 	], [
-	// 		'AND' => [
-	// 			'account' => 19,
-	// 			'user' => 1
-	// 		]
+	// 		'token' => 'H8VeXabF'
 	// 	]));
 	//
 	// 	foreach ($query as $value)
@@ -704,6 +716,7 @@ class Laboratory_model extends Model
 	// 		// print_r($value);
 	//
 	// 		// $pdf_filename = 'covid_pdf_' . $value['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
+	// 		$pdf_filename = $value['pdf'];
 	//
 	// 		$collector = $this->database->select('system_collectors', [
 	// 			'id',
@@ -840,7 +853,7 @@ class Laboratory_model extends Model
 	// 			</tr>
 	// 		</table>';
 	// 		$html2pdf->writeHTML($writing);
-	// 		$html2pdf->output(PATH_UPLOADS . $value['pdf'], 'F');
+	// 		$html2pdf->output(PATH_UPLOADS . $pdf_filename, 'F');
 	//
 	// 		$query = $this->database->update('custody_chains', [
 	// 			'start_process' => '2021-02-23',
@@ -852,7 +865,7 @@ class Laboratory_model extends Model
 	// 			]),
 	// 			'collector' => 2,
 	// 			'date' => '2021-02-23',
-	// 			'pdf' => $value['pdf'],
+	// 			'pdf' => $pdf_filename,
 	// 			'closed' => false,
 	// 			'user' => 1
 	// 		], [
