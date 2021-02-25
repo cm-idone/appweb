@@ -143,7 +143,8 @@ class Laboratory_model extends Model
 		], [
 			'AND' => $AND,
 			'ORDER' => [
-				'custody_chains.id' => 'DESC'
+				'custody_chains.date' => 'DESC'
+				'custody_chains.hour' => 'DESC'
 			]
 		]));
 
