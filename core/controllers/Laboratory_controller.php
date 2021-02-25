@@ -87,6 +87,8 @@ class Laboratory_controller extends Controller
 		{
 			define('_title', Configuration::$web_page . ' | {$lang.laboratory} | {$lang.' . $params[0] . '}');
 
+			// $this->model->sql();
+
 			if (System::temporal('get_if_exists', 'laboratory', 'filter') == false)
 				System::temporal('set_forced', 'laboratory', 'filter', []);
 
@@ -478,8 +480,6 @@ class Laboratory_controller extends Controller
 			else
 			{
 				define('_title', Configuration::$web_page . ' | {$lang.update_test} | ' . $params[0]);
-
-				// this->model->sql();
 
 				$global['locations'] = $this->model->read_locations();
 

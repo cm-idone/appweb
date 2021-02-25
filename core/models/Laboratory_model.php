@@ -709,8 +709,10 @@ class Laboratory_model extends Model
 	// 		'results',
 	// 		'pdf',
 	// 	], [
-	// 		'token' => 'H8VeXabF'
+	// 		'account' => 19
 	// 	]));
+	//
+	// 	// print_r(count($query));
 	//
 	// 	foreach ($query as $value)
 	// 	{
@@ -856,19 +858,25 @@ class Laboratory_model extends Model
 	// 		$html2pdf->writeHTML($writing);
 	// 		$html2pdf->output(PATH_UPLOADS . $pdf_filename, 'F');
 	//
+	// 		// $query = $this->database->update('custody_chains', [
+	// 		// 	'start_process' => '2021-02-23',
+	// 		// 	'end_process' => '2021-02-24',
+	// 		// 	'results' => json_encode([
+	// 		// 		'result' => 'negative',
+	// 		// 		'unity' => 'INDEX',
+	// 		// 		'reference_values' => 'not_detected'
+	// 		// 	]),
+	// 		// 	'collector' => 2,
+	// 		// 	'date' => '2021-02-23',
+	// 		// 	'pdf' => $pdf_filename,
+	// 		// 	'closed' => true,
+	// 		// 	'user' => 1
+	// 		// ], [
+	// 		// 	'id' => $value['id']
+	// 		// ]);
+	//
 	// 		$query = $this->database->update('custody_chains', [
-	// 			'start_process' => '2021-02-23',
-	// 			'end_process' => '2021-02-24',
-	// 			'results' => json_encode([
-	// 				'result' => 'negative',
-	// 				'unity' => 'INDEX',
-	// 				'reference_values' => 'not_detected'
-	// 			]),
-	// 			'collector' => 2,
-	// 			'date' => '2021-02-23',
-	// 			'pdf' => $pdf_filename,
-	// 			'closed' => false,
-	// 			'user' => 1
+	// 			'closed' => true
 	// 		], [
 	// 			'id' => $value['id']
 	// 		]);
