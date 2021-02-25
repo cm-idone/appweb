@@ -240,7 +240,7 @@ class Covid_controller extends Controller
 									$mail2->Body =
 									'<html>
 										<head>
-											<title>' . $mail1->Subject . '</title>
+											<title>' . $mail2->Subject . '</title>
 										</head>
 										<body>
 											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:#fff;">
