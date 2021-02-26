@@ -520,21 +520,21 @@ class Laboratory_model extends Model
 			'id' => $data['custody_chain']['id']
 		]);
 
-		if (!empty($query))
-		{
-			if (!empty($data['custody_chain']['employee']) AND !empty($data['employee_signature']) AND !empty($data['custody_chain']['signatures']['employee']))
-				Fileloader::down($data['custody_chain']['signatures']['employee']);
-
-			if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']))
-			{
-				if ($data['custody_chain']['account_path'] != 'moonpalace')
-					Fileloader::down($data['custody_chain']['qr']);
-
-				Fileloader::down($data['custody_chain']['pdf']);
-			}
-		}
-		else if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']) AND $data['custody_chain']['account_path'] != 'moonpalace')
-			Fileloader::down($data['qr']['filename']);
+		// if (!empty($query))
+		// {
+		// 	if (!empty($data['custody_chain']['employee']) AND !empty($data['employee_signature']) AND !empty($data['custody_chain']['signatures']['employee']))
+		// 		Fileloader::down($data['custody_chain']['signatures']['employee']);
+		//
+		// 	if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']))
+		// 	{
+		// 		if ($data['custody_chain']['account_path'] != 'moonpalace')
+		// 			Fileloader::down($data['custody_chain']['qr']);
+		//
+		// 		Fileloader::down($data['custody_chain']['pdf']);
+		// 	}
+		// }
+		// else if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']) AND $data['custody_chain']['account_path'] != 'moonpalace')
+		// 	Fileloader::down($data['qr']['filename']);
 
         return $query;
     }
