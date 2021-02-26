@@ -147,7 +147,7 @@ class Configuration
 	 *
      * @var string $db_host
      */
-	public static $db_host = 'codemonkey.com.mx';
+	public static $db_host = 'localhost';
 
 	/**
      * Nombre de la base de datos

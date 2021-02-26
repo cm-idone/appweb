@@ -255,7 +255,7 @@ class Laboratory_model extends Model
 			'<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
 			        <td style="width:20%;margin:0px;padding:10px;border:0px;box-sizing:border-box;vertical-align:middle;">
-			            <img style="width:100%;" src="https://' . Configuration::$domain . '/images/marbu_logotype_color.png">
+			            <img style="width:100%;" src="' . PATH_IMAGES . 'marbu_logotype_color.png">
 			        </td>
 			        <td style="width:60%;margin:0px;padding:0px 0px 0px 10px;border:0px;box-sizing:border-box;vertical-align:middle;">
 			            <table style="width:100%;margin:0px;padding:0px;border:0px;">
@@ -274,7 +274,7 @@ class Laboratory_model extends Model
 			            </table>
 			        </td>
 			        <td style="width:20%;margin:0px;padding:10px;border:0px;box-sizing:border-box;vertical-align:middle;">
-			            ' . (($data['custody_chain']['account_path'] != 'moonpalace') ? '<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $data['qr']['filename'] . '">' : '') . '
+			            ' . (($data['custody_chain']['account_path'] != 'moonpalace') ? '<img style="width:100%;" src="' . PATH_UPLOADS . $data['qr']['filename'] . '">' : '') . '
 			        </td>
 			    </tr>
 			</table>
@@ -420,7 +420,7 @@ class Laboratory_model extends Model
 			    </tr>
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
 			        <td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;text-align:center;">
-			            <img style="width:100px" src="https://' . Configuration::$domain . '/uploads/' . $data['collector'][0]['signature'] . '">
+			            <img style="width:100px" src="' . PATH_UPLOADS . $data['collector'][0]['signature'] . '">
 			        </td>
 			    </tr>
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
