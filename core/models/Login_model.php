@@ -113,7 +113,7 @@ class Login_model extends Model
 				$session['account'] = null;
 
 			if ($session['user'][0]['god'] == true)
-				$session['user'][0]['god'] = 'activate_but_sleep';
+				$session['user'][0]['god'] = 'activate_and_wake_up';
 			else if ($session['user'][0]['god'] == false)
 				$session['user'][0]['god'] = 'deactivate';
 
