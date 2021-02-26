@@ -249,7 +249,7 @@ class Configuration
 	 *
      * @var string $smtp_user
      */
-	public static $smtp_user = 'marbu@one-consultores.com';
+	public static $smtp_user = 'marbusalud@gmail.com';
 
 	/**
      * Contraseña de la cuenta smtp.
@@ -258,7 +258,7 @@ class Configuration
 	 *
      * @var string $smtp_pass
      */
-	public static $smtp_pass = '?<MZg!F5JYUD}.)4';
+	public static $smtp_pass = 'marbusalud2021@';
 
 	/**
      * Seguridad de la encriptacion para el envio de SMTP.
