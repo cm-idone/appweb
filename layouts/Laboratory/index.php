@@ -27,8 +27,12 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
             <?php foreach ($global['custody_chains'] as $value) : ?>
                 <tr>
                     <?php if (($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') AND empty($value['employee'])) : ?>
-                        <td class="hidden"><?php echo $value['contact']['email']; ?></td>
                         <td class="hidden"><?php echo $value['contact']['ife']; ?></td>
+                        <td class="hidden"><?php echo $value['contact']['birth_date']; ?></td>
+                        <td class="hidden"><?php echo $value['contact']['age']; ?></td>
+                        <td class="hidden"><?php echo $value['contact']['sex']; ?></td>
+                        <td class="hidden"><?php echo $value['contact']['email']; ?></td>
+                        <td class="hidden">+<?php echo $value['contact']['phone']['country'] . $value['contact']['phone']['number']; ?></td>
                     <?php endif; ?>
                     <td class="smalltag"><span><?php echo $value['token']; ?></span></td>
                     <td class="smalltag"><span class="<?php echo $value['status'] ?>">{$lang.<?php echo $value['type']; ?>}</span></td>
@@ -40,10 +44,10 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                         <?php endif; ?>
                     </td>
                     <?php if ($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') : ?>
-                        <td class="mediumtag"><?php echo (empty($value['employee']) ? (($value['closed'] == true) ? '<i class="fas fa-envelope" style="margin-right:5px;color:#009688;"></i> {$lang.sended}' . (($value['deleted'] == false) ? ' | <a href="{$path.uploads}' . $value['pdf'] . '" download="' . $value['pdf'] . '">{$lang.download_pdf}</a>' : '') : '<i class="fas fa-envelope"  style="margin-right:5px;color:#ff9800;"></i> {$lang.not_sended}') : '<strong>{$lang.internal}</strong>'); ?></td>
+                        <td class="mediumtag"><?php echo (empty($value['employee']) ? (($value['closed'] == true) ? '<i class="fas fa-envelope" style="margin-right:5px;color:#009688;"></i> {$lang.sended}' : '<i class="fas fa-envelope"  style="margin-right:5px;color:#ff9800;"></i> {$lang.not_sended}') . (!empty($value['pdf']) ? ' | <a href="{$path.uploads}' . $value['pdf'] . '" download="' . $value['pdf'] . '">{$lang.download_pdf}</a>' : '') : '<strong>{$lang.internal}</strong>'); ?></td>
                     <?php endif; ?>
                     <td class="mediumtag"><span><?php echo Dates::format_date_hour($value['date'], $value['hour'], 'long_year', '12-short'); ?></span></td>
-                    <td class="mediumtag"><span><?php echo (!empty($value['user']) ? $value['user_firstname'] . ' ' . $value['user_lastname'] : '{$lang.not_user}'); ?></span></td>
+                    <!-- <td class="mediumtag"><span><?php echo (!empty($value['user']) ? $value['user_firstname'] . ' ' . $value['user_lastname'] : '{$lang.not_user}'); ?></span></td> -->
                     <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
                         <td class="mediumtag"><span><?php echo $value['account_name']; ?></span></td>
                     <?php endif; ?>

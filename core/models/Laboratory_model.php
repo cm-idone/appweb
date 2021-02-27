@@ -520,21 +520,22 @@ class Laboratory_model extends Model
 			'id' => $data['custody_chain']['id']
 		]);
 
-		// if (!empty($query))
-		// {
-		// 	if (!empty($data['custody_chain']['employee']) AND !empty($data['employee_signature']) AND !empty($data['custody_chain']['signatures']['employee']))
-		// 		Fileloader::down($data['custody_chain']['signatures']['employee']);
-		//
-		// 	if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']))
-		// 	{
-		// 		if ($data['custody_chain']['account_path'] != 'moonpalace')
-		// 			Fileloader::down($data['custody_chain']['qr']);
-		//
-		// 		Fileloader::down($data['custody_chain']['pdf']);
-		// 	}
-		// }
-		// else if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']) AND $data['custody_chain']['account_path'] != 'moonpalace')
-		// 	Fileloader::down($data['qr']['filename']);
+		if (!empty($query))
+		{
+			if (!empty($data['custody_chain']['employee']) AND !empty($data['employee_signature']) AND !empty($data['custody_chain']['signatures']['employee']))
+				Fileloader::down($data['custody_chain']['signatures']['employee']);
+
+			if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']))
+			{
+				if ($data['custody_chain']['account_path'] != 'moonpalace' AND !empty($data['custody_chain']['qr']))
+					Fileloader::down($data['custody_chain']['qr']);
+
+				if (!empty($data['custody_chain']['pdf']))
+					Fileloader::down($data['custody_chain']['pdf']);
+			}
+		}
+		else if (($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac') AND empty($data['custody_chain']['employee']) AND $data['custody_chain']['account_path'] != 'moonpalace')
+			Fileloader::down($data['qr']['filename']);
 
         return $query;
     }
@@ -696,6 +697,42 @@ class Laboratory_model extends Model
 	// 	set_time_limit(1000000);
 	//
 	// 	$query = System::decode_json_to_array($this->database->select('custody_chains', [
+	// 		'id'
+	// 	]));
+	//
+	// 	foreach ($query as $value)
+	// 	{
+	// 		$this->database->update('custody_chains', [
+	// 			'qr' => null,
+	// 			'pdf' => null
+	// 		], [
+	// 			'id' => $value['id']
+	// 		]);
+	// 	}
+	//
+	// 	// $query = System::decode_json_to_array($this->database->select('custody_chains', [
+	// 	// 	'id',
+	// 	// 	'token'
+	// 	// ], [
+	// 	// 	'date' => '2021-02-26'
+	// 	// ]));
+	// 	//
+	// 	// $exists = [];
+	// 	//
+	// 	// foreach ($query as $value)
+	// 	// {
+	// 	// 	if (in_array($value['token'], $exists))
+	// 	// 		$this->database->delete('custody_chains', ['id' => $value['id']]);
+	// 	// 	else
+	// 	// 		array_push($exists, $value['token']);
+	// 	// }
+	// }
+
+	// public function sql()
+	// {
+	// 	set_time_limit(1000000);
+	//
+	// 	$query = System::decode_json_to_array($this->database->select('custody_chains', [
 	// 		'[>]accounts' => [
 	// 			'account' => 'id'
 	// 		]
@@ -704,16 +741,14 @@ class Laboratory_model extends Model
 	// 		'accounts.path',
 	// 		'custody_chains.token',
 	// 	], [
-	// 		'custody_chains.closed' => false
+	// 		'custody_chains.account[!]' => 19
 	// 	]));
-	//
-	// 	// print_r($query);
 	//
 	// 	foreach ($query as $value)
 	// 	{
 	// 		$qr_filename = 'covid_qr_' . $value['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
 	// 		$qr_content = 'https://id.one-consultores.com/' . $value['path'] . '/covid/' . $value['token'];
-	// 		$qr_dir = PATH_UPLOADS . 'moonpalace/' . $qr_filename;
+	// 		$qr_dir = PATH_UPLOADS . $qr_filename;
 	// 		$qr_level = 'H';
 	// 		$qr_size = 5;
 	// 		$qr_frame = 3;
@@ -732,23 +767,85 @@ class Laboratory_model extends Model
 	// {
 	// 	set_time_limit(1000000);
 	//
+	// 	$xlsx = SimpleXLSX::parse(PATH_UPLOADS . 'moonpalace/' . '0002.xlsx');
+	//
+	//     foreach ($xlsx->rows() as $value)
+	//     {
+	// 		$value[2] = explode(' ', $value[2]);
+	// 		$value[4] = 2021 - intval(explode('-', $value[2][0])[0]);
+	//
+	// 		// print_r($value);
+	//
+	// 		$query = $this->database->insert('custody_chains', [
+	//             'account' => 19,
+	// 			'token' => System::generate_random_string(),
+	//             'employee' => null,
+	// 			'contact' => json_encode([
+	//                 'firstname' => $value[0],
+	//                 'lastname' => '',
+	// 				'ife' => $value[1],
+	//                 'birth_date' => $value[2][0],
+	//                 'age' => $value[4],
+	//                 'sex' => $value[3],
+	//                 'email' => 'cancun@moontravel.com.ar',
+	//                 'phone' => [
+	//                     'country' => '54',
+	//                     'number' => '1157072337'
+	//                 ],
+	//                 'travel_to' => 'N/A'
+	//             ]),
+	//             'type' => 'covid_pcr',
+	//             'reason' => 'random',
+	// 			'start_process' => '2021-02-26',
+	// 			'end_process' => null,
+	//             'results' => json_encode([
+	// 				'result' => '',
+	// 				'unity' => '',
+	// 				'reference_values' => ''
+	// 			]),
+	//             'medicines' => null,
+	//             'prescription' => null,
+	// 			'collector' => null,
+	// 			'location' => null,
+	// 			'date' => '2021-02-26',
+	// 			'hour' => '08:00:00',
+	// 			'comments' => null,
+	//             'signatures' => null,
+	// 			'qr' => null,
+	// 			'pdf' => null,
+	// 			'lang' => 'es',
+	// 			'closed' => false,
+	// 			'user' => null,
+	// 			'accept_terms' => true,
+	// 			'deleted' => false
+	//         ]);
+	//     }
+	// }
+
+	// public function sql()
+	// {
+	// 	set_time_limit(100000000);
+	//
 	// 	$query = System::decode_json_to_array($this->database->select('custody_chains', [
-	// 		'id',
-	// 		'account',
-	// 		'token',
-	// 		'qr',
-	// 		'lang',
-	// 		'date',
-	// 		'hour',
-	// 		'contact',
-	// 		'start_process',
-	// 		'end_process',
-	// 		'results',
-	// 		'pdf',
+	// 		'[>]accounts' => [
+	// 			'account' => 'id'
+	// 		]
+	// 	], [
+	// 		'custody_chains.id',
+	// 		'custody_chains.token',
+	// 		'custody_chains.qr',
+	// 		'custody_chains.lang',
+	// 		'custody_chains.token',
+	// 		'custody_chains.contact',
+	// 		'custody_chains.hour',
+	// 		'custody_chains.date',
+	// 		'accounts.path'
 	// 	], [
 	// 		'AND' => [
-	// 			'account' => 19,
-	// 			'start_process' => '2021-02-25'
+	// 			'custody_chains.account[!]' => 19,
+	// 			'custody_chains.type' => 'covid_pcr',
+	// 			'custody_chains.date' => '2021-02-26',
+	// 			'custody_chains.closed' => false
 	// 		]
 	// 	]));
 	//
@@ -756,10 +853,8 @@ class Laboratory_model extends Model
 	//
 	// 	foreach ($query as $value)
 	// 	{
-	// 		// print_r($value);
-	//
-	// 		// $pdf_filename = 'covid_pdf_' . $value['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
-	// 		$pdf_filename = $value['contact']['firstname'] . '_' . $value['contact']['lastname'] . '_' . $value['token'] . '.pdf';
+	// 		$pdf_filename = 'covid_pdf_' . $value['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
+	// 		// $pdf_filename = $value['contact']['firstname'] . '_' . $value['contact']['lastname'] . '_' . $value['token'] . '.pdf';
 	// 		// $pdf_filename = $value['pdf'];
 	//
 	// 		$collector = $this->database->select('system_collectors', [
@@ -776,7 +871,7 @@ class Laboratory_model extends Model
 	// 		'<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 	// 			<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 	// 				<td style="width:20%;margin:0px;padding:10px;border:0px;box-sizing:border-box;vertical-align:middle;">
-	// 					<img style="width:100%;" src="https://' . Configuration::$domain . '/images/marbu_logotype_color.png">
+	// 					<img style="width:100%;" src="' . PATH_IMAGES . '/marbu_logotype_color.png">
 	// 				</td>
 	// 				<td style="width:60%;margin:0px;padding:0px 0px 0px 10px;border:0px;box-sizing:border-box;vertical-align:middle;">
 	// 					<table style="width:100%;margin:0px;padding:0px;border:0px;">
@@ -794,7 +889,9 @@ class Laboratory_model extends Model
 	// 						</tr>
 	// 					</table>
 	// 				</td>
-	// 				<td style="width:20%;margin:0px;padding:10px;border:0px;box-sizing:border-box;vertical-align:middle;"></td>
+	// 				<td style="width:20%;margin:0px;padding:10px;border:0px;box-sizing:border-box;vertical-align:middle;">
+	// 					<img style="width:100%;" src="' . PATH_UPLOADS . $value['qr'] . '">
+	// 				</td>
 	// 			</tr>
 	// 		</table>
 	// 		<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
@@ -812,8 +909,8 @@ class Laboratory_model extends Model
 	// 		</table>
 	// 		<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 	// 			<tr style="width:100%;margin:0px;padding:0px;border:0px;border-top:2px solid #5b9bd5;border-bottom:2px solid #5b9bd5;">
-	// 				<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('registry_date')[$value['lang']] . ': 2021-02-25</td>
-	// 				<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('company')[$value['lang']] . ': MARIN</td>
+	// 				<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('registry_date')[$value['lang']] . ': 2021-02-26</td>
+	// 				<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('company')[$value['lang']] . ': N/A</td>
 	// 				<td style="width:33.33%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('patient')[$value['lang']] . ': ' . $value['contact']['firstname'] . ' ' . $value['contact']['lastname'] . '</td>
 	// 			</tr>
 	// 			<tr style="width:100%;margin:0px;padding:0px;border:0px;background-color:#deeaf6;">
@@ -822,13 +919,13 @@ class Laboratory_model extends Model
 	// 				<td style="width:33.33%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('sex')[$value['lang']] . ': ' . Languages::email($value['contact']['sex'])[$value['lang']] . '</td>
 	// 			</tr>
 	// 			<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-	// 				<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('get_date')[$value['lang']] . ': 2021-02-25</td>
+	// 				<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('get_date')[$value['lang']] . ': 2021-02-26</td>
 	// 				<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('get_hour')[$value['lang']] . ': ' . $value['hour'] . '</td>
 	// 				<td style="width:33.33%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . $collector[0]['name'] . '</td>
 	// 			</tr>
 	// 			<tr style="width:100%;margin:0px;padding:0px;border:0px;background-color:#deeaf6;">
-	// 				<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('start_process')[$value['lang']] . ': 2021-02-25</td>
-	// 				<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('end_process')[$value['lang']] . ': 2021-02-26</td>
+	// 				<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('start_process')[$value['lang']] . ': 2021-02-26</td>
+	// 				<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('end_process')[$value['lang']] . ': 2021-02-27</td>
 	// 				<td style="width:33.33%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('id_patient')[$value['lang']] . ': ' . $value['contact']['ife'] . '</td>
 	// 			</tr>
 	// 		</table>
@@ -878,7 +975,7 @@ class Laboratory_model extends Model
 	// 			</tr>
 	// 			<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 	// 				<td style="width:100%;margin:0px;padding:10px 10px 0px 10px;border:0px;box-sizing:border-box;text-align:center;">
-	// 					<img style="width:100px" src="https://' . Configuration::$domain . '/uploads/' . $collector[0]['signature'] . '">
+	// 					<img style="width:100px" src="' . PATH_UPLOADS . $collector[0]['signature'] . '">
 	// 				</td>
 	// 			</tr>
 	// 			<tr style="width:100%;margin:0px;padding:0px;border:0px;">
@@ -897,10 +994,10 @@ class Laboratory_model extends Model
 	// 			</tr>
 	// 		</table>';
 	// 		$html2pdf->writeHTML($writing);
-	// 		$html2pdf->output(PATH_UPLOADS . 'moonpalace/' . $pdf_filename, 'F');
+	// 		$html2pdf->output(PATH_UPLOADS . $pdf_filename, 'F');
 	//
 	// 		$query = $this->database->update('custody_chains', [
-	// 			'end_process' => '2021-02-26',
+	// 			'end_process' => '2021-02-27',
 	// 			'results' => json_encode([
 	// 				'result' => 'negative',
 	// 				'unity' => 'INDEX',
@@ -913,12 +1010,102 @@ class Laboratory_model extends Model
 	// 		], [
 	// 			'id' => $value['id']
 	// 		]);
+	//
+	// 		$mail = new Mailer(true);
+	//
+	// 		try
+	// 		{
+	// 			$mail->setFrom(Configuration::$vars['marbu']['email'], 'Marbu Salud');
+	// 			$mail->addAddress($value['contact']['email'], $value['contact']['firstname'] . ' ' . $value['contact']['lastname']);
+	// 			$mail->addAttachment(PATH_UPLOADS . $pdf_filename);
+	// 			$mail->Subject = '¡' . Languages::email('hi')[$value['lang']] . ' ' . explode(' ',  $value['contact']['firstname'])[0] . '! ' . Languages::email('your_results_are_ready')[$value['lang']];
+	// 			$mail->Body =
+	// 			'<html>
+	// 				<head>
+	// 					<title>' . $mail->Subject . '</title>
+	// 				</head>
+	// 				<body>
+	// 					<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:#004770;">
+	// 						<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+	// 							<td style="width:100px;margin:0px;padding:20px 0px 20px 20px;border:0px;box-sizing:border-box;vertical-align:middle;">
+	// 								<img style="width:100px" src="https://' . Configuration::$domain . '/images/marbu_logotype_color_circle.png">
+	// 							</td>
+	// 							<td style="width:auto;margin:0px;padding:20px;border:0px;box-sizing:border-box;vertical-align:middle;">
+	// 								<table style="width:100%;margin:0px;padding:0px;border:0px;">
+	// 									<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+	// 										<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:600;text-align:right;color:#fff;">Marbu Salud S.A. de C.V.</td>
+	// 									</tr>
+	// 									<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+	// 										<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">MSA1907259GA</td>
+	// 									</tr>
+	// 									<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+	// 										<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">Av. Nichupté SM51 M42 L1</td>
+	// 									</tr>
+	// 									<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+	// 										<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">CP: 77533 Cancún, Qroo. México</td>
+	// 									</tr>
+	// 								</table>
+	// 							</td>
+	// 						</tr>
+	// 					</table>
+	// 					<table style="width:100%;max-width:600px;margin:20px 0px;padding:0px;border:1px dashed #000;box-sizing:border-box;background-color:#fff;">
+	// 						<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+	// 							<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:18px;font-weight:600;text-align:center;text-transform:uppercase;color:#000;">¡' . Languages::email('ready_results')[$value['lang']] . '!</td>
+	// 						</tr>
+	// 						<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+	// 							<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#757575;">¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' <strong>' . explode(' ', $value['contact']['firstname'])[0] . '</strong>! ' . Languages::email('get_covid_results_1')[$value['lang']] . ' <strong>' . Dates::format_date($value['date'], 'short') . '</strong> ' . Languages::email('get_covid_results_2')[$value['lang']] . '</td>
+	// 						</tr>
+	// 						<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+	// 							<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
+	// 								<a style="width:100%;display:block;margin:0px;padding:10px;border:1px solid #bdbdbd;border-radius:5px;box-sizing:border-box;background-color:#fff;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#757575;" href="https://api.whatsapp.com/send?phone=' . Configuration::$vars['marbu']['phone'] . '&text=Hola, soy ' . $value['contact']['firstname'] . ' ' . $value['contact']['lastname'] . '. Mi folio es: ' . $value['token'] . '. ">' . Languages::email('whatsapp_us_to_support')[$value['lang']] . '</a>
+	// 							</td>
+	// 						</tr>
+	// 						<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+	// 							<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
+	// 								<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $pdf_filename . '">
+	// 							</td>
+	// 						</tr>
+	// 						<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+	// 							<td style="width:100%;margin:0px;padding:20px;border:0px;box-sizing:border-box;">
+	// 								<a style="width:100%;display:block;margin:0px;padding:10px;border:0px;border-radius:5px;box-sizing:border-box;background-color:#009688;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#fff;" href="https://' . Configuration::$domain . '/' . $value['path'] . '/covid/' . $value['token'] . '">' . Languages::email('view_online_results')[$value['lang']] . '</a>
+	// 							</td>
+	// 						</tr>
+	// 					</table>
+	// 					<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:#0b5178;">
+	// 						<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+	// 							<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="tel:' . Configuration::$vars['marbu']['phone'] . '">' . Configuration::$vars['marbu']['phone'] . '</a></td>
+	// 						</tr>
+	// 						<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+	// 							<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="mailto:' . Configuration::$vars['marbu']['email'] . '">' . Configuration::$vars['marbu']['email'] . '</a></td>
+	// 						</tr>
+	// 						<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+	// 							<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="https://' . Configuration::$vars['marbu']['website'] . '">' . Configuration::$vars['marbu']['website'] . '</a></td>
+	// 						</tr>
+	// 					</table>
+	// 					<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:#004770;">
+	// 						<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+	// 							<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">' . Languages::email('power_by')[$value['lang']] . ' <a style="font-weight:600;text-decoration:none;color:#fff;" href="https://id.one-consultores.com">' . Configuration::$web_page . ' ' . Configuration::$web_version . '</a></td>
+	// 						</tr
+	// 						<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+	// 							<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Copyright (C) <a style="text-decoration:none;color:#fff;" href="https://one-consultores.com">One Consultores</a></td>
+	// 						</tr>
+	// 						<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+	// 							<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Software ' . Languages::email('development_by')[$value['lang']] . ' <a style="text-decoration:none;color:#fff;" href="https://codemonkey.com.mx">Code Monkey</a></td>
+	// 						</tr>
+	// 					</table>
+	// 				</body>
+	// 			</html>';
+	// 			$mail->send();
+	// 		}
+	// 		catch (Exception $e) {}
 	// 	}
 	// }
 
 	// public function sql()
 	// {
-	// 	$xlsx = SimpleXLSX::parse(PATH_UPLOADS . 'moonpalace/' . '0001.xlsx');
+	// 	set_time_limit(1000000);
+	//
+	// 	$xlsx = SimpleXLSX::parse(PATH_UPLOADS . 'moonpalace/' . '0002.xlsx');
 	//
 	//     foreach ($xlsx->rows() as $value)
 	//     {
@@ -947,7 +1134,7 @@ class Laboratory_model extends Model
 	//             ]),
 	//             'type' => 'covid_pcr',
 	//             'reason' => 'random',
-	// 			'start_process' => '2021-02-25',
+	// 			'start_process' => '2021-02-26',
 	// 			'end_process' => null,
 	//             'results' => json_encode([
 	// 				'result' => '',
@@ -958,7 +1145,7 @@ class Laboratory_model extends Model
 	//             'prescription' => null,
 	// 			'collector' => null,
 	// 			'location' => null,
-	// 			'date' => '2021-02-25',
+	// 			'date' => '2021-02-26',
 	// 			'hour' => '08:00:00',
 	// 			'comments' => null,
 	//             'signatures' => null,

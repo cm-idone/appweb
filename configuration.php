@@ -147,7 +147,7 @@ class Configuration
 	 *
      * @var string $db_host
      */
-	public static $db_host = 'localhost';
+	public static $db_host = '149.56.81.137';
 
 	/**
      * Nombre de la base de datos
@@ -156,7 +156,7 @@ class Configuration
 	 *
      * @var string $db_name
      */
-	public static $db_name = 'idone';
+		public static $db_name = 'idone';
 
 	/**
      * Usuario de la base de datos
