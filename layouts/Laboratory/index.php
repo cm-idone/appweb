@@ -8,7 +8,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
 
 %{header}%
 <header class="modbar">
-    <span style="width:100px;height:100%;float:left;display:flex;align-items:center;justify-content:center;padding-left:20px;text-transform:uppercase;"><strong><?php echo count($global['custody_chains']) . ' Registros'; ?></strong></span>
+    <span style="width:auto;height:100%;float:left;display:flex;align-items:center;justify-content:center;padding-left:20px;text-transform:uppercase;"><strong><?php echo count($global['custody_chains']) . ' Registros'; ?></strong></span>
     <div class="buttons">
         <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND !empty(System::temporal('get', 'laboratory', 'filter')) AND System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'deleted') : ?>
             <a data-action="empty_custody_chains" class="btn alert auto"><i class="fas fa-trash"></i>{$lang.empty_trash}</a>
