@@ -1017,7 +1017,6 @@ class Laboratory_model extends Model
 	// 		'AND' => [
 	// 			'custody_chains.type' => 'covid_pcr',
 	// 			'custody_chains.date' => '2021-02-27',
-	// 			'custody_chains.hour[<>]' => ['00:00:00','12:00:00'],
 	// 			'custody_chains.closed' => false,
 	// 			'custody_chains.deleted' => false
 	// 		]
@@ -1099,7 +1098,7 @@ class Laboratory_model extends Model
 	// 			</tr>
 	// 			<tr style="width:100%;margin:0px;padding:0px;border:0px;background-color:#deeaf6;">
 	// 				<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('start_process')[$value['lang']] . ': 2021-02-27</td>
-	// 				<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('end_process')[$value['lang']] . ': 2021-02-27</td>
+	// 				<td style="width:33.33%;margin:0px;padding:10px 0px 10px 10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('end_process')[$value['lang']] . ': 2021-02-28</td>
 	// 				<td style="width:33.33%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#004770;">' . Languages::email('id_patient')[$value['lang']] . ': ' . $value['contact']['ife'] . '</td>
 	// 			</tr>
 	// 		</table>
@@ -1174,7 +1173,7 @@ class Laboratory_model extends Model
 	// 		$html2pdf->output(PATH_UPLOADS . $pdf_filename, 'F');
 	//
 	// 		$query = $this->database->update('custody_chains', [
-	// 			'end_process' => '2021-02-27',
+	// 			'end_process' => '2021-02-28',
 	// 			'results' => json_encode([
 	// 				'result' => 'negative',
 	// 				'unity' => 'INDEX',

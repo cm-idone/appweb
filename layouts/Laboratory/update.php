@@ -47,7 +47,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                 <div class="row">
                     <div class="span6">
                         <div class="text">
-                            <input type="text" value="<?php echo $value['account_name']; ?>" disabled>
+                            <input type="text" value="<?php echo $global['custody_chain']['account_name']; ?>" disabled>
                         </div>
                         <div class="title">
                             <h6>{$lang.institution}</h6>
