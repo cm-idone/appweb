@@ -186,6 +186,7 @@ class Laboratory_model extends Model
 		], [
 			'custody_chains.id',
 			'custody_chains.account',
+			'accounts.name(account_name)',
 			'accounts.path(account_path)',
 			'custody_chains.token',
 			'custody_chains.employee',

@@ -22,6 +22,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
     </div>
 </header>
 <main class="workspace">
+    <span style="padding-left:20px;text-transform:uppercase;"><strong><?php echo count($global['custody_chains']) . ' Registros'; ?></strong></span>
     <table class="tbl-st-1" data-table="custody_chains">
         <tbody>
             <?php foreach ($global['custody_chains'] as $value) : ?>
