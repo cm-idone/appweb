@@ -22,6 +22,7 @@ class System_controller extends Controller
 					Session::set_value('vkye_account', $query['account']);
 					Session::set_value('vkye_user', $query['user']);
 					Session::set_value('vkye_lang', $query['user']['language']);
+					Session::set_value('vkye_time_zone', $query['account']['time_zone']);
 					Session::set_value('vkye_temporal', []);
 
 					echo json_encode([
