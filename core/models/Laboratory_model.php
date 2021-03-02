@@ -769,10 +769,10 @@ class Laboratory_model extends Model
 	// {
 	// 	set_time_limit(1000000);
 	//
-	// 	$xlsx = SimpleXLSX::parse(PATH_UPLOADS . 'moonpalace/' . '0004.xlsx');
+	// 	$xlsx = SimpleXLSX::parse(PATH_UPLOADS . 'moonpalace/' . '0005.xlsx');
 	//
-	// 	$start_process = '2021-03-01';
-	// 	$end_process = '2021-03-01';
+	// 	$start_process = '2021-03-02';
+	// 	$end_process = '2021-03-02';
 	//
 	//     foreach ($xlsx->rows() as $value)
 	//     {
@@ -831,8 +831,8 @@ class Laboratory_model extends Model
 	// {
 	// 	set_time_limit(100000000);
 	//
-	// 	$start_process = '2021-03-01';
-	// 	$end_process = '2021-03-01';
+	// 	$start_process = '2021-03-02';
+	// 	$end_process = '2021-03-02';
 	//
 	// 	$query = System::decode_json_to_array($this->database->select('custody_chains', [
 	// 		'id',
@@ -1005,7 +1005,7 @@ class Laboratory_model extends Model
 	// {
 	// 	set_time_limit(100000000);
 	//
-	// 	$start_process = '2021-02-28';
+	// 	$start_process = '2021-03-01';
 	// 	$end_process = '2021-03-01';
 	//
 	// 	$query = System::decode_json_to_array($this->database->select('custody_chains', [
@@ -1026,6 +1026,7 @@ class Laboratory_model extends Model
 	// 		'AND' => [
 	// 			'custody_chains.type' => 'covid_pcr',
 	// 			'custody_chains.date' => $start_process,
+	// 			'custody_chains.hour[<>]' => ['00:00:00','12:00:00'],
 	// 			'custody_chains.closed' => false,
 	// 			'custody_chains.deleted' => false
 	// 		]
