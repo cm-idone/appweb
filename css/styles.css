@@ -8,6 +8,25 @@ header.leftbar > nav > ul > li > a.logotype {
 }
 
 /* ------------------------------------------------------------- */
+/* Table's rewrite
+/* ------------------------------------------------------------- */
+
+table.tbl-st-1 > tbody > tr > td > span.covid_pcr {
+    background-color: #9c27b0;
+    color: #fff;
+}
+
+table.tbl-st-1 > tbody > tr > td > span.covid_an {
+    background-color: #3f51b5;
+    color: #fff;
+}
+
+table.tbl-st-1 > tbody > tr > td > span.covid_ac {
+    background-color: #9c27b0;
+    color: #fff;
+}
+
+/* ------------------------------------------------------------- */
 /* Tab's rewrite
 /* ------------------------------------------------------------- */
 

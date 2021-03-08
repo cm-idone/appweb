@@ -151,21 +151,31 @@ class Laboratory_model extends Model
 
 		foreach ($query as $key => $value)
 		{
-			$query[$key]['status'] = 'success';
+			$query[$key]['status'] = '';
 
 			if ($value['type'] == 'alcoholic')
 			{
 				if (($value['results']['1'] > 0 AND $value['results']['1'] < 0.20) OR ($value['results']['2'] > 0 AND $value['results']['2'] < 0.20) OR ($value['results']['3'] > 0 AND $value['results']['3'] < 0.20))
 					$query[$key]['status'] = 'warning';
 				else if ($value['results']['1'] >= 0.20 OR $value['results']['2'] >= 0.20 OR $value['results']['3'] >= 0.20)
-					$query[$key]['status'] = 'alert';
+					$query[$key]['status'] = 'positive';
 			}
 			else if ($value['type'] == 'antidoping' AND ($value['results']['COC'] == 'positive' OR $value['results']['THC'] == 'positive' OR $value['results']['ANF'] == 'positive' OR $value['results']['MET'] == 'positive' OR $value['results']['BZD'] == 'positive' OR $value['results']['OPI'] == 'positive' OR $value['results']['BAR'] == 'positive'))
-				$query[$key]['status'] = 'alert';
-			else if (($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an') AND $value['results']['result'] == 'positive')
-				$query[$key]['status'] = 'alert';
-			else if ($value['type'] == 'covid_ac' AND ($value['results']['igm']['result'] == 'positive' OR $value['results']['igg']['result'] == 'positive'))
-				$query[$key]['status'] = 'alert';
+				$query[$key]['status'] = 'positive';
+			else if ($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an')
+			{
+				if ($value['results']['result'] == 'negative')
+					$query[$key]['status'] = 'negative';
+				else if ($value['results']['result'] == 'positive')
+					$query[$key]['status'] = 'positive';
+			}
+			else if ($value['type'] == 'covid_ac')
+			{
+				if ($value['results']['igm']['result'] == 'not_reactive' AND $value['results']['igg']['result'] == 'not_reactive')
+					$query[$key]['status'] = 'negative';
+				else if ($value['results']['igm']['result'] == 'reactive' OR $value['results']['igg']['result'] == 'reactive')
+					$query[$key]['status'] = 'positive';
+			}
 		}
 
 		return $query;
@@ -1005,8 +1015,8 @@ class Laboratory_model extends Model
 	// {
 	// 	set_time_limit(100000000);
 	//
-	// 	$start_process = '2021-03-06';
-	// 	$end_process = '2021-03-07';
+	// 	$start_process = '2021-03-07';
+	// 	$end_process = '2021-03-08';
 	//
 	// 	$query = System::decode_json_to_array($this->database->select('custody_chains', [
 	// 		'[>]accounts' => [
@@ -1026,6 +1036,7 @@ class Laboratory_model extends Model
 	// 		'AND' => [
 	// 			'custody_chains.type' => 'covid_pcr',
 	// 			'custody_chains.date' => $start_process,
+	// 			'custody_chains.hour[<>]' => ['12:00:00','23:59:59'],
 	// 			'custody_chains.closed' => false,
 	// 			'custody_chains.deleted' => false
 	// 		]

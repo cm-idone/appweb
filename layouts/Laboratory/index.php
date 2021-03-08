@@ -28,6 +28,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
             <?php foreach ($global['custody_chains'] as $value) : ?>
                 <tr>
                     <?php if (($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') AND empty($value['employee'])) : ?>
+                        <!-- (($value['account_path'] != 'moonpalace' AND !empty($value['pdf'])) ? ' | <a href="{$path.uploads}' . $value['pdf'] . '" download="' . $value['pdf'] . '">{$lang.download_pdf}</a>' : '') -->
                         <td class="hidden"><?php echo $value['contact']['ife']; ?></td>
                         <td class="hidden"><?php echo $value['contact']['birth_date']; ?></td>
                         <td class="hidden"><?php echo $value['contact']['age']; ?></td>
@@ -36,7 +37,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                         <td class="hidden">+<?php echo $value['contact']['phone']['country'] . $value['contact']['phone']['number']; ?></td>
                     <?php endif; ?>
                     <td class="smalltag"><span><?php echo $value['token']; ?></span></td>
-                    <td class="smalltag"><span class="<?php echo $value['status'] ?>">{$lang.<?php echo $value['type']; ?>}</span></td>
+                    <?php if ($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') : ?>
+                        <td class="smalltag"><span class="<?php echo $value['type'] ?>">{$lang.<?php echo $value['type']; ?>}</span></td>
+                    <?php endif; ?>
                     <td>
                         <?php if (($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') AND empty($value['employee'])) : ?>
                             <?php echo $value['contact']['firstname'] . ' ' . $value['contact']['lastname']; ?>
@@ -45,10 +48,10 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                         <?php endif; ?>
                     </td>
                     <?php if ($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') : ?>
-                        <td class="mediumtag"><?php echo (empty($value['employee']) ? (($value['closed'] == true) ? '<i class="fas fa-envelope" style="margin-right:5px;color:#009688;"></i> {$lang.sended}' : '<i class="fas fa-envelope"  style="margin-right:5px;color:#ff9800;"></i> {$lang.not_sended}') . (($value['account_path'] != 'moonpalace' AND !empty($value['pdf'])) ? ' | <a href="{$path.uploads}' . $value['pdf'] . '" download="' . $value['pdf'] . '">{$lang.download_pdf}</a>' : '') : '<strong>{$lang.internal}</strong>'); ?></td>
+                        <td class="smalltag"><?php echo (empty($value['employee']) ? (($value['closed'] == true) ? '<i class="fas fa-envelope" style="margin-right:5px;color:#009688;"></i> {$lang.sended}' : '<i class="fas fa-envelope"  style="margin-right:5px;color:#ff9800;"></i> {$lang.not_sended}') : '<strong>{$lang.internal}</strong>'); ?></td>
                     <?php endif; ?>
+                    <td class="smalltag"><i class="<?php echo (!empty($value['status']) ? (($value['status'] == 'negative') ? 'fas fa-smile-beam' : (($value['status'] == 'positive') ? 'fas fa-sad-tear' : 'far fa-surprise')) : 'fas fa-grimace'); ?>" style="margin-right:5px;color:<?php echo (!empty($value['status']) ? (($value['status'] == 'negative') ? '#009688' : (($value['status'] == 'positive') ? '#f44336' : '#ff9800')) : '#9e9e9e'); ?>;"></i>{$lang.<?php echo (!empty($value['status']) ? 'short_' . $value['status'] : 'in_process'); ?>}</td>
                     <td class="mediumtag"><span><?php echo Dates::format_date_hour($value['date'], $value['hour'], 'long_year', '12-short'); ?></span></td>
-                    <!-- <td class="mediumtag"><span><?php echo (!empty($value['user']) ? $value['user_firstname'] . ' ' . $value['user_lastname'] : '{$lang.not_user}'); ?></span></td> -->
                     <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
                         <td class="mediumtag"><span><?php echo $value['account_name']; ?></span></td>
                     <?php endif; ?>
