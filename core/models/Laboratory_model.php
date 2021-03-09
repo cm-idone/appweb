@@ -1015,7 +1015,7 @@ class Laboratory_model extends Model
 	// {
 	// 	set_time_limit(100000000);
 	//
-	// 	$start_process = '2021-03-07';
+	// 	$start_process = '2021-03-08';
 	// 	$end_process = '2021-03-08';
 	//
 	// 	$query = System::decode_json_to_array($this->database->select('custody_chains', [
@@ -1042,7 +1042,7 @@ class Laboratory_model extends Model
 	// 		]
 	// 	]));
 	//
-	// 	// print_r(count($query));
+	// 	print_r(count($query));
 	//
 	// 	foreach ($query as $value)
 	// 	{

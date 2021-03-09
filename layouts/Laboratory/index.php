@@ -28,7 +28,6 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
             <?php foreach ($global['custody_chains'] as $value) : ?>
                 <tr>
                     <?php if (($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') AND empty($value['employee'])) : ?>
-                        <!-- (($value['account_path'] != 'moonpalace' AND !empty($value['pdf'])) ? ' | <a href="{$path.uploads}' . $value['pdf'] . '" download="' . $value['pdf'] . '">{$lang.download_pdf}</a>' : '') -->
                         <td class="hidden"><?php echo $value['contact']['ife']; ?></td>
                         <td class="hidden"><?php echo $value['contact']['birth_date']; ?></td>
                         <td class="hidden"><?php echo $value['contact']['age']; ?></td>
@@ -50,11 +49,16 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                     <?php if ($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') : ?>
                         <td class="smalltag"><?php echo (empty($value['employee']) ? (($value['closed'] == true) ? '<i class="fas fa-envelope" style="margin-right:5px;color:#009688;"></i> {$lang.sended}' : '<i class="fas fa-envelope"  style="margin-right:5px;color:#ff9800;"></i> {$lang.not_sended}') : '<strong>{$lang.internal}</strong>'); ?></td>
                     <?php endif; ?>
-                    <td class="smalltag"><i class="<?php echo (!empty($value['status']) ? (($value['status'] == 'negative') ? 'fas fa-smile-beam' : (($value['status'] == 'positive') ? 'fas fa-sad-tear' : 'far fa-surprise')) : 'fas fa-grimace'); ?>" style="margin-right:5px;color:<?php echo (!empty($value['status']) ? (($value['status'] == 'negative') ? '#009688' : (($value['status'] == 'positive') ? '#f44336' : '#ff9800')) : '#9e9e9e'); ?>;"></i>{$lang.<?php echo (!empty($value['status']) ? 'short_' . $value['status'] : 'in_process'); ?>}</td>
+                    <td class="smalltag"><i class="<?php echo (!empty($value['status']) ? (($value['status'] == 'negative') ? 'fas fa-times-circle' : (($value['status'] == 'positive') ? 'fas fa-check-circle' : 'fas fa-exclamation-circle')) : 'fas fa-question-circle'); ?>" style="margin-right:5px;color:<?php echo (!empty($value['status']) ? (($value['status'] == 'negative') ? '#f44336' : (($value['status'] == 'positive') ? '#009688' : '#ff9800')) : '#9e9e9e'); ?>;"></i>{$lang.<?php echo (!empty($value['status']) ? 'short_' . $value['status'] : 'in_process'); ?>}</td>
                     <td class="mediumtag"><span><?php echo Dates::format_date_hour($value['date'], $value['hour'], 'long_year', '12-short'); ?></span></td>
                     <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
                         <td class="mediumtag"><span><?php echo $value['account_name']; ?></span></td>
                     <?php endif; ?>
+                    <td class="button">
+                        <?php if ($value['account_path'] != 'moonpalace' AND !empty($value['pdf'])) : ?>
+                            <a href="{$path.uploads}<?php echo $value['pdf']; ?>" download="<?php echo $value['pdf']; ?>"><i class="fas fa-file-pdf"></i><span>{$lang.download_pdf}</span></a>
+                        <?php endif; ?>
+                    </td>
                     <?php if ($value['deleted'] == true AND (($global['render'] == 'alcoholic' AND Permissions::user(['delete_alcoholic']) == true) OR ($global['render'] == 'antidoping' AND Permissions::user(['delete_antidoping']) == true) OR ($global['render'] == 'covid' AND Permissions::user(['delete_covid']) == true))) : ?>
                         <td class="button">
                             <a data-action="restore_custody_chain" data-id="<?php echo $value['id']; ?>"><i class="fas fa-reply"></i><span>{$lang.restore}</span></a>
