@@ -18,8 +18,8 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.1']);
     </div>
     <div>
         <h2>MSA1907259GA</h2>
-        <h3>Av. Nichupté SM51 M42 L1</h3>
-        <h3>CP: 77533 Cancún, Qroo. México</h3>
+        <h3>Av. Del Sol SM47 M6 L21 Planta Alta</h3>
+        <h3>CP: 77506 Cancún, Qroo. México</h3>
         <?php if ($global['render'] == 'create' AND empty(System::temporal('get', 'covid', 'contact'))) : ?>
             <h3><a href="<?php echo Language::get_lang_url('es'); ?>"><img src="https://cdn.codemonkey.com.mx/monkeyboard/assets/images/es.png"></a><a href="<?php echo Language::get_lang_url('en'); ?>"><img src="https://cdn.codemonkey.com.mx/monkeyboard/assets/images/en.png"></a></h3>
         <?php endif; ?>

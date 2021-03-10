@@ -380,10 +380,10 @@ class Laboratory_controller extends Controller
 																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">MSA1907259GA</td>
 															</tr>
 															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">Av. Nichupté SM51 M42 L1</td>
+																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">Av. Del Sol SM47 M6 L21 Planta Alta</td>
 															</tr>
 															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">CP: 77533 Cancún, Qroo. México</td>
+																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">CP: 77506 Cancún, Qroo. México</td>
 															</tr>
 														</table>
 													</td>
