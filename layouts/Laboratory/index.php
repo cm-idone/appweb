@@ -55,7 +55,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                         <td class="mediumtag"><span><?php echo $value['account_name']; ?></span></td>
                     <?php endif; ?>
                     <td class="button">
-                        <?php if ($value['account_path'] != 'moonpalace' AND !empty($value['pdf'])) : ?>
+                        <?php if (!empty($value['pdf'])) : ?>
                             <a href="{$path.uploads}<?php echo $value['pdf']; ?>" download="<?php echo $value['pdf']; ?>"><i class="fas fa-file-pdf"></i><span>{$lang.download_pdf}</span></a>
                         <?php endif; ?>
                     </td>
