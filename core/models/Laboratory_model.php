@@ -779,17 +779,15 @@ class Laboratory_model extends Model
 	// {
 	// 	set_time_limit(1000000);
 	//
-	// 	$xlsx = SimpleXLSX::parse(PATH_UPLOADS . 'moonpalace/0008.xlsx');
+	// 	$xlsx = SimpleXLSX::parse(PATH_UPLOADS . '10 Resultados Marbu Salud 11 de Marzo del 2021/0009.xlsx');
 	//
-	// 	$start_process = '2021-03-09';
-	// 	$end_process = '2021-03-09';
+	// 	$start_process = '2021-03-11';
+	// 	$end_process = '2021-03-11';
 	//
 	//     foreach ($xlsx->rows() as $value)
 	//     {
 	// 		$value[2] = explode(' ', $value[2]);
 	// 		$value[7] = 2021 - intval(explode('-', $value[2][0])[0]);
-	//
-	// 		// print_r($value);
 	//
 	// 		$query = $this->database->insert('custody_chains', [
 	//             'account' => 19,
@@ -841,8 +839,9 @@ class Laboratory_model extends Model
 	// {
 	// 	set_time_limit(100000000);
 	//
-	// 	$start_process = '2021-03-09';
-	// 	$end_process = '2021-03-09';
+	// 	$start_process = '2021-03-11';
+	// 	$end_process = '2021-03-11';
+	// 	$path_save = '10 Resultados Marbu Salud 11 de Marzo del 2021';
 	//
 	// 	$query = System::decode_json_to_array($this->database->select('custody_chains', [
 	// 		'id',
@@ -1002,7 +1001,11 @@ class Laboratory_model extends Model
 	// 			</tr>
 	// 		</table>';
 	// 		$html2pdf->writeHTML($writing);
-	// 		$html2pdf->output(PATH_UPLOADS . 'moonpalace/' . $pdf_filename, 'F');
+	//
+	// 		if ($value['results']['result'] == 'negative')
+	// 			$html2pdf->output(PATH_UPLOADS . $path_save . '/' . $pdf_filename, 'F');
+	// 		else if ($value['results']['result'] == 'positive')
+	// 			$html2pdf->output(PATH_UPLOADS . $path_save . '/Positivos/' . $pdf_filename, 'F');
 	//
 	// 		$this->database->update('custody_chains', [
 	// 			'pdf' => $pdf_filename
