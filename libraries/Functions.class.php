@@ -16,11 +16,11 @@ class Functions
             return $age;
     }
 
-    static public function collectors()
+    static public function chemicals()
     {
         $database = new Medoo();
 
-        return $database->select('system_collectors', [
+        return $database->select('system_chemicals', [
             'id',
             'name',
             'signature'

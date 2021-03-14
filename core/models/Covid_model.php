@@ -62,6 +62,7 @@ class Covid_model extends Model
 			]) : null),
             'medicines' => null,
             'prescription' => null,
+			'chemical' => null,
 			'collector' => null,
 			'location' => null,
 			'date' => Dates::current_date(),
@@ -86,8 +87,8 @@ class Covid_model extends Model
 	public function read_custody_chain($token)
 	{
 		$query = System::decode_json_to_array($this->database->select('custody_chains', [
-			'[>]system_collectors' => [
-				'collector' => 'id'
+			'[>]system_chemicals' => [
+				'chemical' => 'id'
 			]
 		], [
 			'custody_chains.token',
@@ -96,8 +97,8 @@ class Covid_model extends Model
 			'custody_chains.start_process',
 			'custody_chains.end_process',
 			'custody_chains.results',
-			'system_collectors.name(collector_name)',
-			'system_collectors.signature(collector_signature)',
+			'system_chemicals.name(chemical_name)',
+			'system_chemicals.signature(chemical_signature)',
 			'custody_chains.date',
 			'custody_chains.hour',
 			'custody_chains.comments',

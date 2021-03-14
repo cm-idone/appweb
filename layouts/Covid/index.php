@@ -347,11 +347,11 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.1']);
                     </figure>
                     <a href="{$path.uploads}<?php echo $global['custody_chain']['pdf']; ?>" download="certificate.pdf">{$lang.download_certificate_pdf}</a>
                 <?php endif; ?>
-                <div class="collector">
+                <div class="chemical">
                     <figure>
-                        <img src="{$path.uploads}<?php echo $global['custody_chain']['collector_signature']; ?>">
+                        <img src="{$path.uploads}<?php echo $global['custody_chain']['chemical_signature']; ?>">
                     </figure>
-                    <h2><?php echo $global['custody_chain']['collector_name']; ?></h2>
+                    <h2><?php echo $global['custody_chain']['chemical_name']; ?></h2>
                     <h3>{$lang.this_certificate_available_by}</h3>
                 </div>
             <?php endif; ?>

@@ -334,7 +334,7 @@ main.covid > div.results > a {
     color: #fff;
 }
 
-main.covid > div.results > div.collector {
+main.covid > div.results > div.chemical {
     width: 100%;
     display: flex;
     align-items: center;
@@ -342,14 +342,14 @@ main.covid > div.results > div.collector {
     flex-direction: column;
 }
 
-main.covid > div.results > div.collector > figure,
-main.covid > div.results > div.collector > figure > img {
+main.covid > div.results > div.chemical > figure,
+main.covid > div.results > div.chemical > figure > img {
     width: auto;
     height: 100px;
     margin-bottom: 20px;
 }
 
-main.covid > div.results > div.collector > h2 {
+main.covid > div.results > div.chemical > h2 {
     width: 100%;
     margin-bottom: 5px;
     font-size: 14px;
@@ -358,7 +358,7 @@ main.covid > div.results > div.collector > h2 {
     color: #212121;
 }
 
-main.covid > div.results > div.collector > h3 {
+main.covid > div.results > div.chemical > h3 {
     width: 100%;
     font-size: 14px;
     font-weight: 400;

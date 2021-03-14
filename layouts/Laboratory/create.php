@@ -415,7 +415,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                     <h6>{$lang.signature}</h6>
                 </div>
             </fieldset>
-            <h2>{$lang.authorization_collector}</h2>
+            <h2>{$lang.authorization_chemical}</h2>
             <p>{$lang.custody_chain_alert_<?php echo $global['type']; ?>_2}</p>
             <fieldset class="fields-group">
                 <div class="row">
@@ -454,9 +454,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                 <div class="row">
                     <div class="span4">
                         <div class="text">
-                            <select name="collector">
+                            <select name="chemical">
                                 <option value="" class="hidden">{$lang.choose_an_option}</option>
-                                <?php foreach (Functions::collectors() as $value) : ?>
+                                <?php foreach (Functions::chemicals() as $value) : ?>
                                     <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
                                 <?php endforeach; ?>
                             </select>

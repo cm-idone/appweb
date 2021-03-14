@@ -471,7 +471,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                     </div>
                 </fieldset>
             <?php endif; ?>
-            <h2>{$lang.authorization_collector}</h2>
+            <h2>{$lang.authorization_chemical}</h2>
             <p>{$lang.custody_chain_alert_<?php echo $global['custody_chain']['type']; ?>_2}</p>
             <fieldset class="fields-group">
                 <div class="row">
@@ -510,9 +510,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                 <div class="row">
                     <div class="span4">
                         <div class="text">
-                            <select name="collector">
-                                <?php foreach (Functions::collectors() as $value) : ?>
-                                    <option value="<?php echo $value['id']; ?>" <?php echo (($global['custody_chain']['collector'] == $value['id']) ? 'selected' : ''); ?>><?php echo $value['name']; ?></option>
+                            <select name="chemical">
+                                <?php foreach (Functions::chemicals() as $value) : ?>
+                                    <option value="<?php echo $value['id']; ?>" <?php echo (($global['custody_chain']['chemical'] == $value['id']) ? 'selected' : ''); ?>><?php echo $value['name']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

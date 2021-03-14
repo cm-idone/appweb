@@ -175,8 +175,8 @@ class Laboratory_controller extends Controller
                     if (Validations::empty($_POST['hour']) == false)
     					array_push($errors, ['hour','{$lang.dont_leave_this_field_empty}']);
 
-                    if (Validations::empty($_POST['collector']) == false)
-    					array_push($errors, ['collector','{$lang.dont_leave_this_field_empty}']);
+                    if (Validations::empty($_POST['chemical']) == false)
+    					array_push($errors, ['chemical','{$lang.dont_leave_this_field_empty}']);
 
     				if (empty($errors))
     				{
@@ -331,8 +331,8 @@ class Laboratory_controller extends Controller
                     if (Validations::empty($_POST['hour']) == false)
     					array_push($errors, ['hour','{$lang.dont_leave_this_field_empty}']);
 
-                    if (Validations::empty($_POST['collector']) == false)
-    					array_push($errors, ['collector','{$lang.dont_leave_this_field_empty}']);
+                    if (Validations::empty($_POST['chemical']) == false)
+    					array_push($errors, ['chemical','{$lang.dont_leave_this_field_empty}']);
 
     				if (empty($errors))
     				{
