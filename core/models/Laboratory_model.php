@@ -71,7 +71,6 @@ class Laboratory_model extends Model
 			'lang' => null,
 			'closed' => true,
 			'user' => Session::get_value('vkye_user')['id'],
-			'accept_terms' => null,
 			'deleted' => false
         ]);
 
@@ -827,7 +826,6 @@ class Laboratory_model extends Model
 	// 			'lang' => 'es',
 	// 			'closed' => true,
 	// 			'user' => 1,
-	// 			'accept_terms' => true,
 	// 			'deleted' => false
 	//         ]);
 	//     }
