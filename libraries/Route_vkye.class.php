@@ -21,7 +21,9 @@ class Route_vkye
 
         $paths = [
             '/Index/index',
-            '/Covid/index',
+            '/Laboratory/authentication',
+            '/Laboratory/record',
+            '/Laboratory/results',
             '/Login/index'
         ];
 

@@ -77,7 +77,7 @@ class Permissions
                         switch ($value)
                         {
                             case 'control_laboratory' :
-                                array_push($paths, '/Laboratory/marbu');
+                                array_push($paths, '/Laboratory/control');
                                 break;
 
                             case 'create_alcoholic' :

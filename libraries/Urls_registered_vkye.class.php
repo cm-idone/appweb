@@ -13,14 +13,6 @@ class Urls_registered_vkye
                 'controller' => 'Index',
                 'method' => 'index'
             ],
-            '/%param%/covid' => [
-                'controller' => 'Covid',
-                'method' => 'index'
-            ],
-            '/%param%/covid/%param%' => [
-                'controller' => 'Covid',
-                'method' => 'index'
-            ],
             '/login' => [
                 'controller' => 'Login',
                 'method' => 'index'
@@ -29,13 +21,13 @@ class Urls_registered_vkye
                 'controller' => 'Dashboard',
                 'method' => 'index'
             ],
-            '/laboratory/marbu' => [
-                'controller' => 'Laboratory',
-                'method' => 'marbu'
-            ],
             '/laboratory/%param%' => [
                 'controller' => 'Laboratory',
                 'method' => 'index'
+            ],
+            '/laboratory/control' => [
+                'controller' => 'Laboratory',
+                'method' => 'control'
             ],
             '/laboratory/create/%param%/%param%' => [
                 'controller' => 'Laboratory',
@@ -44,6 +36,22 @@ class Urls_registered_vkye
             '/laboratory/update/%param%' => [
                 'controller' => 'Laboratory',
                 'method' => 'update'
+            ],
+            '/%param%/authentication/%param%' => [
+                'controller' => 'Laboratory',
+                'method' => 'authentication'
+            ],
+            '/%param%/record/%param%' => [
+                'controller' => 'Laboratory',
+                'method' => 'record'
+            ],
+            '/%param%/record/%param%/%param%' => [
+                'controller' => 'Laboratory',
+                'method' => 'record'
+            ],
+            '/%param%/results/%param%' => [
+                'controller' => 'Laboratory',
+                'method' => 'results'
             ],
             '/employees' => [
                 'controller' => 'Employees',

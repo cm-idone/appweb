@@ -249,7 +249,7 @@ class Configuration
 	 *
      * @var string $smtp_user
      */
-	public static $smtp_user = 'marbusalud@gmail.com';
+	public static $smtp_user = 'noreply@one-consultores.com';
 
 	/**
      * Contraseña de la cuenta smtp.
@@ -258,7 +258,7 @@ class Configuration
 	 *
      * @var string $smtp_pass
      */
-	public static $smtp_pass = 'marbusalud2021@';
+	public static $smtp_pass = '5G>BaT&8';
 
 	/**
      * Seguridad de la encriptacion para el envio de SMTP.
@@ -286,13 +286,5 @@ class Configuration
 	 *
      * @var integer $vars
      */
-	public static $vars = [
-		'marbu' => [
-			'phone' => '+52 (998) 121 4013',
-			'email' => 'marbu@one-consultores.com',
-			'facebook' => 'oneconsultoresmx',
-			'linkedin' => 'one-consultores-méxico',
-			'website' => 'marbu.one-consultores.com'
-		]
-	];
+	public static $vars = [];
 }

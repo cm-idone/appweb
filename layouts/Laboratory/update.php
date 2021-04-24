@@ -366,7 +366,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                         <div class="span2">
                             <div class="text">
                                 <select name="test_igm_unity">
-                                    <option value="">{$lang.undefined}</option>
+                                    <option value="INDEX" <?php echo (($global['custody_chain']['results']['igm']['unity'] == 'INDEX') ? 'selected' : '') ?>>{$lang.index}</option>
                                 </select>
                             </div>
                             <div class="title">
@@ -398,7 +398,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                         <div class="span2">
                             <div class="text">
                                 <select name="test_igg_unity">
-                                    <option value="">{$lang.undefined}</option>
+                                    <option value="INDEX" <?php echo (($global['custody_chain']['results']['igg']['unity'] == 'INDEX') ? 'selected' : '') ?>>{$lang.index}</option>
                                 </select>
                             </div>
                             <div class="title">
