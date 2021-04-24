@@ -192,7 +192,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.1']);
                         </div>
                         <div>
                             <a href="https://api.whatsapp.com/send?phone=<?php echo Configuration::$vars['marbu']['phone']; ?>&text=Hola, soy <?php echo System::temporal('get', 'covid', 'contact')['firstname'] . ' ' . System::temporal('get', 'covid', 'contact')['lastname']; ?>. Me gustaría agendar mi cita. Ya he registrado mis datos. Mi folio es: <?php echo System::temporal('get', 'covid', 'contact')['token']; ?>" target="_blank"><i class="fas fa-headset"></i><span>{$lang.share_us_your_token}</span></a>
-                            <a data-action="share" data-title="Marbu Salud" data-text="{$lang.share_token} <?php echo System::temporal('get', 'covid', 'contact')['token']; ?>" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['account']['path']; ?>/covid/<?php echo System::temporal('get', 'covid', 'contact')['token']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_token_with_friends}</span></a>
+                            <a data-action="share" data-title="Marbu Salud" data-text="{$lang.share_results} <?php echo System::temporal('get', 'covid', 'contact')['token']; ?>" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['account']['path']; ?>/covid/<?php echo System::temporal('get', 'covid', 'contact')['token']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_results_with_friends}</span></a>
                         </div>
                     </div>
                     <figure>
@@ -338,7 +338,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.1']);
                     </div>
                     <div>
                         <a href="https://api.whatsapp.com/send?phone=<?php echo Configuration::$vars['marbu']['phone']; ?>&text=Hola, soy <?php echo $global['custody_chain']['contact']['firstname'] . ' ' . $global['custody_chain']['contact']['lastname']; ?>. Mi folio es: <?php echo $global['custody_chain']['token']; ?>" target="_blank"><i class="fas fa-headset"></i><span>{$lang.whatsapp_us_to_support}</span></a>
-                        <a data-action="share" data-title="Marbu Salud" data-text="{$lang.share_results} <?php echo $global['custody_chain']['token']; ?>" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['account']['path']; ?>/covid/<?php echo $global['custody_chain']['token']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_token_with_friends}</span></a>
+                        <a data-action="share" data-title="Marbu Salud" data-text="{$lang.share_results} <?php echo $global['custody_chain']['token']; ?>" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['account']['path']; ?>/covid/<?php echo $global['custody_chain']['token']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_results_with_friends}</span></a>
                     </div>
                 </div>
                 <?php if (Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) : ?>

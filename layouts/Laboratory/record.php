@@ -24,6 +24,11 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
         <div class="blocked">
             <i class="far fa-frown"></i>
             <p>{$lang.record_not_available}</p>
+            <div class="share">
+                <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
+                <a href="tel:<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
+                <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.know_our_laboratory}" data-url="https://<?php echo $global['laboratory']['website']; ?>"><i class="fas fa-share-alt"></i>{$lang.share}</a>
+            </div>
         </div>
     <?php elseif ($global['render'] == 'go') : ?>
         <?php if ($global['collector']['authentication']['type'] == 'alcoholic') : ?>
@@ -44,7 +49,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
                     </figure>
                     <div class="share">
                         <div>
-                            <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.share_token} <?php echo System::temporal('get', 'record', 'covid')['token']; ?>" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['laboratory']['path']; ?>/results/<?php echo System::temporal('get', 'record', 'covid')['token']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_token_with_friends}</span></a>
+                            <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.share_results}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['laboratory']['path']; ?>/results/<?php echo System::temporal('get', 'record', 'covid')['token']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_results_with_friends}</span></a>
                         </div>
                         <div>
                             <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>

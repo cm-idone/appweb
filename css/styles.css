@@ -886,6 +886,7 @@ main.laboratory > div.results > div.chemical > h3 {
 
 /*  */
 
+main.laboratory > div.blocked > div.share,
 main.laboratory > form[name="record"] > div.share,
 main.laboratory > div.create > div.share,
 main.laboratory > div.create > div.share > div,
@@ -894,6 +895,7 @@ main.laboratory > div.results > div.share > div {
     width: 100%;
 }
 
+main.laboratory > div.blocked > div.share,
 main.laboratory > form[name="record"] > div.share {
     margin-top: 40px;
 }
@@ -926,6 +928,7 @@ main.laboratory > div.results > div.share > div:first-child > a > i {
     color: #bdbdbd;
 }
 
+main.laboratory > div.blocked > div.share,
 main.laboratory > form[name="record"] > div.share,
 main.laboratory > div.create > div.share > div:last-child,
 main.laboratory > div.results > div.share > div:last-child {
@@ -934,6 +937,7 @@ main.laboratory > div.results > div.share > div:last-child {
     justify-content: center;
 }
 
+main.laboratory > div.blocked > div.share > a,
 main.laboratory > form[name="record"] > div.share > a,
 main.laboratory > div.create > div.share > div:last-child > a,
 main.laboratory > div.results > div.share > div:last-child > a {
@@ -947,6 +951,7 @@ main.laboratory > div.results > div.share > div:last-child > a {
     color: #757575;
 }
 
+main.laboratory > div.blocked > div.share > a > i,
 main.laboratory > form[name="record"] > div.share > a > i,
 main.laboratory > div.create > div.share > div:last-child > a > i,
 main.laboratory > div.results > div.share > div:last-child > a > i {
