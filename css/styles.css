@@ -503,10 +503,6 @@ main.laboratory > div.blocked {
     padding: 40px 20px;
 }
 
-main.laboratory > div.authentication {
-    padding: 0px 20px;
-}
-
 main.laboratory > div.blocked > i,
 main.laboratory > div.authentication > i {
     margin-bottom: 40px;
