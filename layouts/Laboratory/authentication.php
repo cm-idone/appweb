@@ -6,7 +6,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
 
 ?>
 
-<header class="authentication">
+<header class="laboratory">
     <div style="background-color:<?php echo $global['laboratory']['colors']['first']; ?>;">
         <figure>
             <img src="{$path.uploads}<?php echo $global['laboratory']['avatar']; ?>">
@@ -19,7 +19,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
         <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['address']['second']; ?></h3>
     </div>
 </header>
-<main class="authentication">
+<main class="laboratory">
     <?php if ($global['render'] == 'laboratory_blocked' OR $global['render'] == 'collector_blocked' OR $global['render'] == 'out_of_laboratory' OR $global['render'] == 'out_of_time') : ?>
         <div class="blocked">
             <i class="fas fa-lock"></i>
@@ -57,7 +57,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
         </div>
     <?php endif; ?>
 </main>
-<footer class="authentication">
+<footer class="laboratory">
     <div style="background-color:<?php echo $global['laboratory']['colors']['second']; ?>;">
         <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>"><i class="fab fa-whatsapp"></i><?php echo $global['laboratory']['phone']; ?></a>
         <a href="tel:<?php echo $global['laboratory']['phone']; ?>"><i class="fas fa-phone"></i><?php echo $global['laboratory']['phone']; ?></a>
