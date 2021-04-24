@@ -494,20 +494,80 @@ class Laboratory_controller extends Controller
 	{
 		global $global;
 
-		$global['collector'] = $this->model->read_collector($params[0]);
+		$global['laboratory'] = $this->model->read_laboratory($params[0]);
+		$global['collector'] = $this->model->read_collector($params[1]);
 
-		if (!empty($global['collector']))
+		if (!empty($global['laboratory']) AND !empty($global['collector']))
 		{
 			if (Format::exist_ajax_request() == true)
 	        {
+				if ($_POST['action'] == 'create_authentication')
+				{
+					$errors = [];
 
+					if (Validations::empty($_POST['authentication']) == false)
+						array_push($errors, ['authentication','{$lang.dont_leave_this_field_empty}']);
+
+					if (empty($errors))
+					{
+						$_POST['id'] = $global['collector']['id'];
+
+						$query = $this->model->create_authentication($_POST);
+
+						if (!empty($query))
+						{
+							echo json_encode([
+								'status' => 'success',
+								'message' => '{$lang.operation_success}'
+							]);
+						}
+						else
+						{
+							echo json_encode([
+								'status' => 'error',
+								'message' => '{$lang.operation_error}'
+							]);
+						}
+					}
+					else
+					{
+						echo json_encode([
+							'status' => 'error',
+							'errors' => $errors
+						]);
+					}
+				}
+
+				if ($_POST['action'] == 'delete_authentication')
+				{
+					$query = $this->model->delete_authentication($global['collector']['id']);
+
+					if (!empty($query))
+					{
+						echo json_encode([
+							'status' => 'success',
+							'message' => '{$lang.operation_success}'
+						]);
+					}
+					else
+					{
+						echo json_encode([
+							'status' => 'error',
+							'message' => '{$lang.operation_error}'
+						]);
+					}
+				}
 	        }
 	        else
 	        {
-	            define('_title', 'Marbu Salud | {$lang.authentication}');
+	            define('_title', $global['laboratory']['name'] . ' | {$lang.authentication}');
 
-				if ($global['collector']['blocked'] == true)
-					$global['render'] = 'blocked';
+				if ($global['laboratory']['blocked'] == true)
+					$global['render'] = 'laboratory_blocked';
+				else if ($global['collector']['blocked'] == true)
+					$global['render'] = 'collector_blocked';
+				else if (!in_array($global['laboratory']['id'], $global['collector']['laboratories']))
+					$global['render'] = 'out_of_laboratory';
 				else if (Dates::current_hour() < $global['collector']['schedule']['open'] OR Dates::current_hour() > $global['collector']['schedule']['close'])
 					$global['render'] = 'out_of_time';
 				else if (Dates::current_hour() > $global['collector']['schedule']['open'] AND Dates::current_hour() < $global['collector']['schedule']['close'])

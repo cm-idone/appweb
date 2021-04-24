@@ -32,7 +32,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.1']);
                 <div class="share">
                     <a href="https://api.whatsapp.com/send?phone=<?php echo Configuration::$vars['marbu']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
                     <a href="tel:<?php echo Configuration::$vars['marbu']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
-                    <a data-action="share" data-title="Marbu Salud" data-text="{$lang.share_registry}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['account']['path']; ?>/covid"><i class="fas fa-share-alt"></i>{$lang.share}</a>
+                    <a data-action="share" data-title="Marbu Salud" data-text="{$lang.share_record_qr}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['account']['path']; ?>/covid"><i class="fas fa-share-alt"></i>{$lang.share}</a>
                 </div>
                 <h2>¡{$lang.registry_now}!</h2>
                 <h3>{$lang.covid_test}</h3>
@@ -188,7 +188,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.1']);
                         <div>
                             <a href="https://api.whatsapp.com/send?phone=<?php echo Configuration::$vars['marbu']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
                             <a href="tel:<?php echo Configuration::$vars['marbu']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
-                            <a data-action="share" data-title="Marbu Salud" data-text="{$lang.share_registry}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['account']['path']; ?>/covid"><i class="fas fa-share-alt"></i>{$lang.share}</a>
+                            <a data-action="share" data-title="Marbu Salud" data-text="{$lang.share_record_qr}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['account']['path']; ?>/covid"><i class="fas fa-share-alt"></i>{$lang.share}</a>
                         </div>
                         <div>
                             <a href="https://api.whatsapp.com/send?phone=<?php echo Configuration::$vars['marbu']['phone']; ?>&text=Hola, soy <?php echo System::temporal('get', 'covid', 'contact')['firstname'] . ' ' . System::temporal('get', 'covid', 'contact')['lastname']; ?>. Me gustaría agendar mi cita. Ya he registrado mis datos. Mi folio es: <?php echo System::temporal('get', 'covid', 'contact')['token']; ?>" target="_blank"><i class="fas fa-headset"></i><span>{$lang.share_us_your_token}</span></a>
@@ -334,7 +334,7 @@ $this->dependencies->add(['js', '{$path.js}Covid/index.js?v=1.1']);
                     <div>
                         <a href="https://api.whatsapp.com/send?phone=<?php echo Configuration::$vars['marbu']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
                         <a href="tel:<?php echo Configuration::$vars['marbu']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
-                        <a data-action="share" data-title="Marbu Salud" data-text="{$lang.share_registry}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['account']['path']; ?>/covid"><i class="fas fa-share-alt"></i>{$lang.share}</a>
+                        <a data-action="share" data-title="Marbu Salud" data-text="{$lang.share_record_qr}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['account']['path']; ?>/covid"><i class="fas fa-share-alt"></i>{$lang.share}</a>
                     </div>
                     <div>
                         <a href="https://api.whatsapp.com/send?phone=<?php echo Configuration::$vars['marbu']['phone']; ?>&text=Hola, soy <?php echo $global['custody_chain']['contact']['firstname'] . ' ' . $global['custody_chain']['contact']['lastname']; ?>. Mi folio es: <?php echo $global['custody_chain']['token']; ?>" target="_blank"><i class="fas fa-headset"></i><span>{$lang.whatsapp_us_to_support}</span></a>

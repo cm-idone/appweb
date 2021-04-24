@@ -421,11 +421,11 @@ article.scanner-4 > form > p {
 
 /*  */
 
-header.covid {
+header.authentication {
     width: 100%;
 }
 
-header.covid > div:first-child {
+header.authentication > div:first-child {
     width: 100%;
     height: 80px;
     position: relative;
@@ -434,21 +434,20 @@ header.covid > div:first-child {
     justify-content: flex-end;
     padding: 0px 40px;
     box-sizing: border-box;
-    background-color: #004770;
 }
 
-header.covid > div:first-child > figure {
+header.authentication > div:first-child > figure {
     width: 100px;
     position: absolute;
     top: 20px;
     left: 20px;
 }
 
-header.covid > div:first-child > figure > img {
+header.authentication > div:first-child > figure > img {
     width: 100%;
 }
 
-header.covid > div:first-child > h1 {
+header.authentication > div:first-child > h1 {
     width: 100%;
     font-size: 16px;
     font-weight: 600;
@@ -456,7 +455,7 @@ header.covid > div:first-child > h1 {
     color: #fff;
 }
 
-header.covid > div:last-child {
+header.authentication > div:last-child {
     width: 100%;
     display: flex;
     align-items: flex-end;
@@ -466,16 +465,15 @@ header.covid > div:last-child {
     box-sizing: border-box;
 }
 
-header.covid > div:last-child > h2,
-header.covid > div:last-child > h3 {
+header.authentication > div:last-child > h2,
+header.authentication > div:last-child > h3 {
     width: 100%;
     font-size: 14px;
     font-weight: 400;
     text-align: right;
-    color: #004770;
 }
 
-header.covid > div:last-child > h3 > a > img {
+header.authentication > div:last-child > h3 > a > img {
     width: auto;
     height: 15px;
     margin: 5px 0px 0px 5px;
@@ -483,10 +481,101 @@ header.covid > div:last-child > h3 > a > img {
 
 /*  */
 
-main.covid {
+main.authentication {
     width: 100%;
     padding: 40px 20px;
     box-sizing: border-box;
+}
+
+/*  */
+
+main.authentication > div.blocked,
+main.authentication > div.go {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+main.authentication > div.blocked {
+    padding: 40px 20px;
+}
+
+main.authentication > div.go {
+    padding: 0px 20px;
+}
+
+main.authentication > div.blocked > i,
+main.authentication > div.go > i {
+    margin-bottom: 40px;
+    font-size: 100px;
+    color: #e0e0e0;
+}
+
+main.authentication > div.blocked > p {
+    text-align: center;
+    color: #9e9e9e;
+}
+
+main.authentication > div.go > form {
+    width: 100%;
+}
+
+main.authentication > div.go > form > fieldset > div.button > button {
+    width: 100%;
+}
+
+main.authentication > div.go > h4 {
+    width: 100%;
+    margin-bottom: 40px;
+    text-align: center;
+    color: #757575;
+}
+
+main.authentication > div.go > h4 > i {
+    margin-right: 5px;
+    color: #009688;
+}
+
+main.authentication > div.go > figure {
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px dashed #757575;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+main.authentication > div.go > figure > img {
+    width: 100%;
+}
+
+main.authentication > div.go > a {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+main.authentication > div.go > a[data-action="share"] {
+    margin-bottom: 20px;
+    border: 1px dashed #757575;
+    box-sizing: border-box;
+    color: #757575;
+}
+
+main.authentication > div.go > a[data-action="delete_authentication"] {
+    background-color: #f44336;
+    color: #fff;
+}
+
+main.authentication > div.go > a > i {
+    margin-right: 10px;
 }
 
 /*  */
@@ -790,11 +879,11 @@ main.covid > div.results > div.chemical > h3 {
 
 /*  */
 
-footer.covid {
+footer.authentication {
     width: 100%;
 }
 
-footer.covid > div {
+footer.authentication > div {
     width: 100%;
     display: flex;
     align-items: flex-start;
@@ -804,29 +893,21 @@ footer.covid > div {
     box-sizing: border-box;
 }
 
-footer.covid > div:first-child {
-    background-color: #0b5178;
-}
-
-footer.covid > div:last-child {
-    background-color: #004770;
-}
-
-footer.covid > div > a {
+footer.authentication > div > a {
     font-weight: 400;
     color: #fff;
 }
 
-footer.covid > div:first-child > a {
+footer.authentication > div:first-child > a {
     font-size: 14px;
 }
 
-footer.covid > div:first-child > a > i {
+footer.authentication > div:first-child > a > i {
     min-width: 14px;
     margin-right: 10px;
 }
 
-footer.covid > div:last-child > a {
+footer.authentication > div:last-child > a {
     font-size: 12px;
 }
 

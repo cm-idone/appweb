@@ -702,6 +702,69 @@ class Laboratory_model extends Model
 		return $query;
 	}
 
+	public function read_laboratory($path)
+	{
+		$query = System::decode_json_to_array($this->database->select('system_laboratories', [
+			'id',
+			'avatar',
+            'name',
+            'business',
+            'rfc',
+            'address',
+			'email',
+            'phone',
+            'rrss',
+            'website',
+            'colors',
+            'blocked'
+        ], [
+            'path' => $path
+        ]));
+
+		return !empty($query) ? $query[0] : null;
+	}
+
+	public function read_collector($token)
+	{
+		$query = System::decode_json_to_array($this->database->select('system_collectors', [
+            'id',
+            'token',
+            'name',
+            'schedule',
+            'qrs',
+            'authentication',
+            'notifications',
+            'laboratories',
+            'blocked'
+        ], [
+            'token' => $token
+        ]));
+
+		return !empty($query) ? $query[0] : null;
+	}
+
+	public function create_authentication($data)
+	{
+		$query = $this->database->update('system_collectors', [
+			'authentication' => $data['authentication']
+		], [
+			'id' => $data['id']
+		]);
+
+		return $query;
+	}
+
+	public function delete_authentication($id)
+	{
+		$query = $this->database->update('system_collectors', [
+			'authentication' => 'none'
+		], [
+			'id' => $id
+		]);
+
+		return $query;
+	}
+
 	// public function create_custody_chain($data)
     // {
 	// 	if ($data['account']['path'] != 'moonpalace')
@@ -824,22 +887,6 @@ class Laboratory_model extends Model
 	//
     //     return !empty($query) ? $query[0] : null;
     // }
-	//
-	// public function read_collector($token)
-	// {
-	// 	$query = System::decode_json_to_array($this->database->select('system_collectors', [
-    //         'name',
-    //         'schedule',
-    //         'qrs',
-    //         'authentication',
-    //         'notifications',
-    //         'blocked'
-    //     ], [
-    //         'token' => $token
-    //     ]));
-	//
-	// 	return !empty($query) ? $query[0] : null;
-	// }
 
 	// public function sql()
 	// {
