@@ -161,7 +161,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
                     </fieldset>
                     <div class="accept_terms">
                         <div class="caption">
-                            <p>{$lang.accept_terms}</p>
+                            <p>{$lang.accept_terms_1} <?php echo $global['laboratory']['business']; ?> {$lang.accept_terms_2}</p>
                         </div>
                         <div class="checkbox st-1">
                             <label>
@@ -178,7 +178,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
                     <div class="share">
                         <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
                         <a href="tel:<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
-                        <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.share_record_qr}" data-url="https://<?php echo $global['laboratory']['website']; ?>"><i class="fas fa-share-alt"></i>{$lang.share}</a>
+                        <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.know} <?php echo $global['laboratory']['name']; ?>" data-url="https://<?php echo $global['laboratory']['website']; ?>"><i class="fas fa-share-alt"></i>{$lang.share}</a>
                     </div>
                 </form>
             <?php endif; ?>
