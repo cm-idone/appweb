@@ -64,7 +64,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
                 </form>
             <?php else : ?>
                 <h4><i class="fas fa-check-circle"></i>{$lang.authenticated}</h4>
-                <h6>{$lang.<?php echo $global['collector']['authentication']['type']; ?>} | <?php echo $global['collector']['authentication']['taker']['name']; ?> | <?php echo Dates::format_date(Dates::current_date(), 'long'); ?></h6>
+                <h6>{$lang.<?php echo $global['collector']['authentication']['type']; ?>} | <?php echo $global['collector']['authentication']['taker']['name']; ?> | <?php echo Dates::format_date(Dates::current_date(), 'long_year'); ?></h6>
                 <figure>
                     <img src="{$path.uploads}<?php echo $global['collector']['qrs']['authentication']; ?>">
                 </figure>
