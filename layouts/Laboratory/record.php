@@ -49,7 +49,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
                         <div>
                             <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
                             <a href="tel:<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
-                            <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="<?php echo $global['laboratory']['name']; ?> {$lang.know_our_laboratory}" data-url="https://<?php echo $global['laboratory']['website']; ?>"><i class="fas fa-share-alt"></i>{$lang.share}</a>
+                            <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.know_our_laboratory}" data-url="https://<?php echo $global['laboratory']['website']; ?>"><i class="fas fa-share-alt"></i>{$lang.share}</a>
                         </div>
                     </div>
                     <a data-action="restore_record">{$lang.restore_record}</a>
@@ -193,7 +193,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
                     <div class="share">
                         <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
                         <a href="tel:<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
-                        <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="<?php echo $global['laboratory']['name']; ?> {$lang.know_our_laboratory}" data-url="https://<?php echo $global['laboratory']['website']; ?>"><i class="fas fa-share-alt"></i>{$lang.share}</a>
+                        <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.know_our_laboratory}" data-url="https://<?php echo $global['laboratory']['website']; ?>"><i class="fas fa-share-alt"></i>{$lang.share}</a>
                     </div>
                 </form>
             <?php endif; ?>
