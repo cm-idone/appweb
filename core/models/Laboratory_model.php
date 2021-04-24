@@ -13,22 +13,43 @@ class Laboratory_model extends Model
 		parent::__construct();
 	}
 
-    public function create_custody_chain($data)
+    public function create_custody_chain($data, $record = false)
     {
+		if ($record == true)
+		{
+			$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . $data['laboratory']['path'] . '/results/' . $data['token'];
+			$data['qr']['dir'] = PATH_UPLOADS . $data['qr']['filename'];
+			$data['qr']['level'] = 'H';
+			$data['qr']['size'] = 5;
+			$data['qr']['frame'] = 3;
+		}
+
         $query = $this->database->insert('custody_chains', [
-			'account' => Session::get_value('vkye_account')['id'],
-			'token' => System::generate_random_string(),
-            'employee' => $data['employee'],
-			'contact' => null,
+			'account' => ($record == true) ? null : Session::get_value('vkye_account')['id'],
+			'token' => ($record == true) ? $data['token'] : System::generate_random_string(),
+            'employee' => ($record == true) ? null : $data['employee'],
+			'contact' => ($record == true) ? json_encode([
+                'firstname' => $data['firstname'],
+                'lastname' => $data['lastname'],
+                'birth_date' => $data['birth_date'],
+                'age' => $data['age'],
+                'sex' => $data['sex'],
+				'ife' => $data['ife'],
+                'email' => $data['email'],
+                'phone' => [
+                    'country' => $data['phone_country'],
+                    'number' => $data['phone_number']
+                ]
+            ]) : null,
             'type' => $data['type'],
-            'reason' => $data['reason'],
-			'start_process' => ($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an' OR $data['type'] == 'covid_ac') ? $data['start_process'] : null,
-			'end_process' => ($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an' OR $data['type'] == 'covid_ac') ? $data['end_process'] : null,
-			'results' => ($data['type'] == 'alcoholic') ? json_encode([
+            'reason' => ($record == true) ? 'random' : $data['reason'],
+			'start_process' => ($record == true) ? Dates::current_date() : (($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an' OR $data['type'] == 'covid_ac') ? $data['start_process'] : null),
+			'end_process' => ($record == true) ? null : (($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an' OR $data['type'] == 'covid_ac') ? $data['end_process'] : null),
+			'results' => ($record == false AND $data['type'] == 'alcoholic') ? json_encode([
                 '1' => !empty($data['test_1']) ? $data['test_1'] : '',
                 '2' => !empty($data['test_2']) ? $data['test_2'] : '',
                 '3' => !empty($data['test_3']) ? $data['test_3'] : ''
-            ]) : (($data['type'] == 'antidoping') ? json_encode([
+            ]) : (($record == false AND $data['type'] == 'antidoping') ? json_encode([
                 'COC' => !empty($data['test_COC']) ? $data['test_COC'] : '',
                 'THC' => !empty($data['test_THC']) ? $data['test_THC'] : '',
                 'MET' => !empty($data['test_MET']) ? $data['test_MET'] : '',
@@ -37,42 +58,47 @@ class Laboratory_model extends Model
                 'OPI' => !empty($data['test_OPI']) ? $data['test_OPI'] : '',
                 'BAR' => !empty($data['test_BAR']) ? $data['test_BAR'] : ''
             ]) : (($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an') ? json_encode([
-				'result' => $data['test_result'],
-				'unity' => $data['test_unity'],
-				'reference_values' => $data['test_reference_values']
+				'result' => ($record == true) ? '' : $data['test_result'],
+				'unity' => ($record == true) ? '' : $data['test_unity'],
+				'reference_values' => ($record == true) ? '' : $data['test_reference_values']
 			]) : (($data['type'] == 'covid_ac') ? json_encode([
 				'igm' => [
-					'result' => $data['test_igm_result'],
-					'unity' => $data['test_igm_unity'],
-					'reference_values' => $data['test_igm_reference_values']
+					'result' => ($record == true) ? '' : $data['test_igm_result'],
+					'unity' => ($record == true) ? '' : $data['test_igm_unity'],
+					'reference_values' => ($record == true) ? '' : $data['test_igm_reference_values']
 				],
 				'igg' => [
-					'result' => $data['test_igg_result'],
-					'unity' => $data['test_igg_unity'],
-					'reference_values' => $data['test_igg_reference_values']
+					'result' => ($record == true) ? '' : $data['test_igg_result'],
+					'unity' => ($record == true) ? '' : $data['test_igg_unity'],
+					'reference_values' => ($record == true) ? '' : $data['test_igg_reference_values']
 				]
 			]) : null))),
-			'medicines' => (($data['type'] == 'alcoholic' OR $data['type'] == 'antidoping') AND !empty($data['medicines'])) ? $data['medicines'] : null,
-			'prescription' => ($data['type'] == 'alcoholic' OR $data['type'] == 'antidoping') ? json_encode([
+			'medicines' => ($record == true) ? null : ((($data['type'] == 'alcoholic' OR $data['type'] == 'antidoping') AND !empty($data['medicines'])) ? $data['medicines'] : null),
+			'prescription' => ($record == true) ? null : (($data['type'] == 'alcoholic' OR $data['type'] == 'antidoping') ? json_encode([
 				'issued_by' => !empty($data['prescription_issued_by']) ? $data['prescription_issued_by'] : '',
 				'date' => !empty($data['prescription_date']) ? $data['prescription_date'] : ''
-			]) : null,
-			'chemical' => $data['chemical'],
-			'collector' => null,
-			'location' => !empty($data['location']) ? $data['location'] : null,
-			'date' => $data['date'],
-			'hour' => $data['hour'],
-			'comments' => !empty($data['comments']) ? $data['comments'] : null,
-			'signatures' => json_encode([
+			]) : null),
+			'location' => ($record == true) ? null : (!empty($data['location']) ? $data['location'] : null),
+			'laboratory' => ($record == true) ? $data['laboratory']['id'] : null,
+			'taker' => ($record == true) ? $data['collector']['authentication']['taker']['id'] : null,
+			'collector' => ($record == true) ? $data['collector']['id'] : null,
+			'chemical' => ($record == true) ? null : $data['chemical'],
+			'date' => ($record == true) ? Dates::current_date() : $data['date'],
+			'hour' => ($record == true) ? Dates::current_hour() : $data['hour'],
+			'comments' => ($record == true) ? null : (!empty($data['comments']) ? $data['comments'] : null),
+			'signatures' => ($record == true) ? null : (json_encode([
                 'employee' => !empty($data['employee_signature']) ? Fileloader::base64($data['employee_signature']) : ''
-            ]),
-			'qr' => null,
+            ])),
+			'qr' => ($record == true) ? $data['qr']['filename'] : null,
 			'pdf' => null,
-			'lang' => null,
-			'closed' => true,
-			'user' => Session::get_value('vkye_user')['id'],
+			'lang' => ($record == true) ? Session::get_value('vkye_lang') : null,
+			'closed' => ($record == true) ? false : true,
+			'user' => ($record == true) ? null : Session::get_value('vkye_user')['id'],
 			'deleted' => false
         ]);
+
+		if ($record == true AND !empty($query))
+			QRcode::png($data['qr']['content'], $data['qr']['dir'], $data['qr']['level'], $data['qr']['size'], $data['qr']['frame']);
 
         return $query;
     }
@@ -708,6 +734,7 @@ class Laboratory_model extends Model
 			'id',
 			'avatar',
             'name',
+            'path',
             'business',
             'rfc',
             'address',
@@ -733,11 +760,45 @@ class Laboratory_model extends Model
             'schedule',
             'qrs',
             'authentication',
-            'notifications',
             'laboratories',
             'blocked'
         ], [
             'token' => $token
+        ]));
+
+		if (!empty($query))
+		{
+			if ($query[0]['authentication']['taker'] != 'none')
+				$query[0]['authentication']['taker'] = $this->read_taker($query[0]['authentication']['taker']);
+
+			return $query[0];
+		}
+		else
+			return null;
+	}
+
+	public function read_takers()
+	{
+		$query = System::decode_json_to_array($this->database->select('system_takers', [
+            'id',
+            'name'
+        ], [
+            'blocked' => false,
+			'ORDER' => [
+				'name' => 'ASC'
+			]
+        ]));
+
+		return $query;
+	}
+
+	public function read_taker($id)
+	{
+		$query = System::decode_json_to_array($this->database->select('system_takers', [
+            'id',
+            'name'
+        ], [
+            'id' => $id
         ]));
 
 		return !empty($query) ? $query[0] : null;
@@ -746,7 +807,10 @@ class Laboratory_model extends Model
 	public function create_authentication($data)
 	{
 		$query = $this->database->update('system_collectors', [
-			'authentication' => $data['authentication']
+			'authentication' => json_encode([
+				'type' => $data['type'],
+				'taker' => $data['taker']
+			])
 		], [
 			'id' => $data['id']
 		]);
@@ -757,7 +821,10 @@ class Laboratory_model extends Model
 	public function delete_authentication($id)
 	{
 		$query = $this->database->update('system_collectors', [
-			'authentication' => 'none'
+			'authentication' => json_encode([
+				'type' => 'none',
+				'taker' => 'none'
+			])
 		], [
 			'id' => $id
 		]);
@@ -765,78 +832,6 @@ class Laboratory_model extends Model
 		return $query;
 	}
 
-	// public function create_custody_chain($data)
-    // {
-	// 	if ($data['account']['path'] != 'moonpalace')
-	// 	{
-	// 		$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . $data['account']['path'] . '/covid/' . $data['token'];
-	// 		$data['qr']['dir'] = PATH_UPLOADS . $data['qr']['filename'];
-	// 		$data['qr']['level'] = 'H';
-	// 		$data['qr']['size'] = 5;
-	// 		$data['qr']['frame'] = 3;
-	// 	}
-	//
-    //     $query = $this->database->insert('custody_chains', [
-    //         'account' => $data['account']['id'],
-	// 		'token' => $data['token'],
-    //         'employee' => null,
-	// 		'contact' => json_encode([
-    //             'firstname' => $data['firstname'],
-    //             'lastname' => $data['lastname'],
-	// 			'ife' => $data['ife'],
-    //             'birth_date' => $data['birth_date'],
-    //             'age' => $data['age'],
-    //             'sex' => $data['sex'],
-    //             'email' => $data['email'],
-    //             'phone' => [
-    //                 'country' => $data['phone_country'],
-    //                 'number' => $data['phone_number']
-    //             ],
-    //             'travel_to' => $data['travel_to']
-    //         ]),
-    //         'type' => $_POST['type'],
-    //         'reason' => 'random',
-	// 		'start_process' => Dates::current_date(),
-	// 		'end_process' => null,
-    //         'results' => ($_POST['type'] == 'covid_pcr' OR $_POST['type'] == 'covid_an') ? json_encode([
-	// 			'result' => '',
-	// 			'unity' => '',
-	// 			'reference_values' => ''
-	// 		]) : (($_POST['type'] == 'covid_ac') ? json_encode([
-	// 			'igm' => [
-	// 				'result' => '',
-	// 				'unity' => '',
-	// 				'reference_values' => ''
-	// 			],
-	// 			'igg' => [
-	// 				'result' => '',
-	// 				'unity' => '',
-	// 				'reference_values' => ''
-	// 			]
-	// 		]) : null),
-    //         'medicines' => null,
-    //         'prescription' => null,
-	// 		'chemical' => null,
-	// 		'collector' => null,
-	// 		'location' => null,
-	// 		'date' => Dates::current_date(),
-	// 		'hour' => Dates::current_hour(),
-	// 		'comments' => null,
-    //         'signatures' => null,
-	// 		'qr' => ($data['account']['path'] != 'moonpalace') ? $data['qr']['filename'] : null,
-	// 		'pdf' => null,
-	// 		'lang' => Session::get_value('vkye_lang'),
-	// 		'closed' => false,
-	// 		'user' => null,
-	// 		'deleted' => false
-    //     ]);
-	//
-	// 	if (!empty($query) AND $data['account']['path'] != 'moonpalace')
-	// 		QRcode::png($data['qr']['content'], $data['qr']['dir'], $data['qr']['level'], $data['qr']['size'], $data['qr']['frame']);
-	//
-    //     return $query;
-    // }
-	//
 	// public function read_custody_chain($token)
 	// {
 	// 	$query = System::decode_json_to_array($this->database->select('custody_chains', [

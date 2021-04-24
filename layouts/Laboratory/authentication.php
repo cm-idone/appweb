@@ -26,18 +26,34 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
             <p>{$lang.<?php echo $global['render']; ?>}</p>
         </div>
     <?php elseif ($global['render'] == 'go') : ?>
-        <div class="go">
-            <?php if ($global['collector']['authentication'] == 'none') : ?>
+        <div class="authentication">
+            <?php if ($global['collector']['authentication']['type'] == 'none') : ?>
                 <i class="fas fa-lock"></i>
                 <form name="create_authentication">
                     <fieldset class="fields-group">
                         <div class="text">
-                            <select name="authentication">
-                                <option value="" class="hidden">{$lang.authenticate_to} ({$lang.choose_an_option})</option>
+                            <select name="type">
+                                <option value="" class="hidden">{$lang.choose_an_option}</option>
                                 <option value="alcoholic">{$lang.to_do_test} {$lang.alcoholic}</option>
                                 <option value="antidoping">{$lang.to_do_test} {$lang.antidoping}</option>
                                 <option value="covid">{$lang.to_do_test} {$lang.covid}</option>
                             </select>
+                        </div>
+                        <div class="title">
+                            <h6>{$lang.authenticate_to}</h6>
+                        </div>
+                    </fieldset>
+                    <fieldset class="fields-group">
+                        <div class="text">
+                            <select name="taker">
+                                <option value="" class="hidden">{$lang.choose_an_option}</option>
+                                <?php foreach ($global['takers'] as $value) : ?>
+                                    <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="title">
+                            <h6>{$lang.active_taker}</h6>
                         </div>
                     </fieldset>
                     <fieldset class="fields-group">
@@ -48,10 +64,11 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
                 </form>
             <?php else : ?>
                 <h4><i class="fas fa-check-circle"></i>{$lang.authenticated}</h4>
+                <h6>{$lang.<?php echo $global['collector']['authentication']['type']; ?>} | <?php echo $global['collector']['authentication']['taker']['name']; ?> | <?php echo Dates::format_date(Dates::current_date(), 'long'); ?></h6>
                 <figure>
                     <img src="{$path.uploads}<?php echo $global['collector']['qrs']['authentication']; ?>">
                 </figure>
-                <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.share_record_qr}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['laboratory']['path']; ?>/record/<?php echo $global['collector']['token']; ?>/<?php echo $global['collector']['authentication']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_form}</span></a>
+                <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.share_record_qr}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['laboratory']['path']; ?>/record/<?php echo $global['collector']['token']; ?>/<?php echo $global['collector']['authentication']['type']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_form}</span></a>
                 <a data-action="delete_authentication">{$lang.end_authentication}</a>
             <?php endif; ?>
         </div>
