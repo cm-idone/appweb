@@ -258,7 +258,7 @@ class Configuration
 	 *
      * @var string $smtp_pass
      */
-	public static $smtp_pass = '5G>BaT&8';
+	public static $smtp_pass = '5G>BaT&9';
 
 	/**
      * Seguridad de la encriptacion para el envio de SMTP.
