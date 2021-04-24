@@ -651,8 +651,6 @@ main.laboratory > div.create {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 0px 20px;
-    box-sizing: border-box;
 }
 
 main.laboratory > div.create > h4 {
@@ -664,17 +662,6 @@ main.laboratory > div.create > h4 {
     color: #212121;
 }
 
-main.laboratory > div.create > figure {
-    width: 100%;
-    margin-bottom: 40px;
-    border: 1px dashed #212121;
-    box-sizing: border-box;
-}
-
-main.laboratory > div.create > figure > img {
-    width: 100%;
-}
-
 main.laboratory > div.create > p {
     margin-bottom: 40px;
     font-size: 14px;
@@ -683,13 +670,25 @@ main.laboratory > div.create > p {
     color: #757575;
 }
 
+main.laboratory > div.create > figure {
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px dashed #212121;
+    box-sizing: border-box;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+main.laboratory > div.create > figure > img {
+    width: 100%;
+}
+
 main.laboratory > div.create > a {
     width: 100%;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 40px;
     border-radius: 5px;
     background-color: #009688;
     font-size: 16px;
@@ -902,22 +901,40 @@ main.laboratory > div.results > div.share {
     margin-bottom: 40px;
 }
 
+main.laboratory > div.create > div.share > div:first-child > a,
+main.laboratory > div.results > div.share > div:first-child > a {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 400;
+    color: #757575;
+}
+
+main.laboratory > div.create > div.share > div:first-child > a > i,
+main.laboratory > div.results > div.share > div:first-child > a > i {
+    margin-right: 10px;
+    font-size: 30px;
+    color: #bdbdbd;
+}
+
 main.laboratory > form[name="record"] > div.share,
-main.laboratory > div.create > div.share > div,
-main.laboratory > div.results > div.share > div {
+main.laboratory > div.create > div.share > div:last-child,
+main.laboratory > div.results > div.share > div:last-child {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-main.laboratory > div.create > div.share > div:last-child,
-main.laboratory > div.results > div.share > div:last-child {
-    flex-direction: column;
-}
-
 main.laboratory > form[name="record"] > div.share > a,
-main.laboratory > div.create > div.share > div:first-child > a,
-main.laboratory > div.results > div.share > div:first-child > a {
+main.laboratory > div.create > div.share > div:last-child > a,
+main.laboratory > div.results > div.share > div:last-child > a {
     width: calc(100% / 3);
     display: flex;
     align-items: center;
@@ -929,32 +946,9 @@ main.laboratory > div.results > div.share > div:first-child > a {
 }
 
 main.laboratory > form[name="record"] > div.share > a > i,
-main.laboratory > div.create > div.share > div:first-child > a > i,
-main.laboratory > div.results > div.share > div:first-child > a > i {
-    margin-bottom: 10px;
-    font-size: 30px;
-    color: #bdbdbd;
-}
-
-main.laboratory > div.create > div.share > div:last-child > a,
-main.laboratory > div.results > div.share > div:last-child > a {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    padding: 10px 20px;
-    border: 1px solid #bdbdbd;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 14px;
-    font-weight: 400;
-    color: #757575;
-}
-
 main.laboratory > div.create > div.share > div:last-child > a > i,
 main.laboratory > div.results > div.share > div:last-child > a > i {
-    margin-right: 10px;
+    margin-bottom: 10px;
     font-size: 30px;
     color: #bdbdbd;
 }
