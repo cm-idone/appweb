@@ -496,23 +496,23 @@ main.laboratory > div.authentication {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    box-sizing: border-box;
 }
 
 main.laboratory > div.blocked {
     padding: 40px 20px;
+    box-sizing: border-box;
 }
 
 main.laboratory > div.blocked > i,
 main.laboratory > div.authentication > i {
     margin-bottom: 40px;
     font-size: 100px;
-    color: #e0e0e0;
+    color: #bdbdbd;
 }
 
 main.laboratory > div.blocked > p {
     text-align: center;
-    color: #9e9e9e;
+    color: #757575;
 }
 
 main.laboratory > div.authentication > form {
@@ -521,13 +521,14 @@ main.laboratory > div.authentication > form {
 
 main.laboratory > div.authentication > form > fieldset > div.button > button {
     width: 100%;
+    margin: 0px;
 }
 
 main.laboratory > div.authentication > h4 {
     width: 100%;
     margin-bottom: 10px;
     text-align: center;
-    color: #000;
+    color: #212121;
 }
 
 main.laboratory > div.authentication > h4 > i {
@@ -546,7 +547,7 @@ main.laboratory > div.authentication > h6 {
 main.laboratory > div.authentication > figure {
     width: 100%;
     margin-bottom: 20px;
-    border: 1px dashed #757575;
+    border: 1px dashed #bdbdbd;
     box-sizing: border-box;
     border-radius: 5px;
     overflow: hidden;
@@ -565,22 +566,23 @@ main.laboratory > div.authentication > a {
     border-radius: 5px;
     font-size: 16px;
     font-weight: 400;
+    margin: 0px;
 }
 
 main.laboratory > div.authentication > a[data-action="share"] {
     margin-bottom: 20px;
-    border: 1px dashed #757575;
+    border: 1px dashed #bdbdbd;
     box-sizing: border-box;
     color: #757575;
+}
+
+main.laboratory > div.authentication > a[data-action="share"] > i {
+    margin-right: 10px;
 }
 
 main.laboratory > div.authentication > a[data-action="delete_authentication"] {
     background-color: #f44336;
     color: #fff;
-}
-
-main.laboratory > div.authentication > a > i {
-    margin-right: 10px;
 }
 
 /*  */

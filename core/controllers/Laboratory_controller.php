@@ -783,6 +783,16 @@ class Laboratory_controller extends Controller
 						]);
 					}
 				}
+
+				if ($_POST['action'] == 'restore_record')
+				{
+					System::temporal('set_forced', 'record', 'covid', []);
+
+					echo json_encode([
+						'status' => 'success',
+						'message' => '{$lang.operation_success}'
+					]);
+				}
 			}
 			else
 			{
