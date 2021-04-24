@@ -42,7 +42,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
             <?php else : ?>
                 <form name="record">
                     <h2>¡{$lang.registry_now}!</h2>
-                    <h3>{$lang.covid_test}</h3>
+                    <h6>{$lang.covid_test} | <?php echo $global['collector']['authentication']['taker']['name']; ?> | <?php echo Dates::format_date(Dates::current_date(), 'long_year'); ?></h6>
                     <fieldset class="fields-group">
                         <div class="row">
                             <div class="span4">

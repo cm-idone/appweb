@@ -594,9 +594,9 @@ main.laboratory > form[name="record"] > h2 {
     margin-bottom: 5px;
 }
 
-main.laboratory > form[name="record"] > h3 {
+main.laboratory > form[name="record"] > h6 {
     width: 100%;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 400;
     text-align: center;
     color: #757575;
