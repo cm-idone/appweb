@@ -549,6 +549,7 @@ main.laboratory > div.authentication > figure {
     border: 1px dashed #757575;
     box-sizing: border-box;
     border-radius: 5px;
+    overflow: hidden;
 }
 
 main.laboratory > div.authentication > figure > img {
