@@ -909,7 +909,7 @@ main.laboratory > div.results > div.share > div:first-child > a {
     justify-content: center;
     margin-bottom: 20px;
     padding: 10px 20px;
-    border: 1px solid #bdbdbd;
+    border: 1px dashed #212121;
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 14px;
