@@ -94,6 +94,7 @@ class Laboratory_model extends Model
 			'lang' => ($record == true) ? Session::get_value('vkye_lang') : null,
 			'closed' => ($record == true) ? false : true,
 			'user' => ($record == true) ? null : Session::get_value('vkye_user')['id'],
+			'version' => ($record == true) ? 'v2' : null,
 			'deleted' => false
         ]);
 
@@ -238,11 +239,14 @@ class Laboratory_model extends Model
 			'custody_chains.results',
 			'custody_chains.medicines',
 			'custody_chains.prescription',
+			'custody_chains.location',
+			'custody_chains.laboratory',
+			'custody_chains.taker',
+			'custody_chains.collector',
 			'custody_chains.chemical',
 			'system_chemicals.name(chemical_name)',
 			'system_chemicals.signature(chemical_signature)',
 			'system_chemicals.card(chemical_card)',
-			'custody_chains.location',
 			'custody_chains.date',
 			'custody_chains.hour',
 			'custody_chains.comments',
@@ -252,6 +256,7 @@ class Laboratory_model extends Model
 			'custody_chains.lang',
 			'custody_chains.closed',
 			'custody_chains.user',
+			'custody_chains.version',
 			'custody_chains.deleted'
 		], [
 			'AND' => [
@@ -742,6 +747,7 @@ class Laboratory_model extends Model
             'phone',
             'rrss',
             'website',
+            'time_zone',
             'colors',
             'blocked'
         ], [
@@ -831,57 +837,6 @@ class Laboratory_model extends Model
 
 		return $query;
 	}
-
-	// public function read_custody_chain($token)
-	// {
-	// 	$query = System::decode_json_to_array($this->database->select('custody_chains', [
-	// 		'[>]system_chemicals' => [
-	// 			'chemical' => 'id'
-	// 		]
-	// 	], [
-	// 		'custody_chains.token',
-	// 		'custody_chains.contact',
-	// 		'custody_chains.type',
-	// 		'custody_chains.start_process',
-	// 		'custody_chains.end_process',
-	// 		'custody_chains.results',
-	// 		'system_chemicals.name(chemical_name)',
-	// 		'system_chemicals.signature(chemical_signature)',
-	// 		'custody_chains.date',
-	// 		'custody_chains.hour',
-	// 		'custody_chains.comments',
-	// 		'custody_chains.qr',
-	// 		'custody_chains.pdf',
-	// 		'custody_chains.lang',
-	// 		'custody_chains.closed'
-	// 	], [
-	// 		'AND' => [
-	// 			'custody_chains.token' => $token,
-	// 			'custody_chains.deleted' => false
-	// 		]
-	// 	]));
-	//
-	// 	return !empty($query) ? $query[0] : null;
-	// }
-	//
-    // public function read_account($path)
-    // {
-    //     $query = System::decode_json_to_array($this->database->select('accounts', [
-    //         'id',
-    //         'avatar',
-    //         'path',
-    //         'email',
-    //         'phone',
-    //         'time_zone'
-    //     ], [
-    //         'AND' => [
-	// 			'path' => $path,
-	// 			'blocked' => false
-	// 		]
-    //     ]));
-	//
-    //     return !empty($query) ? $query[0] : null;
-    // }
 
 	// public function sql()
 	// {
