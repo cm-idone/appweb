@@ -673,7 +673,7 @@ main.laboratory > div.create > p {
 main.laboratory > div.create > figure {
     width: 100%;
     margin-bottom: 20px;
-    border: 1px dashed #212121;
+    border: 1px dashed #bdbdbd;
     box-sizing: border-box;
     border-radius: 5px;
     overflow: hidden;
@@ -907,9 +907,9 @@ main.laboratory > div.results > div.share > div:first-child > a {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     padding: 10px 20px;
-    border: 1px dashed #212121;
+    border: 1px dashed #bdbdbd;
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 14px;
