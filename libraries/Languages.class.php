@@ -35,13 +35,13 @@ class Languages
                 'es' => 'con tus resultados. Puedes consultar tus resultados aquí',
                 'en' => 'with your results. You can check your results here'
             ],
-            'share_us_your_token' => [
-                'es' => 'Compártenos tu folio para agendarte una cita',
-                'en' => 'Share your page with us to schedule an appointment'
-            ],
             'whatsapp_us_to_support' => [
-                'es' => 'Escribenos para cualquier duda o aclaración',
-                'en' => 'Write us for any questions or clarification'
+                'es' => 'Escribenos a nuestro Whatsapp',
+                'en' => 'Write us for our Whatsapp'
+            ],
+            'call_us_to_support' => [
+                'es' => 'Llámanos',
+                'en' => 'Call us'
             ],
             'your_results_are_ready' => [
                 'es' => 'Tus resultados están listos',
@@ -64,8 +64,8 @@ class Languages
                 'en' => '. Without further ado for the moment we are awaiting confirmation from him. Thank you.'
             ],
             'view_online_results' => [
-                'es' => 'Consulta tus resultados online',
-                'en' => 'Consult your online results'
+                'es' => 'Consulta tus resultados',
+                'en' => 'Consult your results'
             ],
             'result_report' => [
                 'es' => 'Reporte de resultados',

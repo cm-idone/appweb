@@ -695,7 +695,7 @@ class Laboratory_controller extends Controller
 													</td>
 												</tr>
 											</table>
-											<table style="width:100%;max-width:600px;margin:20px 0px;padding:0px;border:1px dashed #000;box-sizing:border-box;background-color:#fff;">
+											<table style="width:100%;max-width:600px;margin:20px 0px;padding:0px;border:1px dashed #bdbdbd;box-sizing:border-box;background-color:#fff;">
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:18px;font-weight:600;text-align:center;text-transform:uppercase;color:#000;">' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'] . '</td>
 												</tr>
@@ -705,6 +705,16 @@ class Laboratory_controller extends Controller
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
 														<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $_POST['qr']['filename'] . '">
+													</td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
+														<a style="width:100%;display:block;margin:0px;padding:10px;border:1px dashed #bdbdbd;border-radius:5px;box-sizing:border-box;background-color:#fff;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#757575;" href="https://api.whatsapp.com/send?phone=' . $global['laboratory']['phone'] . '">' . Languages::email('whatsapp_us_to_support')[Session::get_value('vkye_lang')] . '</a>
+													</td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
+														<a style="width:100%;display:block;margin:0px;padding:10px;border:1px dashed #bdbdbd;border-radius:5px;box-sizing:border-box;background-color:#fff;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#757575;" href="tel:' . $global['laboratory']['phone'] . '">' . Languages::email('call_us_to_support')[Session::get_value('vkye_lang')] . '</a>
 													</td>
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
