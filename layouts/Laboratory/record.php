@@ -168,9 +168,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
                                 <div class="text">
                                     <select name="type">
                                         <option value="" class="hidden">{$lang.choose_an_option}</option>
-                                        <option value="covid_pcr">PCR (PCR-SARS-CoV-2 (COVID-19))</option>
-                                        <option value="covid_an">{$lang.antigen} (Ag-SARS-CoV-2 (COVID-19))</option>
-                                        <option value="covid_ac">{$lang.anticorps} (SARS-CoV-2 (2019) IgG/IgM)</option>
+                                        <option value="covid_pcr">PCR (<?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['pcr']['usd'], 'USD') . ' / ' .  Currency::format($global['collector']['authentication']['taker']['prices']['covid']['pcr']['mxn'], 'MXN'); ?>)</option>
+                                        <option value="covid_an">{$lang.antigen} (<?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['an']['usd'], 'USD') . ' / ' .  Currency::format($global['collector']['authentication']['taker']['prices']['covid']['an']['mxn'], 'MXN'); ?>)</option>
+                                        <option value="covid_ac">{$lang.anticorps} (<?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['ac']['usd'], 'USD') . ' / ' .  Currency::format($global['collector']['authentication']['taker']['prices']['covid']['ac']['mxn'], 'MXN'); ?>)</option>
                                     </select>
                                 </div>
                                 <div class="title">

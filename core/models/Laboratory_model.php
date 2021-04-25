@@ -876,7 +876,8 @@ class Laboratory_model extends Model
 	{
 		$query = System::decode_json_to_array($this->database->select('system_takers', [
             'id',
-            'name'
+            'name',
+            'prices'
         ], [
             'id' => $id
         ]));

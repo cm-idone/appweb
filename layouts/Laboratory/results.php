@@ -150,6 +150,12 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                 </tr>
             </table>
             <?php if ($global['custody_chain']['closed'] == true) : ?>
+                <?php if (Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) : ?>
+                    <figure>
+                        <img src="{$path.uploads}<?php echo $global['custody_chain']['qr']; ?>">
+                    </figure>
+                    <a href="{$path.uploads}<?php echo $global['custody_chain']['pdf']; ?>" download="certificate.pdf">{$lang.download_certificate_pdf}</a>
+                <?php endif; ?>
                 <div class="share">
                     <div>
                         <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.share_results}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['laboratory']['path']; ?>/results/<?php echo $global['custody_chain']['token']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_results_with_friends}</span></a>
@@ -160,12 +166,6 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                         <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.know_our_laboratory}" data-url="https://<?php echo $global['laboratory']['website']; ?>"><i class="fas fa-share-alt"></i>{$lang.share}</a>
                     </div>
                 </div>
-                <?php if (Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) : ?>
-                    <figure>
-                        <img src="{$path.uploads}<?php echo $global['custody_chain']['qr']; ?>">
-                    </figure>
-                    <a href="{$path.uploads}<?php echo $global['custody_chain']['pdf']; ?>" download="certificate.pdf">{$lang.download_certificate_pdf}</a>
-                <?php endif; ?>
                 <div class="chemical">
                     <figure>
                         <img src="{$path.uploads}<?php echo $global['custody_chain']['chemical_signature']; ?>">
