@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 25-04-2021 a las 10:22:29
+-- Tiempo de generación: 25-04-2021 a las 17:41:51
 -- Versión del servidor: 10.3.27-MariaDB-0+deb10u1
 -- Versión de PHP: 7.3.27
 
@@ -121,12 +121,7 @@ CREATE TABLE `custody_chains` (
 --
 
 INSERT INTO `custody_chains` (`id`, `account`, `token`, `employee`, `contact`, `type`, `reason`, `start_process`, `end_process`, `results`, `medicines`, `prescription`, `location`, `laboratory`, `taker`, `collector`, `chemical`, `date`, `hour`, `comments`, `signatures`, `qr`, `pdf`, `lang`, `closed`, `user`, `version`, `deleted`) VALUES
-(6502, 1, 'huifjIwo', 6, NULL, 'covid_pcr', 'reasonable_suspicion', '2021-04-24', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2021-04-24', '14:09:07', NULL, NULL, NULL, NULL, NULL, 0, NULL, 'v2', 0),
-(6503, NULL, 'TCN-xLiomwwW', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"sex\":\"male\",\"ife\":\"0123456789\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"}}', 'covid_pcr', 'random', '2021-04-24', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, 2, 14, 1, NULL, '2021-04-24', '15:08:49', NULL, NULL, 'covid_qr_xLiomwwW_2021_04_24_15_08_49.png', NULL, 'es', 0, NULL, 'v2', 0),
-(6504, NULL, 'TCN-iVvyx7CS', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"sex\":\"male\",\"ife\":\"0123456789\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"}}', 'covid_pcr', 'random', '2021-04-24', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, 2, 14, 1, NULL, '2021-04-24', '15:15:03', NULL, NULL, 'covid_qr_iVvyx7CS_2021_04_24_15_15_03.png', NULL, 'es', 0, NULL, 'v2', 0),
-(6505, NULL, 'TCN-YybvN1YH', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"birth_date\":\"1992-01-01\",\"age\":\"28\",\"sex\":\"male\",\"ife\":\"0123456789\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"}}', 'covid_pcr', 'random', '2021-04-24', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, 2, 14, 1, NULL, '2021-04-24', '16:46:19', NULL, NULL, 'covid_qr_YybvN1YH_2021_04_24_16_46_19.png', NULL, 'es', 0, NULL, 'v2', 0),
-(6506, NULL, 'TCN-NNEKFa49', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"sex\":\"male\",\"ife\":\"0123456789\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"}}', 'covid_pcr', 'random', '2021-04-24', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, 2, 14, 1, NULL, '2021-04-24', '16:50:14', NULL, NULL, 'covid_qr_NNEKFa49_2021_04_24_16_50_14.png', NULL, 'es', 0, NULL, 'v2', 0),
-(6507, NULL, 'TCN-zi1Mpt4Q', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"sex\":\"male\",\"ife\":\"0123456789\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579342\"}}', 'covid_pcr', 'random', '2021-04-24', '2021-04-25', '{\"result\":\"negative\",\"unity\":\"INDEX\",\"reference_values\":\"not_detected\"}', NULL, NULL, NULL, 2, 14, 1, 1, '2021-04-24', '16:51:50', 'Sin comentarios', NULL, 'covid_qr_zi1Mpt4Q_2021_04_25_07_38_10.png', 'covid_pdf_zi1Mpt4Q_2021_04_25_07_38_10.pdf', 'es', 1, 1, 'v2', 0);
+(6510, NULL, 'TCN-gJxQpeBj', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"sex\":\"female\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"nationality\":\"Mexicana\",\"ife\":\"0987654321\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"},\"sf\":{\"pregnant\":\"not\",\"symptoms\":[\"fever\",\"eyes_pain\",\"torax_pain\",\"muscles_pain\",\"head_pain\",\"throat_pain\",\"knees_pain\",\"ears_pain\",\"joints_pain\",\"cough\",\"difficulty_breathing\",\"sweating\",\"runny_nose\",\"itching\",\"conjunctivitis\",\"vomit\",\"diarrhea\",\"smell_loss\",\"taste_loss\"],\"symptoms_time\":\"5 d\\u00edas\",\"travel\":\"yeah\",\"travel_countries\":\"Canad\\u00e1 y Estados Unidos\",\"contact\":\"yeah\",\"covid\":\"yeah\",\"covid_time\":\"6 meses\"}}', 'covid_pcr', 'random', '2021-04-25', '2021-04-25', '{\"result\":\"negative\",\"unity\":\"INDEX\",\"reference_values\":\"not_detected\"}', NULL, NULL, NULL, 2, 14, 1, 1, '2021-04-25', '16:06:42', NULL, NULL, 'covid_qr_TCN-gJxQpeBj_2021_04_25_16_26_02.png', 'covid_pdf_TCN-gJxQpeBj_2021_04_25_16_26_02.pdf', 'es', 1, 1, 'v2', 0);
 
 -- --------------------------------------------------------
 
@@ -992,7 +987,7 @@ ALTER TABLE `accounts_permissions`
 -- AUTO_INCREMENT de la tabla `custody_chains`
 --
 ALTER TABLE `custody_chains`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6508;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6511;
 
 --
 -- AUTO_INCREMENT de la tabla `employees`
