@@ -136,10 +136,12 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                     <td>{$lang.age}:</td>
                     <td><?php echo $global['custody_chain']['contact']['age']; ?> {$lang.years}</td>
                 </tr>
-                <tr>
-                    <td>{$lang.nationality}:</td>
-                    <td><?php echo $global['custody_chain']['contact']['nationality']; ?></td>
-                </tr>
+                <?php if ($global['custody_chain']['version'] == 'v2') : ?>
+                    <tr>
+                        <td>{$lang.nationality}:</td>
+                        <td><?php echo $global['custody_chain']['contact']['nationality']; ?></td>
+                    </tr>
+                <?php endif; ?>
                 <tr>
                     <td>{$lang.passport}:</td>
                     <td><?php echo $global['custody_chain']['contact']['ife']; ?></td>
@@ -152,38 +154,40 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                     <td>{$lang.phone}:</td>
                     <td>+<?php echo $global['custody_chain']['contact']['phone']['country'] . ' ' . $global['custody_chain']['contact']['phone']['number']; ?></td>
                 </tr>
-                <?php if ($global['custody_chain']['contact']['sex'] == 'female') : ?>
+                <?php if ($global['custody_chain']['version'] == 'v2') : ?>
+                    <?php if ($global['custody_chain']['contact']['sex'] == 'female') : ?>
+                        <tr>
+                            <td>{$lang.pregnant}:</td>
+                            <td>{$lang.<?php echo $global['custody_chain']['contact']['sf']['pregnant']; ?>}</td>
+                        </tr>
+                    <?php endif; ?>
                     <tr>
-                        <td>{$lang.pregnant}:</td>
-                        <td>{$lang.<?php echo $global['custody_chain']['contact']['sf']['pregnant']; ?>}</td>
+                        <td>{$lang.symptoms}:</td>
+                        <td>
+                            <?php if (!empty($global['custody_chain']['contact']['sf']['symptoms'])) : ?>
+                                <?php foreach ($global['custody_chain']['contact']['sf']['symptoms'] as $value) : ?>
+                                    {$lang.<?php echo $value; ?>}<br>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                {$lang.nothing}
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <?php if (!empty($global['custody_chain']['contact']['sf']['symptoms'])) : ?>
+                        <tr>
+                            <td>{$lang.symptoms_time}:</td>
+                            <td><?php echo $global['custody_chain']['contact']['sf']['symptoms_time']; ?></td>
+                        </tr>
+                    <?php endif; ?>
+                    <tr>
+                        <td>{$lang.prev_travel}:</td>
+                        <td><?php echo (($global['custody_chain']['contact']['sf']['travel'] == 'yeah') ? $global['custody_chain']['contact']['sf']['travel_countries'] : '{$lang.not}') ?></td>
+                    </tr>
+                    <tr>
+                        <td>{$lang.prev_covid}:</td>
+                        <td><?php echo (($global['custody_chain']['contact']['sf']['covid'] == 'yeah') ? $global['custody_chain']['contact']['sf']['covid_time'] : '{$lang.not}') ?></td>
                     </tr>
                 <?php endif; ?>
-                <tr>
-                    <td>{$lang.symptoms}:</td>
-                    <td>
-                        <?php if (!empty($global['custody_chain']['contact']['sf']['symptoms'])) : ?>
-                            <?php foreach ($global['custody_chain']['contact']['sf']['symptoms'] as $value) : ?>
-                                {$lang.<?php echo $value; ?>}<br>
-                            <?php endforeach; ?>
-                        <?php else : ?>
-                            {$lang.nothing}
-                        <?php endif; ?>
-                    </td>
-                </tr>
-                <?php if (!empty($global['custody_chain']['contact']['sf']['symptoms'])) : ?>
-                    <tr>
-                        <td>{$lang.symptoms_time}:</td>
-                        <td><?php echo $global['custody_chain']['contact']['sf']['symptoms_time']; ?></td>
-                    </tr>
-                <?php endif; ?>
-                <tr>
-                    <td>{$lang.prev_travel}:</td>
-                    <td><?php echo (($global['custody_chain']['contact']['sf']['travel'] == 'yeah') ? $global['custody_chain']['contact']['sf']['travel_countries'] : '{$lang.not}') ?></td>
-                </tr>
-                <tr>
-                    <td>{$lang.prev_covid}:</td>
-                    <td><?php echo (($global['custody_chain']['contact']['sf']['covid'] == 'yeah') ? $global['custody_chain']['contact']['sf']['covid_time'] : '{$lang.not}') ?></td>
-                </tr>
             </table>
             <?php if ($global['custody_chain']['closed'] == true) : ?>
                 <?php if (Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) : ?>

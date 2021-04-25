@@ -158,7 +158,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
                         <h4>{$lang.security_form}</h4>
                         <fieldset class="fields-group hidden" data-hidden="sf_pregnant">
                             <div class="title">
-                                <p>¿Estás embarazada?</p>
+                                <p>{$lang.are_you_pregnant}</p>
                             </div>
                         </fieldset>
                         <fieldset class="fields-group hidden" data-hidden="sf_pregnant">
@@ -175,133 +175,133 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
                         </fieldset>
                         <fieldset class="fields-group">
                             <div class="title">
-                                <p>¿En los últimos 14 días haz tenido alguno de los siguientes síntomas?</p>
+                                <p>{$lang.are_you_symptoms}</p>
                             </div>
                         </fieldset>
                         <fieldset class="fields-group">
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="fever">
-                                    <span>Fiebre mayor a 38 grados</span>
+                                    <span>{$lang.fever}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="eyes_pain">
-                                    <span>Dolor de ojos</span>
+                                    <span>{$lang.eyes_pain}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="torax_pain">
-                                    <span>Dolor de torax</span>
+                                    <span>{$lang.torax_pain}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="muscles_pain">
-                                    <span>Dolor de músculos</span>
+                                    <span>{$lang.muscles_pain}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="head_pain">
-                                    <span>Dolor de cabeza</span>
+                                    <span>{$lang.head_pain}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="throat_pain">
-                                    <span>Dolor de garganta</span>
+                                    <span>{$lang.throat_pain}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="knees_pain">
-                                    <span>Dolor de rodillas</span>
+                                    <span>{$lang.knees_pain}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="ears_pain">
-                                    <span>Dolor de oído</span>
+                                    <span>{$lang.ears_pain}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="joints_pain">
-                                    <span>Dolor de articulaciones</span>
+                                    <span>{$lang.joints_pain}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="cough">
-                                    <span>Tos</span>
+                                    <span>{$lang.cough}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="difficulty_breathing">
-                                    <span>Dificultad para respirar</span>
+                                    <span>{$lang.difficulty_breathing}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="sweating">
-                                    <span>Sudoración</span>
+                                    <span>{$lang.sweating}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="runny_nose">
-                                    <span>Escurrimiento nasal</span>
+                                    <span>{$lang.runny_nose}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="itching">
-                                    <span>Comezón</span>
+                                    <span>{$lang.itching}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="conjunctivitis">
-                                    <span>Conjuntivitis</span>
+                                    <span>{$lang.conjunctivitis}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="vomit">
-                                    <span>Vómito</span>
+                                    <span>{$lang.vomit}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="diarrhea">
-                                    <span>Diarrea</span>
+                                    <span>{$lang.diarrhea}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="smell_loss">
-                                    <span>Pérdida de olfato</span>
+                                    <span>{$lang.smell_loss}</span>
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="sf_symptoms[]" value="taste_loss">
-                                    <span>Pérdida de gusto</span>
+                                    <span>{$lang.taste_loss}</span>
                                 </label>
                             </div>
                         </fieldset>
                         <fieldset class="fields-group hidden" data-hidden="sf_symptoms_time">
                             <div class="text">
-                                <input type="text" name="sf_symptoms_time" placeholder="Escribe hace cuanto tiempo empezaron tus síntomas">
+                                <input type="text" name="sf_symptoms_time" placeholder="{$lang.write_symptoms_time}">
                             </div>
                         </fieldset>
                         <fieldset class="fields-group">
                             <div class="title">
-                                <p>¿Haz realizado viajes prévios a otros países?</p>
+                                <p>{$lang.are_travel_prev}</p>
                             </div>
                         </fieldset>
                         <fieldset class="fields-group">
@@ -318,12 +318,12 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
                         </fieldset>
                         <fieldset class="fields-group hidden" data-hidden="sf_travel_countries">
                             <div class="text">
-                                <textarea name="sf_travel_countries" placeholder="Escribe los países a los que haz viajado"></textarea>
+                                <textarea name="sf_travel_countries" placeholder="{$lang.write_travel_countries}"></textarea>
                             </div>
                         </fieldset>
                         <fieldset class="fields-group">
                             <div class="title">
-                                <p>¿En los últimos 14 días haz tenido contácto con personas que han tenido cualquiera de los síntomas anteriores o que tenga sospecha de COVID-19?</p>
+                                <p>{$lang.are_contact_covid}</p>
                             </div>
                         </fieldset>
                         <fieldset class="fields-group">
@@ -340,7 +340,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
                         </fieldset>
                         <fieldset class="fields-group">
                             <div class="title">
-                                <p>¿Haz tenido COVID-19?</p>
+                                <p>{$lang.are_you_covid}</p>
                             </div>
                         </fieldset>
                         <fieldset class="fields-group">
@@ -357,7 +357,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
                         </fieldset>
                         <fieldset class="fields-group hidden" data-hidden="sf_covid_time">
                             <div class="text">
-                                <input type="text" name="sf_covid_time" placeholder="Escribe hace cuanto tiempo tuviste COVID-19">
+                                <input type="text" name="sf_covid_time" placeholder="{$lang.write_are_you_covid}">
                             </div>
                         </fieldset>
                     </div>
