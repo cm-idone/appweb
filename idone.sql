@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 25-04-2021 a las 09:28:17
+-- Tiempo de generación: 25-04-2021 a las 10:02:15
 -- Versión del servidor: 10.3.27-MariaDB-0+deb10u1
 -- Versión de PHP: 7.3.27
 
@@ -449,7 +449,7 @@ CREATE TABLE `system_collectors` (
 --
 
 INSERT INTO `system_collectors` (`id`, `token`, `name`, `email`, `schedule`, `qrs`, `authentication`, `notifications`, `laboratories`, `user`, `blocked`) VALUES
-(1, 'hdy73j8w', 'Gersón Gómez', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_hdy73j8w.png\",\"record\":\"system_collector_record_qr_hdy73j8w.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"1\",\"2\"]', 1, 0),
+(1, 'hdy73j8w', 'Gersón Gómez', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_hdy73j8w.png\",\"record\":\"system_collector_record_qr_hdy73j8w.png\"}', '{\"type\":\"covid\",\"taker\":\"14\"}', 1, '[\"1\",\"2\"]', 1, 0),
 (2, 'ms38j3gh', 'Marbu Salud', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_ms38j3gh.png\",\"record\":\"system_collector_record_qr_ms38j3gh.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"1\"]', NULL, 1),
 (3, 'djaybja9', 'Alison', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_djaybja9.png\",\"record\":\"system_collector_record_qr_djaybja9.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', NULL, 0),
 (4, 'p5wj0127', 'Eduar', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_p5wj0127.png\",\"record\":\"system_collector_record_qr_p5wj0127.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"1\",\"2\"]', 5, 0),
@@ -822,11 +822,11 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `avatar`, `firstname`, `lastname`, `email`, `password`, `language`, `accounts`, `settings`, `signup_date`, `god`, `blocked`) VALUES
 (1, NULL, 'Gersón', 'Gómez', 'desarrollo@one-consultores.com', 'aff76a06ed02c05751326d143dd634d896bcd96c:0sSChO6OMgSEhONB8nq7oNTj0041KUKfDwnFWQ5GcwzF3EndySf7KeY3BqwpQ5jX', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"}]', '[]', '2020-10-20', 1, 0),
-(2, NULL, 'Miguel', 'Parra', 'mparra@one-consultores.com', 'aff76a06ed02c05751326d143dd634d896bcd96c:0sSChO6OMgSEhONB8nq7oNTj0041KUKfDwnFWQ5GcwzF3EndySf7KeY3BqwpQ5jX', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"}]', '[]', '2020-10-20', 1, 0),
-(3, NULL, 'Noé', 'Cuxim', 'noec@one-consultores.com', 'aff76a06ed02c05751326d143dd634d896bcd96c:0sSChO6OMgSEhONB8nq7oNTj0041KUKfDwnFWQ5GcwzF3EndySf7KeY3BqwpQ5jX', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"}]', '[]', '2020-10-20', 1, 0),
-(4, NULL, 'Yazmin', 'Morales', 'ymorales@one-consultores.com', 'aff76a06ed02c05751326d143dd634d896bcd96c:0sSChO6OMgSEhONB8nq7oNTj0041KUKfDwnFWQ5GcwzF3EndySf7KeY3BqwpQ5jX', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"}]', '[]', '2021-01-28', 1, 0),
-(5, NULL, 'Eduar', 'Canúl', 'ecanul@one-consultores.com', 'aff76a06ed02c05751326d143dd634d896bcd96c:0sSChO6OMgSEhONB8nq7oNTj0041KUKfDwnFWQ5GcwzF3EndySf7KeY3BqwpQ5jX', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"}]', '[]', '2021-01-28', 1, 0),
-(8, NULL, 'Francisco', 'Gutierrez', 'fcomanuelg@hotmail.com', 'aff76a06ed02c05751326d143dd634d896bcd96c:0sSChO6OMgSEhONB8nq7oNTj0041KUKfDwnFWQ5GcwzF3EndySf7KeY3BqwpQ5jX', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"}]', '[]', '2021-02-15', 1, 0);
+(2, NULL, 'Miguel', 'Parra', 'mparra@one-consultores.com', '6848b097426f2db12c74f06340f33835acda3f59:DijGTBs9o1HpyBHZYzhlxV17O8vl9On2ncDDxhvVqr5jJ8pjLe6breNuZUSXpNy6', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"}]', '[]', '2020-10-20', 1, 0),
+(3, NULL, 'Noé', 'Cuxim', 'noec@one-consultores.com', 'ca11ab6776330fc981c8f43951dcf66e677a41e5:CNx02tt6iM2FL7MB7FLOJ24io0eZRSbtZeZuDfWQ3jFmjTFuZ5hq1H8Unz9uWI03', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"}]', '[]', '2020-10-20', 1, 0),
+(4, NULL, 'Yazmin', 'Morales', 'ymorales@one-consultores.com', '5f82db09c0085acd32e3a3ffbeced5a04f90fb54:2p6775u8MbmQaEahPCqJCdW9LJGmjoUV8Qutc7zL0VbaLw3pewA7CSznpSKnNAvf', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"}]', '[]', '2021-01-28', 1, 0),
+(5, NULL, 'Eduar', 'Canúl', 'ecanul@one-consultores.com', 'ba460c2371a7dd90b3c4858729f902406c2be6af:LySfpScaJKwJqepDR24JlNEszNFIEENvJymkr9ek9oXLubA9FceIzLgqxid6Nfbj', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"}]', '[]', '2021-01-28', 1, 0),
+(8, NULL, 'Francisco', 'Gutierrez', 'fcomanuelg@hotmail.com', 'd48d812190a70bc2c056b775d97499f333f92f01:SGDNryjeckofNpvbMO8ECwkGLZYQWQj1jlXjpraiufHIKFh53cGciTBLiimvYXIJ', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"}]', '[]', '2021-02-15', 1, 0);
 
 -- --------------------------------------------------------
 
