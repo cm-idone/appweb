@@ -652,7 +652,7 @@ class Laboratory_controller extends Controller
 
 				            if (empty($errors))
 				            {
-				                $_POST['token'] = System::generate_random_string();
+				                $_POST['token'] = $global['collector']['authentication']['taker']['token'] . '-' . System::generate_random_string();
 								$_POST['firstname'] = ucwords($_POST['firstname']);
 								$_POST['lastname'] = ucwords($_POST['lastname']);
 								$_POST['birth_date'] = $_POST['birth_date_year'] . '-' . $_POST['birth_date_month'] . '-' . $_POST['birth_date_day'];

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 25-04-2021 a las 10:02:15
+-- Tiempo de generación: 25-04-2021 a las 10:22:29
 -- Versión del servidor: 10.3.27-MariaDB-0+deb10u1
 -- Versión de PHP: 7.3.27
 
@@ -88,7 +88,7 @@ INSERT INTO `accounts_permissions` (`id`, `name`, `code`, `priority`) VALUES
 CREATE TABLE `custody_chains` (
   `id` bigint(20) NOT NULL,
   `account` bigint(20) DEFAULT NULL,
-  `token` varchar(255) NOT NULL,
+  `token` varchar(14) NOT NULL,
   `employee` bigint(20) DEFAULT NULL,
   `contact` text DEFAULT NULL,
   `type` enum('alcoholic','antidoping','covid_pcr','covid_an','covid_ac') NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE `custody_chains` (
   `lang` text DEFAULT NULL,
   `closed` tinyint(1) NOT NULL,
   `user` bigint(20) DEFAULT NULL,
-  `version` char(2) DEFAULT NULL,
+  `version` text DEFAULT NULL,
   `deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -122,11 +122,11 @@ CREATE TABLE `custody_chains` (
 
 INSERT INTO `custody_chains` (`id`, `account`, `token`, `employee`, `contact`, `type`, `reason`, `start_process`, `end_process`, `results`, `medicines`, `prescription`, `location`, `laboratory`, `taker`, `collector`, `chemical`, `date`, `hour`, `comments`, `signatures`, `qr`, `pdf`, `lang`, `closed`, `user`, `version`, `deleted`) VALUES
 (6502, 1, 'huifjIwo', 6, NULL, 'covid_pcr', 'reasonable_suspicion', '2021-04-24', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, NULL, NULL, NULL, 1, '2021-04-24', '14:09:07', NULL, NULL, NULL, NULL, NULL, 0, NULL, 'v2', 0),
-(6503, NULL, 'xLiomwwW', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"sex\":\"male\",\"ife\":\"0123456789\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"}}', 'covid_pcr', 'random', '2021-04-24', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, 2, 14, 1, NULL, '2021-04-24', '15:08:49', NULL, NULL, 'covid_qr_xLiomwwW_2021_04_24_15_08_49.png', NULL, 'es', 0, NULL, 'v2', 0),
-(6504, NULL, 'iVvyx7CS', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"sex\":\"male\",\"ife\":\"0123456789\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"}}', 'covid_pcr', 'random', '2021-04-24', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, 2, 14, 1, NULL, '2021-04-24', '15:15:03', NULL, NULL, 'covid_qr_iVvyx7CS_2021_04_24_15_15_03.png', NULL, 'es', 0, NULL, 'v2', 0),
-(6505, NULL, 'YybvN1YH', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"birth_date\":\"1992-01-01\",\"age\":\"28\",\"sex\":\"male\",\"ife\":\"0123456789\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"}}', 'covid_pcr', 'random', '2021-04-24', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, 2, 14, 1, NULL, '2021-04-24', '16:46:19', NULL, NULL, 'covid_qr_YybvN1YH_2021_04_24_16_46_19.png', NULL, 'es', 0, NULL, 'v2', 0),
-(6506, NULL, 'NNEKFa49', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"sex\":\"male\",\"ife\":\"0123456789\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"}}', 'covid_pcr', 'random', '2021-04-24', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, 2, 14, 1, NULL, '2021-04-24', '16:50:14', NULL, NULL, 'covid_qr_NNEKFa49_2021_04_24_16_50_14.png', NULL, 'es', 0, NULL, 'v2', 0),
-(6507, NULL, 'zi1Mpt4Q', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"sex\":\"male\",\"ife\":\"0123456789\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579342\"}}', 'covid_pcr', 'random', '2021-04-24', '2021-04-25', '{\"result\":\"negative\",\"unity\":\"INDEX\",\"reference_values\":\"not_detected\"}', NULL, NULL, NULL, 2, 14, 1, 1, '2021-04-24', '16:51:50', 'Sin comentarios', NULL, 'covid_qr_zi1Mpt4Q_2021_04_25_07_38_10.png', 'covid_pdf_zi1Mpt4Q_2021_04_25_07_38_10.pdf', 'es', 1, 1, 'v2', 0);
+(6503, NULL, 'TCN-xLiomwwW', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"sex\":\"male\",\"ife\":\"0123456789\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"}}', 'covid_pcr', 'random', '2021-04-24', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, 2, 14, 1, NULL, '2021-04-24', '15:08:49', NULL, NULL, 'covid_qr_xLiomwwW_2021_04_24_15_08_49.png', NULL, 'es', 0, NULL, 'v2', 0),
+(6504, NULL, 'TCN-iVvyx7CS', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"sex\":\"male\",\"ife\":\"0123456789\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"}}', 'covid_pcr', 'random', '2021-04-24', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, 2, 14, 1, NULL, '2021-04-24', '15:15:03', NULL, NULL, 'covid_qr_iVvyx7CS_2021_04_24_15_15_03.png', NULL, 'es', 0, NULL, 'v2', 0),
+(6505, NULL, 'TCN-YybvN1YH', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"birth_date\":\"1992-01-01\",\"age\":\"28\",\"sex\":\"male\",\"ife\":\"0123456789\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"}}', 'covid_pcr', 'random', '2021-04-24', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, 2, 14, 1, NULL, '2021-04-24', '16:46:19', NULL, NULL, 'covid_qr_YybvN1YH_2021_04_24_16_46_19.png', NULL, 'es', 0, NULL, 'v2', 0),
+(6506, NULL, 'TCN-NNEKFa49', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"sex\":\"male\",\"ife\":\"0123456789\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"}}', 'covid_pcr', 'random', '2021-04-24', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, 2, 14, 1, NULL, '2021-04-24', '16:50:14', NULL, NULL, 'covid_qr_NNEKFa49_2021_04_24_16_50_14.png', NULL, 'es', 0, NULL, 'v2', 0),
+(6507, NULL, 'TCN-zi1Mpt4Q', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"sex\":\"male\",\"ife\":\"0123456789\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579342\"}}', 'covid_pcr', 'random', '2021-04-24', '2021-04-25', '{\"result\":\"negative\",\"unity\":\"INDEX\",\"reference_values\":\"not_detected\"}', NULL, NULL, NULL, 2, 14, 1, 1, '2021-04-24', '16:51:50', 'Sin comentarios', NULL, 'covid_qr_zi1Mpt4Q_2021_04_25_07_38_10.png', 'covid_pdf_zi1Mpt4Q_2021_04_25_07_38_10.pdf', 'es', 1, 1, 'v2', 0);
 
 -- --------------------------------------------------------
 
@@ -736,7 +736,7 @@ CREATE TABLE `system_laboratories` (
   `id` bigint(20) NOT NULL,
   `avatar` text NOT NULL,
   `name` text NOT NULL,
-  `path` text NOT NULL,
+  `path` varchar(255) NOT NULL,
   `business` text NOT NULL,
   `rfc` text NOT NULL,
   `address` text NOT NULL,
@@ -766,6 +766,7 @@ INSERT INTO `system_laboratories` (`id`, `avatar`, `name`, `path`, `business`, `
 CREATE TABLE `system_takers` (
   `id` bigint(20) NOT NULL,
   `name` text NOT NULL,
+  `token` varchar(4) NOT NULL,
   `prices` text NOT NULL,
   `blocked` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -774,26 +775,26 @@ CREATE TABLE `system_takers` (
 -- Volcado de datos para la tabla `system_takers`
 --
 
-INSERT INTO `system_takers` (`id`, `name`, `prices`, `blocked`) VALUES
-(1, 'Marina Chac chi', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(2, 'Hotel Megestic', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(3, 'Hotel Riu Costa', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(4, 'Hotel Riu Dunna', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(5, 'Hotel Belo', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(6, 'Hotel Iberostar', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(7, 'Hotel Westing Laguna Mar', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(8, 'Hotel Yellow Capsul', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(9, 'Hotel Riu Caribe', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(10, 'Hotel Riu Peninsula', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(11, 'Hotel Rest Inn', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(12, 'Hotel Wesintg Regina', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(13, 'Hotel Cancún Bay', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(14, 'TP Cancún', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(15, 'TP Playa del Carmen', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(16, 'TP Tulum', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(17, 'Hotel Dos Playas', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(18, 'Hotel Moon Palace', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(19, 'TP Isla Mujeres', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0);
+INSERT INTO `system_takers` (`id`, `name`, `token`, `prices`, `blocked`) VALUES
+(1, 'Marina Chac chi', 'MCC', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(2, 'Hotel Megestic', 'HMG', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(3, 'Hotel Riu Costa', 'HRC', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(4, 'Hotel Riu Dunna', 'HRD', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(5, 'Hotel Belo', 'HBL', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(6, 'Hotel Iberostar', 'HIB', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(7, 'Hotel Westing Laguna Mar', 'HWL', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(8, 'Hotel Yellow Capsul', 'HYC', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(9, 'Hotel Riu Caribe', 'HRB', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(10, 'Hotel Riu Peninsula', 'HRP', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(11, 'Hotel Rest Inn', 'HRI', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(12, 'Hotel Wesintg Regina', 'HWR', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(13, 'Hotel Cancún Bay', 'HCB', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(14, 'TP Cancún', 'TCN', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(15, 'TP Playa del Carmen', 'TPC', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(16, 'TP Tulum', 'TTL', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(17, 'Hotel Dos Playas', 'HDP', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(18, 'Hotel Moon Palace', 'HMP', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(19, 'TP Isla Mujeres', 'TIM', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0);
 
 -- --------------------------------------------------------
 
@@ -893,6 +894,7 @@ ALTER TABLE `accounts_permissions`
 --
 ALTER TABLE `custody_chains`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `token` (`token`),
   ADD KEY `account` (`account`),
   ADD KEY `employee` (`employee`),
   ADD KEY `location` (`location`),
@@ -934,6 +936,7 @@ ALTER TABLE `system_chemicals`
 --
 ALTER TABLE `system_collectors`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `token` (`token`),
   ADD KEY `user` (`user`);
 
 --
@@ -946,13 +949,15 @@ ALTER TABLE `system_countries`
 -- Indices de la tabla `system_laboratories`
 --
 ALTER TABLE `system_laboratories`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `path` (`path`);
 
 --
 -- Indices de la tabla `system_takers`
 --
 ALTER TABLE `system_takers`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `token` (`token`);
 
 --
 -- Indices de la tabla `users`
