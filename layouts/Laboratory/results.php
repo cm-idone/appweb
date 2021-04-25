@@ -161,8 +161,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                 <tr>
                     <td>{$lang.symptoms}:</td>
                     <td>
-                        <?php if (!empty($global['custody_chain']['contact']['sf']['sf_symptoms'])) : ?>
-                            <?php foreach ($global['custody_chain']['contact']['sf']['sf_symptoms'] as $value) : ?>
+                        <?php if (!empty($global['custody_chain']['contact']['sf']['symptoms'])) : ?>
+                            <?php foreach ($global['custody_chain']['contact']['sf']['symptoms'] as $value) : ?>
                                 {$lang.<?php echo $value; ?>}<br>
                             <?php endforeach; ?>
                         <?php else : ?>
@@ -172,19 +172,19 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                 </tr>
                 <tr>
                     <td>{$lang.symptoms_time}:</td>
-                    <td><?php echo $global['custody_chain']['contact']['sf']['sf_symptoms_time']; ?></td>
+                    <td><?php echo $global['custody_chain']['contact']['sf']['symptoms_time']; ?></td>
                 </tr>
                 <tr>
                     <td>{$lang.prev_travel}:</td>
-                    <td><?php echo (($global['custody_chain']['contact']['sf']['sf_travel'] == 'yeah') ? $global['custody_chain']['contact']['sf']['sf_travel_countries'] : '{$lang.not}') ?></td>
+                    <td><?php echo (($global['custody_chain']['contact']['sf']['travel'] == 'yeah') ? $global['custody_chain']['contact']['sf']['travel_countries'] : '{$lang.not}') ?></td>
                 </tr>
                 <tr>
                     <td>{$lang.covid}:</td>
-                    <td>{$lang.<?php echo $global['custody_chain']['contact']['sf']['sf_covid']; ?>}</td>
+                    <td>{$lang.<?php echo $global['custody_chain']['contact']['sf']['covid']; ?>}</td>
                 </tr>
                 <tr>
                     <td>{$lang.covid_time}:</td>
-                    <td><?php echo $global['custody_chain']['contact']['sf']['sf_covid_time']; ?></td>
+                    <td><?php echo $global['custody_chain']['contact']['sf']['covid_time']; ?></td>
                 </tr>
             </table>
             <?php if ($global['custody_chain']['closed'] == true) : ?>
