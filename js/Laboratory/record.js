@@ -2,6 +2,16 @@
 
 $(document).ready(function()
 {
+    $('[name="sex"]').on('change', function()
+    {
+        $('[name="sf_pregnant"][value="not"]').prop('checked', true);
+
+        if ($(this).val() == 'male')
+            $('[data-hidden="sf_pregnant"]').addClass('hidden');
+        else if ($(this).val() == 'female')
+            $('[data-hidden="sf_pregnant"]').removeClass('hidden');
+    });
+
     $('[name="age"]').on('keyup', function()
     {
         validate_string('int', $(this).val(), $(this));
@@ -10,6 +20,39 @@ $(document).ready(function()
     $('[name="phone_number"]').on('keyup', function()
     {
         validate_string('int', $(this).val(), $(this));
+    });
+
+    $('[name="sf_symptoms[]"]').on('change', function()
+    {
+        if ($('[name="sf_symptoms[]"]:checked').prop('checked'))
+            $('[data-hidden="sf_symptoms_time"]').removeClass('hidden');
+        else
+        {
+            $('[name="sf_symptoms_time"]').val('');
+            $('[data-hidden="sf_symptoms_time"]').addClass('hidden');
+        }
+    });
+
+    $('[name="sf_travel"]').on('change', function()
+    {
+        if ($(this).val() == 'not')
+        {
+            $('[name="sf_travel_countries"]').val('');
+            $('[data-hidden="sf_travel_countries"]').addClass('hidden');
+        }
+        else if ($(this).val() == 'yeah')
+            $('[data-hidden="sf_travel_countries"]').removeClass('hidden');
+    });
+
+    $('[name="sf_covid"]').on('change', function()
+    {
+        if ($(this).val() == 'not')
+        {
+            $('[name="sf_covid_time"]').val('');
+            $('[data-hidden="sf_covid_time"]').addClass('hidden');
+        }
+        else if ($(this).val() == 'yeah')
+            $('[data-hidden="sf_covid_time"]').removeClass('hidden');
     });
 
     $('form[name="record"]').on('submit', function(event)

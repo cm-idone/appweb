@@ -597,6 +597,42 @@ main.laboratory > form[name="record"] > h6 {
     margin-bottom: 40px;
 }
 
+main.laboratory > form[name="record"] > div[data-step] {
+    width: 100%;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px dashed #bdbdbd;
+    box-sizing: border-box;
+}
+
+main.laboratory > form[name="record"] > div[data-step] > h4 {
+    width: 100%;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    color: #212121;
+    margin-bottom: 20px;
+}
+
+main.laboratory > form[name="record"] > div[data-step] > p {
+    width: 100%;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    color: #757575;
+    line-height: 18px;
+    margin-bottom: 20px;
+}
+
+main.laboratory > form[name="record"] > div[data-step] > fieldset > div.title > p {
+    width: 100%;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: justify;
+    color: #757575;
+    line-height: 18px;
+}
+
 main.laboratory > form[name="record"] > div.accept_terms {
     width: 100%;
     margin-bottom: 20px;
@@ -632,7 +668,8 @@ main.laboratory > form[name="record"] > div.accept_terms > div.checkbox > label 
     color: #fff;
 }
 
-main.laboratory > form[name="record"] > fieldset > div.button > button {
+main.laboratory > form[name="record"] > fieldset > div.button > button,
+main.laboratory > form[name="record"] > fieldset > div.button > a {
     width: 100% !important;
     margin: 0px;
 }
@@ -889,7 +926,10 @@ main.laboratory > div.results > div.share > div {
 
 main.laboratory > div.blocked > div.share,
 main.laboratory > form[name="record"] > div.share {
-    margin-top: 40px;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px dashed #bdbdbd;
+    box-sizing: border-box;
 }
 
 main.laboratory > div.create > div.share,

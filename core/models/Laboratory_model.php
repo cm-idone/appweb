@@ -31,15 +31,26 @@ class Laboratory_model extends Model
 			'contact' => ($record == true) ? json_encode([
                 'firstname' => $data['firstname'],
                 'lastname' => $data['lastname'],
+				'sex' => $data['sex'],
                 'birth_date' => $data['birth_date'],
                 'age' => $data['age'],
-                'sex' => $data['sex'],
+                'nationality' => $data['nationality'],
 				'ife' => $data['ife'],
                 'email' => $data['email'],
                 'phone' => [
                     'country' => $data['phone_country'],
                     'number' => $data['phone_number']
-                ]
+                ],
+				'sf' => [
+					'pregnant' => $data['sf_pregnant'],
+					'sf_symptoms' => $data['sf_symptoms'],
+					'sf_symptoms_time' => $data['sf_symptoms_time'],
+					'sf_travel' => $data['sf_travel'],
+					'sf_travel_countries' => $data['sf_travel_countries'],
+					'sf_contact' => $data['sf_contact'],
+					'sf_covid' => $data['sf_covid'],
+					'sf_covid_time' => $data['sf_covid_time']
+				]
             ]) : null,
             'type' => $data['type'],
             'reason' => ($record == true) ? 'random' : $data['reason'],

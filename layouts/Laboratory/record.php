@@ -64,124 +64,354 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
                 </div>
             <?php else : ?>
                 <form name="record">
-                    <h2>¡{$lang.record_now}!</h2>
-                    <h6>{$lang.covid_test} | <?php echo $global['collector']['authentication']['taker']['name']; ?> | <?php echo Dates::format_date(Dates::current_date(), 'long_year'); ?></h6>
-                    <fieldset class="fields-group">
-                        <div class="row">
-                            <div class="span4">
-                                <div class="text">
-                                    <input type="text" name="firstname">
-                                </div>
-                                <div class="title">
-                                    <h6>{$lang.firstname} (s)</h6>
-                                </div>
+                    <!-- <h2>¡{$lang.record_now}!</h2> -->
+                    <!-- <h6>{$lang.covid_test} | <?php echo $global['collector']['authentication']['taker']['name']; ?> | <?php echo Dates::format_date(Dates::current_date(), 'long_year'); ?></h6> -->
+                    <div class="share">
+                        <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
+                        <a href="tel:<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
+                        <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.know_our_laboratory}" data-url="https://<?php echo $global['laboratory']['website']; ?>"><i class="fas fa-share-alt"></i>{$lang.share}</a>
+                    </div>
+                    <div data-step>
+                        <h4>{$lang.what_your_name}</h4>
+                        <fieldset class="fields-group">
+                            <div class="text">
+                                <input type="text" name="firstname" placeholder="{$lang.write_your_firstname}">
                             </div>
-                            <div class="span4">
-                                <div class="text">
-                                    <input type="text" name="lastname">
-                                </div>
-                                <div class="title">
-                                    <h6>{$lang.lastname} (s)</h6>
-                                </div>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="text">
+                                <input type="text" name="lastname" placeholder="{$lang.write_your_lastname}">
                             </div>
-                            <div class="span4">
-                                <div class="compound st-10">
-                                    <select name="birth_date_year">
-                                        <option value="" class="hidden">{$lang.year}</option>
-                                        <?php foreach (Dates::create_lapse_date('years', 100) as $value) : ?>
-                                            <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <select name="birth_date_month">
-                                        <option value="" class="hidden">{$lang.month}</option>
-                                        <?php foreach (Dates::create_lapse_date('months', Session::get_value('vkye_lang')) as $key => $value) : ?>
-                                            <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <select name="birth_date_day">
-                                        <option value="" class="hidden">{$lang.day}</option>
-                                        <?php foreach (Dates::create_lapse_date('days') as $value) : ?>
-                                            <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                                <div class="title">
-                                    <h6>{$lang.birth_date}</h6>
-                                </div>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="radio" name="sex" value="male" checked>
+                                    <span>{$lang.im_male}</span>
+                                </label>
                             </div>
-                        </div>
-                    </fieldset>
-                    <fieldset class="fields-group">
-                        <div class="row">
-                            <div class="span4">
-                                <div class="text">
-                                    <input type="number" name="age">
-                                </div>
-                                <div class="title">
-                                    <h6>{$lang.age}</h6>
-                                </div>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="radio" name="sex" value="female">
+                                    <span>{$lang.im_female}</span>
+                                </label>
                             </div>
-                            <div class="span4">
-                                <div class="text">
-                                    <select name="sex">
-                                        <option value="" class="hidden">{$lang.choose_an_option}</option>
-                                        <option value="male">{$lang.male}</option>
-                                        <option value="female">{$lang.female}</option>
-                                    </select>
-                                </div>
-                                <div class="title">
-                                    <h6>{$lang.sex}</h6>
-                                </div>
+                        </fieldset>
+                    </div>
+                    <div data-step>
+                        <h4>{$lang.what_your_born}</h4>
+                        <fieldset class="fields-group">
+                            <div class="text">
+                                <select name="birth_date_day">
+                                    <option value="" class="hidden">{$lang.select_your_day}</option>
+                                    <?php foreach (Dates::create_lapse_date('days') as $value) : ?>
+                                        <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
-                            <div class="span4">
-                                <div class="text">
-                                    <input type="text" name="ife">
-                                </div>
-                                <div class="title">
-                                    <h6>{$lang.passport}</h6>
-                                </div>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="text">
+                                <select name="birth_date_month">
+                                    <option value="" class="hidden">{$lang.select_your_month}</option>
+                                    <?php foreach (Dates::create_lapse_date('months', Session::get_value('vkye_lang')) as $key => $value) : ?>
+                                        <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
-                        </div>
-                    </fieldset>
-                    <fieldset class="fields-group">
-                        <div class="row">
-                            <div class="span4">
-                                <div class="text">
-                                    <input type="email" name="email">
-                                </div>
-                                <div class="title">
-                                    <h6>{$lang.email}</h6>
-                                </div>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="text">
+                                <select name="birth_date_year">
+                                    <option value="" class="hidden">{$lang.select_your_year}</option>
+                                    <?php foreach (Dates::create_lapse_date('years', 100) as $value) : ?>
+                                        <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
-                            <div class="span4">
-                                <div class="compound st-1-left">
-                                    <select name="phone_country">
-                                        <option value="" class="hidden">{$lang.country}</option>
-                                        <?php foreach (Functions::countries() as $value) : ?>
-                                            <option value="<?php echo $value['lada']; ?>"><?php echo $value['name'][Session::get_value('vkye_lang')] . ' +' . $value['lada']; ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <input type="number" name="phone_number" placeholder="{$lang.number}">
-                                </div>
-                                <div class="title">
-                                    <h6>{$lang.phone}</h6>
-                                </div>
+                        </fieldset>
+                    </div>
+                    <div data-step>
+                        <h4>{$lang.what_your_age}</h4>
+                        <fieldset class="fields-group">
+                            <div class="text">
+                                <input type="number" name="age" placeholder="{$lang.write_your_age}">
                             </div>
-                            <div class="span4">
-                                <div class="text">
-                                    <select name="type">
-                                        <option value="" class="hidden">{$lang.choose_an_option}</option>
-                                        <option value="covid_pcr">PCR (<?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['pcr']['usd'], 'USD') . ' / ' .  Currency::format($global['collector']['authentication']['taker']['prices']['covid']['pcr']['mxn'], 'MXN'); ?>)</option>
-                                        <option value="covid_an">{$lang.antigen} (<?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['an']['usd'], 'USD') . ' / ' .  Currency::format($global['collector']['authentication']['taker']['prices']['covid']['an']['mxn'], 'MXN'); ?>)</option>
-                                        <option value="covid_ac">{$lang.anticorps} (<?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['ac']['usd'], 'USD') . ' / ' .  Currency::format($global['collector']['authentication']['taker']['prices']['covid']['ac']['mxn'], 'MXN'); ?>)</option>
-                                    </select>
-                                </div>
-                                <div class="title">
-                                    <h6>{$lang.test_to_do}</h6>
-                                </div>
+                        </fieldset>
+                    </div>
+                    <div data-step>
+                        <h4>{$lang.what_your_personal_information}</h4>
+                        <fieldset class="fields-group">
+                            <div class="text">
+                                <input type="text" name="nationality" placeholder="{$lang.write_your_nationality}">
                             </div>
-                        </div>
-                    </fieldset>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="text">
+                                <input type="text" name="ife" placeholder="{$lang.write_your_passport}">
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div data-step>
+                        <h4>{$lang.security_form}</h4>
+                        <fieldset class="fields-group hidden" data-hidden="sf_pregnant">
+                            <div class="title">
+                                <p>¿Estás embarazada?</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="fields-group hidden" data-hidden="sf_pregnant">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="radio" name="sf_pregnant" value="not" checked>
+                                    <span>{$lang.not}</span>
+                                </label>
+                                <label style="margin-left:10px;">
+                                    <input type="radio" name="sf_pregnant" value="yeah">
+                                    <span>{$lang.yeah}</span>
+                                </label>
+                            </div>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="title">
+                                <p>¿En los últimos 14 días haz tenido alguno de los siguientes síntomas?</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="fever">
+                                    <span>Fiebre mayor a 38 grados</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="eyes_pain">
+                                    <span>Dolor de ojos</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="torax_pain">
+                                    <span>Dolor de torax</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="muscles_pain">
+                                    <span>Dolor de músculos</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="head_pain">
+                                    <span>Dolor de cabeza</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="throat_pain">
+                                    <span>Dolor de garganta</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="knees_pain">
+                                    <span>Dolor de rodillas</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="ears_pain">
+                                    <span>Dolor de oído</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="joints_pain">
+                                    <span>Dolor de articulaciones</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="cough">
+                                    <span>Tos</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="difficulty_breathing">
+                                    <span>Dificultad para respirar</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="sweating">
+                                    <span>Sudoración</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="runny_nose">
+                                    <span>Escurrimiento nasal</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="itching">
+                                    <span>Comezón</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="conjunctivitis">
+                                    <span>Conjuntivitis</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="vomit">
+                                    <span>Vómito</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="diarrhea">
+                                    <span>Diarrea</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="smell_loss">
+                                    <span>Pérdida de olfato</span>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="sf_symptoms[]" value="taste_loss">
+                                    <span>Pérdida de gusto</span>
+                                </label>
+                            </div>
+                        </fieldset>
+                        <fieldset class="fields-group hidden" data-hidden="sf_symptoms_time">
+                            <div class="text">
+                                <input type="text" name="sf_symptoms_time" placeholder="Escribe hace cuanto tiempo empezaron tus síntomas">
+                            </div>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="title">
+                                <p>¿Haz realizado viajes prévios a otros países?</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="radio" name="sf_travel" value="not" checked>
+                                    <span>{$lang.not}</span>
+                                </label>
+                                <label style="margin-left:10px;">
+                                    <input type="radio" name="sf_travel" value="yeah">
+                                    <span>{$lang.yeah}</span>
+                                </label>
+                            </div>
+                        </fieldset>
+                        <fieldset class="fields-group hidden" data-hidden="sf_travel_countries">
+                            <div class="text">
+                                <textarea name="sf_travel_countries" placeholder="Escribe los países a los que haz viajado"></textarea>
+                            </div>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="title">
+                                <p>¿En los últimos 14 días haz tenido contácto con personas que han tenido cualquiera de los síntomas anteriores o que tenga sospecha de COVID-19?</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="radio" name="sf_contact" value="not" checked>
+                                    <span>{$lang.not}</span>
+                                </label>
+                                <label style="margin-left:10px;">
+                                    <input type="radio" name="sf_contact" value="yeah">
+                                    <span>{$lang.yeah}</span>
+                                </label>
+                            </div>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="title">
+                                <p>¿Haz tenido COVID-19?</p>
+                            </div>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="radio" name="sf_covid" value="not" checked>
+                                    <span>{$lang.not}</span>
+                                </label>
+                                <label style="margin-left:10px;">
+                                    <input type="radio" name="sf_covid" value="yeah">
+                                    <span>{$lang.yeah}</span>
+                                </label>
+                            </div>
+                        </fieldset>
+                        <fieldset class="fields-group hidden" data-hidden="sf_covid_time">
+                            <div class="text">
+                                <input type="text" name="sf_covid_time" placeholder="Escribe hace cuanto tiempo tuviste COVID-19">
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div data-step>
+                        <h4>{$lang.what_your_contact}</h4>
+                        <p>{$lang.what_your_contact_description}</p>
+                        <fieldset class="fields-group">
+                            <div class="text">
+                                <input type="email" name="email" placeholder="{$lang.write_your_email}">
+                            </div>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="text">
+                                <select name="phone_country">
+                                    <option value="" class="hidden">{$lang.select_your_phone_country}</option>
+                                    <?php foreach (Functions::countries() as $value) : ?>
+                                        <option value="<?php echo $value['lada']; ?>"><?php echo $value['name'][Session::get_value('vkye_lang')] . ' +' . $value['lada']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="text">
+                                <input type="number" name="phone_number" placeholder="{$lang.write_your_phone}">
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div data-step>
+                        <h4>{$lang.what_your_test}</h4>
+                        <fieldset class="fields-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="radio" name="type" value="covid_pcr" checked>
+                                    <span>PCR (<?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['pcr']['usd'], 'USD') . ' - ' .  Currency::format($global['collector']['authentication']['taker']['prices']['covid']['pcr']['mxn'], 'MXN'); ?>)</span>
+                                </label>
+                            </div>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="radio" name="type" value="covid_an">
+                                    <span>{$lang.antigen} (<?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['an']['usd'], 'USD') . ' - ' .  Currency::format($global['collector']['authentication']['taker']['prices']['covid']['an']['mxn'], 'MXN'); ?>)</span>
+                                </label>
+                            </div>
+                        </fieldset>
+                        <fieldset class="fields-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="radio" name="type" value="covid_ac">
+                                    <span>{$lang.anticorps} (<?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['ac']['usd'], 'USD') . ' - ' .  Currency::format($global['collector']['authentication']['taker']['prices']['covid']['ac']['mxn'], 'MXN'); ?>)</span>
+                                </label>
+                            </div>
+                        </fieldset>
+                    </div>
                     <div class="accept_terms">
                         <div class="caption">
                             <p>{$lang.accept_terms_1} <?php echo $global['laboratory']['business']; ?> {$lang.accept_terms_2}</p>
@@ -198,11 +428,6 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
                             <button type="submit" class="success">{$lang.end_and_send}</button>
                         </div>
                     </fieldset>
-                    <div class="share">
-                        <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
-                        <a href="tel:<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
-                        <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.know_our_laboratory}" data-url="https://<?php echo $global['laboratory']['website']; ?>"><i class="fas fa-share-alt"></i>{$lang.share}</a>
-                    </div>
                 </form>
             <?php endif; ?>
         <?php endif; ?>

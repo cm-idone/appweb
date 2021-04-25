@@ -617,6 +617,9 @@ class Laboratory_controller extends Controller
 				            if (Validations::empty($_POST['lastname']) == false)
 				                array_push($errors, ['lastname','{$lang.dont_leave_this_field_empty}']);
 
+							if (Validations::empty($_POST['sex']) == false)
+				                array_push($errors, ['sex','{$lang.dont_leave_this_field_empty}']);
+
 				            if (Validations::empty($_POST['birth_date_year']) == false)
 				                array_push($errors, ['birth_date_year','{$lang.dont_leave_this_field_empty}']);
 
@@ -631,18 +634,42 @@ class Laboratory_controller extends Controller
 				            else if (Validations::number('int', $_POST['age']) == false)
 				                array_push($errors, ['age','{$lang.invalid_field}']);
 
-				            if (Validations::empty($_POST['sex']) == false)
-				                array_push($errors, ['sex','{$lang.dont_leave_this_field_empty}']);
+							if (Validations::empty($_POST['nationality']) == false)
+				                array_push($errors, ['nationality','{$lang.dont_leave_this_field_empty}']);
 
 							if (Validations::empty($_POST['ife']) == false)
 				                array_push($errors, ['ife','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::equals($_POST['sex'], 'female') AND Validations::empty($_POST['sf_pregnant']) == false)
+				                array_push($errors, ['sf_pregnant','{$lang.dont_leave_this_field_empty}']);
+
+							if (!empty($_POST['sf_symptoms']) AND Validations::empty($_POST['sf_symptoms_time']) == false)
+				                array_push($errors, ['sf_symptoms_time','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['sf_travel']) == false)
+				                array_push($errors, ['sf_travel','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::equals($_POST['sf_travel'], 'yeah') == true AND Validations::empty($_POST['sf_travel_countries']) == false)
+				                array_push($errors, ['sf_travel_countries','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['sf_contact']) == false)
+				                array_push($errors, ['sf_contact','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['sf_covid']) == false)
+				                array_push($errors, ['sf_covid','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::equals($_POST['sf_covid'], 'yeah') == true AND Validations::empty($_POST['sf_covid_time']) == false)
+				                array_push($errors, ['sf_covid_time','{$lang.dont_leave_this_field_empty}']);
 
 							if (Validations::empty($_POST['email']) == false)
 								array_push($errors, ['email','{$lang.dont_leave_this_field_empty}']);
 							else if (Validations::email($_POST['email']) == false)
 								array_push($errors, ['email','{$lang.invalid_field}']);
 
-							if (Validations::empty([$_POST['phone_country'],$_POST['phone_number']]) == false)
+							if (Validations::empty($_POST['phone_country']) == false)
+								array_push($errors, ['phone_country','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['phone_number']) == false)
 								array_push($errors, ['phone_number','{$lang.dont_leave_this_field_empty}']);
 							else if (Validations::number('int', $_POST['phone_number']) == false)
 								array_push($errors, ['phone_number','{$lang.invalid_field}']);
@@ -656,6 +683,7 @@ class Laboratory_controller extends Controller
 								$_POST['firstname'] = ucwords($_POST['firstname']);
 								$_POST['lastname'] = ucwords($_POST['lastname']);
 								$_POST['birth_date'] = $_POST['birth_date_year'] . '-' . $_POST['birth_date_month'] . '-' . $_POST['birth_date_day'];
+								$_POST['sf_symptoms'] = !empty($_POST['sf_symptoms']) ? $_POST['sf_symptoms'] : [];
 								$_POST['email'] = strtolower($_POST['email']);
 								$_POST['qr']['filename'] = 'covid_qr_' . $_POST['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
 								$_POST['laboratory'] = $global['laboratory'];
