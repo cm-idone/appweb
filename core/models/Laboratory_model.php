@@ -525,7 +525,7 @@ class Laboratory_model extends Model
 			</table>
 			<table style="width:100%;margin:0px;padding:0px;border:0px;background-color:#fff;">
 			    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
-			        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#212121;">' . Languages::email('alert_pdf_covid')[$data['lang']] . ' <strong style="color:#f44336;">' . Languages::email('accept_terms_1')[$data['lang']] . ' ' . $global['custody_chain']['laboratory_business'] . ' ' . Languages::email('accept_terms_2')[$data['lang']] . '</strong></td>
+			        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:justify;color:#212121;">' . Languages::email('alert_pdf_covid')[$data['lang']] . ' <strong style="color:#f44336;">' . Languages::email('accept_terms_1')[$data['lang']] . ' ' . $data['custody_chain']['laboratory_business'] . ' ' . Languages::email('accept_terms_2')[$data['lang']] . '</strong></td>
 			    </tr>
 				<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 			        <td style="width:100%;margin:0px;padding:10px;border:0px;box-sizing:border-box;font-size:12px;font-weight:600;text-align:center;color:' . $data['custody_chain']['laboratory_colors']['second'] . ';">' . $data['custody_chain']['laboratory_phone'] . ' | ' . $data['custody_chain']['laboratory_email'] . ' | ' . $data['custody_chain']['laboratory_website'] . '</td>
@@ -540,14 +540,25 @@ class Laboratory_model extends Model
 			'contact' => (empty($data['custody_chain']['account']) AND ($data['custody_chain']['type'] == 'covid_pcr' OR $data['custody_chain']['type'] == 'covid_an' OR $data['custody_chain']['type'] == 'covid_ac')) ? json_encode([
 				'firstname' => $data['firstname'],
 				'lastname' => $data['lastname'],
+				'sex' => $data['sex'],
 				'birth_date' => $data['birth_date'],
 				'age' => $data['age'],
-				'sex' => $data['sex'],
+				'nationality' => $data['nationality'],
 				'ife' => $data['ife'],
 				'email' => $data['email'],
 				'phone' => [
 					'country' => $data['phone_country'],
 					'number' => $data['phone_number']
+				],
+				'sf' => [
+					'pregnant' => $data['custody_chain']['contact']['sf']['pregnant'],
+					'sf_symptoms' => $data['custody_chain']['contact']['sf']['symptoms'],
+					'sf_symptoms_time' => $data['custody_chain']['contact']['sf']['symptoms_time'],
+					'sf_travel' => $data['custody_chain']['contact']['sf']['travel'],
+					'sf_travel_countries' => $data['custody_chain']['contact']['sf']['travel_countries'],
+					'sf_contact' => $data['custody_chain']['contact']['sf']['contact'],
+					'sf_covid' => $data['custody_chain']['contact']['sf']['covid'],
+					'sf_covid_time' => $data['custody_chain']['contact']['sf']['covid_time']
 				]
 			]) : null,
 			'reason' => $data['reason'],

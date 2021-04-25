@@ -29,18 +29,18 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                 <div class="row">
                     <div class="span4">
                         <div class="text">
-                            <input type="text" name="lastname" value="<?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? $global['custody_chain']['contact']['lastname'] : $global['custody_chain']['employee_lastname']); ?>" <?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? '' : 'disabled'); ?>>
-                        </div>
-                        <div class="title">
-                            <h6>{$lang.lastname}</h6>
-                        </div>
-                    </div>
-                    <div class="span4">
-                        <div class="text">
                             <input type="text" name="firstname" value="<?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? $global['custody_chain']['contact']['firstname'] : $global['custody_chain']['employee_firstname']); ?>" <?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? '' : 'disabled'); ?>>
                         </div>
                         <div class="title">
                             <h6>{$lang.firstname}</h6>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="text">
+                            <input type="text" name="lastname" value="<?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? $global['custody_chain']['contact']['lastname'] : $global['custody_chain']['employee_lastname']); ?>" <?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? '' : 'disabled'); ?>>
+                        </div>
+                        <div class="title">
+                            <h6>{$lang.lastname}</h6>
                         </div>
                     </div>
                     <div class="span4">
@@ -87,7 +87,15 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
             <?php if (empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) : ?>
                 <fieldset class="fields-group">
                     <div class="row">
-                        <div class="span4">
+                        <div class="span3">
+                            <div class="text">
+                                <input type="text" name="nationality" value="<?php echo $global['custody_chain']['contact']['nationality']; ?>">
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.nationality}</h6>
+                            </div>
+                        </div>
+                        <div class="span3">
                             <div class="text">
                                 <input type="email" name="email" value="<?php echo $global['custody_chain']['contact']['email']; ?>">
                             </div>
@@ -95,7 +103,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                                 <h6>{$lang.email}</h6>
                             </div>
                         </div>
-                        <div class="span4">
+                        <div class="span3">
                             <div class="compound st-1-left">
                                 <select name="phone_country">
                                     <?php foreach (Functions::countries() as $value) : ?>
@@ -108,7 +116,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                                 <h6>{$lang.phone}</h6>
                             </div>
                         </div>
-                        <div class="span4">
+                        <div class="span3">
                             <div class="text">
                                 <select name="lang">
                                     <option value="es" <?php echo (($global['custody_chain']['lang'] == 'es') ? 'selected' : '') ?>>{$lang.es}</option>
