@@ -154,7 +154,6 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                     <figure>
                         <img src="{$path.uploads}<?php echo $global['custody_chain']['qr']; ?>">
                     </figure>
-                    <a href="{$path.uploads}<?php echo $global['custody_chain']['pdf']; ?>" download="certificate.pdf">{$lang.download_certificate_pdf}</a>
                 <?php endif; ?>
                 <div class="share">
                     <div>
@@ -173,6 +172,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                     <h2><?php echo $global['custody_chain']['chemical_name']; ?></h2>
                     <h3>{$lang.this_certificate_available_by}</h3>
                 </div>
+                <?php if (Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) : ?>
+                    <a href="{$path.uploads}<?php echo $global['custody_chain']['pdf']; ?>" download="certificate.pdf">{$lang.download_certificate_pdf}</a>
+                <?php endif; ?>
             <?php endif; ?>
         <?php endif; ?>
     </div>
