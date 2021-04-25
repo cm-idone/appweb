@@ -179,7 +179,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                     <td><?php echo (($global['custody_chain']['contact']['sf']['travel'] == 'yeah') ? $global['custody_chain']['contact']['sf']['travel_countries'] : '{$lang.not}') ?></td>
                 </tr>
                 <tr>
-                    <td>{$lang.covid}:</td>
+                    <td>{$lang.prev_covid}:</td>
                     <td>{$lang.<?php echo $global['custody_chain']['contact']['sf']['covid']; ?>}</td>
                 </tr>
                 <tr>
