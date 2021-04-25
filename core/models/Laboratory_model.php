@@ -43,13 +43,13 @@ class Laboratory_model extends Model
                 ],
 				'sf' => [
 					'pregnant' => $data['sf_pregnant'],
-					'sf_symptoms' => $data['sf_symptoms'],
-					'sf_symptoms_time' => $data['sf_symptoms_time'],
-					'sf_travel' => $data['sf_travel'],
-					'sf_travel_countries' => $data['sf_travel_countries'],
-					'sf_contact' => $data['sf_contact'],
-					'sf_covid' => $data['sf_covid'],
-					'sf_covid_time' => $data['sf_covid_time']
+					'symptoms' => $data['sf_symptoms'],
+					'symptoms_time' => $data['sf_symptoms_time'],
+					'travel' => $data['sf_travel'],
+					'travel_countries' => $data['sf_travel_countries'],
+					'contact' => $data['sf_contact'],
+					'covid' => $data['sf_covid'],
+					'covid_time' => $data['sf_covid_time']
 				]
             ]) : null,
             'type' => $data['type'],
@@ -552,13 +552,13 @@ class Laboratory_model extends Model
 				],
 				'sf' => [
 					'pregnant' => $data['custody_chain']['contact']['sf']['pregnant'],
-					'sf_symptoms' => $data['custody_chain']['contact']['sf']['symptoms'],
-					'sf_symptoms_time' => $data['custody_chain']['contact']['sf']['symptoms_time'],
-					'sf_travel' => $data['custody_chain']['contact']['sf']['travel'],
-					'sf_travel_countries' => $data['custody_chain']['contact']['sf']['travel_countries'],
-					'sf_contact' => $data['custody_chain']['contact']['sf']['contact'],
-					'sf_covid' => $data['custody_chain']['contact']['sf']['covid'],
-					'sf_covid_time' => $data['custody_chain']['contact']['sf']['covid_time']
+					'symptoms' => $data['custody_chain']['contact']['sf']['symptoms'],
+					'symptoms_time' => $data['custody_chain']['contact']['sf']['symptoms_time'],
+					'travel' => $data['custody_chain']['contact']['sf']['travel'],
+					'travel_countries' => $data['custody_chain']['contact']['sf']['travel_countries'],
+					'contact' => $data['custody_chain']['contact']['sf']['contact'],
+					'covid' => $data['custody_chain']['contact']['sf']['covid'],
+					'covid_time' => $data['custody_chain']['contact']['sf']['covid_time']
 				]
 			]) : null,
 			'reason' => $data['reason'],
