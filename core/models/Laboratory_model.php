@@ -779,23 +779,8 @@ class Laboratory_model extends Model
 		return $query;
 	}
 
-	public function read_laboratory($path, $default = false)
+	public function read_laboratory($path)
 	{
-		$where = [];
-
-		if ($default == true)
-		{
-			$where = [
-				'default' => true
-			];
-		}
-		else
-		{
-			$where = [
-				'path' => $path
-			];
-		}
-
 		$query = System::decode_json_to_array($this->database->select('system_laboratories', [
 			'id',
 			'avatar',
@@ -811,7 +796,9 @@ class Laboratory_model extends Model
             'time_zone',
             'colors',
             'blocked'
-        ], $where));
+        ], [
+			'path' => $path
+		]));
 
 		return !empty($query) ? $query[0] : null;
 	}
