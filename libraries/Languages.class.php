@@ -71,9 +71,9 @@ class Languages
                 'es' => 'Reporte de resultados',
                 'en' => 'Results report'
             ],
-            'marbu_laboratory_analisys' => [
-                'es' => 'Laboratorio de análisis clinicos Marbu',
-                'en' => 'Marbu clinical analysis laboratory'
+            'laboratory_analisys' => [
+                'es' => 'Laboratorio de análisis clinicos',
+                'en' => 'Clinical analysis laboratory'
             ],
             'n_petition' => [
                 'es' => 'N. petición',

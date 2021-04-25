@@ -12,50 +12,40 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
 <main class="workspace unmodbar">
     <article class="scanner-4 create">
         <header>
-            <figure>
-                <img src="{$path.images}marbu_logotype_color_circle.png">
-            </figure>
-            <h1>{$lang.custody_chain} | {$lang.<?php echo $global['custody_chain']['type']; ?>} | {$lang.token}: <?php echo $global['custody_chain']['token']; ?></h1>
-            <figure>
-                <img src="<?php echo (!empty(Session::get_value('vkye_account')['avatar']) ? '{$path.uploads}' . Session::get_value('vkye_account')['avatar'] : '{$path.images}logotype_color.png'); ?>">
-            </figure>
+            <h1>{$lang.custody_chain}</h1>
         </header>
         <form name="update_custody_chain">
             <p>{$lang.custody_chain_alert_1}</p>
             <h2>{$lang.donor_identification}</h2>
             <fieldset class="fields-group">
+                <div class="text">
+                    <input type="text" value="<?php echo (empty($global['custody_chain']['account']) ? $global['custody_chain']['laboratory_name'] . ' | ' . $global['custody_chain']['taker_name'] . ' | ' . $global['custody_chain']['collector_name'] : $global['custody_chain']['account_name']); ?>" disabled>
+                </div>
+                <div class="title">
+                    <h6>{$lang.institution}</h6>
+                </div>
+            </fieldset>
+            <fieldset class="fields-group">
                 <div class="row">
-                    <div class="span6">
+                    <div class="span4">
                         <div class="text">
-                            <input type="text" name="lastname" value="<?php echo ((($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee'])) ? $global['custody_chain']['contact']['lastname'] : $global['custody_chain']['employee_lastname']); ?>" <?php echo ((($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee'])) ? '' : 'disabled'); ?>>
+                            <input type="text" name="lastname" value="<?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? $global['custody_chain']['contact']['lastname'] : $global['custody_chain']['employee_lastname']); ?>" <?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? '' : 'disabled'); ?>>
                         </div>
                         <div class="title">
                             <h6>{$lang.lastname}</h6>
                         </div>
                     </div>
-                    <div class="span6">
+                    <div class="span4">
                         <div class="text">
-                            <input type="text" name="firstname" value="<?php echo ((($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee'])) ? $global['custody_chain']['contact']['firstname'] : $global['custody_chain']['employee_firstname']); ?>" <?php echo ((($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee'])) ? '' : 'disabled'); ?>>
+                            <input type="text" name="firstname" value="<?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? $global['custody_chain']['contact']['firstname'] : $global['custody_chain']['employee_firstname']); ?>" <?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? '' : 'disabled'); ?>>
                         </div>
                         <div class="title">
                             <h6>{$lang.firstname}</h6>
                         </div>
                     </div>
-                </div>
-            </fieldset>
-            <fieldset class="fields-group">
-                <div class="row">
-                    <div class="span6">
+                    <div class="span4">
                         <div class="text">
-                            <input type="text" value="<?php echo $global['custody_chain']['account_name']; ?>" disabled>
-                        </div>
-                        <div class="title">
-                            <h6>{$lang.institution}</h6>
-                        </div>
-                    </div>
-                    <div class="span6">
-                        <div class="text">
-                            <input type="text" name="ife" value="<?php echo ((($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee'])) ? $global['custody_chain']['contact']['ife'] : $global['custody_chain']['employee_ife']); ?>" <?php echo ((($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee'])) ? '' : 'disabled'); ?>>
+                            <input type="text" name="ife" value="<?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? $global['custody_chain']['contact']['ife'] : $global['custody_chain']['employee_ife']); ?>" <?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? '' : 'disabled'); ?>>
                         </div>
                         <div class="title">
                             <h6>{$lang.id}</h6>
@@ -67,7 +57,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                 <div class="row">
                     <div class="span4">
                         <div class="text">
-                            <input type="date" name="birth_date" value="<?php echo (empty($global['custody_chain']['employee']) ? $global['custody_chain']['contact']['birth_date'] : $global['custody_chain']['employee_birth_date']); ?>" <?php echo (empty($global['custody_chain']['employee']) ? '' : 'disabled'); ?>>
+                            <input type="date" name="birth_date" value="<?php echo (empty($global['custody_chain']['account']) ? $global['custody_chain']['contact']['birth_date'] : $global['custody_chain']['employee_birth_date']); ?>" <?php echo (empty($global['custody_chain']['account']) ? '' : 'disabled'); ?>>
                         </div>
                         <div class="title">
                             <h6>{$lang.birth_date}</h6>
@@ -75,7 +65,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                     </div>
                     <div class="span4">
                         <div class="text">
-                            <input type="number" name="age" value="<?php echo ((($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee'])) ? $global['custody_chain']['contact']['age'] : Functions::format_age($global['custody_chain']['employee_birth_date'], true)); ?>" <?php echo ((($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee'])) ? '' : 'disabled'); ?>>
+                            <input type="number" name="age" value="<?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? $global['custody_chain']['contact']['age'] : Functions::format_age($global['custody_chain']['employee_birth_date'], true)); ?>" <?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? '' : 'disabled'); ?>>
                         </div>
                         <div class="title">
                             <h6>{$lang.age}</h6>
@@ -83,9 +73,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                     </div>
                     <div class="span4">
                         <div class="text">
-                            <select name="sex" <?php echo ((($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee'])) ? '' : 'disabled') ?>>
-                                <option value="male" <?php echo ((($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee'])) ? (($global['custody_chain']['contact']['sex'] == 'male') ? 'selected' : '') : (($global['custody_chain']['employee_sex'] == 'male') ? 'selected' : '')); ?>>{$lang.male}</option>
-                                <option value="female" <?php echo ((($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee'])) ? (($global['custody_chain']['contact']['sex'] == 'female') ? 'selected' : '') : (($global['custody_chain']['employee_sex'] == 'female') ? 'selected' : '')); ?>>{$lang.female}</option>
+                            <select name="sex" <?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? '' : 'disabled') ?>>
+                                <option value="male" <?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? (($global['custody_chain']['contact']['sex'] == 'male') ? 'selected' : '') : (($global['custody_chain']['employee_sex'] == 'male') ? 'selected' : '')); ?>>{$lang.male}</option>
+                                <option value="female" <?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? (($global['custody_chain']['contact']['sex'] == 'female') ? 'selected' : '') : (($global['custody_chain']['employee_sex'] == 'female') ? 'selected' : '')); ?>>{$lang.female}</option>
                             </select>
                         </div>
                         <div class="title">
@@ -94,7 +84,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                     </div>
                 </div>
             </fieldset>
-            <?php if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee'])) : ?>
+            <?php if (empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) : ?>
                 <fieldset class="fields-group">
                     <div class="row">
                         <div class="span4">
@@ -120,23 +110,15 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                         </div>
                         <div class="span4">
                             <div class="text">
-                                <input type="text" name="travel_to" value="<?php echo $global['custody_chain']['contact']['travel_to']; ?>">
+                                <select name="lang">
+                                    <option value="es" <?php echo (($global['custody_chain']['lang'] == 'es') ? 'selected' : '') ?>>{$lang.es}</option>
+                                    <option value="en" <?php echo (($global['custody_chain']['lang'] == 'en') ? 'selected' : '') ?>>{$lang.en}</option>
+                                </select>
                             </div>
                             <div class="title">
-                                <h6>{$lang.travel_to}</h6>
+                                <h6>{$lang.language}</h6>
                             </div>
                         </div>
-                    </div>
-                </fieldset>
-                <fieldset class="fields-group">
-                    <div class="text">
-                        <select name="lang">
-                            <option value="es" <?php echo (($global['custody_chain']['lang'] == 'es') ? 'selected' : '') ?>>{$lang.es}</option>
-                            <option value="en" <?php echo (($global['custody_chain']['lang'] == 'en') ? 'selected' : '') ?>>{$lang.en}</option>
-                        </select>
-                    </div>
-                    <div class="title">
-                        <h6>{$lang.language}</h6>
                     </div>
                 </fieldset>
             <?php endif; ?>
@@ -450,7 +432,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                     </div>
                 </fieldset>
             <?php endif; ?>
-            <?php if (($global['custody_chain']['type'] == 'alcoholic' OR $global['custody_chain']['type'] == 'antidoping') OR (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND !empty($global['custody_chain']['employee']))) : ?>
+            <?php if (($global['custody_chain']['type'] == 'alcoholic' OR $global['custody_chain']['type'] == 'antidoping') OR (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND !empty($global['custody_chain']['account']))) : ?>
                 <h2>{$lang.authorization_donor}</h2>
                 <p>{$lang.custody_chain_alert_<?php echo $global['custody_chain']['type']; ?>_1}</p>
                 <fieldset class="fields-group">
@@ -533,7 +515,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
             <fieldset class="fields-group">
                 <div class="button">
                     <a class="alert" data-action="go_back"><i class="fas fa-times"></i></a>
-                    <?php if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND empty($global['custody_chain']['employee'])) : ?>
+                    <?php if (empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) : ?>
                         <button type="submit" class="auto warning" data-save="only_save"><i class="fas fa-save"></i>{$lang.only_save}</button>
                         <button type="submit" class="auto success" data-save="save_and_send"><i class="fas fa-envelope"></i>{$lang.save_and_send}</button>
                     <?php else : ?>
