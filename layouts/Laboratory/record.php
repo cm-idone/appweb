@@ -17,6 +17,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
         <h2 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['rfc']; ?></h2>
         <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['address']['first']; ?></h3>
         <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['address']['second']; ?></h3>
+        <?php if ($global['render'] == 'go' AND empty(System::temporal('get', 'record', 'covid'))) : ?>
+            <h3><a href="<?php echo Language::get_lang_url('es'); ?>"><img src="https://cdn.codemonkey.com.mx/monkeyboard/assets/images/es.png"></a><a href="<?php echo Language::get_lang_url('en'); ?>"><img src="https://cdn.codemonkey.com.mx/monkeyboard/assets/images/en.png"></a></h3>
+        <?php endif; ?>
     </div>
 </header>
 <main class="laboratory">
