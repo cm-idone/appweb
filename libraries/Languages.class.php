@@ -247,9 +247,13 @@ class Languages
                 'es' => 'Este informe no podrá reproducirse parcialmente sin autorización del laboratorio que lo emite. Este documento se dirige a su destinatario y contiene información confidencial. Queda notificado que la utilización, divulgación y/o copias sin autorización está prohibido en virtud de la legislación vigente.',
                 'en' => 'This report may not be partially reproduced without authorization from the issuing laboratory. This document is addressed to its recipient and contains confidential information. You are hereby notified that unauthorized use, disclosure and / or copies are prohibited under current legislation.'
             ],
-            'accept_terms' => [
-                'es' => 'La captura de datos fue responsabilidad del cliente. Marbu Salud S.A. de C.V. no se hace responsable por cualquier percance producido por la mal captura de estos datos. La corrección de datos tendrá un costo extra.',
-                'en' => 'Data capture was responsibility of the customer. Marbu Salud S.A. de C.V. It is not responsible for any mishap produced by the wrong capture of this data. Data correction will cost extra.'
+            'accept_terms_1' => [
+                'es' => 'La captura de datos fue responsabilidad del cliente.',
+                'en' => 'Data capture was responsibility of the customer.'
+            ],
+            'accept_terms_2' => [
+                'es' => 'no se hace responsable por cualquier percance producido por la mala captura de los mismos. La corrección de dichos datos tendrá un costo extra.',
+                'en' => 'It is not responsible for any mishap produced by the bad capture of the same. The correction of said data will have an extra cost.'
             ],
             'power_by' => [
                 'es' => 'Power by',
