@@ -822,7 +822,7 @@ main.laboratory > div.results > p {
 main.laboratory > div.results > figure {
     width: 100%;
     margin-bottom: 20px;
-    border: 1px dashed #212121;
+    border: 1px dashed #bdbdbd;
     box-sizing: border-box;
 }
 
