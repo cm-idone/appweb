@@ -821,7 +821,7 @@ main.laboratory > div.results > p {
 
 main.laboratory > div.results > figure {
     width: 100%;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     border: 1px dashed #212121;
     box-sizing: border-box;
 }
@@ -836,7 +836,7 @@ main.laboratory > div.results > a {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 40px;
+    margin-top: 40px;
     border-radius: 5px;
     background-color: #009688;
     font-size: 16px;
