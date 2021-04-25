@@ -22,19 +22,19 @@ class Urls_registered_vkye
                 'method' => 'index'
             ],
             '/laboratory/%param%' => [
-                'controller' => 'Laboratory',
+                'controller' => 'Laboratory', // Pendiente
                 'method' => 'index'
             ],
             '/laboratory/control' => [
-                'controller' => 'Laboratory',
+                'controller' => 'Laboratory', // Pendiente
                 'method' => 'control'
             ],
             '/laboratory/create/%param%/%param%' => [
-                'controller' => 'Laboratory',
+                'controller' => 'Laboratory', // Pendiente
                 'method' => 'create'
             ],
             '/laboratory/update/%param%' => [
-                'controller' => 'Laboratory',
+                'controller' => 'Laboratory', // Pendiente
                 'method' => 'update'
             ],
             '/%param%/authentication/%param%' => [
@@ -58,7 +58,7 @@ class Urls_registered_vkye
                 'method' => 'index'
             ],
             '/employees/profile/%param%' => [
-                'controller' => 'Employees',
+                'controller' => 'Employees', // Pendiente
                 'method' => 'profile'
             ],
             '/locations' => [

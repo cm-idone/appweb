@@ -23,17 +23,39 @@ $(document).ready(function()
         open_form_modal('filter', $('[data-modal="' + filter_action + '"]'));
     });
 
+    $('[name="own"]').on('change', function()
+    {
+        if ($(this).val() == 'account')
+        {
+            $('[name="taker"]').val('all');
+            $('[name="taker"]').attr('disabled', true);
+            $('[name="collector"]').val('all');
+            $('[name="collector"]').attr('disabled', true);
+            $('[name="sended_status"]').val('all');
+            $('[name="sended_status"]').attr('disabled', true);
+        }
+        else
+        {
+            $('[name="taker"]').attr('disabled', false);
+            $('[name="collector"]').attr('disabled', false);
+
+            if ($('[name="deleted_status"]').val() != 'deleted')
+                $('[name="sended_status"]').attr('disabled', false);
+        }
+    });
+
     $('[name="deleted_status"]').on('change', function()
     {
         if ($(this).val() == 'deleted')
+        {
             $('[name="sended_status"]').val('all');
-    });
-
-    $('[data-modal="' + filter_action + '"]').modal().onCancel(function()
-    {
-        filter = false;
-
-        $('[data-modal="' + filter_action + '"]').find('form').submit();
+            $('[name="sended_status"]').attr('disabled', true);
+        }
+        else
+        {
+            if ($('[name="own"]').val() != 'account')
+                $('[name="sended_status"]').attr('disabled', false);
+        }
     });
 
     $('[data-modal="' + filter_action + '"]').find('form').on('submit', function(event)

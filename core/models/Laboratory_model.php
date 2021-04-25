@@ -45,18 +45,18 @@ class Laboratory_model extends Model
             'reason' => ($record == true) ? 'random' : $data['reason'],
 			'start_process' => ($record == true) ? Dates::current_date() : (($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an' OR $data['type'] == 'covid_ac') ? $data['start_process'] : null),
 			'end_process' => ($record == true) ? null : (($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an' OR $data['type'] == 'covid_ac') ? $data['end_process'] : null),
-			'results' => ($record == false AND $data['type'] == 'alcoholic') ? json_encode([
-                '1' => !empty($data['test_1']) ? $data['test_1'] : '',
-                '2' => !empty($data['test_2']) ? $data['test_2'] : '',
-                '3' => !empty($data['test_3']) ? $data['test_3'] : ''
-            ]) : (($record == false AND $data['type'] == 'antidoping') ? json_encode([
-                'COC' => !empty($data['test_COC']) ? $data['test_COC'] : '',
-                'THC' => !empty($data['test_THC']) ? $data['test_THC'] : '',
-                'MET' => !empty($data['test_MET']) ? $data['test_MET'] : '',
-                'ANF' => !empty($data['test_ANF']) ? $data['test_ANF'] : '',
-                'BZD' => !empty($data['test_BZD']) ? $data['test_BZD'] : '',
-                'OPI' => !empty($data['test_OPI']) ? $data['test_OPI'] : '',
-                'BAR' => !empty($data['test_BAR']) ? $data['test_BAR'] : ''
+			'results' => ($data['type'] == 'alcoholic') ? json_encode([
+                '1' => ($record == true) ? '' : (!empty($data['test_1']) ? $data['test_1'] : ''),
+                '2' => ($record == true) ? '' : (!empty($data['test_2']) ? $data['test_2'] : ''),
+                '3' => ($record == true) ? '' : (!empty($data['test_3']) ? $data['test_3'] : '')
+            ]) : (($data['type'] == 'antidoping') ? json_encode([
+                'COC' => ($record == true) ? '' : (!empty($data['test_COC']) ? $data['test_COC'] : ''),
+                'THC' => ($record == true) ? '' : (!empty($data['test_THC']) ? $data['test_THC'] : ''),
+                'MET' => ($record == true) ? '' : (!empty($data['test_MET']) ? $data['test_MET'] : ''),
+                'ANF' => ($record == true) ? '' : (!empty($data['test_ANF']) ? $data['test_ANF'] : ''),
+                'BZD' => ($record == true) ? '' : (!empty($data['test_BZD']) ? $data['test_BZD'] : ''),
+                'OPI' => ($record == true) ? '' : (!empty($data['test_OPI']) ? $data['test_OPI'] : ''),
+                'BAR' => ($record == true) ? '' : (!empty($data['test_BAR']) ? $data['test_BAR'] : '')
             ]) : (($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an') ? json_encode([
 				'result' => ($record == true) ? '' : $data['test_result'],
 				'unity' => ($record == true) ? '' : $data['test_unity'],
@@ -110,48 +110,64 @@ class Laboratory_model extends Model
 
 		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up')
 		{
-			$accounts = [];
-
-			foreach (Session::get_value('vkye_user')['accounts'] as $value)
-				array_push($accounts, $value['id']);
-		}
-
-		if (!empty(System::temporal('get', 'laboratory', 'filter')))
-		{
-			$AND['custody_chains.account'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? ((System::temporal('get', 'laboratory', 'filter')['account'] == 'all') ? $accounts : System::temporal('get', 'laboratory', 'filter')['account']) : Session::get_value('vkye_account')['id'];
-			$AND['custody_chains.type'] = ($type == 'covid') ? ((System::temporal('get', 'laboratory', 'filter')['type'] == 'all') ? ['covid_pcr','covid_an','covid_ac'] : System::temporal('get', 'laboratory', 'filter')['type']) : $type;
-			$AND['custody_chains.date[<>]'] = [System::temporal('get', 'laboratory', 'filter')['start_date'], System::temporal('get', 'laboratory', 'filter')['end_date']];
-			$AND['custody_chains.hour[<>]'] = [System::temporal('get', 'laboratory', 'filter')['start_hour'], System::temporal('get', 'laboratory', 'filter')['end_hour']];
-
-			if ($type == 'covid' AND System::temporal('get', 'laboratory', 'filter')['sended_status'] == 'not_sended')
-				$AND['custody_chains.closed'] = false;
-			else if ($type == 'covid' AND System::temporal('get', 'laboratory', 'filter')['sended_status'] == 'sended')
-				$AND['custody_chains.closed'] = true;
-
-			$AND['custody_chains.deleted'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? ((System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'deleted') ? true : false) : false;
+			if (System::temporal('get', 'laboratory', 'filter')['own'] == 'account')
+				$AND['custody_chains.account'] = Session::get_value('vkye_account')['id'];
+			else if (System::temporal('get', 'laboratory', 'filter')['own'] == 'laboratories')
+				$AND['custody_chains.laboratory[>=]'] = 1;
+			else if (System::temporal('get', 'laboratory', 'filter')['own'] >= 1)
+				$AND['custody_chains.laboratory'] = System::temporal('get', 'laboratory', 'filter')['own'];
 		}
 		else
+			$AND['custody_chains.account'] = Session::get_value('vkye_account')['id'];
+
+		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['taker'] != 'all')
+			$AND['custody_chains.taker'] = System::temporal('get', 'laboratory', 'filter')['taker'];
+
+		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['collector'] != 'all')
+			$AND['custody_chains.collector'] = System::temporal('get', 'laboratory', 'filter')['collector'];
+
+		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up')
 		{
-			$AND['custody_chains.account'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $accounts : Session::get_value('vkye_account')['id'];
-			$AND['custody_chains.type'] = ($type == 'covid') ? ['covid_pcr','covid_an','covid_ac'] : $type;
-			$AND['custody_chains.date[<>]'] = [Dates::past_date(Dates::current_date(), 1, 'days'), Dates::current_date()];
+			if (System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'not_deleted')
+				$AND['custody_chains.deleted'] = false;
+			else if (System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'deleted')
+				$AND['custody_chains.deleted'] = true;
+		}
+		else
 			$AND['custody_chains.deleted'] = false;
+
+		$AND['custody_chains.type'] = ($type == 'covid') ? ((System::temporal('get', 'laboratory', 'filter')['type'] == 'all') ? ['covid_pcr','covid_an','covid_ac'] : System::temporal('get', 'laboratory', 'filter')['type']) : $type;
+
+		if (Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep' OR (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'not_deleted'))
+		{
+			$AND['custody_chains.date[<>]'] = [System::temporal('get', 'laboratory', 'filter')['start_date'], System::temporal('get', 'laboratory', 'filter')['end_date']];
+			$AND['custody_chains.hour[<>]'] = [System::temporal('get', 'laboratory', 'filter')['start_hour'], System::temporal('get', 'laboratory', 'filter')['end_hour']];
+		}
+
+		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND (System::temporal('get', 'laboratory', 'filter')['own'] == 'laboratories' OR System::temporal('get', 'laboratory', 'filter')['own'] >= 1))
+		{
+			if (System::temporal('get', 'laboratory', 'filter')['sended_status'] == 'not_sended')
+				$AND['custody_chains.closed'] = false;
+			else if (System::temporal('get', 'laboratory', 'filter')['sended_status'] == 'sended')
+				$AND['custody_chains.closed'] = true;
 		}
 
 		$query = System::decode_json_to_array($this->database->select('custody_chains', [
-			'[>]accounts' => [
-				'account' => 'id'
-			],
 			'[>]employees' => [
 				'employee' => 'id'
 			],
-			'[>]users' => [
-				'user' => 'id'
-			]
+			'[>]system_laboratories' => [
+				'laboratory' => 'id'
+			],
+			'[>]system_takers' => [
+				'taker' => 'id'
+			],
+			'[>]system_collectors' => [
+				'collector' => 'id'
+			],
 		], [
 			'custody_chains.id',
-			'accounts.name(account_name)',
-			'accounts.path(account_path)',
+			'custody_chains.account',
 			'custody_chains.token',
 			'custody_chains.employee',
 			'employees.firstname(employee_firstname)',
@@ -159,13 +175,16 @@ class Laboratory_model extends Model
 			'custody_chains.contact',
 			'custody_chains.type',
 			'custody_chains.results',
+			'custody_chains.laboratory',
+			'system_laboratories.name(laboratory_name)',
+			'custody_chains.taker',
+			'system_takers.name(taker_name)',
+			'custody_chains.collector',
+			'system_collectors.name(collector_name)',
 			'custody_chains.date',
 			'custody_chains.hour',
 			'custody_chains.pdf',
 			'custody_chains.closed',
-			'custody_chains.user',
-			'users.firstname(user_firstname)',
-			'users.lastname(user_lastname)',
 			'custody_chains.deleted'
 		], [
 			'AND' => $AND,
@@ -733,8 +752,38 @@ class Laboratory_model extends Model
 		return $query;
 	}
 
-	public function read_laboratory($path)
+	public function read_laboratories()
 	{
+		$query = System::decode_json_to_array($this->database->select('system_laboratories', [
+			'id',
+            'name'
+        ], [
+            'blocked' => false,
+			'ORDER' => [
+				'name' => 'ASC'
+			]
+        ]));
+
+		return $query;
+	}
+
+	public function read_laboratory($path, $default = false)
+	{
+		$where = [];
+
+		if ($default == true)
+		{
+			$where = [
+				'default' => true
+			];
+		}
+		else
+		{
+			$where = [
+				'path' => $path
+			];
+		}
+
 		$query = System::decode_json_to_array($this->database->select('system_laboratories', [
 			'id',
 			'avatar',
@@ -750,11 +799,24 @@ class Laboratory_model extends Model
             'time_zone',
             'colors',
             'blocked'
-        ], [
-            'path' => $path
-        ]));
+        ], $where));
 
 		return !empty($query) ? $query[0] : null;
+	}
+
+	public function read_collectors()
+	{
+		$query = System::decode_json_to_array($this->database->select('system_collectors', [
+            'id',
+            'name'
+        ], [
+            'blocked' => false,
+			'ORDER' => [
+				'name' => 'ASC'
+			]
+        ]));
+
+		return $query;
 	}
 
 	public function read_collector($token)

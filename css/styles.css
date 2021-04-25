@@ -8,6 +8,21 @@ header.leftbar > nav > ul > li > a.logotype {
 }
 
 /* ------------------------------------------------------------- */
+/* Modbar rewrite
+/* ------------------------------------------------------------- */
+
+header.modbar > span.title {
+    width: auto;
+    height: 100%;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+    text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------- */
 /* Table's rewrite
 /* ------------------------------------------------------------- */
 

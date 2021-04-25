@@ -20,19 +20,16 @@ class Laboratory_controller extends Controller
 			{
 				$filter = System::temporal('get', 'laboratory', 'filter');
 
-				if ($_POST['filter'] == 'true')
-				{
-					$filter['account'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $_POST['account'] : '';
-					$filter['deleted_status'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $_POST['deleted_status'] : '';
-					$filter['type'] = ($params[0] == 'covid') ? $_POST['type'] : $params[0];
-					$filter['start_date'] = $_POST['start_date'];
-					$filter['end_date'] = $_POST['end_date'];
-					$filter['start_hour'] = $_POST['start_hour'];
-					$filter['end_hour'] = $_POST['end_hour'];
-					$filter['sended_status'] = ($params[0] == 'covid') ? $_POST['sended_status'] : '';
-				}
-				else if ($_POST['filter'] == 'false')
-					$filter = [];
+				$filter['own'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $_POST['own'] : 'account';
+				$filter['taker'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? (($_POST['own'] != 'account') ? $_POST['taker'] : 'all') : 'all';
+				$filter['collector'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? (($_POST['own'] != 'account') ? $_POST['collector'] : 'all') : 'all';
+				$filter['deleted_status'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $_POST['deleted_status'] : 'not_deleted';
+				$filter['type'] = ($params[0] == 'covid') ? $_POST['type'] : $params[0];
+				$filter['start_date'] = $_POST['start_date'];
+				$filter['end_date'] = $_POST['end_date'];
+				$filter['start_hour'] = $_POST['start_hour'];
+				$filter['end_hour'] = $_POST['end_hour'];
+				$filter['sended_status'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? (($_POST['own'] != 'account' AND $_POST['deleted_status'] != 'deleted') ? $_POST['sended_status'] : 'all') : 'all';
 
 				System::temporal('set_forced', 'laboratory', 'filter', $filter);
 
@@ -71,15 +68,29 @@ class Laboratory_controller extends Controller
 		{
 			define('_title', Configuration::$web_page . ' | {$lang.laboratory} | {$lang.' . $params[0] . '}');
 
-			// $this->model->sql();
-
 			if (System::temporal('get_if_exists', 'laboratory', 'filter') == false)
-				System::temporal('set_forced', 'laboratory', 'filter', []);
+			{
+				System::temporal('set_forced', 'laboratory', 'filter', [
+					'own' => (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? 'laboratories' : 'account',
+					'taker' => 'all',
+					'collector' => 'all',
+					'deleted_status' => 'not_deleted',
+					'type' => ($params[0] == 'covid') ? 'all' : $params[0],
+					'start_date' => Dates::past_date(Dates::current_date(), 1, 'days'),
+					'end_date' => Dates::current_date(),
+					'start_hour' => '00:00:00',
+					'end_hour' => '23:59:59',
+					'sended_status' => 'all'
+				]);
+			}
 
 			global $global;
 
 			$global['render'] = $params[0];
 			$global['custody_chains'] = $this->model->read_custody_chains($params[0]);
+			$global['laboratories'] = $this->model->read_laboratories();
+			$global['takers'] = $this->model->read_takers();
+			$global['collectors'] = $this->model->read_collectors();
 
 			$template = $this->view->render($this, 'index');
 
@@ -599,204 +610,216 @@ class Laboratory_controller extends Controller
 			{
 				if ($_POST['action'] == 'record')
 				{
-					if (isset($_POST['accept_terms']))
+					if ($global['collector']['authentication']['type'] == 'alcoholic')
+						print_r('Ok');
+					else if ($global['collector']['authentication']['type'] == 'antidoping')
+						print_r('Ok');
+					else if ($global['collector']['authentication']['type'] == 'covid')
 					{
-						$errors = [];
+						if (isset($_POST['accept_terms']))
+						{
+							$errors = [];
 
-			            if (Validations::empty($_POST['firstname']) == false)
-			                array_push($errors, ['firstname','{$lang.dont_leave_this_field_empty}']);
+				            if (Validations::empty($_POST['firstname']) == false)
+				                array_push($errors, ['firstname','{$lang.dont_leave_this_field_empty}']);
 
-			            if (Validations::empty($_POST['lastname']) == false)
-			                array_push($errors, ['lastname','{$lang.dont_leave_this_field_empty}']);
+				            if (Validations::empty($_POST['lastname']) == false)
+				                array_push($errors, ['lastname','{$lang.dont_leave_this_field_empty}']);
 
-			            if (Validations::empty($_POST['birth_date_year']) == false)
-			                array_push($errors, ['birth_date_year','{$lang.dont_leave_this_field_empty}']);
+				            if (Validations::empty($_POST['birth_date_year']) == false)
+				                array_push($errors, ['birth_date_year','{$lang.dont_leave_this_field_empty}']);
 
-			            if (Validations::empty($_POST['birth_date_month']) == false)
-			                array_push($errors, ['birth_date_month','{$lang.dont_leave_this_field_empty}']);
+				            if (Validations::empty($_POST['birth_date_month']) == false)
+				                array_push($errors, ['birth_date_month','{$lang.dont_leave_this_field_empty}']);
 
-			            if (Validations::empty($_POST['birth_date_day']) == false)
-			                array_push($errors, ['birth_date_day','{$lang.dont_leave_this_field_empty}']);
+				            if (Validations::empty($_POST['birth_date_day']) == false)
+				                array_push($errors, ['birth_date_day','{$lang.dont_leave_this_field_empty}']);
 
-			            if (Validations::empty($_POST['age']) == false)
-			                array_push($errors, ['age','{$lang.dont_leave_this_field_empty}']);
-			            else if (Validations::number('int', $_POST['age']) == false)
-			                array_push($errors, ['age','{$lang.invalid_field}']);
+				            if (Validations::empty($_POST['age']) == false)
+				                array_push($errors, ['age','{$lang.dont_leave_this_field_empty}']);
+				            else if (Validations::number('int', $_POST['age']) == false)
+				                array_push($errors, ['age','{$lang.invalid_field}']);
 
-			            if (Validations::empty($_POST['sex']) == false)
-			                array_push($errors, ['sex','{$lang.dont_leave_this_field_empty}']);
+				            if (Validations::empty($_POST['sex']) == false)
+				                array_push($errors, ['sex','{$lang.dont_leave_this_field_empty}']);
 
-						if (Validations::empty($_POST['ife']) == false)
-			                array_push($errors, ['ife','{$lang.dont_leave_this_field_empty}']);
+							if (Validations::empty($_POST['ife']) == false)
+				                array_push($errors, ['ife','{$lang.dont_leave_this_field_empty}']);
 
-						if (Validations::empty($_POST['email']) == false)
-							array_push($errors, ['email','{$lang.dont_leave_this_field_empty}']);
-						else if (Validations::email($_POST['email']) == false)
-							array_push($errors, ['email','{$lang.invalid_field}']);
+							if (Validations::empty($_POST['email']) == false)
+								array_push($errors, ['email','{$lang.dont_leave_this_field_empty}']);
+							else if (Validations::email($_POST['email']) == false)
+								array_push($errors, ['email','{$lang.invalid_field}']);
 
-						if (Validations::empty([$_POST['phone_country'],$_POST['phone_number']]) == false)
-							array_push($errors, ['phone_number','{$lang.dont_leave_this_field_empty}']);
-						else if (Validations::number('int', $_POST['phone_number']) == false)
-							array_push($errors, ['phone_number','{$lang.invalid_field}']);
+							if (Validations::empty([$_POST['phone_country'],$_POST['phone_number']]) == false)
+								array_push($errors, ['phone_number','{$lang.dont_leave_this_field_empty}']);
+							else if (Validations::number('int', $_POST['phone_number']) == false)
+								array_push($errors, ['phone_number','{$lang.invalid_field}']);
 
-						if (Validations::empty($_POST['type']) == false)
-							array_push($errors, ['type','{$lang.dont_leave_this_field_empty}']);
+							if (Validations::empty($_POST['type']) == false)
+								array_push($errors, ['type','{$lang.dont_leave_this_field_empty}']);
 
-			            if (empty($errors))
-			            {
-			                $_POST['token'] = System::generate_random_string();
-							$_POST['firstname'] = ucwords($_POST['firstname']);
-							$_POST['lastname'] = ucwords($_POST['lastname']);
-							$_POST['birth_date'] = $_POST['birth_date_year'] . '-' . $_POST['birth_date_month'] . '-' . $_POST['birth_date_day'];
-							$_POST['email'] = strtolower($_POST['email']);
-							$_POST['qr']['filename'] = 'covid_qr_' . $_POST['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
-							$_POST['laboratory'] = $global['laboratory'];
-							$_POST['collector'] = $global['collector'];
+				            if (empty($errors))
+				            {
+				                $_POST['token'] = System::generate_random_string();
+								$_POST['firstname'] = ucwords($_POST['firstname']);
+								$_POST['lastname'] = ucwords($_POST['lastname']);
+								$_POST['birth_date'] = $_POST['birth_date_year'] . '-' . $_POST['birth_date_month'] . '-' . $_POST['birth_date_day'];
+								$_POST['email'] = strtolower($_POST['email']);
+								$_POST['qr']['filename'] = 'covid_qr_' . $_POST['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
+								$_POST['laboratory'] = $global['laboratory'];
+								$_POST['collector'] = $global['collector'];
 
-			                $query = $this->model->create_custody_chain($_POST, true);
+				                $query = $this->model->create_custody_chain($_POST, true);
 
-			                if (!empty($query))
-			                {
-			                    System::temporal('set_forced', 'record', 'covid', $_POST);
+				                if (!empty($query))
+				                {
+				                    System::temporal('set_forced', 'record', 'covid', $_POST);
 
-								$mail1 = new Mailer(true);
+									$mail1 = new Mailer(true);
 
-								try
-								{
-									$mail1->setFrom($global['laboratory']['email'], $global['laboratory']['name']);
-									$mail1->addAddress($_POST['email'], $_POST['firstname'] . ' ' . $_POST['lastname']);
-									$mail1->Subject = '¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' ' . explode(' ',  $_POST['firstname'])[0] . '! ' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'];
-									$mail1->Body =
-									'<html>
-										<head>
-											<title>' . $mail1->Subject . '</title>
-										</head>
-										<body>
-											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $global['laboratory']['colors']['first'] . ';">
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100px;margin:0px;padding:20px 0px 20px 20px;border:0px;box-sizing:border-box;vertical-align:middle;">
-														<img style="width:100px" src="https://' . Configuration::$domain . '/uploads/' . $global['laboratory']['avatar'] . '">
-													</td>
-													<td style="width:auto;margin:0px;padding:20px;border:0px;box-sizing:border-box;vertical-align:middle;">
-														<table style="width:100%;margin:0px;padding:0px;border:0px;">
-															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:600;text-align:right;color:#fff;">' . $global['laboratory']['business'] . '</td>
-															</tr>
-															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['laboratory']['rfc'] . '</td>
-															</tr>
-															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['laboratory']['address']['first'] . '</td>
-															</tr>
-															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['laboratory']['address']['second'] . '</td>
-															</tr>
-														</table>
-													</td>
-												</tr>
-											</table>
-											<table style="width:100%;max-width:600px;margin:20px 0px;padding:0px;border:1px dashed #bdbdbd;box-sizing:border-box;background-color:#fff;">
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:18px;font-weight:600;text-align:center;text-transform:uppercase;color:#000;">' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'] . '</td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#757575;">¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' <strong>' . explode(' ', $_POST['firstname'])[0] . '</strong>! ' . Languages::email('your_results_next_email')[Session::get_value('vkye_lang')] . '</td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
-														<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $_POST['qr']['filename'] . '">
-													</td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
-														<a style="width:100%;display:block;margin:0px;padding:10px;border:1px dashed #bdbdbd;border-radius:5px;box-sizing:border-box;background-color:#fff;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#757575;" href="https://api.whatsapp.com/send?phone=' . $global['laboratory']['phone'] . '">' . Languages::email('whatsapp_us_to_support')[Session::get_value('vkye_lang')] . '</a>
-													</td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
-														<a style="width:100%;display:block;margin:0px;padding:10px;border:1px dashed #bdbdbd;border-radius:5px;box-sizing:border-box;background-color:#fff;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#757575;" href="tel:' . $global['laboratory']['phone'] . '">' . Languages::email('call_us_to_support')[Session::get_value('vkye_lang')] . '</a>
-													</td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px;border:0px;box-sizing:border-box;">
-														<a style="width:100%;display:block;margin:0px;padding:10px;border:0px;border-radius:5px;box-sizing:border-box;background-color:#009688;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#fff;" href="https://' . Configuration::$domain . '/' . $global['laboratory']['path'] . '/results/' . $_POST['token'] . '">' . Languages::email('view_online_results')[Session::get_value('vkye_lang')] . '</a>
-													</td>
-												</tr>
-											</table>
-											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $global['laboratory']['colors']['second'] . ';">
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="tel:' . $global['laboratory']['phone'] . '">' . $global['laboratory']['phone'] . '</a></td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="mailto:' . $global['laboratory']['email'] . '">' . $global['laboratory']['email'] . '</a></td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="https://' . $global['laboratory']['website'] . '">' . $global['laboratory']['website'] . '</a></td>
-												</tr>
-											</table>
-											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $global['laboratory']['colors']['first'] . ';">
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' <a style="font-weight:600;text-decoration:none;color:#fff;" href="https://id.one-consultores.com">' . Configuration::$web_page . ' ' . Configuration::$web_version . '</a></td>
-												</tr
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Copyright (C) <a style="text-decoration:none;color:#fff;" href="https://one-consultores.com">One Consultores</a></td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Software ' . Languages::email('development_by')[Session::get_value('vkye_lang')] . ' <a style="text-decoration:none;color:#fff;" href="https://codemonkey.com.mx">Code Monkey</a></td>
-												</tr>
-											</table>
-										</body>
-									</html>';
-									$mail1->send();
-								}
-								catch (Exception $e) {}
+									try
+									{
+										$mail1->setFrom($global['laboratory']['email'], $global['laboratory']['name']);
+										$mail1->addAddress($_POST['email'], $_POST['firstname'] . ' ' . $_POST['lastname']);
+										$mail1->Subject = '¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' ' . explode(' ',  $_POST['firstname'])[0] . '! ' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'];
+										$mail1->Body =
+										'<html>
+											<head>
+												<title>' . $mail1->Subject . '</title>
+											</head>
+											<body>
+												<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $global['laboratory']['colors']['first'] . ';">
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100px;margin:0px;padding:20px 0px 20px 20px;border:0px;box-sizing:border-box;vertical-align:middle;">
+															<img style="width:100px" src="https://' . Configuration::$domain . '/uploads/' . $global['laboratory']['avatar'] . '">
+														</td>
+														<td style="width:auto;margin:0px;padding:20px;border:0px;box-sizing:border-box;vertical-align:middle;">
+															<table style="width:100%;margin:0px;padding:0px;border:0px;">
+																<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																	<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:600;text-align:right;color:#fff;">' . $global['laboratory']['business'] . '</td>
+																</tr>
+																<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																	<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['laboratory']['rfc'] . '</td>
+																</tr>
+																<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																	<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['laboratory']['address']['first'] . '</td>
+																</tr>
+																<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																	<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['laboratory']['address']['second'] . '</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+												<table style="width:100%;max-width:600px;margin:20px 0px;padding:0px;border:1px dashed #bdbdbd;box-sizing:border-box;background-color:#fff;">
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:18px;font-weight:600;text-align:center;text-transform:uppercase;color:#000;">' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'] . '</td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#757575;">¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' <strong>' . explode(' ', $_POST['firstname'])[0] . '</strong>! ' . Languages::email('your_results_next_email')[Session::get_value('vkye_lang')] . '</td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
+															<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $_POST['qr']['filename'] . '">
+														</td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
+															<a style="width:100%;display:block;margin:0px;padding:10px;border:1px dashed #bdbdbd;border-radius:5px;box-sizing:border-box;background-color:#fff;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#757575;" href="https://api.whatsapp.com/send?phone=' . $global['laboratory']['phone'] . '">' . Languages::email('whatsapp_us_to_support')[Session::get_value('vkye_lang')] . '</a>
+														</td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
+															<a style="width:100%;display:block;margin:0px;padding:10px;border:1px dashed #bdbdbd;border-radius:5px;box-sizing:border-box;background-color:#fff;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#757575;" href="tel:' . $global['laboratory']['phone'] . '">' . Languages::email('call_us_to_support')[Session::get_value('vkye_lang')] . '</a>
+														</td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:20px;border:0px;box-sizing:border-box;">
+															<a style="width:100%;display:block;margin:0px;padding:10px;border:0px;border-radius:5px;box-sizing:border-box;background-color:#009688;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#fff;" href="https://' . Configuration::$domain . '/' . $global['laboratory']['path'] . '/results/' . $_POST['token'] . '">' . Languages::email('view_online_results')[Session::get_value('vkye_lang')] . '</a>
+														</td>
+													</tr>
+												</table>
+												<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $global['laboratory']['colors']['second'] . ';">
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="tel:' . $global['laboratory']['phone'] . '">' . $global['laboratory']['phone'] . '</a></td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="mailto:' . $global['laboratory']['email'] . '">' . $global['laboratory']['email'] . '</a></td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="https://' . $global['laboratory']['website'] . '">' . $global['laboratory']['website'] . '</a></td>
+													</tr>
+												</table>
+												<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $global['laboratory']['colors']['first'] . ';">
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' <a style="font-weight:600;text-decoration:none;color:#fff;" href="https://id.one-consultores.com">' . Configuration::$web_page . ' ' . Configuration::$web_version . '</a></td>
+													</tr
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Copyright (C) <a style="text-decoration:none;color:#fff;" href="https://one-consultores.com">One Consultores</a></td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Software ' . Languages::email('development_by')[Session::get_value('vkye_lang')] . ' <a style="text-decoration:none;color:#fff;" href="https://codemonkey.com.mx">Code Monkey</a></td>
+													</tr>
+												</table>
+											</body>
+										</html>';
+										$mail1->send();
+									}
+									catch (Exception $e) {}
 
-								$sms = new \Nexmo\Client\Credentials\Basic('51db0b68', 'd2TTUheuHp6BqYep');
-								$sms = new \Nexmo\Client($sms);
+									$sms = new \Nexmo\Client\Credentials\Basic('51db0b68', 'd2TTUheuHp6BqYep');
+									$sms = new \Nexmo\Client($sms);
 
-								try
-								{
-									$sms->message()->send([
-										'to' => $_POST['phone_country'] . $_POST['phone_number'],
-										'from' => $global['laboratory']['name'],
-										'text' => '¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' ' . explode(' ',  $_POST['firstname'])[0] . '! ' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'] . '. ' . Languages::email('we_send_email_1')[Session::get_value('vkye_lang')] . ' ' . $_POST['email'] . ' ' . Languages::email('we_send_email_2')[Session::get_value('vkye_lang')] . ': https://' . Configuration::$domain . '/' . $global['laboratory']['path'] . '/results/' . $_POST['token'] . '. ' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' ' . Configuration::$web_page . ' ' . Configuration::$web_version . '.'
-									]);
-								}
-								catch (Exception $e) {}
+									try
+									{
+										$sms->message()->send([
+											'to' => $_POST['phone_country'] . $_POST['phone_number'],
+											'from' => $global['laboratory']['name'],
+											'text' => '¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' ' . explode(' ',  $_POST['firstname'])[0] . '! ' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'] . '. ' . Languages::email('we_send_email_1')[Session::get_value('vkye_lang')] . ' ' . $_POST['email'] . ' ' . Languages::email('we_send_email_2')[Session::get_value('vkye_lang')] . ': https://' . Configuration::$domain . '/' . $global['laboratory']['path'] . '/results/' . $_POST['token'] . '. ' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' ' . Configuration::$web_page . ' ' . Configuration::$web_version . '.'
+										]);
+									}
+									catch (Exception $e) {}
 
-			                    echo json_encode([
-			                        'status' => 'success',
-			                        'message' => '{$lang.operation_success}'
-			                    ]);
-			                }
-			                else
-			                {
-			                    echo json_encode([
-			                        'status' => 'error',
-			                        'message' => '{$lang.operation_error}'
-			                    ]);
-			                }
-			            }
-			            else
-			            {
-			                echo json_encode([
-			                    'status' => 'error',
-			                    'errors' => $errors
-			                ]);
-			            }
-					}
-					else
-					{
-						echo json_encode([
-							'status' => 'error',
-							'message' => '{$lang.accept_terms_error}'
-						]);
+				                    echo json_encode([
+				                        'status' => 'success',
+				                        'message' => '{$lang.operation_success}'
+				                    ]);
+				                }
+				                else
+				                {
+				                    echo json_encode([
+				                        'status' => 'error',
+				                        'message' => '{$lang.operation_error}'
+				                    ]);
+				                }
+				            }
+				            else
+				            {
+				                echo json_encode([
+				                    'status' => 'error',
+				                    'errors' => $errors
+				                ]);
+				            }
+						}
+						else
+						{
+							echo json_encode([
+								'status' => 'error',
+								'message' => '{$lang.accept_terms_error}'
+							]);
+						}
 					}
 				}
 
 				if ($_POST['action'] == 'restore_record')
 				{
-					System::temporal('set_forced', 'record', 'covid', []);
+					if ($global['collector']['authentication']['type'] == 'alcoholic')
+						print_r('Ok');
+					else if ($global['collector']['authentication']['type'] == 'antidoping')
+						print_r('Ok');
+					else if ($global['collector']['authentication']['type'] == 'covid')
+						System::temporal('set_forced', 'record', 'covid', []);
 
 					echo json_encode([
 						'status' => 'success',
