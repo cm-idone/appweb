@@ -994,6 +994,49 @@ main.laboratory > div.results > div.share > div:last-child > a > i {
 
 /*  */
 
+main.laboratory > form[name="record"] > div.operating_permits > div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main.laboratory > form[name="record"] > div.operating_permits > div:last-child {
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+main.laboratory > form[name="record"] > div.operating_permits > div:last-child > h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+}
+
+main.laboratory > form[name="record"] > div.operating_permits > div:last-child > h6 {
+    font-size: 12px;
+    font-weight: 400;
+    color: #757575;
+}
+
+main.laboratory > form[name="record"] > div.operating_permits > div > figure {
+    width: calc(100% / 5);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main.laboratory > form[name="record"] > div.operating_permits > div > figure.hor > img {
+    width: 100%;
+}
+
+main.laboratory > form[name="record"] > div.operating_permits > div > figure.ver > img {
+    width: auto;
+    height: 100%;
+}
+
+/*  */
+
 footer.laboratory {
     width: 100%;
 }

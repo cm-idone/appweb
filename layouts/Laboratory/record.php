@@ -428,6 +428,29 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
                             <button type="submit" class="success">{$lang.end_and_send}</button>
                         </div>
                     </fieldset>
+                    <div class="operating_permits">
+                        <div>
+                            <figure class="hor">
+                                <img src="{$path.images}secretaria_salud.png">
+                            </figure>
+                            <figure class="ver">
+                                <img src="{$path.images}cofepris.png">
+                            </figure>
+                            <figure class="ver">
+                                <img src="{$path.images}qroo_1.png">
+                            </figure>
+                            <figure class="ver">
+                                <img src="{$path.images}qroo_2.png">
+                            </figure>
+                            <figure class="hor">
+                                <img src="{$path.images}qroo_sesa.png">
+                            </figure>
+                        </div>
+                        <div>
+                            <h4>{$lang.sanitary_opinion}</h4>
+                            <h6><?php echo $global['laboratory']['sanitary_opinion']; ?></h6>
+                        </div>
+                    </div>
                 </form>
             <?php endif; ?>
         <?php endif; ?>

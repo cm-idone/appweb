@@ -816,6 +816,7 @@ class Laboratory_model extends Model
             'rrss',
             'website',
             'time_zone',
+            'sanitary_opinion',
             'colors',
             'blocked'
         ], [
