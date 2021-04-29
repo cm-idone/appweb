@@ -1040,6 +1040,10 @@ main.laboratory > form[name="record"] > div.operating_permits > div > figure.ver
     height: 100%;
 }
 
+main.laboratory > form[name="record"] > fieldset.fields-group div.signature > canvas {
+    height: 400px !important;
+}
+
 /*  */
 
 footer.laboratory {
