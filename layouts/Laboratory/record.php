@@ -2,6 +2,8 @@
 
 defined('_EXEC') or die;
 
+$this->dependencies->add(['js', '{$path.plugins}signature_pad/signature_pad.css']);
+$this->dependencies->add(['js', '{$path.plugins}signature_pad/signature_pad.js']);
 $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
 
 ?>
@@ -424,8 +426,14 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
                         </div>
                     </div>
                     <fieldset class="fields-group">
-                        <div class="button">
-                            <button type="submit" class="success">{$lang.end_and_send}</button>
+                        <div class="signature" id="client_signature">
+                            <canvas></canvas>
+                            <div class="sign_by_first_time">
+                                <a data-action="clean_client_signature"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+                        <div class="title">
+                            <h6>{$lang.signature}</h6>
                         </div>
                     </fieldset>
                     <div class="operating_permits">
@@ -451,6 +459,11 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.0']);
                             <h6><?php echo $global['laboratory']['sanitary_opinion']; ?></h6>
                         </div>
                     </div>
+                    <fieldset class="fields-group">
+                        <div class="button">
+                            <button type="submit" class="success">{$lang.end_and_send}</button>
+                        </div>
+                    </fieldset>
                 </form>
             <?php endif; ?>
         <?php endif; ?>

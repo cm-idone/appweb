@@ -994,6 +994,11 @@ main.laboratory > div.results > div.share > div:last-child > a > i {
 
 /*  */
 
+main.laboratory > form[name="record"] > div.operating_permits {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
 main.laboratory > form[name="record"] > div.operating_permits > div {
     width: 100%;
     display: flex;

@@ -55,6 +55,19 @@ $(document).ready(function()
             $('[data-hidden="sf_covid_time"]').removeClass('hidden');
     });
 
+    var client_signature = document.getElementById('client_signature');
+    var client_canvas = client_signature.querySelector('canvas');
+    var client_pad = new SignaturePad(client_canvas, {
+        backgroundColor: 'rgb(255, 255, 255)'
+    });
+
+    resize_canvas(client_canvas);
+
+    $('[data-action="clean_client_signature"]').on('click', function()
+    {
+        client_pad.clear();
+    });
+
     $('form[name="record"]').on('submit', function(event)
     {
         event.preventDefault();
@@ -62,6 +75,7 @@ $(document).ready(function()
         var form = $(this);
         var data = new FormData(form[0]);
 
+        data.append('client_signature', ((client_pad.isEmpty()) ? '' : client_pad.toDataURL('image/jpeg')));
         data.append('action','record');
 
         $.ajax({

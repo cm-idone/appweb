@@ -98,7 +98,8 @@ class Laboratory_model extends Model
 			'hour' => ($record == true) ? Dates::current_hour() : $data['hour'],
 			'comments' => ($record == true) ? null : (!empty($data['comments']) ? $data['comments'] : null),
 			'signatures' => ($record == true) ? null : (json_encode([
-                'employee' => !empty($data['employee_signature']) ? Fileloader::base64($data['employee_signature']) : ''
+                'employee' => ($record == true) ? '' : (!empty($data['employee_signature']) ? Fileloader::base64($data['employee_signature']) : ''),
+                'client' => ($record == true) ? Fileloader::base64($data['client_signature']) : ''
             ])),
 			'qr' => ($record == true) ? $data['qr']['filename'] : null,
 			'pdf' => null,
