@@ -56,12 +56,16 @@ $(document).ready(function()
     });
 
     var signature = document.getElementById('signature');
-    var signature_canvas = signature.querySelector('canvas');
-    var signature_pad = new SignaturePad(signature_canvas, {
-        backgroundColor: 'rgb(255, 255, 255)'
-    });
 
-    resize_canvas(signature_canvas);
+    if (signature)
+    {
+        var signature_canvas = signature.querySelector('canvas');
+        var signature_pad = new SignaturePad(signature_canvas, {
+            backgroundColor: 'rgb(255, 255, 255)'
+        });
+    
+        resize_canvas(signature_canvas);
+    }
 
     $('[data-action="clean_signature"]').on('click', function()
     {
