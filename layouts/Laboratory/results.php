@@ -193,9 +193,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                 </tr>
             </table>
             <?php if ($global['custody_chain']['version'] == 'v2') : ?>
-                <figure>
+                <!-- <figure>
                     <img src="{$path.uploads}<?php echo $global['custody_chain']['signature']; ?>">
-                </figure>
+                </figure> -->
             <?php endif; ?>
             <?php if ($global['custody_chain']['closed'] == true) : ?>
                 <?php if (Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) : ?>
