@@ -343,8 +343,8 @@ class Laboratory_controller extends Controller
     				{
 						if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up')
 						{
-							$_POST['qr']['filename'] = $global['custody_chain']['type'] . '_qr_' . $global['custody_chain']['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
-							$_POST['pdf']['filename'] = $global['custody_chain']['type'] . '_pdf_' . $global['custody_chain']['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
+							$_POST['qr']['filename'] = 'covid_qr_' . $global['custody_chain']['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
+							$_POST['pdf']['filename'] = 'covid_pdf_' . $global['custody_chain']['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
 						}
 
 						$_POST['custody_chain'] = $global['custody_chain'];

@@ -591,7 +591,7 @@ class Laboratory_model extends Model
 			'date' => $data['date'],
 			'hour' => $data['hour'],
 			'comments' => !empty($data['comments']) ? $data['comments'] : null,
-			'signatures' => !empty($data['signature']) ? Fileloader::base64($data['signature']) : $data['custody_chain']['signature'],
+			'signature' => !empty($data['signature']) ? Fileloader::base64($data['signature']) : $data['custody_chain']['signature'],
 			'qr' => (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $data['qr']['filename'] : $data['custody_chain']['qr'],
 			'pdf' => (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $data['pdf']['filename'] : $data['custody_chain']['pdf'],
 			'lang' => (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $data['lang'] : $data['custody_chain']['lang'],
