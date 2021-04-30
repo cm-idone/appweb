@@ -143,7 +143,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                 <?php endif; ?>
                 <tr>
                     <td>{$lang.passport}:</td>
-                    <td><?php echo $global['custody_chain']['contact']['passport']; ?></td>
+                    <td><?php echo $global['custody_chain']['contact']['ife']; ?></td>
                 </tr>
             </table>
             <?php if ($global['custody_chain']['version'] == 'v2') : ?>
@@ -194,7 +194,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
             </table>
             <?php if ($global['custody_chain']['version'] == 'v2') : ?>
                 <figure>
-                    <img src="{$path.uploads}<?php echo $global['custody_chain']['signatures']['contact']; ?>">
+                    <img src="{$path.uploads}<?php echo $global['custody_chain']['signature']; ?>">
                 </figure>
             <?php endif; ?>
             <?php if ($global['custody_chain']['closed'] == true) : ?>
