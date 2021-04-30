@@ -204,8 +204,8 @@ class Languages
                 'en' => 'An “NOT DETECTED” (Negative) result does not rule out the possibility of SARS-CoV-2 infection due to factors such as incubation period, biological variability, quality of sample collection; all of these factors are reflected in the viral expression obtained.'
             ],
             'notes_pcr_an_3' => [
-                'es' => 'Los resultados Detectados y No detectados serán notificados por MARBU laboratorio al instituto Diagnostico y Referencia (InDRE) siguiendo el Lineamiento Estandarizado para la Vigilancia Epidemiológica y por Laboratorio COVID-19.',
-                'en' => 'The Detected and Undetected results will be notified by the MARBU laboratory to the Diagnostic and Reference Institute (InDRE) following the Standardized Guidelines for Epidemiological Surveillance and COVID-19 Laboratory.'
+                'es' => 'Los resultados Detectados y No detectados serán notificados al instituto Diagnostico y Referencia (InDRE) siguiendo el Lineamiento Estandarizado para la Vigilancia Epidemiológica y por Laboratorio COVID-19.',
+                'en' => 'The Detected and Undetected results will be notified to the Diagnostic and Reference Institute (InDRE) following the Standardized Guidelines for Epidemiological Surveillance and COVID-19 Laboratory.'
             ],
             'notes_ac_1' => [
                 'es' => 'IgM (-)/ IgG (-): No hay evidencia de infección por SARS-CoV-2.',
