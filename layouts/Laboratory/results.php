@@ -17,6 +17,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
     </div>
     <div>
         <h2 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['rfc']; ?></h2>
+        <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['sanitary_opinion']; ?></h3>
         <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['address']['first']; ?></h3>
         <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['address']['second']; ?></h3>
     </div>
@@ -28,35 +29,41 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
         <?php elseif ($global['custody_chain']['type'] == 'antidoping') : ?>
 
         <?php elseif ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') : ?>
-            <h2><?php echo ((Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) ? (($global['custody_chain']['closed'] == true) ? '¡{$lang.ready_results}!' : '{$lang.results_in_process}') : '{$lang.expired_results}'); ?></h2>
-            <h3>{$lang.covid_test}</h3>
-            <div class="title">
-                <i class="fas fa-qrcode"></i>
-                <h2><strong>{$lang.type}: {$lang.<?php echo $global['custody_chain']['type']; ?>} </strong>{$lang.token}: <?php echo $global['custody_chain']['token']; ?></h2>
-            </div>
+            <h2>{$lang.results}</h2>
             <div class="counter">
                 <h3 id="counter" class="<?php echo ((Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) ? 'time_on' : 'time_out'); ?>" data-date="<?php echo Dates::future_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), 72, 'hours'); ?>" data-time-zone="<?php echo $global['laboratory']['time_zone']; ?>"></h3>
                 <h2><?php echo Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour'], 'long', '12-long'); ?></h2>
-                <h4><?php echo ((Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) ? '{$lang.72_validation}' : '{$lang.certificate_timed_out}'); ?></h4>
             </div>
             <table>
-                <?php if ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') : ?>
                     <tr>
                         <td>{$lang.exam}:</td>
                         <?php if ($global['custody_chain']['type'] == 'covid_pcr') : ?>
                             <td>PCR-SARS-CoV-2 (COVID-19)</td>
                         <?php elseif ($global['custody_chain']['type'] == 'covid_an') : ?>
                             <td>Ag-SARS-CoV-2 (COVID-19)</td>
+                        <?php elseif ($global['custody_chain']['type'] == 'covid_ac') : ?>
+                            <td>SARS-CoV-2 (2019) IgG/IgM</td>
                         <?php endif; ?>
                     </tr>
                     <tr>
-                        <td>{$lang.start_process}:</td>
-                        <td><?php echo Dates::format_date($global['custody_chain']['start_process'], 'long'); ?></td>
+                        <td>{$lang.token}:</td>
+                        <td><?php echo $global['custody_chain']['token']; ?></td>
                     </tr>
                     <tr>
-                        <td>{$lang.end_process}:</td>
-                        <td><?php echo (($global['custody_chain']['closed'] == true) ? Dates::format_date($global['custody_chain']['end_process'], 'long') : '{$lang.results_in_process}'); ?></td>
+                        <td>{$lang.validity}:</td>
+                        <td><?php echo ((Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) ? '{$lang.72_validation}' : '{$lang.certificate_timed_out}'); ?></td>
                     </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>{$lang.start_process}:</td>
+                    <td><?php echo Dates::format_date($global['custody_chain']['start_process'], 'long'); ?></td>
+                </tr>
+                <tr>
+                    <td>{$lang.end_process}:</td>
+                    <td><?php echo (($global['custody_chain']['closed'] == true) ? Dates::format_date($global['custody_chain']['end_process'], 'long') : '{$lang.results_in_process}'); ?></td>
+                </tr>
+                <?php if ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') : ?>
                     <tr>
                         <td>{$lang.result}:</td>
                         <td><?php echo (($global['custody_chain']['closed'] == true) ? '{$lang.' . $global['custody_chain']['results']['result'] . '}' : '{$lang.results_in_process}'); ?></td>
@@ -70,18 +77,6 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                         <td><?php echo (($global['custody_chain']['closed'] == true) ? '{$lang.' . $global['custody_chain']['results']['reference_values'] . '}' : '{$lang.results_in_process}'); ?></td>
                     </tr>
                 <?php elseif ($global['custody_chain']['type'] == 'covid_ac') : ?>
-                    <tr>
-                        <td>{$lang.exam}:</td>
-                        <td>SARS-CoV-2 (2019) IgG/IgM</td>
-                    </tr>
-                    <tr>
-                        <td>{$lang.start_process}:</td>
-                        <td><?php echo Dates::format_date($global['custody_chain']['start_process'], 'long'); ?></td>
-                    </tr>
-                    <tr>
-                        <td>{$lang.end_process}:</td>
-                        <td><?php echo (($global['custody_chain']['closed'] == true) ? Dates::format_date($global['custody_chain']['end_process'], 'long') : '{$lang.results_in_process}'); ?></td>
-                    </tr>
                     <tr>
                         <td style="padding-top:10px;"><strong>{$lang.anticorps} IgM</strong></td>
                         <td></td>
@@ -116,9 +111,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                     </tr>
                 <?php endif; ?>
             </table>
-            <?php if (!empty($global['custody_chain']['comments'])) : ?>
-                <p>{$lang.comments}: <?php echo (!empty($global['custody_chain']['comments']) ? $global['custody_chain']['comments'] : '{$lang.not_comments}'); ?></p>
-            <?php endif; ?>
+            <p>{$lang.comments}: <?php echo (!empty($global['custody_chain']['comments']) ? $global['custody_chain']['comments'] : '{$lang.not_comments}'); ?></p>
             <table>
                 <tr>
                     <td>{$lang.name}:</td>
@@ -144,17 +137,11 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                 <?php endif; ?>
                 <tr>
                     <td>{$lang.passport}:</td>
-                    <td><?php echo $global['custody_chain']['contact']['ife']; ?></td>
+                    <td><?php echo (($global['custody_chain']['version'] == 'v2') ?  $global['custody_chain']['contact']['passport'] :  $global['custody_chain']['contact']['ife']); ?></td>
                 </tr>
-                <tr>
-                    <td>{$lang.email}:</td>
-                    <td><?php echo $global['custody_chain']['contact']['email']; ?></td>
-                </tr>
-                <tr>
-                    <td>{$lang.phone}:</td>
-                    <td>+<?php echo $global['custody_chain']['contact']['phone']['country'] . ' ' . $global['custody_chain']['contact']['phone']['number']; ?></td>
-                </tr>
-                <?php if ($global['custody_chain']['version'] == 'v2') : ?>
+            </table>
+            <?php if ($global['custody_chain']['version'] == 'v2') : ?>
+                <table>
                     <?php if ($global['custody_chain']['contact']['sex'] == 'female') : ?>
                         <tr>
                             <td>{$lang.pregnant}:</td>
@@ -187,8 +174,23 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                         <td>{$lang.prev_covid}:</td>
                         <td><?php echo (($global['custody_chain']['contact']['sf']['covid'] == 'yeah') ? $global['custody_chain']['contact']['sf']['covid_time'] : '{$lang.not}') ?></td>
                     </tr>
-                <?php endif; ?>
+                </table>
+            <?php endif; ?>
+            <table>
+                <tr>
+                    <td>{$lang.email}:</td>
+                    <td><?php echo $global['custody_chain']['contact']['email']; ?></td>
+                </tr>
+                <tr>
+                    <td>{$lang.phone}:</td>
+                    <td>+<?php echo $global['custody_chain']['contact']['phone']['country'] . ' ' . $global['custody_chain']['contact']['phone']['number']; ?></td>
+                </tr>
             </table>
+            <?php if ($global['custody_chain']['version'] == 'v2') : ?>
+                <figure>
+                    <img src="{$path.uploads}<?php echo $global['custody_chain']['signatures']['contact']; ?>">
+                </figure>
+            <?php endif; ?>
             <?php if ($global['custody_chain']['closed'] == true) : ?>
                 <?php if (Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) : ?>
                     <figure>
