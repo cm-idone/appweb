@@ -48,7 +48,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.1']);
         <?php elseif ($global['collector']['authentication']['type'] == 'covid') : ?>
             <?php if (!empty(System::temporal('get', 'record', 'covid'))) : ?>
                 <div class="record">
-                    <h4>{$lang.your_token_is}</h4>
+                    <h4>{$lang.your_token_is}:</h4>
                     <h5><?php echo System::temporal('get', 'record', 'covid')['token']; ?></h5>
                     <p>¡{$lang.hi} <strong><?php echo explode(' ', System::temporal('get', 'record', 'covid')['firstname'])[0]; ?></strong>! {$lang.covid_alert_1} <strong><?php echo System::temporal('get', 'record', 'covid')['email']; ?></strong> {$lang.covid_alert_2}</p>
                     <figure>
