@@ -692,7 +692,6 @@ main.laboratory > div.record {
 }
 
 main.laboratory > div.record > h4 {
-    margin-bottom: 5px;
     font-size: 24px;
     font-weight: 600;
     text-transform: uppercase;
