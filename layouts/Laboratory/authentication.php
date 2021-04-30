@@ -15,6 +15,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
     </div>
     <div>
         <h2 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['rfc']; ?></h2>
+        <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['sanitary_opinion']; ?></h3>
         <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['address']['first']; ?></h3>
         <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['address']['second']; ?></h3>
     </div>
@@ -26,52 +27,52 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
             <p>{$lang.<?php echo $global['render']; ?>}</p>
         </div>
     <?php elseif ($global['render'] == 'go') : ?>
-        <div class="authentication">
-            <?php if ($global['collector']['authentication']['type'] == 'none') : ?>
+        <?php if ($global['collector']['authentication']['type'] == 'none') : ?>
+            <form name="start_authentication">
                 <i class="fas fa-lock"></i>
-                <form name="create_authentication">
-                    <fieldset class="fields-group">
-                        <div class="text">
-                            <select name="type">
-                                <option value="" class="hidden">{$lang.choose_an_option}</option>
-                                <option value="alcoholic">{$lang.to_do_test} {$lang.alcoholic}</option>
-                                <option value="antidoping">{$lang.to_do_test} {$lang.antidoping}</option>
-                                <option value="covid">{$lang.to_do_test} {$lang.covid}</option>
-                            </select>
-                        </div>
-                        <div class="title">
-                            <h6>{$lang.authenticate_to}</h6>
-                        </div>
-                    </fieldset>
-                    <fieldset class="fields-group">
-                        <div class="text">
-                            <select name="taker">
-                                <option value="" class="hidden">{$lang.choose_an_option}</option>
-                                <?php foreach ($global['takers'] as $value) : ?>
-                                    <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="title">
-                            <h6>{$lang.active_taker}</h6>
-                        </div>
-                    </fieldset>
-                    <fieldset class="fields-group">
-                        <div class="button">
-                            <button type="submit" class="success">{$lang.authenticate}</button>
-                        </div>
-                    </fieldset>
-                </form>
-            <?php else : ?>
+                <fieldset class="fields-group">
+                    <div class="text">
+                        <select name="type">
+                            <option value="" class="hidden">{$lang.choose_an_option}</option>
+                            <option value="alcoholic">{$lang.to_do_test} {$lang.alcoholic}</option>
+                            <option value="antidoping">{$lang.to_do_test} {$lang.antidoping}</option>
+                            <option value="covid">{$lang.to_do_test} {$lang.covid}</option>
+                        </select>
+                    </div>
+                    <div class="title">
+                        <h6>{$lang.authenticate_to}</h6>
+                    </div>
+                </fieldset>
+                <fieldset class="fields-group">
+                    <div class="text">
+                        <select name="taker">
+                            <option value="" class="hidden">{$lang.choose_an_option}</option>
+                            <?php foreach ($global['takers'] as $value) : ?>
+                                <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="title">
+                        <h6>{$lang.active_taker}</h6>
+                    </div>
+                </fieldset>
+                <fieldset class="fields-group">
+                    <div class="button">
+                        <button type="submit" class="success">{$lang.start_authentication}</button>
+                    </div>
+                </fieldset>
+            </form>
+        <?php else : ?>
+            <div class="authentication">
                 <h4><i class="fas fa-check-circle"></i>{$lang.authenticated}</h4>
-                <h6>{$lang.<?php echo $global['collector']['authentication']['type']; ?>} | <?php echo $global['collector']['authentication']['taker']['name']; ?> | <?php echo Dates::format_date(Dates::current_date(), 'long_year'); ?></h6>
+                <h5>{$lang.<?php echo $global['collector']['authentication']['type']; ?>} | <?php echo $global['collector']['authentication']['taker']['name']; ?> | <?php echo Dates::format_date(Dates::current_date(), 'long_year'); ?></h5>
                 <figure>
                     <img src="{$path.uploads}<?php echo $global['collector']['qrs']['authentication']; ?>">
                 </figure>
                 <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.share_record_qr}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['laboratory']['path']; ?>/record/<?php echo $global['collector']['token']; ?>/<?php echo $global['collector']['authentication']['type']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_form}</span></a>
-                <a data-action="delete_authentication">{$lang.end_authentication}</a>
-            <?php endif; ?>
-        </div>
+                <a data-action="end_authentication">{$lang.end_authentication}</a>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
 </main>
 <footer class="laboratory">

@@ -2,14 +2,14 @@
 
 $(document).ready(function()
 {
-    $('form[name="create_authentication"]').on('submit', function(event)
+    $('form[name="start_authentication"]').on('submit', function(event)
     {
         event.preventDefault();
 
         var form = $(this);
         var data = new FormData(form[0]);
 
-        data.append('action','create_authentication');
+        data.append('action','start_authentication');
 
         $.ajax({
             type: 'POST',
@@ -28,11 +28,11 @@ $(document).ready(function()
         });
     });
 
-    $('[data-action="delete_authentication"]').on('click', function()
+    $('[data-action="end_authentication"]').on('click', function()
     {
         $.ajax({
             type: 'POST',
-            data: 'action=delete_authentication',
+            data: 'action=end_authentication',
             processData: false,
             cache: false,
             dataType: 'json',

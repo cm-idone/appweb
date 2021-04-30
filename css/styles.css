@@ -444,6 +444,7 @@ header.laboratory > div:first-child > h1 {
     font-size: 16px;
     font-weight: 600;
     text-align: right;
+    text-transform: uppercase;
     color: #fff;
 }
 
@@ -482,6 +483,7 @@ main.laboratory {
 /*  */
 
 main.laboratory > div.blocked,
+main.laboratory > form[name="start_authentication"],
 main.laboratory > div.authentication {
     width: 100%;
     display: flex;
@@ -496,6 +498,7 @@ main.laboratory > div.blocked {
 }
 
 main.laboratory > div.blocked > i,
+main.laboratory > form[name="start_authentication"] > i,
 main.laboratory > div.authentication > i {
     margin-bottom: 40px;
     font-size: 100px;
@@ -507,11 +510,11 @@ main.laboratory > div.blocked > p {
     color: #757575;
 }
 
-main.laboratory > div.authentication > form {
+main.laboratory > form[name="start_authentication"] {
     width: 100%;
 }
 
-main.laboratory > div.authentication > form > fieldset > div.button > button {
+main.laboratory > form[name="start_authentication"] > fieldset > div.button > button {
     width: 100%;
     margin: 0px;
 }
@@ -528,7 +531,7 @@ main.laboratory > div.authentication > h4 > i {
     color: #009688;
 }
 
-main.laboratory > div.authentication > h6 {
+main.laboratory > div.authentication > h5 {
     width: 100%;
     margin-bottom: 40px;
     font-size: 12px;
@@ -572,32 +575,36 @@ main.laboratory > div.authentication > a[data-action="share"] > i {
     margin-right: 10px;
 }
 
-main.laboratory > div.authentication > a[data-action="delete_authentication"] {
+main.laboratory > div.authentication > a[data-action="end_authentication"] {
     background-color: #f44336;
     color: #fff;
 }
 
 /*  */
 
-main.laboratory > form[name="record"] > h2 {
-    width: 100%;
+main.laboratory > form[name="create_record"] > h4 {
+    margin-bottom: 40px;
     font-size: 24px;
     font-weight: 600;
+    text-transform: uppercase;
     text-align: center;
     color: #212121;
-    margin-bottom: 5px;
 }
 
-main.laboratory > form[name="record"] > h6 {
-    width: 100%;
+main.laboratory > form[name="create_record"] > p {
+    margin-bottom: 40px;
     font-size: 12px;
     font-weight: 400;
-    text-align: center;
+    text-align: justify;
+    line-height: 18px;
     color: #757575;
+    padding-bottom: 40px;
     margin-bottom: 40px;
+    border-bottom: 1px dashed #bdbdbd;
+    box-sizing: border-box;
 }
 
-main.laboratory > form[name="record"] > div[data-step] {
+main.laboratory > form[name="create_record"] > div[data-step] {
     width: 100%;
     padding-bottom: 40px;
     margin-bottom: 40px;
@@ -605,16 +612,16 @@ main.laboratory > form[name="record"] > div[data-step] {
     box-sizing: border-box;
 }
 
-main.laboratory > form[name="record"] > div[data-step] > h4 {
+main.laboratory > form[name="create_record"] > div[data-step] > h4 {
     width: 100%;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     text-align: center;
     color: #212121;
     margin-bottom: 20px;
 }
 
-main.laboratory > form[name="record"] > div[data-step] > p {
+main.laboratory > form[name="create_record"] > div[data-step] > p {
     width: 100%;
     font-size: 12px;
     font-weight: 400;
@@ -624,7 +631,7 @@ main.laboratory > form[name="record"] > div[data-step] > p {
     margin-bottom: 20px;
 }
 
-main.laboratory > form[name="record"] > div[data-step] > fieldset > div.title > p {
+main.laboratory > form[name="create_record"] > div[data-step] > fieldset > div.title > p {
     width: 100%;
     font-size: 12px;
     font-weight: 400;
@@ -633,7 +640,7 @@ main.laboratory > form[name="record"] > div[data-step] > fieldset > div.title > 
     line-height: 18px;
 }
 
-main.laboratory > form[name="record"] > div.accept_terms {
+main.laboratory > form[name="create_record"] > div[data-step] > div.accept_terms {
     width: 100%;
     margin-bottom: 20px;
     padding: 20px;
@@ -642,18 +649,18 @@ main.laboratory > form[name="record"] > div.accept_terms {
     background-color: #f44336;
 }
 
-main.laboratory > form[name="record"] > div.accept_terms > div.caption > p {
+main.laboratory > form[name="create_record"] > div[data-step] > div.accept_terms > div.caption > p {
     font-size: 14px;
     font-weight: 400;
     text-align: justify;
     color: #fff;
 }
 
-main.laboratory > form[name="record"] > div.accept_terms > div.checkbox {
+main.laboratory > form[name="create_record"] > div[data-step] > div.accept_terms > div.checkbox {
     margin-top: 20px;
 }
 
-main.laboratory > form[name="record"] > div.accept_terms > div.checkbox > label {
+main.laboratory > form[name="create_record"] > div[data-step] > div.accept_terms > div.checkbox > label {
     width: 100%;
     display: flex;
     align-items: center;
@@ -663,20 +670,20 @@ main.laboratory > form[name="record"] > div.accept_terms > div.checkbox > label 
     background-color: #f44336;
 }
 
-main.laboratory > form[name="record"] > div.accept_terms > div.checkbox > label > span {
+main.laboratory > form[name="create_record"] > div[data-step] > div.accept_terms > div.checkbox > label > span {
     margin-right: 5px;
     color: #fff;
 }
 
-main.laboratory > form[name="record"] > fieldset > div.button > button,
-main.laboratory > form[name="record"] > fieldset > div.button > a {
+main.laboratory > form[name="create_record"] > fieldset > div.button > button,
+main.laboratory > form[name="create_record"] > fieldset > div.button > a {
     width: 100% !important;
     margin: 0px;
 }
 
 /*  */
 
-main.laboratory > div.create {
+main.laboratory > div.record {
     width: 100%;
     display: flex;
     align-items: center;
@@ -684,8 +691,8 @@ main.laboratory > div.create {
     flex-direction: column;
 }
 
-main.laboratory > div.create > h4 {
-    margin-bottom: 40px;
+main.laboratory > div.record > h4,
+main.laboratory > div.record > h5 {
     font-size: 24px;
     font-weight: 600;
     text-transform: uppercase;
@@ -693,7 +700,15 @@ main.laboratory > div.create > h4 {
     color: #212121;
 }
 
-main.laboratory > div.create > p {
+main.laboratory > div.record > h4 {
+    margin-bottom: 10px;
+}
+
+main.laboratory > div.record > h5 {
+    margin-bottom: 40px;
+}
+
+main.laboratory > div.record > p {
     margin-bottom: 40px;
     font-size: 14px;
     font-weight: 400;
@@ -701,7 +716,7 @@ main.laboratory > div.create > p {
     color: #757575;
 }
 
-main.laboratory > div.create > figure {
+main.laboratory > div.record > figure {
     width: 100%;
     margin-bottom: 20px;
     border: 1px dashed #bdbdbd;
@@ -710,11 +725,11 @@ main.laboratory > div.create > figure {
     overflow: hidden;
 }
 
-main.laboratory > div.create > figure > img {
+main.laboratory > div.record > figure > img {
     width: 100%;
 }
 
-main.laboratory > div.create > a {
+main.laboratory > div.record > a {
     width: 100%;
     height: 40px;
     display: flex;
@@ -916,28 +931,28 @@ main.laboratory > div.results > div.chemical > h3 {
 /*  */
 
 main.laboratory > div.blocked > div.share,
-main.laboratory > form[name="record"] > div.share,
-main.laboratory > div.create > div.share,
-main.laboratory > div.create > div.share > div,
+main.laboratory > form[name="create_record"] > div.share,
+main.laboratory > div.record > div.share,
+main.laboratory > div.record > div.share > div,
 main.laboratory > div.results > div.share,
 main.laboratory > div.results > div.share > div {
     width: 100%;
 }
 
 main.laboratory > div.blocked > div.share,
-main.laboratory > form[name="record"] > div.share {
+main.laboratory > form[name="create_record"] > div.share {
     margin-bottom: 40px;
     padding-bottom: 40px;
     border-bottom: 1px dashed #bdbdbd;
     box-sizing: border-box;
 }
 
-main.laboratory > div.create > div.share,
+main.laboratory > div.record > div.share,
 main.laboratory > div.results > div.share {
     margin-bottom: 40px;
 }
 
-main.laboratory > div.create > div.share > div:first-child > a,
+main.laboratory > div.record > div.share > div:first-child > a,
 main.laboratory > div.results > div.share > div:first-child > a {
     width: 100%;
     display: flex;
@@ -953,7 +968,7 @@ main.laboratory > div.results > div.share > div:first-child > a {
     color: #757575;
 }
 
-main.laboratory > div.create > div.share > div:first-child > a > i,
+main.laboratory > div.record > div.share > div:first-child > a > i,
 main.laboratory > div.results > div.share > div:first-child > a > i {
     margin-right: 10px;
     font-size: 30px;
@@ -961,8 +976,8 @@ main.laboratory > div.results > div.share > div:first-child > a > i {
 }
 
 main.laboratory > div.blocked > div.share,
-main.laboratory > form[name="record"] > div.share,
-main.laboratory > div.create > div.share > div:last-child,
+main.laboratory > form[name="create_record"] > div.share,
+main.laboratory > div.record > div.share > div:last-child,
 main.laboratory > div.results > div.share > div:last-child {
     display: flex;
     align-items: center;
@@ -970,8 +985,8 @@ main.laboratory > div.results > div.share > div:last-child {
 }
 
 main.laboratory > div.blocked > div.share > a,
-main.laboratory > form[name="record"] > div.share > a,
-main.laboratory > div.create > div.share > div:last-child > a,
+main.laboratory > form[name="create_record"] > div.share > a,
+main.laboratory > div.record > div.share > div:last-child > a,
 main.laboratory > div.results > div.share > div:last-child > a {
     width: calc(100% / 3);
     display: flex;
@@ -984,8 +999,8 @@ main.laboratory > div.results > div.share > div:last-child > a {
 }
 
 main.laboratory > div.blocked > div.share > a > i,
-main.laboratory > form[name="record"] > div.share > a > i,
-main.laboratory > div.create > div.share > div:last-child > a > i,
+main.laboratory > form[name="create_record"] > div.share > a > i,
+main.laboratory > div.record > div.share > div:last-child > a > i,
 main.laboratory > div.results > div.share > div:last-child > a > i {
     margin-bottom: 10px;
     font-size: 30px;
@@ -994,36 +1009,23 @@ main.laboratory > div.results > div.share > div:last-child > a > i {
 
 /*  */
 
-main.laboratory > form[name="record"] > div.operating_permits {
+main.laboratory > form[name="create_record"] > div.operating_permits {
     width: 100%;
-    margin-bottom: 20px;
+    margin-top: 40px;
 }
 
-main.laboratory > form[name="record"] > div.operating_permits > div {
+main.laboratory > form[name="create_record"] > div.operating_permits > div {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-main.laboratory > form[name="record"] > div.operating_permits > div:last-child {
-    flex-direction: column;
-    margin-top: 20px;
+main.laboratory > form[name="create_record"] > div.operating_permits > div:first-child {
+    margin-bottom: 20px;
 }
 
-main.laboratory > form[name="record"] > div.operating_permits > div:last-child > h4 {
-    font-size: 20px;
-    font-weight: 600;
-    color: #000;
-}
-
-main.laboratory > form[name="record"] > div.operating_permits > div:last-child > h6 {
-    font-size: 12px;
-    font-weight: 400;
-    color: #757575;
-}
-
-main.laboratory > form[name="record"] > div.operating_permits > div > figure {
+main.laboratory > form[name="create_record"] > div.operating_permits > div:first-child > figure {
     width: calc(100% / 5);
     height: 40px;
     display: flex;
@@ -1031,17 +1033,30 @@ main.laboratory > form[name="record"] > div.operating_permits > div > figure {
     justify-content: center;
 }
 
-main.laboratory > form[name="record"] > div.operating_permits > div > figure.hor > img {
+main.laboratory > form[name="create_record"] > div.operating_permits > div:first-child > figure.hor > img {
     width: 100%;
 }
 
-main.laboratory > form[name="record"] > div.operating_permits > div > figure.ver > img {
+main.laboratory > form[name="create_record"] > div.operating_permits > div:first-child > figure.ver > img {
     width: auto;
     height: 100%;
 }
 
-main.laboratory > form[name="record"] > fieldset.fields-group div.signature > canvas {
-    height: 400px !important;
+main.laboratory > form[name="create_record"] > div.operating_permits > div:last-child {
+    flex-direction: column;
+}
+
+main.laboratory > form[name="create_record"] > div.operating_permits > div:last-child > h4 {
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #000;
+}
+
+main.laboratory > form[name="create_record"] > div.operating_permits > div:last-child > h6 {
+    font-size: 12px;
+    font-weight: 400;
+    color: #757575;
 }
 
 /*  */

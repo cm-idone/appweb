@@ -35,7 +35,7 @@ class Laboratory_model extends Model
                 'birth_date' => $data['birth_date'],
                 'age' => $data['age'],
                 'nationality' => $data['nationality'],
-				'ife' => $data['ife'],
+				'passport' => $data['passport'],
                 'email' => $data['email'],
                 'phone' => [
                     'country' => $data['phone_country'],
@@ -97,16 +97,16 @@ class Laboratory_model extends Model
 			'date' => ($record == true) ? Dates::current_date() : $data['date'],
 			'hour' => ($record == true) ? Dates::current_hour() : $data['hour'],
 			'comments' => ($record == true) ? null : (!empty($data['comments']) ? $data['comments'] : null),
-			'signatures' => ($record == true) ? null : (json_encode([
+			'signatures' => json_encode([
                 'employee' => ($record == true) ? '' : (!empty($data['employee_signature']) ? Fileloader::base64($data['employee_signature']) : ''),
-                'client' => ($record == true) ? Fileloader::base64($data['client_signature']) : ''
-            ])),
+                'contact' => ($record == true) ? Fileloader::base64($data['signature']) : ''
+            ]),
 			'qr' => ($record == true) ? $data['qr']['filename'] : null,
 			'pdf' => null,
 			'lang' => ($record == true) ? Session::get_value('vkye_lang') : null,
 			'closed' => ($record == true) ? false : true,
 			'user' => ($record == true) ? null : Session::get_value('vkye_user')['id'],
-			'version' => ($record == true) ? 'v2' : null,
+			'version' => 'v2',
 			'deleted' => false
         ]);
 
@@ -897,7 +897,7 @@ class Laboratory_model extends Model
 		return !empty($query) ? $query[0] : null;
 	}
 
-	public function create_authentication($data)
+	public function start_authentication($data)
 	{
 		$query = $this->database->update('system_collectors', [
 			'authentication' => json_encode([
@@ -911,7 +911,7 @@ class Laboratory_model extends Model
 		return $query;
 	}
 
-	public function delete_authentication($id)
+	public function end_authentication($id)
 	{
 		$query = $this->database->update('system_collectors', [
 			'authentication' => json_encode([

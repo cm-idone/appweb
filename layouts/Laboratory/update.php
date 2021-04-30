@@ -11,11 +11,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
 %{header}%
 <main class="workspace unmodbar">
     <article class="scanner-4 create">
-        <header>
-            <h1>{$lang.custody_chain}</h1>
-        </header>
         <form name="update_custody_chain">
-            <p>{$lang.custody_chain_alert_1}</p>
             <h2>{$lang.donor_identification}</h2>
             <fieldset class="fields-group">
                 <div class="text">
@@ -133,7 +129,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
             <h2>{$lang.exam_reasons}</h2>
             <fieldset class="fields-group">
                 <div class="row">
-                    <div class="span4">
+                    <div class="<?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? 'span6' : 'span4'); ?>">
                         <div class="text">
                             <input type="text" value="<?php echo $global['custody_chain']['token'] ?>" disabled>
                         </div>
@@ -141,7 +137,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                             <h6>{$lang.token}</h6>
                         </div>
                     </div>
-                    <div class="span4">
+                    <div class="<?php echo ((empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? 'span6' : 'span4'); ?>">
                         <div class="text">
                             <input type="text" value="{$lang.<?php echo $global['custody_chain']['type'] ?>}" disabled>
                         </div>
@@ -149,18 +145,20 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                             <h6>{$lang.type}</h6>
                         </div>
                     </div>
-                    <div class="span4">
-                        <div class="text">
-                            <select name="reason">
-                                <option value="random" <?php echo (($global['custody_chain']['reason'] == 'random') ? 'selected' : '') ?>>{$lang.random}</option>
-                                <option value="reasonable_suspicion" <?php echo (($global['custody_chain']['reason'] == 'reasonable_suspicion') ? 'selected' : '') ?>>{$lang.reasonable_suspicion}</option>
-                                <option value="periodic" <?php echo (($global['custody_chain']['reason'] == 'periodic') ? 'selected' : '') ?>>{$lang.periodic}</option>
-                            </select>
+                    <?php if (!empty($global['custody_chain']['account'])) : ?>
+                        <div class="span4">
+                            <div class="text">
+                                <select name="reason">
+                                    <option value="random" <?php echo (($global['custody_chain']['reason'] == 'random') ? 'selected' : '') ?>>{$lang.random}</option>
+                                    <option value="reasonable_suspicion" <?php echo (($global['custody_chain']['reason'] == 'reasonable_suspicion') ? 'selected' : '') ?>>{$lang.reasonable_suspicion}</option>
+                                    <option value="periodic" <?php echo (($global['custody_chain']['reason'] == 'periodic') ? 'selected' : '') ?>>{$lang.periodic}</option>
+                                </select>
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.reason}</h6>
+                            </div>
                         </div>
-                        <div class="title">
-                            <h6>{$lang.reason}</h6>
-                        </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
             </fieldset>
             <?php if ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') : ?>
@@ -440,9 +438,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                     </div>
                 </fieldset>
             <?php endif; ?>
-            <?php if (($global['custody_chain']['type'] == 'alcoholic' OR $global['custody_chain']['type'] == 'antidoping') OR (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND !empty($global['custody_chain']['account']))) : ?>
+            <?php if (!empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'alcoholic' OR $global['custody_chain']['type'] == 'antidoping') OR (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac'))) : ?>
                 <h2>{$lang.authorization_donor}</h2>
-                <p>{$lang.custody_chain_alert_<?php echo $global['custody_chain']['type']; ?>_1}</p>
                 <fieldset class="fields-group">
                     <div class="signature" id="employee_signature">
                         <canvas></canvas>
@@ -462,7 +459,6 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                 </fieldset>
             <?php endif; ?>
             <h2>{$lang.authorization_chemical}</h2>
-            <p>{$lang.custody_chain_alert_<?php echo $global['custody_chain']['type']; ?>_2}</p>
             <fieldset class="fields-group">
                 <div class="row">
                     <div class="span4">

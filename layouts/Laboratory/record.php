@@ -17,6 +17,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.1']);
     </div>
     <div>
         <h2 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['rfc']; ?></h2>
+        <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['sanitary_opinion']; ?></h3>
         <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['address']['first']; ?></h3>
         <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['address']['second']; ?></h3>
         <?php if ($global['render'] == 'go' AND empty(System::temporal('get', 'record', 'covid'))) : ?>
@@ -37,17 +38,18 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.1']);
         </div>
     <?php elseif ($global['render'] == 'go') : ?>
         <?php if ($global['collector']['authentication']['type'] == 'alcoholic') : ?>
-            <form name="record">
+            <form name="create_record">
 
             </form>
         <?php elseif ($global['collector']['authentication']['type'] == 'antidoping') : ?>
-            <form name="record">
+            <form name="create_record">
 
             </form>
         <?php elseif ($global['collector']['authentication']['type'] == 'covid') : ?>
             <?php if (!empty(System::temporal('get', 'record', 'covid'))) : ?>
-                <div class="create">
-                    <h4>{$lang.your_token_is}: <?php echo System::temporal('get', 'record', 'covid')['token']; ?></h4>
+                <div class="record">
+                    <h4>{$lang.your_token_is}</h4>
+                    <h5><?php echo System::temporal('get', 'record', 'covid')['token']; ?></h5>
                     <p>¡{$lang.hi} <strong><?php echo explode(' ', System::temporal('get', 'record', 'covid')['firstname'])[0]; ?></strong>! {$lang.covid_alert_1} <strong><?php echo System::temporal('get', 'record', 'covid')['email']; ?></strong> {$lang.covid_alert_2}</p>
                     <figure>
                         <img src="{$path.uploads}<?php echo System::temporal('get', 'record', 'covid')['qr']['filename']; ?>">
@@ -62,17 +64,17 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.1']);
                             <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.know_our_laboratory}" data-url="https://<?php echo $global['laboratory']['website']; ?>"><i class="fas fa-share-alt"></i>{$lang.share}</a>
                         </div>
                     </div>
-                    <a data-action="restore_record">{$lang.restore_record}</a>
+                    <a data-action="restore_record">{$lang.record_other_person}</a>
                 </div>
             <?php else : ?>
-                <form name="record">
-                    <!-- <h2>¡{$lang.record_now}!</h2> -->
-                    <!-- <h6>{$lang.covid_test} | <?php echo $global['collector']['authentication']['taker']['name']; ?> | <?php echo Dates::format_date(Dates::current_date(), 'long_year'); ?></h6> -->
+                <form name="create_record">
                     <div class="share">
                         <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
                         <a href="tel:<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
                         <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.know_our_laboratory}" data-url="https://<?php echo $global['laboratory']['website']; ?>"><i class="fas fa-share-alt"></i>{$lang.share}</a>
                     </div>
+                    <h4>{$lang.record}</h4>
+                    <p>{$lang.custody_chain_alert_1}</p>
                     <div data-step>
                         <h4>{$lang.what_your_name}</h4>
                         <fieldset class="fields-group">
@@ -152,7 +154,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.1']);
                         </fieldset>
                         <fieldset class="fields-group">
                             <div class="text">
-                                <input type="text" name="ife" placeholder="{$lang.write_your_passport}">
+                                <input type="text" name="passport" placeholder="{$lang.write_your_passport}">
                             </div>
                         </fieldset>
                     </div>
@@ -414,26 +416,29 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.1']);
                             </div>
                         </fieldset>
                     </div>
-                    <div class="accept_terms">
-                        <div class="caption">
-                            <p>{$lang.accept_terms_1} <?php echo $global['laboratory']['business']; ?> {$lang.accept_terms_2}</p>
-                        </div>
-                        <div class="checkbox st-1">
-                            <label>
-                                <span>{$lang.accept}</span>
-                                <input type="checkbox" name="accept_terms">
-                            </label>
-                        </div>
-                    </div>
-                    <fieldset class="fields-group">
-                        <div class="signature" id="client_signature">
-                            <canvas></canvas>
-                            <div class="sign_by_first_time">
-                                <a data-action="clean_client_signature"><i class="fas fa-trash"></i></a>
+                    <div data-step>
+                        <h4>{$lang.signature}</h4>
+                        <p>{$lang.accept_terms_1} <a href="https://<?php echo $global['laboratory']['website']; ?>/terminos-y-condiciones" target="_blank">{$lang.terms_and_conditions}</a> {$lang.accept_terms_2} <a href="https://<?php echo $global['laboratory']['website']; ?>/aviso-de-privacidad" target="_blank">{$lang.privacy_notice}</a></p>
+                        <div class="accept_terms">
+                            <div class="caption">
+                                <p>{$lang.accept_terms_3} <?php echo $global['laboratory']['business']; ?> {$lang.accept_terms_4}</p>
                             </div>
                         </div>
-                        <div class="title">
-                            <h6>{$lang.signature}</h6>
+                        <fieldset class="fields-group">
+                            <div class="signature" id="signature">
+                                <canvas></canvas>
+                                <div class="sign_by_first_time">
+                                    <a data-action="clean_signature"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.sign_here}</h6>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <fieldset class="fields-group">
+                        <div class="button">
+                            <button type="submit" class="success">{$lang.end_and_send}</button>
                         </div>
                     </fieldset>
                     <div class="operating_permits">
@@ -455,15 +460,10 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.1']);
                             </figure>
                         </div>
                         <div>
-                            <h4>{$lang.sanitary_opinion}</h4>
-                            <h6><?php echo $global['laboratory']['sanitary_opinion']; ?></h6>
+                            <h4><?php echo $global['laboratory']['sanitary_opinion']; ?></h4>
+                            <h6>{$lang.sanitary_opinion}</h6>
                         </div>
                     </div>
-                    <fieldset class="fields-group">
-                        <div class="button">
-                            <button type="submit" class="success">{$lang.end_and_send}</button>
-                        </div>
-                    </fieldset>
                 </form>
             <?php endif; ?>
         <?php endif; ?>

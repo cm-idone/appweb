@@ -55,28 +55,28 @@ $(document).ready(function()
             $('[data-hidden="sf_covid_time"]').removeClass('hidden');
     });
 
-    var client_signature = document.getElementById('client_signature');
-    var client_canvas = client_signature.querySelector('canvas');
-    var client_pad = new SignaturePad(client_canvas, {
+    var signature = document.getElementById('signature');
+    var signature_canvas = signature.querySelector('canvas');
+    var signature_pad = new SignaturePad(signature_canvas, {
         backgroundColor: 'rgb(255, 255, 255)'
     });
 
-    resize_canvas(client_canvas);
+    resize_canvas(signature_canvas);
 
-    $('[data-action="clean_client_signature"]').on('click', function()
+    $('[data-action="clean_signature"]').on('click', function()
     {
-        client_pad.clear();
+        signature_pad.clear();
     });
 
-    $('form[name="record"]').on('submit', function(event)
+    $('form[name="create_record"]').on('submit', function(event)
     {
         event.preventDefault();
 
         var form = $(this);
         var data = new FormData(form[0]);
 
-        data.append('client_signature', ((client_pad.isEmpty()) ? '' : client_pad.toDataURL('image/jpeg')));
-        data.append('action','record');
+        data.append('signature', ((signature_pad.isEmpty()) ? '' : signature_pad.toDataURL('image/jpeg')));
+        data.append('action','create_record');
 
         $.ajax({
             type: 'POST',
