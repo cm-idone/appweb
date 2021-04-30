@@ -605,12 +605,12 @@ class Laboratory_model extends Model
 		{
 			// if (!empty($data['custody_chain']['signature']))
 			// 	Fileloader::down($data['custody_chain']['signature']);
-			//
-			// if (!empty($data['custody_chain']['qr']))
-			// 	Fileloader::down($data['custody_chain']['qr']);
-			//
-			// if (!empty($data['custody_chain']['pdf']))
-			// 	Fileloader::down($data['custody_chain']['pdf']);
+
+			if (!empty($data['custody_chain']['qr']))
+				Fileloader::down($data['custody_chain']['qr']);
+
+			if (!empty($data['custody_chain']['pdf']))
+				Fileloader::down($data['custody_chain']['pdf']);
 		}
 		else
 		{
