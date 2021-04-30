@@ -39,11 +39,11 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.1']);
     <?php elseif ($global['render'] == 'go') : ?>
         <?php if ($global['collector']['authentication']['type'] == 'alcoholic') : ?>
             <form name="create_record">
-
+                <!--  -->
             </form>
         <?php elseif ($global['collector']['authentication']['type'] == 'antidoping') : ?>
             <form name="create_record">
-
+                <!--  -->
             </form>
         <?php elseif ($global['collector']['authentication']['type'] == 'covid') : ?>
             <?php if (!empty(System::temporal('get', 'record', 'covid'))) : ?>
@@ -154,7 +154,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.1']);
                         </fieldset>
                         <fieldset class="fields-group">
                             <div class="text">
-                                <input type="text" name="passport" placeholder="{$lang.write_your_passport}">
+                                <input type="text" name="ife" placeholder="{$lang.write_your_passport}">
                             </div>
                         </fieldset>
                     </div>

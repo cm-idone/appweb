@@ -25,9 +25,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
 <main class="laboratory">
     <div class="results">
         <?php if ($global['custody_chain']['type'] == 'alcoholic') : ?>
-
+            <!--  -->
         <?php elseif ($global['custody_chain']['type'] == 'antidoping') : ?>
-
+            <!--  -->
         <?php elseif ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') : ?>
             <h2>{$lang.results}</h2>
             <div class="counter">
@@ -129,6 +129,12 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                     <td>{$lang.age}:</td>
                     <td><?php echo $global['custody_chain']['contact']['age']; ?> {$lang.years}</td>
                 </tr>
+                <?php if ($global['custody_chain']['version'] == 'v1') : ?>
+                    <tr>
+                        <td>{$lang.travel_to}:</td>
+                        <td><?php echo $global['custody_chain']['contact']['travel_to']; ?></td>
+                    </tr>
+                <?php endif; ?>
                 <?php if ($global['custody_chain']['version'] == 'v2') : ?>
                     <tr>
                         <td>{$lang.nationality}:</td>
@@ -137,7 +143,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                 <?php endif; ?>
                 <tr>
                     <td>{$lang.passport}:</td>
-                    <td><?php echo (($global['custody_chain']['version'] == 'v2') ?  $global['custody_chain']['contact']['passport'] :  $global['custody_chain']['contact']['ife']); ?></td>
+                    <td><?php echo $global['custody_chain']['contact']['passport']; ?></td>
                 </tr>
             </table>
             <?php if ($global['custody_chain']['version'] == 'v2') : ?>

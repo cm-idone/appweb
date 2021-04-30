@@ -8,11 +8,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
 
 %{header}%
 <header class="modbar">
-    <span class="title"><strong><?php echo count($global['custody_chains']) . ' Registros'; ?></strong></span>
+    <span class="title"><strong><?php echo count($global['custody_chains']) . ' {$lang.records}'; ?></strong></span>
     <div class="buttons">
-        <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'deleted') : ?>
-            <a data-action="empty_custody_chains" class="btn alert auto"><i class="fas fa-trash"></i>{$lang.empty_trash}</a>
-        <?php endif; ?>
         <a data-action="filter_custody_chains" class="btn auto success"><i class="fas fa-filter"></i>{$lang.filter}</a>
         <fieldset class="fields-group big">
             <div class="compound st-4-left">
@@ -27,7 +24,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
         <tbody>
             <?php foreach ($global['custody_chains'] as $value) : ?>
                 <tr>
-                    <?php if (empty($value['account'])) : ?>
+                    <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
                         <?php if ($value['type'] == 'alcoholic') : ?>
                             <!--  -->
                         <?php elseif ($value['type'] == 'antidoping') : ?>
@@ -36,7 +33,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                             <td class="hidden"><?php echo $value['contact']['birth_date']; ?></td>
                             <td class="hidden"><?php echo $value['contact']['age']; ?></td>
                             <td class="hidden"><?php echo $value['contact']['sex']; ?></td>
-                            <td class="hidden"><?php echo $value['contact']['ife']; ?></td>
+                            <td class="hidden"><?php echo $value['contact']['passport']; ?></td>
                             <td class="hidden"><?php echo $value['contact']['email']; ?></td>
                             <td class="hidden">+<?php echo $value['contact']['phone']['country'] . $value['contact']['phone']['number']; ?></td>
                         <?php endif; ?>
@@ -46,7 +43,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                         <td class="smalltag"><span class="<?php echo $value['type'] ?>">{$lang.<?php echo $value['type']; ?>}</span></td>
                     <?php endif; ?>
                     <td>
-                        <?php if (empty($value['account'])) : ?>
+                        <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
                             <?php if ($value['type'] == 'alcoholic') : ?>
                                 <!--  -->
                             <?php elseif ($value['type'] == 'antidoping') : ?>
@@ -58,7 +55,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                             <?php echo $value['employee_firstname'] . ' ' . $value['employee_lastname']; ?>
                         <?php endif; ?>
                     </td>
-                    <?php if (empty($value['account'])) : ?>
+                    <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
                         <?php if ($value['type'] == 'alcoholic') : ?>
                             <!--  -->
                         <?php elseif ($value['type'] == 'antidoping') : ?>
@@ -73,18 +70,18 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                         <td class="smalltag"><span><?php echo $value['laboratory_name']; ?></span></td>
                         <td class="smalltag"><span><?php echo $value['taker_name']; ?></span></td>
                         <td class="smalltag"><span><?php echo $value['collector_name']; ?></span></td>
+                        <td class="button">
+                            <?php if (!empty($value['pdf'])) : ?>
+                                <a href="{$path.uploads}<?php echo $value['pdf']; ?>" download="<?php echo $value['pdf']; ?>"><i class="fas fa-file-pdf"></i><span>{$lang.download_pdf}</span></a>
+                            <?php endif; ?>
+                        </td>
                     <?php endif; ?>
-                    <td class="button">
-                        <?php if (!empty($value['pdf'])) : ?>
-                            <a href="{$path.uploads}<?php echo $value['pdf']; ?>" download="<?php echo $value['pdf']; ?>"><i class="fas fa-file-pdf"></i><span>{$lang.download_pdf}</span></a>
-                        <?php endif; ?>
-                    </td>
-                    <?php if ($value['deleted'] == true AND (($global['render'] == 'alcoholic' AND Permissions::user(['delete_alcoholic']) == true) OR ($global['render'] == 'antidoping' AND Permissions::user(['delete_antidoping']) == true) OR ($global['render'] == 'covid' AND Permissions::user(['delete_covid']) == true))) : ?>
+                    <?php if ($value['deleted'] == true AND (($global['render'] == 'alcoholic' AND Permissions::user(['restore_alcoholic']) == true) OR ($global['render'] == 'antidoping' AND Permissions::user(['restore_antidoping']) == true) OR ($global['render'] == 'covid' AND Permissions::user(['restore_covid']) == true))) : ?>
                         <td class="button">
                             <a data-action="restore_custody_chain" data-id="<?php echo $value['id']; ?>"><i class="fas fa-reply"></i><span>{$lang.restore}</span></a>
                         </td>
                     <?php endif; ?>
-                    <?php if (($global['render'] == 'alcoholic' AND Permissions::user(['delete_alcoholic']) == true) OR ($global['render'] == 'antidoping' AND Permissions::user(['delete_antidoping']) == true) OR ($global['render'] == 'covid' AND Permissions::user(['delete_covid']) == true)) : ?>
+                    <?php if (($value['deleted'] == false AND (($global['render'] == 'alcoholic' AND Permissions::user(['delete_alcoholic']) == true) OR ($global['render'] == 'antidoping' AND Permissions::user(['delete_antidoping']) == true) OR ($global['render'] == 'covid' AND Permissions::user(['delete_covid']) == true))) OR ($value['deleted'] == true AND (($global['render'] == 'alcoholic' AND Permissions::user(['trash_alcoholic']) == true) OR ($global['render'] == 'antidoping' AND Permissions::user(['trash_antidoping']) == true) OR ($global['render'] == 'covid' AND Permissions::user(['trash_covid']) == true)))) : ?>
                         <td class="button">
                             <a data-action="delete_custody_chain" data-id="<?php echo $value['id']; ?>" class="alert"><i class="fas fa-trash"></i><span>{$lang.delete}</span></a>
                         </td>
@@ -106,7 +103,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                 <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
                     <fieldset class="fields-group">
                         <div class="row">
-                            <div class="span3">
+                            <div class="<?php echo ((System::temporal('get', 'laboratory', 'filter')['own'] == 'account') ? 'span9' : 'span3'); ?>">
                                 <div class="text">
                                     <select name="own">
                                         <option value="account" <?php echo ((System::temporal('get', 'laboratory', 'filter')['own'] == 'account') ? 'selected' : '') ?>>{$lang.account} (<?php echo Session::get_value('vkye_account')['name']; ?>)</option>
@@ -120,9 +117,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                                     <h6>{$lang.own}</h6>
                                 </div>
                             </div>
-                            <div class="span3">
+                            <div class="span3 <?php echo ((System::temporal('get', 'laboratory', 'filter')['own'] == 'account') ? 'hidden' : ''); ?>">
                                 <div class="text">
-                                    <select name="taker" <?php echo ((System::temporal('get', 'laboratory', 'filter')['own'] == 'account') ? 'disabled' : ''); ?>>
+                                    <select name="taker">
                                         <option value="all" <?php echo ((System::temporal('get', 'laboratory', 'filter')['taker'] == 'all') ? 'selected' : '') ?>>{$lang.all}</option>
                                         <?php foreach ($global['takers'] as $value) : ?>
                                             <option value="<?php echo $value['id']; ?>" <?php echo ((System::temporal('get', 'laboratory', 'filter')['taker'] == $value['id']) ? 'selected' : '') ?>><?php echo $value['name']; ?></option>
@@ -133,9 +130,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                                     <h6>{$lang.taker}</h6>
                                 </div>
                             </div>
-                            <div class="span3">
+                            <div class="span3 <?php echo ((System::temporal('get', 'laboratory', 'filter')['own'] == 'account') ? 'hidden' : ''); ?>">
                                 <div class="text">
-                                    <select name="collector" <?php echo ((System::temporal('get', 'laboratory', 'filter')['own'] == 'account') ? 'disabled' : ''); ?>>
+                                    <select name="collector">
                                         <option value="all" <?php echo ((System::temporal('get', 'laboratory', 'filter')['collector'] == 'all') ? 'selected' : '') ?>>{$lang.all}</option>
                                         <?php foreach ($global['collectors'] as $value) : ?>
                                             <option value="<?php echo $value['id']; ?>" <?php echo ((System::temporal('get', 'laboratory', 'filter')['collector'] == $value['id']) ? 'selected' : '') ?>><?php echo $value['name']; ?></option>
@@ -175,7 +172,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                         </div>
                     </fieldset>
                 <?php endif; ?>
-                <fieldset class="fields-group">
+                <fieldset class="fields-group <?php echo ((System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'deleted') ? 'hidden' : ''); ?>">
                     <div class="row">
                         <div class="span6">
                             <div class="text">
@@ -195,7 +192,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                         </div>
                     </div>
                 </fieldset>
-                <fieldset class="fields-group">
+                <fieldset class="fields-group <?php echo ((System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'deleted') ? 'hidden' : ''); ?>">
                     <div class="row">
                         <div class="span6">
                             <div class="text">
@@ -216,9 +213,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                     </div>
                 </fieldset>
                 <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
-                    <fieldset class="fields-group">
+                    <fieldset class="fields-group <?php echo ((System::temporal('get', 'laboratory', 'filter')['own'] == 'account' OR System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'deleted') ? 'hidden' : ''); ?>">
                         <div class="text">
-                            <select name="sended_status" <?php echo ((System::temporal('get', 'laboratory', 'filter')['own'] == 'account' OR System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'deleted') ? 'disabled' : ''); ?>>
+                            <select name="sended_status">
                                 <option value="all" <?php echo ((System::temporal('get', 'laboratory', 'filter')['sended_status'] == 'all') ? 'selected' : '') ?>>{$lang.all}</option>
                                 <option value="not_sended" <?php echo ((System::temporal('get', 'laboratory', 'filter')['sended_status'] == 'not_sended') ? 'selected' : '') ?>>{$lang.not_sended}</option>
                                 <option value="sended" <?php echo ((System::temporal('get', 'laboratory', 'filter')['sended_status'] == 'sended') ? 'selected' : '') ?>>{$lang.sended}</option>

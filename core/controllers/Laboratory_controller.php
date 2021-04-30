@@ -249,7 +249,7 @@ class Laboratory_controller extends Controller
 				{
 					$errors = [];
 
-					if (empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac'))
+					if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up')
 					{
 						if (Validations::empty($_POST['firstname']) == false)
 	    					array_push($errors, ['firstname','{$lang.dont_leave_this_field_empty}']);
@@ -285,7 +285,7 @@ class Laboratory_controller extends Controller
 						   array_push($errors, ['lang','{$lang.dont_leave_this_field_empty}']);
 					}
 
-    				if (Validations::empty($_POST['reason']) == false)
+    				if ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Validations::empty($_POST['reason']) == false)
     					array_push($errors, ['reason','{$lang.dont_leave_this_field_empty}']);
 
 					if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND Validations::empty($_POST['start_process']) == false)
@@ -315,10 +315,16 @@ class Laboratory_controller extends Controller
 					if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igm_result']) == false)
 						array_push($errors, ['test_igm_result','{$lang.dont_leave_this_field_empty}']);
 
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igm_unity']) == false)
+						array_push($errors, ['test_igm_result','{$lang.dont_leave_this_field_empty}']);
+
 					if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igm_reference_values']) == false)
 						array_push($errors, ['test_igm_reference_values','{$lang.dont_leave_this_field_empty}']);
 
 					if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igg_result']) == false)
+						array_push($errors, ['test_igg_result','{$lang.dont_leave_this_field_empty}']);
+
+					if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igg_unity']) == false)
 						array_push($errors, ['test_igg_result','{$lang.dont_leave_this_field_empty}']);
 
 					if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igg_reference_values']) == false)
@@ -335,10 +341,10 @@ class Laboratory_controller extends Controller
 
     				if (empty($errors))
     				{
-						if (empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac'))
+						if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up')
 						{
-							$_POST['qr']['filename'] = 'covid_qr_' . $global['custody_chain']['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
-							$_POST['pdf']['filename'] = 'covid_pdf_' . $global['custody_chain']['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
+							$_POST['qr']['filename'] = $global['custody_chain']['type'] . '_qr_' . $global['custody_chain']['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
+							$_POST['pdf']['filename'] = $global['custody_chain']['type'] . '_pdf_' . $global['custody_chain']['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
 						}
 
 						$_POST['custody_chain'] = $global['custody_chain'];
@@ -347,7 +353,7 @@ class Laboratory_controller extends Controller
 
     					if (!empty($query))
     					{
-							if (empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') AND $_POST['save'] == 'save_and_send')
+							if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND $_POST['save'] == 'save_and_send')
 							{
 								$mail = new Mailer(true);
 
@@ -375,6 +381,9 @@ class Laboratory_controller extends Controller
 															</tr>
 															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['custody_chain']['laboratory_rfc'] . '</td>
+															</tr>
+															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['custody_chain']['laboratory_sanitary_opinion'] . '</td>
 															</tr>
 															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['custody_chain']['laboratory_address']['first'] . '</td>
@@ -459,7 +468,7 @@ class Laboratory_controller extends Controller
     						echo json_encode([
     							'status' => 'success',
     							'message' => '{$lang.operation_success}',
-								'path' => (empty($global['custody_chain']['account']) AND ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac')) ? '/laboratory/covid' : 'go_back'
+								'path' => (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? '/laboratory/' . (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') ? 'covid' : $global['custody_chain']['type']) : 'go_back'
     						]);
     					}
     					else
@@ -637,8 +646,8 @@ class Laboratory_controller extends Controller
 							if (Validations::empty($_POST['nationality']) == false)
 								array_push($errors, ['nationality','{$lang.dont_leave_this_field_empty}']);
 
-							if (Validations::empty($_POST['passport']) == false)
-								array_push($errors, ['passport','{$lang.dont_leave_this_field_empty}']);
+							if (Validations::empty($_POST['ife']) == false)
+								array_push($errors, ['ife','{$lang.dont_leave_this_field_empty}']);
 
 							if (Validations::equals($_POST['sex'], 'female') AND Validations::empty($_POST['sf_pregnant']) == false)
 								array_push($errors, ['sf_pregnant','{$lang.dont_leave_this_field_empty}']);
