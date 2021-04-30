@@ -290,7 +290,7 @@ class Laboratory_model extends Model
 			'custody_chains.date',
 			'custody_chains.hour',
 			'custody_chains.comments',
-			'custody_chains.signatures',
+			'custody_chains.signature',
 			'custody_chains.qr',
 			'custody_chains.pdf',
 			'custody_chains.lang',
