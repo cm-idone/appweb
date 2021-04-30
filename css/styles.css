@@ -702,11 +702,11 @@ main.laboratory > div.record > h4 {
 
 main.laboratory > div.record > h5 {
     margin-bottom: 40px;
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 24;
+    font-weight: 600;
     text-transform: uppercase;
     text-align: center;
-    color: #757575;
+    color: #212121;
 }
 
 main.laboratory > div.record > p {
