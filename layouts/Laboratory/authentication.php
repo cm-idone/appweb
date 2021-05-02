@@ -11,9 +11,10 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
         <figure>
             <img src="{$path.uploads}<?php echo $global['laboratory']['avatar']; ?>">
         </figure>
-        <h1><?php echo $global['laboratory']['business']; ?></h1>
+        <h1><?php echo $global['laboratory']['name']; ?></h1>
     </div>
     <div>
+        <h2 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['business']; ?></h2>
         <h2 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['rfc']; ?></h2>
         <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['sanitary_opinion']; ?></h3>
         <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['address']['first']; ?></h3>
@@ -34,8 +35,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
                     <div class="text">
                         <select name="type">
                             <option value="" class="hidden">{$lang.choose_an_option}</option>
-                            <option value="alcoholic">{$lang.to_do_test} {$lang.alcoholic}</option>
-                            <option value="antidoping">{$lang.to_do_test} {$lang.antidoping}</option>
+                            <!-- <option value="alcoholic">{$lang.to_do_test} {$lang.alcoholic}</option>
+                            <option value="antidoping">{$lang.to_do_test} {$lang.antidoping}</option> -->
                             <option value="covid">{$lang.to_do_test} {$lang.covid}</option>
                         </select>
                     </div>
@@ -65,7 +66,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
         <?php else : ?>
             <div class="authentication">
                 <h4><i class="fas fa-check-circle"></i>{$lang.authenticated}</h4>
-                <h5>{$lang.<?php echo $global['collector']['authentication']['type']; ?>} | <?php echo $global['collector']['authentication']['taker']['name']; ?> | <?php echo Dates::format_date(Dates::current_date(), 'long_year'); ?></h5>
+                <h5>{$lang.to_do_test} {$lang.<?php echo $global['collector']['authentication']['type']; ?>}</h5>
+                <h6><?php echo $global['collector']['authentication']['taker']['name']; ?></h6>
                 <figure>
                     <img src="{$path.uploads}<?php echo $global['collector']['qrs']['authentication']; ?>">
                 </figure>
@@ -77,13 +79,14 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
 </main>
 <footer class="laboratory">
     <div style="background-color:<?php echo $global['laboratory']['colors']['second']; ?>;">
-        <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>"><i class="fab fa-whatsapp"></i><?php echo $global['laboratory']['phone']; ?></a>
-        <a href="tel:<?php echo $global['laboratory']['phone']; ?>"><i class="fas fa-phone"></i><?php echo $global['laboratory']['phone']; ?></a>
-        <a href="mailto:<?php echo $global['laboratory']['email']; ?>"><i class="fas fa-envelope"></i><?php echo $global['laboratory']['email']; ?></a>
-        <a href="https://facebook.com/<?php echo $global['laboratory']['rrss']['facebook']; ?>" target="_blank"><i class="fab fa-facebook"></i>@<?php echo $global['laboratory']['rrss']['facebook']; ?></a>
-        <a href="https://instagram.com/<?php echo $global['laboratory']['rrss']['instagram']; ?>" target="_blank"><i class="fab fa-instagram"></i>@<?php echo $global['laboratory']['rrss']['instagram']; ?></a>
-        <a href="https://linkedin.com/company/<?php echo $global['laboratory']['rrss']['linkedin']; ?>" target="_blank"><i class="fab fa-linkedin"></i>@<?php echo $global['laboratory']['rrss']['linkedin']; ?></a>
-        <a href="https://<?php echo $global['laboratory']['website']; ?>" target="_blank"><i class="fas fa-globe"></i><?php echo $global['laboratory']['website']; ?></a>
+        <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="tel:<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i></a>
+        <a href="mailto:<?php echo $global['laboratory']['email']; ?>" target="_blank"><i class="fas fa-envelope"></i></a>
+        <a href="https://facebook.com/<?php echo $global['laboratory']['rrss']['facebook']; ?>" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://instagram.com/<?php echo $global['laboratory']['rrss']['instagram']; ?>" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://linkedin.com/company/<?php echo $global['laboratory']['rrss']['linkedin']; ?>" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://<?php echo $global['laboratory']['website']; ?>/vcard" target="_blank"><i class="fas fa-address-card"></i></a>
+        <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.know_our_laboratory}" data-url="https://<?php echo $global['laboratory']['website']; ?>/vcard"><i class="fas fa-share-alt"></i></a>
     </div>
     <div style="background-color:<?php echo $global['laboratory']['colors']['first']; ?>;">
         <a href="https://id.one-consultores.com" target="_blank">{$lang.power_by} <strong><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?></strong></a>

@@ -72,8 +72,24 @@ class Languages
                 'en' => 'Results report'
             ],
             'laboratory_analisys' => [
-                'es' => 'Laboratorio de análisis clinicos',
-                'en' => 'Clinical analysis laboratory'
+                'es' => 'Laboratorio clinico',
+                'en' => 'Clinical laboratory'
+            ],
+            'general_patient_data' => [
+                'es' => 'Datos generales del paciente',
+                'en' => 'General patient data'
+            ],
+            'name' => [
+                'es' => 'Nombre',
+                'en' => 'Name'
+            ],
+            'id' => [
+                'es' => 'ID',
+                'en' => 'ID'
+            ],
+            'results' => [
+                'es' => 'Resultados',
+                'en' => 'Results'
             ],
             'n_petition' => [
                 'es' => 'N. petición',
@@ -188,8 +204,16 @@ class Languages
                 'en' => 'Anticorps'
             ],
             'nasopharynx_secretion' => [
-                'es' => 'Muestra: Secrecion Nasofaríngea',
-                'en' => 'Test: Nasopharynx Secretion'
+                'es' => 'Secrecion Nasofaríngea',
+                'en' => 'Nasopharynx Secretion'
+            ],
+            'sanguine' => [
+                'es' => 'Sanguínea',
+                'en' => 'Sanguine'
+            ],
+            'test' => [
+                'es' => 'Muestra',
+                'en' => 'Test'
             ],
             'notes' => [
                 'es' => 'Notas',
@@ -239,9 +263,21 @@ class Languages
                 'es' => 'Cédula',
                 'en' => 'Identification card'
             ],
-            'atila_biosystem' => [
-                'es' => 'Médoto: RT-PCR (Atila BioSystems)',
-                'en' => 'Method: RT-PCR (Atila BioSystems)'
+            'pcr_atila_biosystem' => [
+                'es' => 'RT-PCR (Atila BioSystems)',
+                'en' => 'RT-PCR (Atila BioSystems)'
+            ],
+            'an_atila_biosystem' => [
+                'es' => 'Inmunocromatografia',
+                'en' => 'Inmunocromatografia'
+            ],
+            'ac_atila_biosystem' => [
+                'es' => 'Inmunocromatografia',
+                'en' => 'Inmunocromatografia'
+            ],
+            'method' => [
+                'es' => 'Médoto',
+                'en' => 'Method'
             ],
             'alert_pdf_covid' => [
                 'es' => 'Este informe no podrá reproducirse parcialmente sin autorización del laboratorio que lo emite. Este documento se dirige a su destinatario y contiene información confidencial. Queda notificado que la utilización, divulgación y/o copias sin autorización está prohibido en virtud de la legislación vigente.',
@@ -254,6 +290,22 @@ class Languages
             'accept_terms_2' => [
                 'es' => 'no se hace responsable por cualquier percance producido por la mala captura de los mismos. La corrección de dichos datos tendrá un costo extra.',
                 'en' => 'It is not responsible for any mishap produced by the bad capture of the same. The correction of said data will have an extra cost.'
+            ],
+            'our_proccess_available_1' => [
+                'es' => 'Nuestros procesos están avaládos por el Dictamen Sanitario',
+                'en' => 'Our processes are endorsed by the Sanitary Opinion'
+            ],
+            'our_proccess_available_2' => [
+                'es' => 'con el RFC',
+                'en' => 'with RFC'
+            ],
+            'expedition_date' => [
+                'es' => 'Fecha de expedición',
+                'en' => 'Expedition date'
+            ],
+            'scan_to_security' => [
+                'es' => 'Escanéame para verificación de seguridad',
+                'en' => 'Scan me for security verification'
             ],
             'power_by' => [
                 'es' => 'Power by',

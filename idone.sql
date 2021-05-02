@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 25-04-2021 a las 17:41:51
+-- Tiempo de generación: 30-04-2021 a las 14:09:42
 -- Versión del servidor: 10.3.27-MariaDB-0+deb10u1
 -- Versión de PHP: 7.3.27
 
@@ -106,7 +106,7 @@ CREATE TABLE `custody_chains` (
   `date` date NOT NULL,
   `hour` time DEFAULT NULL,
   `comments` text DEFAULT NULL,
-  `signatures` text DEFAULT NULL,
+  `signature` text DEFAULT NULL,
   `qr` text DEFAULT NULL,
   `pdf` text DEFAULT NULL,
   `lang` text DEFAULT NULL,
@@ -120,8 +120,9 @@ CREATE TABLE `custody_chains` (
 -- Volcado de datos para la tabla `custody_chains`
 --
 
-INSERT INTO `custody_chains` (`id`, `account`, `token`, `employee`, `contact`, `type`, `reason`, `start_process`, `end_process`, `results`, `medicines`, `prescription`, `location`, `laboratory`, `taker`, `collector`, `chemical`, `date`, `hour`, `comments`, `signatures`, `qr`, `pdf`, `lang`, `closed`, `user`, `version`, `deleted`) VALUES
-(6510, NULL, 'TCN-gJxQpeBj', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"sex\":\"female\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"nationality\":\"Mexicana\",\"ife\":\"0987654321\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"},\"sf\":{\"pregnant\":\"not\",\"symptoms\":[\"fever\",\"eyes_pain\",\"torax_pain\",\"muscles_pain\",\"head_pain\",\"throat_pain\",\"knees_pain\",\"ears_pain\",\"joints_pain\",\"cough\",\"difficulty_breathing\",\"sweating\",\"runny_nose\",\"itching\",\"conjunctivitis\",\"vomit\",\"diarrhea\",\"smell_loss\",\"taste_loss\"],\"symptoms_time\":\"5 d\\u00edas\",\"travel\":\"yeah\",\"travel_countries\":\"Canad\\u00e1 y Estados Unidos\",\"contact\":\"yeah\",\"covid\":\"yeah\",\"covid_time\":\"6 meses\"}}', 'covid_pcr', 'random', '2021-04-25', '2021-04-25', '{\"result\":\"negative\",\"unity\":\"INDEX\",\"reference_values\":\"not_detected\"}', NULL, NULL, NULL, 2, 14, 1, 1, '2021-04-25', '16:06:42', NULL, NULL, 'covid_qr_TCN-gJxQpeBj_2021_04_25_16_26_02.png', 'covid_pdf_TCN-gJxQpeBj_2021_04_25_16_26_02.pdf', 'es', 1, 1, 'v2', 0);
+INSERT INTO `custody_chains` (`id`, `account`, `token`, `employee`, `contact`, `type`, `reason`, `start_process`, `end_process`, `results`, `medicines`, `prescription`, `location`, `laboratory`, `taker`, `collector`, `chemical`, `date`, `hour`, `comments`, `signature`, `qr`, `pdf`, `lang`, `closed`, `user`, `version`, `deleted`) VALUES
+(6516, NULL, 'TCN-MnP7JhFq', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"sex\":\"male\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"nationality\":\"Mexicana\",\"ife\":\"0987654321\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"},\"sf\":{\"pregnant\":\"not\",\"symptoms\":[],\"symptoms_time\":\"\",\"travel\":\"not\",\"travel_countries\":\"\",\"contact\":\"not\",\"covid\":\"not\",\"covid_time\":\"\"}}', 'covid_pcr', 'random', '2021-04-30', '2021-04-30', '{\"result\":\"negative\",\"unity\":\"INDEX\",\"reference_values\":\"not_detected\"}', NULL, NULL, NULL, 2, 14, 6, 1, '2021-04-30', '11:27:26', NULL, 'I6vpSQlWOkBOEBUu.png', 'covid_qr_TCN-MnP7JhFq_2021_04_30_12_26_26.png', 'covid_pdf_TCN-MnP7JhFq_2021_04_30_12_26_26.pdf', 'es', 1, 1, 'v2', 0),
+(6517, NULL, 'TCN-rX9QQkie', NULL, '{\"firstname\":\"Miguel Fernando\",\"lastname\":\"Parra Ordu\\u00f1a\",\"sex\":\"male\",\"birth_date\":\"1975-12-19\",\"age\":\"46\",\"nationality\":\"Mexicana\",\"ife\":\"G17117371\",\"email\":\"migue.parra07@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9985010226\"},\"sf\":{\"pregnant\":\"not\",\"symptoms\":[],\"symptoms_time\":\"\",\"travel\":\"not\",\"travel_countries\":\"\",\"contact\":\"not\",\"covid\":\"not\",\"covid_time\":\"\"}}', 'covid_an', 'random', '2021-04-30', '2021-04-30', '{\"result\":\"negative\",\"unity\":\"INDEX\",\"reference_values\":\"not_detected\"}', NULL, NULL, NULL, 2, 14, 6, 1, '2021-04-30', '11:37:55', NULL, 'wx2OnwVuTB1bbHVk.png', 'covid_qr_TCN-rX9QQkie_2021_04_30_11_43_33.png', 'covid_pdf_TCN-rX9QQkie_2021_04_30_11_43_33.pdf', 'es', 1, 1, 'v2', 0);
 
 -- --------------------------------------------------------
 
@@ -444,18 +445,18 @@ CREATE TABLE `system_collectors` (
 --
 
 INSERT INTO `system_collectors` (`id`, `token`, `name`, `email`, `schedule`, `qrs`, `authentication`, `notifications`, `laboratories`, `user`, `blocked`) VALUES
-(1, 'hdy73j8w', 'Gersón Gómez', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_hdy73j8w.png\",\"record\":\"system_collector_record_qr_hdy73j8w.png\"}', '{\"type\":\"covid\",\"taker\":\"14\"}', 1, '[\"1\",\"2\"]', 1, 0),
+(1, 'hdy73j8w', 'Gersón Gómez', NULL, '{\"open\":\"00:00:00\",\"close\":\"23:59:59\"}', '{\"authentication\":\"system_collector_authentication_qr_hdy73j8w.png\",\"record\":\"system_collector_record_qr_hdy73j8w.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"1\",\"2\"]', 1, 0),
 (2, 'ms38j3gh', 'Marbu Salud', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_ms38j3gh.png\",\"record\":\"system_collector_record_qr_ms38j3gh.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"1\"]', NULL, 1),
 (3, 'djaybja9', 'Alison', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_djaybja9.png\",\"record\":\"system_collector_record_qr_djaybja9.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', NULL, 0),
-(4, 'p5wj0127', 'Eduar', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_p5wj0127.png\",\"record\":\"system_collector_record_qr_p5wj0127.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"1\",\"2\"]', 5, 0),
+(4, 'p5wj0127', 'Eduar', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_p5wj0127.png\",\"record\":\"system_collector_record_qr_p5wj0127.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', 5, 0),
 (5, '9vuwfgr1', 'Julieta', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_9vuwfgr1.png\",\"record\":\"system_collector_record_qr_9vuwfgr1.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', NULL, 0),
-(6, 'ifkg76x8', 'Miguel Parra', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_ifkg76x8.png\",\"record\":\"system_collector_record_qr_ifkg76x8.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"1\",\"2\"]', 2, 0),
+(6, 'ifkg76x8', 'Miguel Parra', NULL, '{\"open\":\"08:00:00\",\"close\":\"20:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_ifkg76x8.png\",\"record\":\"system_collector_record_qr_ifkg76x8.png\"}', '{\"type\":\"covid\",\"taker\":\"14\"}', 1, '[\"2\"]', 2, 0),
 (7, 'e0SaS6QC', 'Miguel Escobedo', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_e0SaS6QC.png\",\"record\":\"system_collector_record_qr_e0SaS6QC.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', NULL, 0),
-(8, '3pd7j863', 'Noé Cuxim', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_3pd7j863.png\",\"record\":\"system_collector_record_qr_3pd7j863.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"1\",\"2\"]', 3, 0),
+(8, '3pd7j863', 'Noé Cuxim', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_3pd7j863.png\",\"record\":\"system_collector_record_qr_3pd7j863.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', 3, 0),
 (9, '4z1fd401', 'Paula', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_4z1fd401.png\",\"record\":\"system_collector_record_qr_4z1fd401.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', NULL, 0),
 (10, 'pkx8sg20', 'Román', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_pkx8sg20.png\",\"record\":\"system_collector_record_qr_pkx8sg20.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', NULL, 0),
-(11, 'ckcc1ouu', 'SkyLab', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_ckcc1ouu.png\",\"record\":\"system_collector_record_qr_ckcc1ouu.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', NULL, 1),
-(12, 'wvu7shyu', 'Yazmin', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_wvu7shyu.png\",\"record\":\"system_collector_record_qr_wvu7shyu.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"1\",\"2\"]', 4, 0);
+(11, 'ckcc1ouu', 'SkyLab', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_ckcc1ouu.png\",\"record\":\"system_collector_record_qr_ckcc1ouu.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', NULL, 0),
+(12, 'wvu7shyu', 'Yazmin', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_wvu7shyu.png\",\"record\":\"system_collector_record_qr_wvu7shyu.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -734,6 +735,7 @@ CREATE TABLE `system_laboratories` (
   `path` varchar(255) NOT NULL,
   `business` text NOT NULL,
   `rfc` text NOT NULL,
+  `sanitary_opinion` text NOT NULL,
   `address` text NOT NULL,
   `email` text NOT NULL,
   `phone` text NOT NULL,
@@ -748,9 +750,9 @@ CREATE TABLE `system_laboratories` (
 -- Volcado de datos para la tabla `system_laboratories`
 --
 
-INSERT INTO `system_laboratories` (`id`, `avatar`, `name`, `path`, `business`, `rfc`, `address`, `email`, `phone`, `rrss`, `website`, `time_zone`, `colors`, `blocked`) VALUES
-(1, 'system_laboratory_logotype_marbusalud.png', 'Marbu Salud', 'marbusalud', 'Marbu Salud S.A. de C.V.', 'MSA1907259GA', '{\"first\":\"Av. Del Sol SM47 M6 L21 Planta Alta\",\"second\":\"CP: 77506 Cancún, Qroo. México\"}', 'marbu@one-consultores.com', '+52 (998) 440 33 02', '{\"facebook\":\"marbusalud\",\"instagram\":\"marbusalud\",\"linkedin\":\"marbusalud\"}', 'marbu.one-consultores.com', 'America/Cancun', '{\"first\":\"#004770\",\"second\":\"#0b5178\"}', 1),
-(2, 'system_laboratory_logotype_skylab.png', 'SkyLab', 'skylab', 'SkyLab S.A. de C.V.', 'ABCD123456789', '{\"first\":\"Av. Del Sol SM47 M6 L21 Planta Alta\",\"second\":\"CP: 77506 Cancún, Qroo. México\"}', 'skylab@one-consultores.com', '+52 (998) 440 33 02', '{\"facebook\":\"skylab\",\"instagram\":\"skylab\",\"linkedin\":\"skylab\"}', 'skylab.one-consultores.com', 'America/Cancun', '{\"first\":\"#00acdb\",\"second\":\"#f68b1f\"}', 0);
+INSERT INTO `system_laboratories` (`id`, `avatar`, `name`, `path`, `business`, `rfc`, `sanitary_opinion`, `address`, `email`, `phone`, `rrss`, `website`, `time_zone`, `colors`, `blocked`) VALUES
+(1, 'system_laboratory_logotype_marbusalud.png', 'Marbu Salud', 'marbusalud', 'Marbu Salud S.A. de C.V.', 'MSA1907259GA', 'DPCRS-CZNCS-1029-2021', '{\"first\":\"SM47 MZ6 LT21 AV Del Sol CP 77506\",\"second\":\"Cancún, Qroo. México\"}', 'marbu@one-consultores.com', '+52 (998) 440 33 02', '{\"facebook\":\"marbusalud\",\"instagram\":\"marbusalud\",\"linkedin\":\"marbusalud\"}', 'marbu.one-consultores.com', 'America/Cancun', '{\"first\":\"#004770\",\"second\":\"#0b5178\"}', 1),
+(2, 'system_laboratory_logotype_skylab.png', 'SkyLab', 'skylab', 'SkyLab International', 'MSA1907259GA', 'DPCRS-CZNCS-1029-2021', '{\"first\":\"Av. Hidalgo por Morelos s/n Colonia Centro. SM 6, MZ 260, LT 6 Fracc. Ampliación LA\",\"second\":\"Isla Mujeres, Qroo. México\"}', 'skylab@one-consultores.com', '+52 (998) 440 33 02', '{\"facebook\":\"skylab\",\"instagram\":\"skylab\",\"linkedin\":\"skylab\"}', 'skylab.one-consultores.com', 'America/Cancun', '{\"first\":\"#00acdb\",\"second\":\"#f68b1f\"}', 0);
 
 -- --------------------------------------------------------
 
@@ -784,12 +786,12 @@ INSERT INTO `system_takers` (`id`, `name`, `token`, `prices`, `blocked`) VALUES
 (11, 'Hotel Rest Inn', 'HRI', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
 (12, 'Hotel Wesintg Regina', 'HWR', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
 (13, 'Hotel Cancún Bay', 'HCB', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(14, 'TP Cancún', 'TCN', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(15, 'TP Playa del Carmen', 'TPC', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(16, 'TP Tulum', 'TTL', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(14, 'Toma Cancún', 'TCN', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(15, 'Toma Playa del Carmen', 'TPC', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(16, 'Toma Tulum', 'TTL', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
 (17, 'Hotel Dos Playas', 'HDP', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
 (18, 'Hotel Moon Palace', 'HMP', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(19, 'TP Isla Mujeres', 'TIM', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0);
+(19, 'Toma Isla Mujeres', 'TIM', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0);
 
 -- --------------------------------------------------------
 
@@ -987,7 +989,7 @@ ALTER TABLE `accounts_permissions`
 -- AUTO_INCREMENT de la tabla `custody_chains`
 --
 ALTER TABLE `custody_chains`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6511;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6518;
 
 --
 -- AUTO_INCREMENT de la tabla `employees`

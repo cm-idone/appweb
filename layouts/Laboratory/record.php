@@ -37,6 +37,102 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.1']);
             </div>
         </div>
     <?php elseif ($global['render'] == 'go') : ?>
+        <?php if (empty(System::temporal('get', 'record', 'covid'))) : ?>
+            <form name="create_record">
+                <div class="share">
+                    <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
+                    <a href="tel:<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
+                    <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.know_our_laboratory}" data-url="https://<?php echo $global['laboratory']['website']; ?>"><i class="fas fa-share-alt"></i>{$lang.share}</a>
+                </div>
+                <h4>{$lang.record}</h4>
+                <p>{$lang.custody_chain_alert_1}</p>
+                <div data-step>
+                    <h4>{$lang.what_your_name}</h4>
+                    <fieldset class="fields-group">
+                        <div class="text">
+                            <input type="text" name="firstname" placeholder="{$lang.write_your_firstname}">
+                        </div>
+                    </fieldset>
+                    <fieldset class="fields-group">
+                        <div class="text">
+                            <input type="text" name="lastname" placeholder="{$lang.write_your_lastname}">
+                        </div>
+                    </fieldset>
+                    <fieldset class="fields-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="radio" name="sex" value="male" checked>
+                                <span>{$lang.im_male}</span>
+                            </label>
+                        </div>
+                    </fieldset>
+                    <fieldset class="fields-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="radio" name="sex" value="female">
+                                <span>{$lang.im_female}</span>
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+                <div data-step>
+                    <h4>{$lang.what_your_born}</h4>
+                    <fieldset class="fields-group">
+                        <div class="text">
+                            <select name="birth_date_day">
+                                <option value="" class="hidden">{$lang.select_your_day}</option>
+                                <?php foreach (Dates::create_lapse_date('days') as $value) : ?>
+                                    <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <fieldset class="fields-group">
+                        <div class="text">
+                            <select name="birth_date_month">
+                                <option value="" class="hidden">{$lang.select_your_month}</option>
+                                <?php foreach (Dates::create_lapse_date('months', Session::get_value('vkye_lang')) as $key => $value) : ?>
+                                    <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <fieldset class="fields-group">
+                        <div class="text">
+                            <select name="birth_date_year">
+                                <option value="" class="hidden">{$lang.select_your_year}</option>
+                                <?php foreach (Dates::create_lapse_date('years', 100) as $value) : ?>
+                                    <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </fieldset>
+                </div>
+                <div data-step>
+                    <h4>{$lang.what_your_age}</h4>
+                    <fieldset class="fields-group">
+                        <div class="text">
+                            <input type="number" name="age" placeholder="{$lang.write_your_age}">
+                        </div>
+                    </fieldset>
+                </div>
+                <div data-step>
+                    <h4>{$lang.what_your_personal_information}</h4>
+                    <fieldset class="fields-group">
+                        <div class="text">
+                            <input type="text" name="nationality" placeholder="{$lang.write_your_nationality}">
+                        </div>
+                    </fieldset>
+                    <fieldset class="fields-group">
+                        <div class="text">
+                            <input type="text" name="ife" placeholder="{$lang.write_your_ife}">
+                        </div>
+                    </fieldset>
+                </div>
+            </form>
+        <?php endif; ?>
+
+
         <?php if ($global['collector']['authentication']['type'] == 'alcoholic') : ?>
             <form name="create_record">
                 <!--  -->
@@ -46,118 +142,13 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.1']);
                 <!--  -->
             </form>
         <?php elseif ($global['collector']['authentication']['type'] == 'covid') : ?>
-            <?php if (!empty(System::temporal('get', 'record', 'covid'))) : ?>
-                <div class="record">
-                    <h4>{$lang.your_token_is}:</h4>
-                    <h5><?php echo System::temporal('get', 'record', 'covid')['token']; ?></h5>
-                    <p>¡{$lang.hi} <strong><?php echo explode(' ', System::temporal('get', 'record', 'covid')['firstname'])[0]; ?></strong>! {$lang.covid_alert_1} <strong><?php echo System::temporal('get', 'record', 'covid')['email']; ?></strong> {$lang.covid_alert_2}</p>
-                    <figure>
-                        <img src="{$path.uploads}<?php echo System::temporal('get', 'record', 'covid')['qr']['filename']; ?>">
-                    </figure>
-                    <div class="share">
-                        <div>
-                            <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.share_results}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['laboratory']['path']; ?>/results/<?php echo System::temporal('get', 'record', 'covid')['token']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_results_with_friends}</span></a>
-                        </div>
-                        <div>
-                            <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
-                            <a href="tel:<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
-                            <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.know_our_laboratory}" data-url="https://<?php echo $global['laboratory']['website']; ?>"><i class="fas fa-share-alt"></i>{$lang.share}</a>
-                        </div>
-                    </div>
-                    <a data-action="restore_record">{$lang.record_other_person}</a>
-                </div>
-            <?php else : ?>
+            <?php if (empty(System::temporal('get', 'record', 'covid'))) : ?>
                 <form name="create_record">
-                    <div class="share">
-                        <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
-                        <a href="tel:<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
-                        <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.know_our_laboratory}" data-url="https://<?php echo $global['laboratory']['website']; ?>"><i class="fas fa-share-alt"></i>{$lang.share}</a>
-                    </div>
-                    <h4>{$lang.record}</h4>
-                    <p>{$lang.custody_chain_alert_1}</p>
-                    <div data-step>
-                        <h4>{$lang.what_your_name}</h4>
-                        <fieldset class="fields-group">
-                            <div class="text">
-                                <input type="text" name="firstname" placeholder="{$lang.write_your_firstname}">
-                            </div>
-                        </fieldset>
-                        <fieldset class="fields-group">
-                            <div class="text">
-                                <input type="text" name="lastname" placeholder="{$lang.write_your_lastname}">
-                            </div>
-                        </fieldset>
-                        <fieldset class="fields-group">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="radio" name="sex" value="male" checked>
-                                    <span>{$lang.im_male}</span>
-                                </label>
-                            </div>
-                        </fieldset>
-                        <fieldset class="fields-group">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="radio" name="sex" value="female">
-                                    <span>{$lang.im_female}</span>
-                                </label>
-                            </div>
-                        </fieldset>
-                    </div>
-                    <div data-step>
-                        <h4>{$lang.what_your_born}</h4>
-                        <fieldset class="fields-group">
-                            <div class="text">
-                                <select name="birth_date_day">
-                                    <option value="" class="hidden">{$lang.select_your_day}</option>
-                                    <?php foreach (Dates::create_lapse_date('days') as $value) : ?>
-                                        <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </fieldset>
-                        <fieldset class="fields-group">
-                            <div class="text">
-                                <select name="birth_date_month">
-                                    <option value="" class="hidden">{$lang.select_your_month}</option>
-                                    <?php foreach (Dates::create_lapse_date('months', Session::get_value('vkye_lang')) as $key => $value) : ?>
-                                        <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </fieldset>
-                        <fieldset class="fields-group">
-                            <div class="text">
-                                <select name="birth_date_year">
-                                    <option value="" class="hidden">{$lang.select_your_year}</option>
-                                    <?php foreach (Dates::create_lapse_date('years', 100) as $value) : ?>
-                                        <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </fieldset>
-                    </div>
-                    <div data-step>
-                        <h4>{$lang.what_your_age}</h4>
-                        <fieldset class="fields-group">
-                            <div class="text">
-                                <input type="number" name="age" placeholder="{$lang.write_your_age}">
-                            </div>
-                        </fieldset>
-                    </div>
-                    <div data-step>
-                        <h4>{$lang.what_your_personal_information}</h4>
-                        <fieldset class="fields-group">
-                            <div class="text">
-                                <input type="text" name="nationality" placeholder="{$lang.write_your_nationality}">
-                            </div>
-                        </fieldset>
-                        <fieldset class="fields-group">
-                            <div class="text">
-                                <input type="text" name="ife" placeholder="{$lang.write_your_passport}">
-                            </div>
-                        </fieldset>
-                    </div>
+
+
+
+
+
                     <div data-step>
                         <h4>{$lang.security_form}</h4>
                         <fieldset class="fields-group hidden" data-hidden="sf_pregnant">
@@ -465,8 +456,31 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.1']);
                         </div>
                     </div>
                 </form>
+            <?php else : ?>
+                <div class="record">
+                    <h4>{$lang.your_token_is}:</h4>
+                    <h5><?php echo System::temporal('get', 'record', 'covid')['token']; ?></h5>
+                    <p>¡{$lang.hi} <strong><?php echo explode(' ', System::temporal('get', 'record', 'covid')['firstname'])[0]; ?></strong>! {$lang.covid_alert_1} <strong><?php echo System::temporal('get', 'record', 'covid')['email']; ?></strong> {$lang.covid_alert_2}</p>
+                    <figure>
+                        <img src="{$path.uploads}<?php echo System::temporal('get', 'record', 'covid')['qr']['filename']; ?>">
+                    </figure>
+                    <div class="share">
+                        <div>
+                            <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.share_results}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['laboratory']['path']; ?>/results/<?php echo System::temporal('get', 'record', 'covid')['token']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_results_with_friends}</span></a>
+                        </div>
+                        <div>
+                            <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
+                            <a href="tel:<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
+                            <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.know_our_laboratory}" data-url="https://<?php echo $global['laboratory']['website']; ?>"><i class="fas fa-share-alt"></i>{$lang.share}</a>
+                        </div>
+                    </div>
+                    <a data-action="restore_record">{$lang.record_other_person}</a>
+                </div>
             <?php endif; ?>
         <?php endif; ?>
+
+
+
     <?php endif; ?>
 </main>
 <footer class="laboratory">
