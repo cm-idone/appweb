@@ -413,7 +413,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.2']);
                 </div>
                 <fieldset class="fields-group">
                     <div class="button">
-                        <button type="submit" class="success">{$lang.end_and_send}</button>
+                        <button type="submit" class="success">{$lang.submit}</button>
                     </div>
                 </fieldset>
                 <div class="operating_permits">

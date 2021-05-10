@@ -770,12 +770,23 @@ main.laboratory > div.results > a {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 40px;
     border-radius: 5px;
     background-color: #009688;
     font-size: 16px;
     font-weight: 400;
     color: #fff;
+}
+
+main.laboratory > div.results > a[data-action="share"] {
+    margin-bottom: 20px;
+    border: 1px dashed #bdbdbd;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #757575;
+}
+
+main.laboratory > div.results > a[data-action="share"] > i {
+    margin-right: 10px;
 }
 
 main.laboratory > div.results > div.chemical {
@@ -784,6 +795,7 @@ main.laboratory > div.results > div.chemical {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin-bottom: 20px;
 }
 
 main.laboratory > div.results > div.chemical > figure,
