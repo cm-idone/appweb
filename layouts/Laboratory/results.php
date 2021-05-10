@@ -13,9 +13,10 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
         <figure>
             <img src="{$path.uploads}<?php echo $global['laboratory']['avatar']; ?>">
         </figure>
-        <h1><?php echo $global['laboratory']['business']; ?></h1>
+        <h1><?php echo $global['laboratory']['name']; ?></h1>
     </div>
     <div>
+        <h2 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['business']; ?></h2>
         <h2 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['rfc']; ?></h2>
         <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['sanitary_opinion']; ?></h3>
         <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['address']['first']; ?></h3>
@@ -29,21 +30,23 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
         <?php elseif ($global['custody_chain']['type'] == 'antidoping') : ?>
             <!--  -->
         <?php elseif ($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an' OR $global['custody_chain']['type'] == 'covid_ac') : ?>
-            <h2>{$lang.results}</h2>
+            <h4>{$lang.results}</h4>
             <div class="counter">
-                <h3 id="counter" class="<?php echo ((Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) ? 'time_on' : 'time_out'); ?>" data-date="<?php echo Dates::future_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), 72, 'hours'); ?>" data-time-zone="<?php echo $global['laboratory']['time_zone']; ?>"></h3>
-                <h2><?php echo Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour'], 'long', '12-long'); ?></h2>
+                <h5 id="counter" class="<?php echo ((Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) ? 'time_on' : 'time_out'); ?>" data-date="<?php echo Dates::future_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), 72, 'hours'); ?>" data-time-zone="<?php echo $global['laboratory']['time_zone']; ?>"></h5>
+                <h6><?php echo Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour'], 'long', '12-long'); ?></h6>
             </div>
             <table>
                     <tr>
                         <td>{$lang.exam}:</td>
-                        <?php if ($global['custody_chain']['type'] == 'covid_pcr') : ?>
-                            <td>PCR-SARS-CoV-2 (COVID-19)</td>
-                        <?php elseif ($global['custody_chain']['type'] == 'covid_an') : ?>
-                            <td>Ag-SARS-CoV-2 (COVID-19)</td>
-                        <?php elseif ($global['custody_chain']['type'] == 'covid_ac') : ?>
-                            <td>SARS-CoV-2 (2019) IgG/IgM</td>
-                        <?php endif; ?>
+                        <td>
+                            <?php if ($global['custody_chain']['type'] == 'covid_pcr') : ?>
+                                PCR-SARS-CoV-2 (COVID-19)
+                            <?php elseif ($global['custody_chain']['type'] == 'covid_an') : ?>
+                                Ag-SARS-CoV-2 (COVID-19)
+                            <?php elseif ($global['custody_chain']['type'] == 'covid_ac') : ?>
+                                SARS-CoV-2 (2019) IgG/IgM
+                            <?php endif; ?>
+                        </td>
                     </tr>
                     <tr>
                         <td>{$lang.token}:</td>
@@ -129,12 +132,6 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                     <td>{$lang.age}:</td>
                     <td><?php echo $global['custody_chain']['contact']['age']; ?> {$lang.years}</td>
                 </tr>
-                <?php if ($global['custody_chain']['version'] == 'v1') : ?>
-                    <tr>
-                        <td>{$lang.travel_to}:</td>
-                        <td><?php echo $global['custody_chain']['contact']['travel_to']; ?></td>
-                    </tr>
-                <?php endif; ?>
                 <?php if ($global['custody_chain']['version'] == 'v2') : ?>
                     <tr>
                         <td>{$lang.nationality}:</td>
@@ -145,20 +142,24 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                     <td>{$lang.passport}:</td>
                     <td><?php echo $global['custody_chain']['contact']['ife']; ?></td>
                 </tr>
+                <tr>
+                    <td>{$lang.travel_to}:</td>
+                    <td><?php echo $global['custody_chain']['contact']['travel_to']; ?></td>
+                </tr>
             </table>
             <?php if ($global['custody_chain']['version'] == 'v2') : ?>
                 <table>
                     <?php if ($global['custody_chain']['contact']['sex'] == 'female') : ?>
                         <tr>
                             <td>{$lang.pregnant}:</td>
-                            <td>{$lang.<?php echo $global['custody_chain']['contact']['sf']['pregnant']; ?>}</td>
+                            <td>{$lang.<?php echo $global['custody_chain']['contact']['pregnant']; ?>}</td>
                         </tr>
                     <?php endif; ?>
                     <tr>
                         <td>{$lang.symptoms}:</td>
                         <td>
-                            <?php if (!empty($global['custody_chain']['contact']['sf']['symptoms'])) : ?>
-                                <?php foreach ($global['custody_chain']['contact']['sf']['symptoms'] as $value) : ?>
+                            <?php if ($global['custody_chain']['contact']['symptoms'][0] != 'nothing') : ?>
+                                <?php foreach ($global['custody_chain']['contact']['symptoms'] as $value) : ?>
                                     {$lang.<?php echo $value; ?>}<br>
                                 <?php endforeach; ?>
                             <?php else : ?>
@@ -166,19 +167,23 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                             <?php endif; ?>
                         </td>
                     </tr>
-                    <?php if (!empty($global['custody_chain']['contact']['sf']['symptoms'])) : ?>
+                    <?php if ($global['custody_chain']['contact']['symptoms'][0] != 'nothing') : ?>
                         <tr>
                             <td>{$lang.symptoms_time}:</td>
-                            <td><?php echo $global['custody_chain']['contact']['sf']['symptoms_time']; ?></td>
+                            <td><?php echo $global['custody_chain']['contact']['symptoms_time']; ?></td>
                         </tr>
                     <?php endif; ?>
                     <tr>
-                        <td>{$lang.prev_travel}:</td>
-                        <td><?php echo (($global['custody_chain']['contact']['sf']['travel'] == 'yeah') ? $global['custody_chain']['contact']['sf']['travel_countries'] : '{$lang.not}') ?></td>
+                        <td>{$lang.previous_travel}:</td>
+                        <td><?php echo (($global['custody_chain']['contact']['previous_travel'] == 'yeah') ? $global['custody_chain']['contact']['previous_travel_countries'] : '{$lang.not}') ?></td>
                     </tr>
                     <tr>
-                        <td>{$lang.prev_covid}:</td>
-                        <td><?php echo (($global['custody_chain']['contact']['sf']['covid'] == 'yeah') ? $global['custody_chain']['contact']['sf']['covid_time'] : '{$lang.not}') ?></td>
+                        <td>{$lang.covid_contact}:</td>
+                        <td><?php echo (($global['custody_chain']['contact']['covid_contact'] == 'yeah') ? '{$lang.yeah}' : '{$lang.not}') ?></td>
+                    </tr>
+                    <tr>
+                        <td>{$lang.covid_infection}:</td>
+                        <td><?php echo (($global['custody_chain']['contact']['covid_infection'] == 'yeah') ? $global['custody_chain']['contact']['covid_infection_time'] : '{$lang.not}') ?></td>
                     </tr>
                 </table>
             <?php endif; ?>
@@ -193,26 +198,17 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                 </tr>
             </table>
             <?php if ($global['custody_chain']['version'] == 'v2') : ?>
-                <!-- <figure>
+                <figure>
                     <img src="{$path.uploads}<?php echo $global['custody_chain']['signature']; ?>">
-                </figure> -->
+                </figure>
             <?php endif; ?>
             <?php if ($global['custody_chain']['closed'] == true) : ?>
                 <?php if (Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) : ?>
                     <figure>
                         <img src="{$path.uploads}<?php echo $global['custody_chain']['qr']; ?>">
                     </figure>
+                    <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.covid_share_results}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['laboratory']['path']; ?>/results/<?php echo $global['custody_chain']['token']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_results}</span></a>
                 <?php endif; ?>
-                <div class="share">
-                    <div>
-                        <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.share_results}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['laboratory']['path']; ?>/results/<?php echo $global['custody_chain']['token']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_results_with_friends}</span></a>
-                    </div>
-                    <div>
-                        <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i>{$lang.whatsapp_us}</a>
-                        <a href="tel:<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i>{$lang.call_us}</a>
-                        <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.know_our_laboratory}" data-url="https://<?php echo $global['laboratory']['website']; ?>"><i class="fas fa-share-alt"></i>{$lang.share}</a>
-                    </div>
-                </div>
                 <div class="chemical">
                     <figure>
                         <img src="{$path.uploads}<?php echo $global['custody_chain']['chemical_signature']; ?>">
@@ -221,7 +217,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                     <h3>{$lang.this_certificate_available_by}</h3>
                 </div>
                 <?php if (Dates::diff_date_hour(Dates::format_date_hour($global['custody_chain']['date'], $global['custody_chain']['hour']), Dates::current_date_hour(), 'hours', false) < 72) : ?>
-                    <a href="{$path.uploads}<?php echo $global['custody_chain']['pdf']; ?>" download="certificate.pdf">{$lang.download_certificate_pdf}</a>
+                    <a href="{$path.uploads}<?php echo $global['custody_chain']['pdf']; ?>" download="certificate.pdf">{$lang.download_certificate}</a>
                 <?php endif; ?>
             <?php endif; ?>
         <?php endif; ?>
@@ -229,13 +225,14 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
 </main>
 <footer class="laboratory">
     <div style="background-color:<?php echo $global['laboratory']['colors']['second']; ?>;">
-        <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>"><i class="fab fa-whatsapp"></i><?php echo $global['laboratory']['phone']; ?></a>
-        <a href="tel:<?php echo $global['laboratory']['phone']; ?>"><i class="fas fa-phone"></i><?php echo $global['laboratory']['phone']; ?></a>
-        <a href="mailto:<?php echo $global['laboratory']['email']; ?>"><i class="fas fa-envelope"></i><?php echo $global['laboratory']['email']; ?></a>
-        <a href="https://facebook.com/<?php echo $global['laboratory']['rrss']['facebook']; ?>" target="_blank"><i class="fab fa-facebook"></i>@<?php echo $global['laboratory']['rrss']['facebook']; ?></a>
-        <a href="https://instagram.com/<?php echo $global['laboratory']['rrss']['instagram']; ?>" target="_blank"><i class="fab fa-instagram"></i>@<?php echo $global['laboratory']['rrss']['instagram']; ?></a>
-        <a href="https://linkedin.com/company/<?php echo $global['laboratory']['rrss']['linkedin']; ?>" target="_blank"><i class="fab fa-linkedin"></i>@<?php echo $global['laboratory']['rrss']['linkedin']; ?></a>
-        <a href="https://<?php echo $global['laboratory']['website']; ?>" target="_blank"><i class="fas fa-globe"></i><?php echo $global['laboratory']['website']; ?></a>
+        <a href="https://api.whatsapp.com/send?phone=<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="tel:<?php echo $global['laboratory']['phone']; ?>" target="_blank"><i class="fas fa-phone"></i></a>
+        <a href="mailto:<?php echo $global['laboratory']['email']; ?>" target="_blank"><i class="fas fa-envelope"></i></a>
+        <a href="https://facebook.com/<?php echo $global['laboratory']['rrss']['facebook']; ?>" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://instagram.com/<?php echo $global['laboratory']['rrss']['instagram']; ?>" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://linkedin.com/company/<?php echo $global['laboratory']['rrss']['linkedin']; ?>" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://<?php echo $global['laboratory']['website']; ?>" target="_blank"><i class="fas fa-globe"></i></a>
+        <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="¡{$lang.know} <?php echo $global['laboratory']['name']; ?>!" data-url="https://<?php echo $global['laboratory']['website']; ?>/vcard"><i class="fas fa-share-alt"></i></a>
     </div>
     <div style="background-color:<?php echo $global['laboratory']['colors']['first']; ?>;">
         <a href="https://id.one-consultores.com" target="_blank">{$lang.power_by} <strong><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?></strong></a>

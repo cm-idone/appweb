@@ -13,106 +13,109 @@ class Laboratory_model extends Model
 		parent::__construct();
 	}
 
-    // public function create_custody_chain($data, $record = false)
-    // {
-	// 	if ($record == true)
-	// 	{
-	// 		$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . $data['laboratory']['path'] . '/results/' . $data['token'];
-	// 		$data['qr']['dir'] = PATH_UPLOADS . $data['qr']['filename'];
-	// 		$data['qr']['level'] = 'H';
-	// 		$data['qr']['size'] = 5;
-	// 		$data['qr']['frame'] = 3;
-	// 	}
-	//
-    //     $query = $this->database->insert('custody_chains', [
-	// 		'account' => ($record == true) ? null : Session::get_value('vkye_account')['id'],
-	// 		'token' => ($record == true) ? $data['token'] : System::generate_random_string(),
-    //         'employee' => ($record == true) ? null : $data['employee'],
-	// 		'contact' => ($record == true) ? json_encode([
-    //             'firstname' => $data['firstname'],
-    //             'lastname' => $data['lastname'],
-	// 			'sex' => $data['sex'],
-    //             'birth_date' => $data['birth_date'],
-    //             'age' => $data['age'],
-    //             'nationality' => $data['nationality'],
-	// 			'ife' => $data['ife'],
-    //             'email' => $data['email'],
-    //             'phone' => [
-    //                 'country' => $data['phone_country'],
-    //                 'number' => $data['phone_number']
-    //             ],
-	// 			'sf' => [
-	// 				'pregnant' => $data['sf_pregnant'],
-	// 				'symptoms' => $data['sf_symptoms'],
-	// 				'symptoms_time' => $data['sf_symptoms_time'],
-	// 				'travel' => $data['sf_travel'],
-	// 				'travel_countries' => $data['sf_travel_countries'],
-	// 				'contact' => $data['sf_contact'],
-	// 				'covid' => $data['sf_covid'],
-	// 				'covid_time' => $data['sf_covid_time']
-	// 			]
-    //         ]) : null,
-    //         'type' => $data['type'],
-    //         'reason' => ($record == true) ? 'random' : $data['reason'],
-	// 		'start_process' => ($record == true) ? Dates::current_date() : (($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an' OR $data['type'] == 'covid_ac') ? $data['start_process'] : null),
-	// 		'end_process' => ($record == true) ? null : (($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an' OR $data['type'] == 'covid_ac') ? $data['end_process'] : null),
-	// 		'results' => ($data['type'] == 'alcoholic') ? json_encode([
-    //             '1' => ($record == true) ? '' : (!empty($data['test_1']) ? $data['test_1'] : ''),
-    //             '2' => ($record == true) ? '' : (!empty($data['test_2']) ? $data['test_2'] : ''),
-    //             '3' => ($record == true) ? '' : (!empty($data['test_3']) ? $data['test_3'] : '')
-    //         ]) : (($data['type'] == 'antidoping') ? json_encode([
-    //             'COC' => ($record == true) ? '' : (!empty($data['test_COC']) ? $data['test_COC'] : ''),
-    //             'THC' => ($record == true) ? '' : (!empty($data['test_THC']) ? $data['test_THC'] : ''),
-    //             'MET' => ($record == true) ? '' : (!empty($data['test_MET']) ? $data['test_MET'] : ''),
-    //             'ANF' => ($record == true) ? '' : (!empty($data['test_ANF']) ? $data['test_ANF'] : ''),
-    //             'BZD' => ($record == true) ? '' : (!empty($data['test_BZD']) ? $data['test_BZD'] : ''),
-    //             'OPI' => ($record == true) ? '' : (!empty($data['test_OPI']) ? $data['test_OPI'] : ''),
-    //             'BAR' => ($record == true) ? '' : (!empty($data['test_BAR']) ? $data['test_BAR'] : '')
-    //         ]) : (($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an') ? json_encode([
-	// 			'result' => ($record == true) ? '' : $data['test_result'],
-	// 			'unity' => ($record == true) ? '' : $data['test_unity'],
-	// 			'reference_values' => ($record == true) ? '' : $data['test_reference_values']
-	// 		]) : (($data['type'] == 'covid_ac') ? json_encode([
-	// 			'igm' => [
-	// 				'result' => ($record == true) ? '' : $data['test_igm_result'],
-	// 				'unity' => ($record == true) ? '' : $data['test_igm_unity'],
-	// 				'reference_values' => ($record == true) ? '' : $data['test_igm_reference_values']
-	// 			],
-	// 			'igg' => [
-	// 				'result' => ($record == true) ? '' : $data['test_igg_result'],
-	// 				'unity' => ($record == true) ? '' : $data['test_igg_unity'],
-	// 				'reference_values' => ($record == true) ? '' : $data['test_igg_reference_values']
-	// 			]
-	// 		]) : null))),
-	// 		'medicines' => ($record == true) ? null : ((($data['type'] == 'alcoholic' OR $data['type'] == 'antidoping') AND !empty($data['medicines'])) ? $data['medicines'] : null),
-	// 		'prescription' => ($record == true) ? null : (($data['type'] == 'alcoholic' OR $data['type'] == 'antidoping') ? json_encode([
-	// 			'issued_by' => !empty($data['prescription_issued_by']) ? $data['prescription_issued_by'] : '',
-	// 			'date' => !empty($data['prescription_date']) ? $data['prescription_date'] : ''
-	// 		]) : null),
-	// 		'location' => ($record == true) ? null : (!empty($data['location']) ? $data['location'] : null),
-	// 		'laboratory' => ($record == true) ? $data['laboratory']['id'] : null,
-	// 		'taker' => ($record == true) ? $data['collector']['authentication']['taker']['id'] : null,
-	// 		'collector' => ($record == true) ? $data['collector']['id'] : null,
-	// 		'chemical' => ($record == true) ? null : $data['chemical'],
-	// 		'date' => ($record == true) ? Dates::current_date() : $data['date'],
-	// 		'hour' => ($record == true) ? Dates::current_hour() : $data['hour'],
-	// 		'comments' => ($record == true) ? null : (!empty($data['comments']) ? $data['comments'] : null),
-	// 		'signature' => ($record == true OR ($record == false AND !empty($data['signature']))) ? Fileloader::base64($data['signature']) : null,
-	// 		'qr' => ($record == true) ? $data['qr']['filename'] : null,
-	// 		'pdf' => null,
-	// 		'lang' => ($record == true) ? Session::get_value('vkye_lang') : null,
-	// 		'closed' => ($record == true) ? false : true,
-	// 		'user' => ($record == true) ? null : Session::get_value('vkye_user')['id'],
-	// 		'version' => 'v2',
-	// 		'deleted' => false
-    //     ]);
-	//
-	// 	if ($record == true AND !empty($query))
-	// 		QRcode::png($data['qr']['content'], $data['qr']['dir'], $data['qr']['level'], $data['qr']['size'], $data['qr']['frame']);
-	//
-    //     return $query;
-    // }
-	//
+    public function create_custody_chain($data, $record = false)
+    {
+		if ($record == true)
+		{
+			$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . $data['laboratory']['path'] . '/results/' . $data['token'];
+			$data['qr']['dir'] = PATH_UPLOADS . $data['qr']['filename'];
+			$data['qr']['level'] = 'H';
+			$data['qr']['size'] = 5;
+			$data['qr']['frame'] = 3;
+		}
+
+        $query = $this->database->insert('custody_chains', [
+			'account' => ($record == true) ? null : Session::get_value('vkye_account')['id'],
+			'token' => ($record == true) ? $data['token'] : System::generate_random_string(),
+            'employee' => ($record == true) ? null : $data['employee'],
+			'contact' => ($record == true) ? (($data['collector']['authentication']['type'] == 'alcoholic') ? json_encode([
+
+			]) : (($data['collector']['authentication']['type'] == 'antidoping') ? json_encode([
+
+			]) : (($data['collector']['authentication']['type'] == 'covid') ? json_encode([
+				'firstname' => ucwords($data['firstname']),
+                'lastname' => ucwords($data['lastname']),
+				'sex' => $data['sex'],
+                'birth_date' => $data['birth_date_year'] . '-' . $data['birth_date_month'] . '-' . $data['birth_date_day'],
+                'age' => $data['age'],
+                'nationality' => $data['nationality'],
+				'ife' => $data['ife'],
+				'travel_to' => $data['travel_to'],
+				'pregnant' => $data['pregnant'],
+				'symptoms' => $data['symptoms'],
+				'symptoms_time' => $data['symptoms_time'],
+				'previous_travel' => $data['previous_travel'],
+				'previous_travel_countries' => $data['previous_travel_countries'],
+				'covid_contact' => $data['covid_contact'],
+				'covid_infection' => $data['covid_infection'],
+				'covid_infection_time' => $data['covid_infection_time'],
+                'email' => strtolower($data['email']),
+                'phone' => [
+                    'country' => $data['phone_country'],
+                    'number' => $data['phone_number']
+                ]
+			]) : null))) : null,
+			'type' => ($record == true) ? (($data['collector']['authentication']['type'] == 'covid') ? $data['type'] : $data['collector']['authentication']['type']) : $data['type'],
+			'reason' => ($record == true) ? 'random' : $data['reason'],
+			'start_process' => ($record == true) ? (($data['collector']['authentication']['type'] == 'covid') ? Dates::current_date() : null) : (($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an' OR $data['type'] == 'covid_ac') ? $data['start_process'] : null),
+			'end_process' => ($record == false AND ($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an' OR $data['type'] == 'covid_ac')) ? $data['end_process'] : null,
+			'results' => (($record == true AND $data['collector']['authentication']['type'] == 'alcoholic') OR ($record == false AND $data['type'] == 'alcoholic')) ? json_encode([
+                '1' => ($record == true) ? '' : (!empty($data['test_1']) ? $data['test_1'] : ''),
+                '2' => ($record == true) ? '' : (!empty($data['test_2']) ? $data['test_2'] : ''),
+                '3' => ($record == true) ? '' : (!empty($data['test_3']) ? $data['test_3'] : '')
+            ]) : ((($record == true AND $data['collector']['authentication']['type'] == 'antidoping') OR ($record == false AND $data['type'] == 'antidoping')) ? json_encode([
+                'COC' => ($record == true) ? '' : (!empty($data['test_COC']) ? $data['test_COC'] : ''),
+                'THC' => ($record == true) ? '' : (!empty($data['test_THC']) ? $data['test_THC'] : ''),
+                'MET' => ($record == true) ? '' : (!empty($data['test_MET']) ? $data['test_MET'] : ''),
+                'ANF' => ($record == true) ? '' : (!empty($data['test_ANF']) ? $data['test_ANF'] : ''),
+                'BZD' => ($record == true) ? '' : (!empty($data['test_BZD']) ? $data['test_BZD'] : ''),
+                'OPI' => ($record == true) ? '' : (!empty($data['test_OPI']) ? $data['test_OPI'] : ''),
+                'BAR' => ($record == true) ? '' : (!empty($data['test_BAR']) ? $data['test_BAR'] : '')
+            ]) : (((($record == true AND $data['collector']['authentication']['type'] == 'covid') OR $record == false) AND ($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an')) ? json_encode([
+				'result' => ($record == true) ? '' : $data['test_result'],
+				'unity' => ($record == true) ? '' : $data['test_unity'],
+				'reference_values' => ($record == true) ? '' : $data['test_reference_values']
+			]) : (((($record == true AND $data['collector']['authentication']['type'] == 'covid') OR $record == false) AND $data['type'] == 'covid_ac') ? json_encode([
+				'igm' => [
+					'result' => ($record == true) ? '' : $data['test_igm_result'],
+					'unity' => ($record == true) ? '' : $data['test_igm_unity'],
+					'reference_values' => ($record == true) ? '' : $data['test_igm_reference_values']
+				],
+				'igg' => [
+					'result' => ($record == true) ? '' : $data['test_igg_result'],
+					'unity' => ($record == true) ? '' : $data['test_igg_unity'],
+					'reference_values' => ($record == true) ? '' : $data['test_igg_reference_values']
+				]
+			]) : null))),
+			'medicines' => ((($record == true AND ($data['collector']['authentication']['type'] == 'alcoholic' OR $data['collector']['authentication']['type'] == 'antidoping')) OR ($record == false AND ($data['type'] == 'alcoholic' OR $data['type'] == 'antidoping'))) AND !empty($data['medicines'])) ? $data['medicines'] : null,
+			'prescription' => (($record == true AND ($data['collector']['authentication']['type'] == 'alcoholic' OR $data['collector']['authentication']['type'] == 'antidoping')) OR ($record == false AND ($data['type'] == 'alcoholic' OR $data['type'] == 'antidoping'))) ? json_encode([
+				'issued_by' => !empty($data['prescription_issued_by']) ? $data['prescription_issued_by'] : '',
+				'date' => !empty($data['prescription_date']) ? $data['prescription_date'] : ''
+			]) : null,
+			'location' => ($record == false AND !empty($data['location'])) ? $data['location'] : null,
+			'laboratory' => ($record == true) ? $data['laboratory']['id'] : null,
+			'taker' => ($record == true) ? $data['collector']['authentication']['taker']['id'] : null,
+			'collector' => ($record == true) ? $data['collector']['id'] : null,
+			'chemical' => ($record == true) ? null : $data['chemical'],
+			'date' => ($record == true) ? Dates::current_date() : $data['date'],
+			'hour' => ($record == true) ? Dates::current_hour() : $data['hour'],
+			'comments' => ($record == false AND !empty($data['comments'])) ? $data['comments'] : null,
+			'signature' => ($record == true OR ($record == false AND !empty($data['signature']))) ? Fileloader::base64($data['signature']) : null,
+			'qr' => ($record == true) ? $data['qr']['filename'] : null,
+			'pdf' => null,
+			'lang' => ($record == true) ? Session::get_value('vkye_lang') : null,
+			'closed' => ($record == true) ? false : true,
+			'user' => ($record == true) ? null : Session::get_value('vkye_user')['id'],
+			'version' => 'v2',
+			'deleted' => false
+        ]);
+
+		if ($record == true AND !empty($query))
+			QRcode::png($data['qr']['content'], $data['qr']['dir'], $data['qr']['level'], $data['qr']['size'], $data['qr']['frame']);
+
+        return $query;
+    }
+
 	// public function read_custody_chains($type)
 	// {
 	// 	$AND = [];
@@ -224,87 +227,87 @@ class Laboratory_model extends Model
 	//
 	// 	return $query;
 	// }
-	//
-	// public function read_custody_chain($token)
-	// {
-	// 	$query = System::decode_json_to_array($this->database->select('custody_chains', [
-	// 		'[>]accounts' => [
-	// 			'account' => 'id'
-	// 		],
-	// 		'[>]employees' => [
-	// 			'employee' => 'id'
-	// 		],
-	// 		'[>]system_laboratories' => [
-	// 			'laboratory' => 'id'
-	// 		],
-	// 		'[>]system_takers' => [
-	// 			'taker' => 'id'
-	// 		],
-	// 		'[>]system_collectors' => [
-	// 			'collector' => 'id'
-	// 		],
-	// 		'[>]system_chemicals' => [
-	// 			'chemical' => 'id'
-	// 		]
-	// 	], [
-	// 		'custody_chains.id',
-	// 		'custody_chains.account',
-	// 		'accounts.name(account_name)',
-	// 		'accounts.path(account_path)',
-	// 		'custody_chains.token',
-	// 		'custody_chains.employee',
-	// 		'employees.firstname(employee_firstname)',
-	// 		'employees.lastname(employee_lastname)',
-	// 		'employees.ife(employee_ife)',
-	// 		'employees.birth_date(employee_birth_date)',
-	// 		'employees.sex(employee_sex)',
-	// 		'custody_chains.contact',
-	// 		'custody_chains.type',
-	// 		'custody_chains.reason',
-	// 		'custody_chains.start_process',
-	// 		'custody_chains.end_process',
-	// 		'custody_chains.results',
-	// 		'custody_chains.medicines',
-	// 		'custody_chains.prescription',
-	// 		'custody_chains.location',
-	// 		'custody_chains.laboratory',
-	// 		'system_laboratories.avatar(laboratory_avatar)',
-	// 		'system_laboratories.name(laboratory_name)',
-	// 		'system_laboratories.path(laboratory_path)',
-	// 		'system_laboratories.business(laboratory_business)',
-	// 		'system_laboratories.rfc(laboratory_rfc)',
-	// 		'system_laboratories.sanitary_opinion(laboratory_sanitary_opinion)',
-	// 		'system_laboratories.address(laboratory_address)',
-	// 		'system_laboratories.email(laboratory_email)',
-	// 		'system_laboratories.phone(laboratory_phone)',
-	// 		'system_laboratories.website(laboratory_website)',
-	// 		'system_laboratories.colors(laboratory_colors)',
-	// 		'custody_chains.taker',
-	// 		'system_takers.name(taker_name)',
-	// 		'custody_chains.collector',
-	// 		'system_collectors.name(collector_name)',
-	// 		'custody_chains.chemical',
-	// 		'system_chemicals.name(chemical_name)',
-	// 		'system_chemicals.signature(chemical_signature)',
-	// 		'system_chemicals.card(chemical_card)',
-	// 		'custody_chains.date',
-	// 		'custody_chains.hour',
-	// 		'custody_chains.comments',
-	// 		'custody_chains.signature',
-	// 		'custody_chains.qr',
-	// 		'custody_chains.pdf',
-	// 		'custody_chains.lang',
-	// 		'custody_chains.closed',
-	// 		'custody_chains.user',
-	// 		'custody_chains.version',
-	// 		'custody_chains.deleted'
-	// 	], [
-	// 		'custody_chains.token' => $token
-	// 	]));
-	//
-	// 	return !empty($query) ? $query[0] : null;
-	// }
-	//
+
+	public function read_custody_chain($token)
+	{
+		$query = System::decode_json_to_array($this->database->select('custody_chains', [
+			'[>]accounts' => [
+				'account' => 'id'
+			],
+			'[>]employees' => [
+				'employee' => 'id'
+			],
+			'[>]system_laboratories' => [
+				'laboratory' => 'id'
+			],
+			'[>]system_takers' => [
+				'taker' => 'id'
+			],
+			'[>]system_collectors' => [
+				'collector' => 'id'
+			],
+			'[>]system_chemicals' => [
+				'chemical' => 'id'
+			]
+		], [
+			'custody_chains.id',
+			'custody_chains.account',
+			'accounts.name(account_name)',
+			'accounts.path(account_path)',
+			'custody_chains.token',
+			'custody_chains.employee',
+			'employees.firstname(employee_firstname)',
+			'employees.lastname(employee_lastname)',
+			'employees.ife(employee_ife)',
+			'employees.birth_date(employee_birth_date)',
+			'employees.sex(employee_sex)',
+			'custody_chains.contact',
+			'custody_chains.type',
+			'custody_chains.reason',
+			'custody_chains.start_process',
+			'custody_chains.end_process',
+			'custody_chains.results',
+			'custody_chains.medicines',
+			'custody_chains.prescription',
+			'custody_chains.location',
+			'custody_chains.laboratory',
+			'system_laboratories.avatar(laboratory_avatar)',
+			'system_laboratories.name(laboratory_name)',
+			'system_laboratories.path(laboratory_path)',
+			'system_laboratories.business(laboratory_business)',
+			'system_laboratories.rfc(laboratory_rfc)',
+			'system_laboratories.sanitary_opinion(laboratory_sanitary_opinion)',
+			'system_laboratories.address(laboratory_address)',
+			'system_laboratories.email(laboratory_email)',
+			'system_laboratories.phone(laboratory_phone)',
+			'system_laboratories.website(laboratory_website)',
+			'system_laboratories.colors(laboratory_colors)',
+			'custody_chains.taker',
+			'system_takers.name(taker_name)',
+			'custody_chains.collector',
+			'system_collectors.name(collector_name)',
+			'custody_chains.chemical',
+			'system_chemicals.name(chemical_name)',
+			'system_chemicals.signature(chemical_signature)',
+			'system_chemicals.card(chemical_card)',
+			'custody_chains.date',
+			'custody_chains.hour',
+			'custody_chains.comments',
+			'custody_chains.signature',
+			'custody_chains.qr',
+			'custody_chains.pdf',
+			'custody_chains.lang',
+			'custody_chains.closed',
+			'custody_chains.user',
+			'custody_chains.version',
+			'custody_chains.deleted'
+		], [
+			'custody_chains.token' => $token
+		]));
+
+		return !empty($query) ? $query[0] : null;
+	}
+
 	// public function update_custody_chain($data)
     // {
 	// 	if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up')

@@ -71,7 +71,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
                 <figure>
                     <img src="{$path.uploads}<?php echo $global['collector']['qrs']['authentication']; ?>">
                 </figure>
-                <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.share_record_qr}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['laboratory']['path']; ?>/record/<?php echo $global['collector']['token']; ?>/<?php echo $global['collector']['authentication']['type']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_form}</span></a>
+                <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.record_now}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['laboratory']['path']; ?>/record/<?php echo $global['collector']['token']; ?>/<?php echo $global['collector']['authentication']['type']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_form}</span></a>
                 <a data-action="end_authentication">{$lang.end_authentication}</a>
             </div>
         <?php endif; ?>
@@ -85,8 +85,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
         <a href="https://facebook.com/<?php echo $global['laboratory']['rrss']['facebook']; ?>" target="_blank"><i class="fab fa-facebook"></i></a>
         <a href="https://instagram.com/<?php echo $global['laboratory']['rrss']['instagram']; ?>" target="_blank"><i class="fab fa-instagram"></i></a>
         <a href="https://linkedin.com/company/<?php echo $global['laboratory']['rrss']['linkedin']; ?>" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://<?php echo $global['laboratory']['website']; ?>/vcard" target="_blank"><i class="fas fa-address-card"></i></a>
-        <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.know_our_laboratory}" data-url="https://<?php echo $global['laboratory']['website']; ?>/vcard"><i class="fas fa-share-alt"></i></a>
+        <a href="https://<?php echo $global['laboratory']['website']; ?>" target="_blank"><i class="fas fa-globe"></i></a>
+        <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="¡{$lang.know} <?php echo $global['laboratory']['name']; ?>!" data-url="https://<?php echo $global['laboratory']['website']; ?>/vcard"><i class="fas fa-share-alt"></i></a>
     </div>
     <div style="background-color:<?php echo $global['laboratory']['colors']['first']; ?>;">
         <a href="https://id.one-consultores.com" target="_blank">{$lang.power_by} <strong><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?></strong></a>

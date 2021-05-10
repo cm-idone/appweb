@@ -640,8 +640,6 @@ class Laboratory_controller extends Controller
 
 							if (Validations::empty($_POST['age']) == false)
 								array_push($errors, ['age','{$lang.dont_leave_this_field_empty}']);
-							else if (Validations::number('int', $_POST['age']) == false)
-								array_push($errors, ['age','{$lang.invalid_field}']);
 
 							if (Validations::empty($_POST['nationality']) == false)
 								array_push($errors, ['nationality','{$lang.dont_leave_this_field_empty}']);
@@ -649,26 +647,29 @@ class Laboratory_controller extends Controller
 							if (Validations::empty($_POST['ife']) == false)
 								array_push($errors, ['ife','{$lang.dont_leave_this_field_empty}']);
 
-							if (Validations::equals($_POST['sex'], 'female') AND Validations::empty($_POST['sf_pregnant']) == false)
-								array_push($errors, ['sf_pregnant','{$lang.dont_leave_this_field_empty}']);
+							if (Validations::empty($_POST['travel_to']) == false)
+								array_push($errors, ['travel_to','{$lang.dont_leave_this_field_empty}']);
 
-							if (Validations::empty((!empty($_POST['sf_symptoms']) ? $_POST['sf_symptoms'] : null)) == true AND Validations::empty($_POST['sf_symptoms_time']) == false)
-								array_push($errors, ['sf_symptoms_time','{$lang.dont_leave_this_field_empty}']);
+							if (Validations::equals($_POST['sex'], 'female') == true AND Validations::empty($_POST['pregnant']) == false)
+								array_push($errors, ['pregnant','{$lang.dont_leave_this_field_empty}']);
 
-							if (Validations::empty($_POST['sf_travel']) == false)
-								array_push($errors, ['sf_travel','{$lang.dont_leave_this_field_empty}']);
+							if (Validations::equals($_POST['symptoms'][0], 'nothing') == false AND Validations::empty($_POST['symptoms_time']) == false)
+								array_push($errors, ['symptoms_time','{$lang.dont_leave_this_field_empty}']);
 
-							if (Validations::equals($_POST['sf_travel'], 'yeah') == true AND Validations::empty($_POST['sf_travel_countries']) == false)
-								array_push($errors, ['sf_travel_countries','{$lang.dont_leave_this_field_empty}']);
+							if (Validations::empty($_POST['previous_travel']) == false)
+								array_push($errors, ['previous_travel','{$lang.dont_leave_this_field_empty}']);
 
-							if (Validations::empty($_POST['sf_contact']) == false)
-								array_push($errors, ['sf_contact','{$lang.dont_leave_this_field_empty}']);
+							if (Validations::equals($_POST['previous_travel'], 'yeah') == true AND Validations::empty($_POST['previous_travel_countries']) == false)
+								array_push($errors, ['previous_travel_countries','{$lang.dont_leave_this_field_empty}']);
 
-							if (Validations::empty($_POST['sf_covid']) == false)
-								array_push($errors, ['sf_covid','{$lang.dont_leave_this_field_empty}']);
+							if (Validations::empty($_POST['covid_contact']) == false)
+								array_push($errors, ['covid_contact','{$lang.dont_leave_this_field_empty}']);
 
-							if (Validations::equals($_POST['sf_covid'], 'yeah') == true AND Validations::empty($_POST['sf_covid_time']) == false)
-								array_push($errors, ['sf_covid_time','{$lang.dont_leave_this_field_empty}']);
+							if (Validations::empty($_POST['covid_infection']) == false)
+								array_push($errors, ['covid_infection','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::equals($_POST['covid_infection'], 'yeah') == true AND Validations::empty($_POST['covid_infection_time']) == false)
+								array_push($errors, ['covid_infection_time','{$lang.dont_leave_this_field_empty}']);
 
 							if (Validations::empty($_POST['email']) == false)
 								array_push($errors, ['email','{$lang.dont_leave_this_field_empty}']);
@@ -680,8 +681,6 @@ class Laboratory_controller extends Controller
 
 							if (Validations::empty($_POST['phone_number']) == false)
 								array_push($errors, ['phone_number','{$lang.dont_leave_this_field_empty}']);
-							else if (Validations::number('int', $_POST['phone_number']) == false)
-								array_push($errors, ['phone_number','{$lang.invalid_field}']);
 
 							if (Validations::empty($_POST['type']) == false)
 								array_push($errors, ['type','{$lang.dont_leave_this_field_empty}']);
@@ -689,12 +688,7 @@ class Laboratory_controller extends Controller
 							if (empty($errors))
 							{
 								$_POST['token'] = $global['collector']['authentication']['taker']['token'] . '-' . System::generate_random_string();
-								$_POST['firstname'] = ucwords($_POST['firstname']);
-								$_POST['lastname'] = ucwords($_POST['lastname']);
-								$_POST['birth_date'] = $_POST['birth_date_year'] . '-' . $_POST['birth_date_month'] . '-' . $_POST['birth_date_day'];
-								$_POST['sf_symptoms'] = !empty($_POST['sf_symptoms']) ? $_POST['sf_symptoms'] : [];
-								$_POST['email'] = strtolower($_POST['email']);
-								$_POST['qr']['filename'] = 'covid_qr_' . $_POST['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
+								$_POST['qr']['filename'] = $global['laboratory']['path'] . '_' . $_POST['type'] . '_qr_results_' . $_POST['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
 								$_POST['laboratory'] = $global['laboratory'];
 								$_POST['collector'] = $global['collector'];
 
@@ -702,19 +696,17 @@ class Laboratory_controller extends Controller
 
 								if (!empty($query))
 								{
-									System::temporal('set_forced', 'record', 'covid', $_POST);
-
-									$mail1 = new Mailer(true);
+									$mail = new Mailer(true);
 
 									try
 									{
-										$mail1->setFrom($global['laboratory']['email'], $global['laboratory']['name']);
-										$mail1->addAddress($_POST['email'], $_POST['firstname'] . ' ' . $_POST['lastname']);
-										$mail1->Subject = '¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' ' . explode(' ',  $_POST['firstname'])[0] . '! ' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'];
-										$mail1->Body =
+										$mail->setFrom($global['laboratory']['email'], $global['laboratory']['name']);
+										$mail->addAddress(strtolower($_POST['email']), ucwords($_POST['firstname'] . ' ' . $_POST['lastname']));
+										$mail->Subject = '¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' ' . ucwords(explode(' ', $_POST['firstname'])[0]) . '! ' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'];
+										$mail->Body =
 										'<html>
 											<head>
-												<title>' . $mail1->Subject . '</title>
+												<title>' . $mail->Subject . '</title>
 											</head>
 											<body>
 												<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $global['laboratory']['colors']['first'] . ';">
@@ -751,21 +743,11 @@ class Laboratory_controller extends Controller
 														<td style="width:100%;margin:0px;padding:0px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:28px;font-weight:600;text-align:center;text-transform:uppercase;color:#000;">' . $_POST['token'] . '</td>
 													</tr>
 													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#757575;">¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' <strong>' . explode(' ', $_POST['firstname'])[0] . '</strong>! ' . Languages::email('your_results_next_email')[Session::get_value('vkye_lang')] . '</td>
+														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#757575;">¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' <strong>' . ucwords(explode(' ', $_POST['firstname'])[0]) . '</strong>! ' . Languages::email('your_results_next_email')[Session::get_value('vkye_lang')] . '</td>
 													</tr>
 													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
 															<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $_POST['qr']['filename'] . '">
-														</td>
-													</tr>
-													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
-															<a style="width:100%;display:block;margin:0px;padding:10px;border:1px dashed #bdbdbd;border-radius:5px;box-sizing:border-box;background-color:#fff;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#757575;" href="https://api.whatsapp.com/send?phone=' . $global['laboratory']['phone'] . '">' . Languages::email('whatsapp_us_to_support')[Session::get_value('vkye_lang')] . '</a>
-														</td>
-													</tr>
-													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
-															<a style="width:100%;display:block;margin:0px;padding:10px;border:1px dashed #bdbdbd;border-radius:5px;box-sizing:border-box;background-color:#fff;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#757575;" href="tel:' . $global['laboratory']['phone'] . '">' . Languages::email('call_us_to_support')[Session::get_value('vkye_lang')] . '</a>
 														</td>
 													</tr>
 													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
@@ -798,7 +780,7 @@ class Laboratory_controller extends Controller
 												</table>
 											</body>
 										</html>';
-										$mail1->send();
+										$mail->send();
 									}
 									catch (Exception $e) {}
 
@@ -810,7 +792,7 @@ class Laboratory_controller extends Controller
 										$sms->message()->send([
 											'to' => $_POST['phone_country'] . $_POST['phone_number'],
 											'from' => $global['laboratory']['name'],
-											'text' => '¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' ' . explode(' ',  $_POST['firstname'])[0] . '! ' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'] . '. ' . Languages::email('we_send_email_1')[Session::get_value('vkye_lang')] . ' ' . $_POST['email'] . ' ' . Languages::email('we_send_email_2')[Session::get_value('vkye_lang')] . ': https://' . Configuration::$domain . '/' . $global['laboratory']['path'] . '/results/' . $_POST['token'] . '. ' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' ' . Configuration::$web_page . ' ' . Configuration::$web_version . '.'
+											'text' => '¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' ' . ucwords(explode(' ',  $_POST['firstname'])[0]) . '! ' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'] . '. ' . Languages::email('we_send_email_1')[Session::get_value('vkye_lang')] . ' ' . strtolower($_POST['email']) . ' ' . Languages::email('we_send_email_2')[Session::get_value('vkye_lang')] . ': https://' . Configuration::$domain . '/' . $global['laboratory']['path'] . '/results/' . $_POST['token'] . '. ' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' ' . Configuration::$web_page . ' ' . Configuration::$web_version . '.'
 										]);
 									}
 									catch (Exception $e) {}
@@ -845,21 +827,6 @@ class Laboratory_controller extends Controller
 						}
 					}
 				}
-
-				if ($_POST['action'] == 'restore_record')
-				{
-					if ($global['collector']['authentication']['type'] == 'alcoholic')
-						print_r('Ok');
-					else if ($global['collector']['authentication']['type'] == 'antidoping')
-						print_r('Ok');
-					else if ($global['collector']['authentication']['type'] == 'covid')
-						System::temporal('set_forced', 'record', 'covid', []);
-
-					echo json_encode([
-						'status' => 'success',
-						'message' => '{$lang.operation_success}'
-					]);
-				}
 			}
 			else
 			{
@@ -878,12 +845,7 @@ class Laboratory_controller extends Controller
 				else if (Dates::current_hour() > $global['collector']['schedule']['open'] AND Dates::current_hour() < $global['collector']['schedule']['close'] AND ($global['collector']['authentication']['type'] == 'alcoholic' OR $global['collector']['authentication']['type'] == 'antidoping' OR $global['collector']['authentication']['type'] == 'covid'))
 				{
 					if (!empty($params[2]))
-					{
-						if ($global['collector']['authentication']['type'] == 'covid' AND System::temporal('get_if_exists', 'record', 'covid') == false)
-							System::temporal('set_forced', 'record', 'covid', []);
-
 						$global['render'] = 'go';
-					}
 					else
 						header('Location: https://' . Configuration::$domain . '/' . $global['laboratory']['path'] . '/record/' . $global['collector']['token'] . '/' . $global['collector']['authentication']['type']);
 				}
@@ -904,18 +866,11 @@ class Laboratory_controller extends Controller
 
 		if (!empty($global['laboratory']) AND !empty($global['custody_chain']))
 		{
-			if (Format::exist_ajax_request() == true)
-			{
+			define('_title', $global['laboratory']['name'] . ' | {$lang.results}');
 
-			}
-			else
-			{
-				define('_title', $global['laboratory']['name'] . ' | {$lang.results}');
+			$template = $this->view->render($this, 'results');
 
-				$template = $this->view->render($this, 'results');
-
-				echo $template;
-			}
+			echo $template;
 		}
 	}
 }
