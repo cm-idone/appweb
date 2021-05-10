@@ -92,7 +92,7 @@ $(document).ready(function()
             {
                 check_form_errors(form, response, function()
                 {
-                    open_notification_modal('success', response.message);
+                    open_notification_modal('success', response.message, response.path);
                 });
             }
         });

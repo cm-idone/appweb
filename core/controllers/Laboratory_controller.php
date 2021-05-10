@@ -799,7 +799,8 @@ class Laboratory_controller extends Controller
 
 									echo json_encode([
 										'status' => 'success',
-										'message' => '{$lang.operation_success}'
+										'message' => '{$lang.operation_success}',
+										'path' => '/' . $global['laboratory']['path'] . '/results/' . $_POST['token']
 									]);
 								}
 								else
