@@ -672,68 +672,6 @@ main.laboratory > form[name="create_record"] > fieldset > div.button > a {
 
 /*  */
 
-main.laboratory > div.record {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-main.laboratory > div.record > h4,
-main.laboratory > div.record > h5 {
-    font-weight: 600;
-    text-transform: uppercase;
-    text-align: center;
-    color: #212121;
-}
-
-main.laboratory > div.record > h4 {
-    font-size: 24px;
-
-}
-
-main.laboratory > div.record > h5 {
-    margin-bottom: 40px;
-    font-size: 34px;
-}
-
-main.laboratory > div.record > p {
-    margin-bottom: 40px;
-    font-size: 14px;
-    font-weight: 400;
-    text-align: center;
-    color: #757575;
-}
-
-main.laboratory > div.record > figure {
-    width: 100%;
-    margin-bottom: 20px;
-    border: 1px dashed #bdbdbd;
-    box-sizing: border-box;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-main.laboratory > div.record > figure > img {
-    width: 100%;
-}
-
-main.laboratory > div.record > a {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    background-color: #009688;
-    font-size: 16px;
-    font-weight: 400;
-    color: #fff;
-}
-
-/*  */
-
 main.laboratory > div.results {
     width: 100%;
     display: flex;
@@ -742,9 +680,9 @@ main.laboratory > div.results {
     flex-direction: column;
 }
 
-main.laboratory > div.results > h2 {
+main.laboratory > div.results > h4 {
     width: 100%;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     font-size: 24px;
     font-weight: 600;
     text-transform: uppercase;
@@ -758,17 +696,10 @@ main.laboratory > div.results > div.counter {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
-main.laboratory > div.results > div.counter > h2 {
-    margin-bottom: 5px;
-    font-size: 14px;
-    font-weight: 400;
-    color: #757575;
-}
-
-main.laboratory > div.results > div.counter > h3 {
+main.laboratory > div.results > div.counter > h5 {
     width: 100%;
     display: flex;
     align-items: center;
@@ -780,17 +711,17 @@ main.laboratory > div.results > div.counter > h3 {
     font-weight: 600;
 }
 
-main.laboratory > div.results > div.counter > h3.time_on {
+main.laboratory > div.results > div.counter > h5.time_on {
     background-color: #009688;
     color: #fff;
 }
 
-main.laboratory > div.results > div.counter > h3.time_out {
+main.laboratory > div.results > div.counter > h5.time_out {
     background-color: #eee;
     color: #757575;
 }
 
-main.laboratory > div.results > div.counter > h4 {
+main.laboratory > div.results > div.counter > h6 {
     font-size: 14px;
     font-weight: 400;
     color: #757575;
@@ -798,7 +729,7 @@ main.laboratory > div.results > div.counter > h4 {
 
 main.laboratory > div.results > table {
     width: 100%;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 main.laboratory > div.results > table > tbody > tr > td {
@@ -815,7 +746,7 @@ main.laboratory > div.results > p {
     font-weight: 400;
     text-align: justify;
     color: #757575;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 main.laboratory > div.results > figure {
@@ -823,6 +754,10 @@ main.laboratory > div.results > figure {
     margin-bottom: 20px;
     border: 1px dashed #bdbdbd;
     box-sizing: border-box;
+}
+
+main.laboratory > div.results > figure:last-child {
+    margin-bottom: 0px;
 }
 
 main.laboratory > div.results > figure > img {
