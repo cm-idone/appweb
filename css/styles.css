@@ -770,6 +770,7 @@ main.laboratory > div.results > a {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20px;
     border-radius: 5px;
     background-color: #009688;
     font-size: 16px;
@@ -778,7 +779,6 @@ main.laboratory > div.results > a {
 }
 
 main.laboratory > div.results > a[data-action="share"] {
-    margin-bottom: 20px;
     border: 1px dashed #bdbdbd;
     box-sizing: border-box;
     background-color: #fff;

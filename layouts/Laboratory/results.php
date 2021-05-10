@@ -220,6 +220,23 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                     <a href="{$path.uploads}<?php echo $global['custody_chain']['pdf']; ?>" download="certificate.pdf">{$lang.download_certificate}</a>
                 <?php endif; ?>
             <?php endif; ?>
+            <div class="operating_permits">
+                <figure class="hor">
+                    <img src="{$path.images}secretaria_salud.png">
+                </figure>
+                <figure class="ver">
+                    <img src="{$path.images}cofepris.png">
+                </figure>
+                <figure class="ver">
+                    <img src="{$path.images}qroo_1.png">
+                </figure>
+                <figure class="ver">
+                    <img src="{$path.images}qroo_2.png">
+                </figure>
+                <figure class="hor">
+                    <img src="{$path.images}qroo_sesa.png">
+                </figure>
+            </div>
         <?php endif; ?>
     </div>
 </main>
