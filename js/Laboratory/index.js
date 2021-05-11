@@ -31,8 +31,8 @@ $(document).ready(function()
             $('[name="taker"]').attr('disabled', true);
             $('[name="collector"]').val('all');
             $('[name="collector"]').attr('disabled', true);
-            $('[name="sended_status"]').val('all');
-            $('[name="sended_status"]').attr('disabled', true);
+            $('[name="sent_status"]').val('all');
+            $('[name="sent_status"]').attr('disabled', true);
         }
         else
         {
@@ -40,7 +40,7 @@ $(document).ready(function()
             $('[name="collector"]').attr('disabled', false);
 
             if ($('[name="deleted_status"]').val() != 'deleted')
-                $('[name="sended_status"]').attr('disabled', false);
+                $('[name="sent_status"]').attr('disabled', false);
         }
     });
 
@@ -48,13 +48,13 @@ $(document).ready(function()
     {
         if ($(this).val() == 'deleted')
         {
-            $('[name="sended_status"]').val('all');
-            $('[name="sended_status"]').attr('disabled', true);
+            $('[name="sent_status"]').val('all');
+            $('[name="sent_status"]').attr('disabled', true);
         }
         else
         {
             if ($('[name="own"]').val() != 'account')
-                $('[name="sended_status"]').attr('disabled', false);
+                $('[name="sent_status"]').attr('disabled', false);
         }
     });
 

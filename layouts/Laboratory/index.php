@@ -31,11 +31,8 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                             <!--  -->
                         <?php elseif ($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') : ?>
                             <td class="hidden"><?php echo $value['contact']['birth_date']; ?></td>
-                            <td class="hidden"><?php echo $value['contact']['age']; ?></td>
-                            <td class="hidden"><?php echo $value['contact']['sex']; ?></td>
-                            <td class="hidden"><?php echo $value['contact']['passport']; ?></td>
+                            <td class="hidden"><?php echo $value['contact']['ife']; ?></td>
                             <td class="hidden"><?php echo $value['contact']['email']; ?></td>
-                            <td class="hidden">+<?php echo $value['contact']['phone']['country'] . $value['contact']['phone']['number']; ?></td>
                         <?php endif; ?>
                     <?php endif; ?>
                     <td class="smalltag"><span><?php echo $value['token']; ?></span></td>
@@ -61,7 +58,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                         <?php elseif ($value['type'] == 'antidoping') : ?>
                             <!--  -->
                         <?php elseif ($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') : ?>
-                            <td class="smalltag"><?php echo (($value['closed'] == true) ? '<i class="fas fa-envelope" style="margin-right:5px;color:#009688;"></i> {$lang.sended}' : '<i class="fas fa-envelope"  style="margin-right:5px;color:#ff9800;"></i> {$lang.not_sended}'); ?></td>
+                            <td class="smalltag"><?php echo (($value['sent'] == true) ? '<i class="fas fa-envelope" style="margin-right:5px;color:#009688;"></i> {$lang.sent}' : '<i class="fas fa-envelope"  style="margin-right:5px;color:#ff9800;"></i> {$lang.not_sent}'); ?></td>
                         <?php endif; ?>
                     <?php endif; ?>
                     <td class="smalltag"><i class="<?php echo (!empty($value['status']) ? (($value['status'] == 'negative') ? 'fas fa-times-circle' : (($value['status'] == 'positive') ? 'fas fa-check-circle' : 'fas fa-exclamation-circle')) : 'fas fa-question-circle'); ?>" style="margin-right:5px;color:<?php echo (!empty($value['status']) ? (($value['status'] == 'negative') ? '#f44336' : (($value['status'] == 'positive') ? '#009688' : '#ff9800')) : '#9e9e9e'); ?>;"></i>{$lang.<?php echo (!empty($value['status']) ? 'short_' . $value['status'] : 'in_process'); ?>}</td>
@@ -215,14 +212,14 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                 <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
                     <fieldset class="fields-group <?php echo ((System::temporal('get', 'laboratory', 'filter')['own'] == 'account' OR System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'deleted') ? 'hidden' : ''); ?>">
                         <div class="text">
-                            <select name="sended_status">
-                                <option value="all" <?php echo ((System::temporal('get', 'laboratory', 'filter')['sended_status'] == 'all') ? 'selected' : '') ?>>{$lang.all}</option>
-                                <option value="not_sended" <?php echo ((System::temporal('get', 'laboratory', 'filter')['sended_status'] == 'not_sended') ? 'selected' : '') ?>>{$lang.not_sended}</option>
-                                <option value="sended" <?php echo ((System::temporal('get', 'laboratory', 'filter')['sended_status'] == 'sended') ? 'selected' : '') ?>>{$lang.sended}</option>
+                            <select name="sent_status">
+                                <option value="all" <?php echo ((System::temporal('get', 'laboratory', 'filter')['sent_status'] == 'all') ? 'selected' : '') ?>>{$lang.all}</option>
+                                <option value="not_sent" <?php echo ((System::temporal('get', 'laboratory', 'filter')['sent_status'] == 'not_sent') ? 'selected' : '') ?>>{$lang.not_sent}</option>
+                                <option value="sent" <?php echo ((System::temporal('get', 'laboratory', 'filter')['sent_status'] == 'sent') ? 'selected' : '') ?>>{$lang.sent}</option>
                             </select>
                         </div>
                         <div class="title">
-                            <h6>{$lang.sended_status}</h6>
+                            <h6>{$lang.sent_status}</h6>
                         </div>
                     </fieldset>
                 <?php endif; ?>
