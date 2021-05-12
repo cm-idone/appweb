@@ -25,36 +25,59 @@ $(document).ready(function()
 
     $('[name="own"]').on('change', function()
     {
+        $('[name="taker"]').val('all');
+        $('[name="collector"]').val('all');
+        $('[name="sent_status"]').val('all');
+
         if ($(this).val() == 'account')
         {
-            $('[name="taker"]').val('all');
-            $('[name="taker"]').attr('disabled', true);
-            $('[name="collector"]').val('all');
-            $('[name="collector"]').attr('disabled', true);
-            $('[name="sent_status"]').val('all');
-            $('[name="sent_status"]').attr('disabled', true);
+            $(this).parent().parent().removeClass('span4');
+            $(this).parent().parent().addClass('span12');
+            $('[name="taker"]').parent().parent().addClass('hidden');
+            $('[name="collector"]').parent().parent().addClass('hidden');
+            $('[name="sent_status"]').parent().parent().addClass('hidden');
+            $('[name="deleted_status"]').parent().parent().removeClass('span6');
+            $('[name="deleted_status"]').parent().parent().addClass('span12');
         }
         else
         {
-            $('[name="taker"]').attr('disabled', false);
-            $('[name="collector"]').attr('disabled', false);
+            $(this).parent().parent().removeClass('span12');
+            $(this).parent().parent().addClass('span4');
+            $('[name="taker"]').parent().parent().removeClass('hidden');
+            $('[name="collector"]').parent().parent().removeClass('hidden');
 
             if ($('[name="deleted_status"]').val() != 'deleted')
-                $('[name="sent_status"]').attr('disabled', false);
+            {
+                $('[name="sent_status"]').parent().parent().removeClass('hidden');
+                $('[name="deleted_status"]').parent().parent().removeClass('span12');
+                $('[name="deleted_status"]').parent().parent().addClass('span6');
+            }
         }
     });
 
     $('[name="deleted_status"]').on('change', function()
     {
+        $('[name="sent_status"]').val('all');
+
         if ($(this).val() == 'deleted')
         {
-            $('[name="sent_status"]').val('all');
-            $('[name="sent_status"]').attr('disabled', true);
+            $('[name="start_date"]').parents('fieldset').addClass('hidden');
+            $('[name="start_hour"]').parents('fieldset').addClass('hidden');
+            $('[name="sent_status"]').parent().parent().addClass('hidden');
+            $(this).parent().parent().removeClass('span6');
+            $(this).parent().parent().addClass('span12');
         }
         else
         {
+            $('[name="start_date"]').parents('fieldset').removeClass('hidden');
+            $('[name="start_hour"]').parents('fieldset').removeClass('hidden');
+
             if ($('[name="own"]').val() != 'account')
-                $('[name="sent_status"]').attr('disabled', false);
+            {
+                $('[name="sent_status"]').parent().parent().removeClass('hidden');
+                $(this).parent().parent().removeClass('span12');
+                $(this).parent().parent().addClass('span6');
+            }
         }
     });
 

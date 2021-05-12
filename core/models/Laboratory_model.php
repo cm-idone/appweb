@@ -107,6 +107,7 @@ class Laboratory_model extends Model
 			'version' => 'v2',
 			'user' => ($record == true) ? null : Session::get_value('vkye_user')['id'],
 			'sent' => false,
+			'closed' => ($record == true) ? false : true,
 			'deleted' => false
         ]);
 
@@ -116,120 +117,122 @@ class Laboratory_model extends Model
         return $query;
     }
 
-	// public function read_custody_chains($type)
-	// {
-	// 	$AND = [];
-	//
-	// 	if (Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep' OR (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['own'] == 'account'))
-	// 		$AND['custody_chains.account'] = Session::get_value('vkye_account')['id'];
-	// 	else if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['own'] == 'laboratories')
-	// 		$AND['custody_chains.laboratory[>=]'] = 1;
-	// 	else if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['own'] >= 1)
-	// 		$AND['custody_chains.laboratory'] = System::temporal('get', 'laboratory', 'filter')['own'];
-	//
-	// 	if (System::temporal('get', 'laboratory', 'filter')['taker'] != 'all')
-	// 		$AND['custody_chains.taker'] = System::temporal('get', 'laboratory', 'filter')['taker'];
-	//
-	// 	if (System::temporal('get', 'laboratory', 'filter')['collector'] != 'all')
-	// 		$AND['custody_chains.collector'] = System::temporal('get', 'laboratory', 'filter')['collector'];
-	//
-	// 	if (System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'not_deleted')
-	// 		$AND['custody_chains.deleted'] = false;
-	// 	else if (System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'deleted')
-	// 		$AND['custody_chains.deleted'] = true;
-	//
-	// 	if (System::temporal('get', 'laboratory', 'filter')['type'] == 'covid')
-	// 		$AND['custody_chains.type'] = ['covid_pcr','covid_an','covid_ac']
-	// 	else
-	// 		$AND['custody_chains.type'] = System::temporal('get', 'laboratory', 'filter')['type'];
-	//
-	// 	if (System::temporal('get', 'laboratory', 'filter')['start_date'] != 'all' AND System::temporal('get', 'laboratory', 'filter')['end_date'] != 'all')
-	// 		$AND['custody_chains.date[<>]'] = [System::temporal('get', 'laboratory', 'filter')['start_date'],System::temporal('get', 'laboratory', 'filter')['end_date']];
-	//
-	// 	if (System::temporal('get', 'laboratory', 'filter')['start_hour'] != 'all' AND System::temporal('get', 'laboratory', 'filter')['end_hour'] != 'all')
-	// 		$AND['custody_chains.hour[<>]'] = [System::temporal('get', 'laboratory', 'filter')['start_hour'],System::temporal('get', 'laboratory', 'filter')['end_hour']];
-	//
-	// 	if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'not_deleted')
-	// 	{
-	// 		if (System::temporal('get', 'laboratory', 'filter')['sent_status'] == 'not_sent')
-	// 			$AND['custody_chains.closed'] = false;
-	// 		else if (System::temporal('get', 'laboratory', 'filter')['sent_status'] == 'sent')
-	// 			$AND['custody_chains.closed'] = true;
-	// 	}
-	//
-	// 	$query = System::decode_json_to_array($this->database->select('custody_chains', [
-	// 		'[>]employees' => [
-	// 			'employee' => 'id'
-	// 		],
-	// 		'[>]system_laboratories' => [
-	// 			'laboratory' => 'id'
-	// 		],
-	// 		'[>]system_takers' => [
-	// 			'taker' => 'id'
-	// 		],
-	// 		'[>]system_collectors' => [
-	// 			'collector' => 'id'
-	// 		],
-	// 	], [
-	// 		'custody_chains.id',
-	// 		'custody_chains.account',
-	// 		'custody_chains.token',
-	// 		'custody_chains.employee',
-	// 		'employees.firstname(employee_firstname)',
-	// 		'employees.lastname(employee_lastname)',
-	// 		'custody_chains.contact',
-	// 		'custody_chains.type',
-	// 		'custody_chains.results',
-	// 		'custody_chains.laboratory',
-	// 		'system_laboratories.name(laboratory_name)',
-	// 		'custody_chains.taker',
-	// 		'system_takers.name(taker_name)',
-	// 		'custody_chains.collector',
-	// 		'system_collectors.name(collector_name)',
-	// 		'custody_chains.date',
-	// 		'custody_chains.hour',
-	// 		'custody_chains.pdf',
-	// 		'custody_chains.closed',
-	// 		'custody_chains.deleted'
-	// 	], [
-	// 		'AND' => $AND,
-	// 		'ORDER' => [
-	// 			'custody_chains.date' => 'DESC',
-	// 			'custody_chains.hour' => 'DESC'
-	// 		]
-	// 	]));
-	//
-	// 	foreach ($query as $key => $value)
-	// 	{
-	// 		$query[$key]['status'] = '';
-	//
-	// 		if ($value['type'] == 'alcoholic')
-	// 		{
-	// 			if (($value['results']['1'] > 0 AND $value['results']['1'] < 0.20) OR ($value['results']['2'] > 0 AND $value['results']['2'] < 0.20) OR ($value['results']['3'] > 0 AND $value['results']['3'] < 0.20))
-	// 				$query[$key]['status'] = 'warning';
-	// 			else if ($value['results']['1'] >= 0.20 OR $value['results']['2'] >= 0.20 OR $value['results']['3'] >= 0.20)
-	// 				$query[$key]['status'] = 'positive';
-	// 		}
-	// 		else if ($value['type'] == 'antidoping' AND ($value['results']['COC'] == 'positive' OR $value['results']['THC'] == 'positive' OR $value['results']['ANF'] == 'positive' OR $value['results']['MET'] == 'positive' OR $value['results']['BZD'] == 'positive' OR $value['results']['OPI'] == 'positive' OR $value['results']['BAR'] == 'positive'))
-	// 			$query[$key]['status'] = 'positive';
-	// 		else if ($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an')
-	// 		{
-	// 			if ($value['results']['result'] == 'negative')
-	// 				$query[$key]['status'] = 'negative';
-	// 			else if ($value['results']['result'] == 'positive')
-	// 				$query[$key]['status'] = 'positive';
-	// 		}
-	// 		else if ($value['type'] == 'covid_ac')
-	// 		{
-	// 			if ($value['results']['igm']['result'] == 'not_reactive' AND $value['results']['igg']['result'] == 'not_reactive')
-	// 				$query[$key]['status'] = 'negative';
-	// 			else if ($value['results']['igm']['result'] == 'reactive' OR $value['results']['igg']['result'] == 'reactive')
-	// 				$query[$key]['status'] = 'positive';
-	// 		}
-	// 	}
-	//
-	// 	return $query;
-	// }
+	public function read_custody_chains($type)
+	{
+		$AND = [];
+
+		if (Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep' OR (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['own'] == 'account'))
+			$AND['custody_chains.account'] = Session::get_value('vkye_account')['id'];
+		else if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['own'] == 'laboratories')
+			$AND['custody_chains.laboratory[>=]'] = 1;
+		else if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['own'] >= 1)
+			$AND['custody_chains.laboratory'] = System::temporal('get', 'laboratory', 'filter')['own'];
+
+		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['own'] != 'account' AND System::temporal('get', 'laboratory', 'filter')['taker'] != 'all')
+			$AND['custody_chains.taker'] = System::temporal('get', 'laboratory', 'filter')['taker'];
+
+		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['own'] != 'account' AND System::temporal('get', 'laboratory', 'filter')['collector'] != 'all')
+			$AND['custody_chains.collector'] = System::temporal('get', 'laboratory', 'filter')['collector'];
+
+		if (System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'not_deleted')
+			$AND['custody_chains.deleted'] = false;
+		else if (System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'deleted')
+			$AND['custody_chains.deleted'] = true;
+
+		if ($type == 'covid' AND System::temporal('get', 'laboratory', 'filter')['type'] == 'all')
+			$AND['custody_chains.type'] = ['covid_pcr','covid_an','covid_ac'];
+		else if ($type == 'covid' AND System::temporal('get', 'laboratory', 'filter')['type'] != 'all')
+			$AND['custody_chains.type'] = System::temporal('get', 'laboratory', 'filter')['type'];
+		else
+			$AND['custody_chains.type'] = $type;
+
+		if (System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'not_deleted')
+			$AND['custody_chains.date[<>]'] = [System::temporal('get', 'laboratory', 'filter')['start_date'],System::temporal('get', 'laboratory', 'filter')['end_date']];
+
+		if (System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'not_deleted')
+			$AND['custody_chains.hour[<>]'] = [System::temporal('get', 'laboratory', 'filter')['start_hour'],System::temporal('get', 'laboratory', 'filter')['end_hour']];
+
+		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['own'] != 'account' AND System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'not_deleted' AND System::temporal('get', 'laboratory', 'filter')['sent_status'] != 'all')
+		{
+			if (System::temporal('get', 'laboratory', 'filter')['sent_status'] == 'not_sent')
+				$AND['custody_chains.sent'] = false;
+			else if (System::temporal('get', 'laboratory', 'filter')['sent_status'] == 'sent')
+				$AND['custody_chains.sent'] = true;
+		}
+
+		$query = System::decode_json_to_array($this->database->select('custody_chains', [
+			'[>]employees' => [
+				'employee' => 'id'
+			],
+			'[>]system_laboratories' => [
+				'laboratory' => 'id'
+			],
+			'[>]system_takers' => [
+				'taker' => 'id'
+			],
+			'[>]system_collectors' => [
+				'collector' => 'id'
+			]
+		], [
+			'custody_chains.id',
+			'custody_chains.account',
+			'custody_chains.token',
+			'custody_chains.employee',
+			'employees.firstname(employee_firstname)',
+			'employees.lastname(employee_lastname)',
+			'custody_chains.contact',
+			'custody_chains.type',
+			'custody_chains.results',
+			'custody_chains.laboratory',
+			'system_laboratories.name(laboratory_name)',
+			'custody_chains.taker',
+			'system_takers.name(taker_name)',
+			'custody_chains.collector',
+			'system_collectors.name(collector_name)',
+			'custody_chains.date',
+			'custody_chains.hour',
+			'custody_chains.pdf',
+			'custody_chains.sent',
+			'custody_chains.deleted'
+		], [
+			'AND' => $AND,
+			'ORDER' => [
+				'custody_chains.date' => 'DESC',
+				'custody_chains.hour' => 'DESC'
+			]
+		]));
+
+		foreach ($query as $key => $value)
+		{
+			$query[$key]['status'] = '';
+
+			if ($value['type'] == 'alcoholic')
+			{
+				if (($value['results']['1'] > 0 AND $value['results']['1'] < 0.20) OR ($value['results']['2'] > 0 AND $value['results']['2'] < 0.20) OR ($value['results']['3'] > 0 AND $value['results']['3'] < 0.20))
+					$query[$key]['status'] = 'warning';
+				else if ($value['results']['1'] >= 0.20 OR $value['results']['2'] >= 0.20 OR $value['results']['3'] >= 0.20)
+					$query[$key]['status'] = 'positive';
+			}
+			else if ($value['type'] == 'antidoping' AND ($value['results']['COC'] == 'positive' OR $value['results']['THC'] == 'positive' OR $value['results']['ANF'] == 'positive' OR $value['results']['MET'] == 'positive' OR $value['results']['BZD'] == 'positive' OR $value['results']['OPI'] == 'positive' OR $value['results']['BAR'] == 'positive'))
+				$query[$key]['status'] = 'positive';
+			else if ($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an')
+			{
+				if ($value['results']['result'] == 'negative')
+					$query[$key]['status'] = 'negative';
+				else if ($value['results']['result'] == 'positive')
+					$query[$key]['status'] = 'positive';
+			}
+			else if ($value['type'] == 'covid_ac')
+			{
+				if ($value['results']['igm']['result'] == 'not_reactive' AND $value['results']['igg']['result'] == 'not_reactive')
+					$query[$key]['status'] = 'negative';
+				else if ($value['results']['igm']['result'] == 'reactive' OR $value['results']['igg']['result'] == 'reactive')
+					$query[$key]['status'] = 'positive';
+			}
+		}
+
+		return $query;
+	}
 
 	public function read_custody_chain($token)
 	{
@@ -300,9 +303,9 @@ class Laboratory_model extends Model
 			'custody_chains.qr',
 			'custody_chains.pdf',
 			'custody_chains.lang',
-			'custody_chains.closed',
-			'custody_chains.user',
 			'custody_chains.version',
+			'custody_chains.user',
+			'custody_chains.closed',
 			'custody_chains.deleted'
 		], [
 			'custody_chains.token' => $token
@@ -628,105 +631,105 @@ class Laboratory_model extends Model
     //     return $query;
     // }
 
-	// public function restore_custody_chain($id)
-	// {
-	// 	$query = $this->database->update('custody_chains', [
-	// 		'deleted' => false
-	// 	], [
-	// 		'id' => $id
-	// 	]);
-	//
-    //     return $query;
-	// }
-	//
-	// public function empty_custody_chains()
-    // {
-	// 	$deleteds = System::decode_json_to_array($this->database->select('custody_chains', [
-	// 		'id',
-	// 		'signatures',
-	// 		'qr',
-	// 		'pdf'
-    //     ], [
-    //         'AND' => [
-	// 			'account' => (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? NULL : Session::get_value('vkye_account')['id'],
-	// 			'deleted' => true
-	// 		]
-    //     ]));
-	//
-	// 	foreach ($deleteds as $value)
-	// 	{
-	// 		$query = $this->database->delete('custody_chains', [
-	// 			'id' => $value['id']
-	// 		]);
-	//
-	// 		if (!empty($query))
-	// 		{
-	// 			if (!empty($value['signatures']['employee']))
-	// 				Fileloader::down($value['signatures']['employee']);
-	//
-	// 			if (!empty($value['signatures']['contact']))
-	// 				Fileloader::down($value['signatures']['contact']);
-	//
-	// 			if (!empty($value['qr']))
-	// 				Fileloader::down($value['qr']);
-	//
-	// 			if (!empty($value['pdf']))
-	// 				Fileloader::down($value['pdf']);
-	// 		}
-	// 	}
-	//
-    //     return true;
-    // }
-	//
-	// public function delete_custody_chain($id)
-    // {
-	// 	$query = null;
-	//
-	// 	$deleted = System::decode_json_to_array($this->database->select('custody_chains', [
-	// 		'signatures',
-	// 		'qr',
-	// 		'pdf',
-	// 		'deleted'
-    //     ], [
-    //         'id' => $id
-    //     ]));
-	//
-	// 	if (!empty($deleted))
-	// 	{
-	// 		if ($deleted[0]['deleted'] == false)
-	// 		{
-	// 			$query = $this->database->update('custody_chains', [
-	// 				'deleted' => true
-	// 			], [
-	// 				'id' => $id
-	// 			]);
-	// 		}
-	// 		else if ($deleted[0]['deleted'] == true)
-	// 		{
-	// 			$query = $this->database->delete('custody_chains', [
-	// 				'id' => $id
-	// 			]);
-	//
-	// 			if (!empty($query))
-	// 			{
-	// 				if (!empty($deleted[0]['signatures']['employee']))
-	// 					Fileloader::down($deleted[0]['signatures']['employee']);
-	//
-	// 				if (!empty($deleted[0]['signatures']['contact']))
-	// 					Fileloader::down($deleted[0]['signatures']['contact']);
-	//
-	// 				if (!empty($deleted[0]['qr']))
-	// 					Fileloader::down($deleted[0]['qr']);
-	//
-	// 				if (!empty($deleted[0]['pdf']))
-	// 					Fileloader::down($deleted[0]['pdf']);
-	// 			}
-	// 		}
-	// 	}
-	//
-    //     return $query;
-    // }
-	//
+	public function restore_custody_chain($id)
+	{
+		$query = $this->database->update('custody_chains', [
+			'deleted' => false
+		], [
+			'id' => $id
+		]);
+
+        return $query;
+	}
+
+	public function empty_custody_chains()
+    {
+		$AND = [];
+
+		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up')
+			$AND['laboratory[>=]'] = 1;
+		else
+			$AND['account'] = Session::get_value('vkye_account')['id'];
+
+		$AND['deleted'] = true;
+
+		$deleteds = System::decode_json_to_array($this->database->select('custody_chains', [
+			'id',
+			'signature',
+			'qr',
+			'pdf'
+        ], [
+            'AND' => $AND
+        ]));
+
+		foreach ($deleteds as $value)
+		{
+			$query = $this->database->delete('custody_chains', [
+				'id' => $value['id']
+			]);
+
+			if (!empty($query))
+			{
+				if (!empty($value['signature']))
+					Fileloader::down($value['signature']);
+
+				if (!empty($value['qr']))
+					Fileloader::down($value['qr']);
+
+				if (!empty($value['pdf']))
+					Fileloader::down($value['pdf']);
+			}
+		}
+
+        return true;
+    }
+
+	public function delete_custody_chain($id)
+    {
+		$query = null;
+
+		$deleted = System::decode_json_to_array($this->database->select('custody_chains', [
+			'signature',
+			'qr',
+			'pdf',
+			'deleted'
+        ], [
+            'id' => $id
+        ]));
+
+		if (!empty($deleted))
+		{
+			if ($deleted[0]['deleted'] == false)
+			{
+				$query = $this->database->update('custody_chains', [
+					'deleted' => true
+				], [
+					'id' => $id
+				]);
+			}
+			else if ($deleted[0]['deleted'] == true)
+			{
+				$query = $this->database->delete('custody_chains', [
+					'id' => $id
+				]);
+
+				if (!empty($query))
+				{
+					if (!empty($deleted[0]['signature']))
+						Fileloader::down($deleted[0]['signature']);
+
+					if (!empty($deleted[0]['qr']))
+						Fileloader::down($deleted[0]['qr']);
+
+					if (!empty($deleted[0]['pdf']))
+						Fileloader::down($deleted[0]['pdf']);
+				}
+			}
+		}
+
+        return $query;
+    }
+
     // public function read_employee($nie)
 	// {
 	// 	$query = System::decode_json_to_array($this->database->select('employees', [
@@ -765,20 +768,20 @@ class Laboratory_model extends Model
 	// 	return $query;
 	// }
 
-	// public function read_laboratories()
-	// {
-	// 	$query = System::decode_json_to_array($this->database->select('system_laboratories', [
-	// 		'id',
-    //         'name'
-    //     ], [
-    //         'blocked' => false,
-	// 		'ORDER' => [
-	// 			'name' => 'ASC'
-	// 		]
-    //     ]));
-	//
-	// 	return $query;
-	// }
+	public function read_laboratories()
+	{
+		$query = System::decode_json_to_array($this->database->select('system_laboratories', [
+			'id',
+            'name'
+        ], [
+            'blocked' => false,
+			'ORDER' => [
+				'name' => 'ASC'
+			]
+        ]));
+
+		return $query;
+	}
 
 	public function read_laboratory($path)
 	{
@@ -805,20 +808,20 @@ class Laboratory_model extends Model
 		return !empty($query) ? $query[0] : null;
 	}
 
-	// public function read_collectors()
-	// {
-	// 	$query = System::decode_json_to_array($this->database->select('system_collectors', [
-    //         'id',
-    //         'name'
-    //     ], [
-    //         'blocked' => false,
-	// 		'ORDER' => [
-	// 			'name' => 'ASC'
-	// 		]
-    //     ]));
-	//
-	// 	return $query;
-	// }
+	public function read_collectors()
+	{
+		$query = System::decode_json_to_array($this->database->select('system_collectors', [
+            'id',
+            'name'
+        ], [
+            'blocked' => false,
+			'ORDER' => [
+				'name' => 'ASC'
+			]
+        ]));
+
+		return $query;
+	}
 
 	public function read_collector($token)
 	{

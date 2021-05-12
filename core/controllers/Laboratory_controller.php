@@ -11,91 +11,91 @@ class Laboratory_controller extends Controller
 		parent::__construct();
 	}
 
-	// public function index($params)
-    // {
-    //     if (Format::exist_ajax_request() == true)
-	// 	{
-	// 		if ($_POST['action'] == 'filter_custody_chains')
-	// 		{
-	// 			$filter = System::temporal('get', 'laboratory', 'filter');
-	//
-	// 			$filter['own'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $_POST['own'] : 'account';
-	// 			$filter['taker'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $_POST['taker'] : '';
-	// 			$filter['collector'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND $_POST['own'] != 'account') ? $_POST['collector'] : 'all';
-	// 			$filter['deleted_status'] = $_POST['deleted_status'];
-	// 			$filter['type'] = $params[0];
-	// 			$filter['start_date'] = ($_POST['deleted_status'] == 'not_deleted') ? $_POST['start_date'] : 'all';
-	// 			$filter['end_date'] = ($_POST['deleted_status'] == 'not_deleted') ? $_POST['end_date'] : 'all';
-	// 			$filter['start_hour'] = ($_POST['deleted_status'] == 'not_deleted') ? $_POST['start_hour'] : 'all';
-	// 			$filter['end_hour'] = ($_POST['deleted_status'] == 'not_deleted') ? $_POST['end_hour'] : 'all';
-	// 			$filter['sent_status'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND $_POST['deleted_status'] == 'not_deleted') ? $_POST['sent_status'] : 'all';
-	//
-	// 			System::temporal('set_forced', 'laboratory', 'filter', $filter);
-	//
-	// 			echo json_encode([
-	// 				'status' => 'success',
-	// 				'message' => '{$lang.operation_success}'
-	// 			]);
-	// 		}
-	//
-	// 		if ($_POST['action'] == 'restore_custody_chain' OR $_POST['action'] == 'empty_custody_chains' OR $_POST['action'] == 'delete_custody_chain')
-	// 		{
-	// 			if ($_POST['action'] == 'restore_custody_chain')
-	// 				$query = $this->model->restore_custody_chain($_POST['id']);
-	// 			else if ($_POST['action'] == 'empty_custody_chains')
-	// 				$query = $this->model->empty_custody_chains();
-	// 			else if ($_POST['action'] == 'delete_custody_chain')
-	// 				$query = $this->model->delete_custody_chain($_POST['id']);
-	//
-	// 			if (!empty($query))
-	// 			{
-	// 				echo json_encode([
-	// 					'status' => 'success',
-	// 					'message' => '{$lang.operation_success}'
-	// 				]);
-	// 			}
-	// 			else
-	// 			{
-	// 				echo json_encode([
-	// 					'status' => 'error',
-	// 					'message' => '{$lang.operation_error}'
-	// 				]);
-	// 			}
-	// 		}
-	// 	}
-	// 	else
-	// 	{
-	// 		define('_title', Configuration::$web_page . ' | {$lang.laboratory} | {$lang.' . $params[0] . '}');
-	//
-	// 		if (System::temporal('get_if_exists', 'laboratory', 'filter') == false)
-	// 		{
-	// 			System::temporal('set_forced', 'laboratory', 'filter', [
-	// 				'own' => (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? 'laboratories' : 'account',
-	// 				'taker' => (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? 'all' : '',
-	// 				'collector' => (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? 'all' : '',
-	// 				'deleted_status' => 'not_deleted',
-	// 				'type' => $params[0],
-	// 				'start_date' => Dates::past_date(Dates::current_date(), 1, 'days'),
-	// 				'end_date' => Dates::current_date(),
-	// 				'start_hour' => '00:00:00',
-	// 				'end_hour' => '23:59:59',
-	// 				'sent_status' => (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? 'all' : ''
-	// 			]);
-	// 		}
-	//
-	// 		global $global;
-	//
-	// 		$global['render'] = $params[0];
-	// 		$global['custody_chains'] = $this->model->read_custody_chains($params[0]);
-	// 		$global['laboratories'] = $this->model->read_laboratories();
-	// 		$global['takers'] = $this->model->read_takers();
-	// 		$global['collectors'] = $this->model->read_collectors();
-	//
-	// 		$template = $this->view->render($this, 'index');
-	//
-	// 		echo $template;
-	// 	}
-    // }
+	public function index($params)
+    {
+        if (Format::exist_ajax_request() == true)
+		{
+			if ($_POST['action'] == 'filter_custody_chains')
+			{
+				$filter = System::temporal('get', 'laboratory', 'filter');
+
+				$filter['own'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $_POST['own'] : 'account';
+				$filter['taker'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND $_POST['own'] != 'account') ? $_POST['taker'] : '';
+				$filter['collector'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND $_POST['own'] != 'account') ? $_POST['collector'] : '';
+				$filter['deleted_status'] = $_POST['deleted_status'];
+				$filter['type'] = ($params[0] == 'covid') ? $_POST['type'] : $params[0];
+				$filter['start_date'] = ($_POST['deleted_status'] == 'not_deleted') ? $_POST['start_date'] : $filter['start_date'];
+				$filter['end_date'] = ($_POST['deleted_status'] == 'not_deleted') ? $_POST['end_date'] : $filter['end_date'];
+				$filter['start_hour'] = ($_POST['deleted_status'] == 'not_deleted') ? $_POST['start_hour'] : $filter['start_hour'];
+				$filter['end_hour'] = ($_POST['deleted_status'] == 'not_deleted') ? $_POST['end_hour'] : $filter['end_hour'];
+				$filter['sent_status'] = (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND $_POST['own'] != 'account' AND $_POST['deleted_status'] == 'not_deleted') ? $_POST['sent_status'] : '';
+
+				System::temporal('set_forced', 'laboratory', 'filter', $filter);
+
+				echo json_encode([
+					'status' => 'success',
+					'message' => '{$lang.operation_success}'
+				]);
+			}
+
+			if ($_POST['action'] == 'restore_custody_chain' OR $_POST['action'] == 'empty_custody_chains' OR $_POST['action'] == 'delete_custody_chain')
+			{
+				if ($_POST['action'] == 'restore_custody_chain')
+					$query = $this->model->restore_custody_chain($_POST['id']);
+				else if ($_POST['action'] == 'empty_custody_chains')
+					$query = $this->model->empty_custody_chains();
+				else if ($_POST['action'] == 'delete_custody_chain')
+					$query = $this->model->delete_custody_chain($_POST['id']);
+
+				if (!empty($query))
+				{
+					echo json_encode([
+						'status' => 'success',
+						'message' => '{$lang.operation_success}'
+					]);
+				}
+				else
+				{
+					echo json_encode([
+						'status' => 'error',
+						'message' => '{$lang.operation_error}'
+					]);
+				}
+			}
+		}
+		else
+		{
+			define('_title', Configuration::$web_page . ' | {$lang.laboratory} | {$lang.' . $params[0] . '}');
+
+			if (System::temporal('get_if_exists', 'laboratory', 'filter') == false)
+			{
+				System::temporal('set_forced', 'laboratory', 'filter', [
+					'own' => (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? 'laboratories' : 'account',
+					'taker' => (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? 'all' : '',
+					'collector' => (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? 'all' : '',
+					'deleted_status' => 'not_deleted',
+					'type' => ($params[0] == 'covid') ? 'all' : $params[0],
+					'start_date' => Dates::past_date(Dates::current_date(), 1, 'days'),
+					'end_date' => Dates::current_date(),
+					'start_hour' => '00:00:00',
+					'end_hour' => '23:59:59',
+					'sent_status' => (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? 'all' : ''
+				]);
+			}
+
+			global $global;
+
+			$global['render'] = $params[0];
+			$global['custody_chains'] = $this->model->read_custody_chains($params[0]);
+			$global['laboratories'] = $this->model->read_laboratories();
+			$global['takers'] = $this->model->read_takers();
+			$global['collectors'] = $this->model->read_collectors();
+
+			$template = $this->view->render($this, 'index');
+
+			echo $template;
+		}
+    }
 
 	// public function control()
     // {
