@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 30-04-2021 a las 14:09:42
+-- Tiempo de generación: 13-05-2021 a las 14:59:08
 -- Versión del servidor: 10.3.27-MariaDB-0+deb10u1
 -- Versión de PHP: 7.3.27
 
@@ -56,8 +56,8 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `avatar`, `name`, `type`, `path`, `email`, `phone`, `description`, `website`, `zip_code`, `country`, `city`, `time_zone`, `currency`, `language`, `fiscal`, `work_team`, `permissions`, `settings`, `signup_date`, `blocked`) VALUES
-(1, NULL, 'One Consultores', 'business', 'oneconsultores', 'desarrollo@one-consultores.com', '{\"country\":\"\",\"number\":\"\"}', NULL, NULL, NULL, 'MEX', 'Cancún', 'America/Cancun', 'MXN', 'es', '{\"id\":\"\",\"name\":\"\",\"country\":\"\"}', '[\"1\",\"2\",\"4\",\"5\",\"8\"]', '[\"1\"]', '[]', '2020-10-20', 0),
-(2, NULL, 'Cancún Sailing', 'business', 'cancunsailing', 'desarrollo@one-consultores.com', '{\"country\":\"\",\"number\":\"\"}', NULL, NULL, NULL, 'MEX', 'Cancún', 'America/Cancun', 'MXN', 'es', '{\"id\":\"\",\"name\":\"\",\"country\":\"\"}', '[\"1\",\"2\",\"4\",\"5\",\"8\"]', '[\"1\"]', '[]', '2020-10-20', 0);
+(1, NULL, 'One Consultores', 'business', 'oneconsultores', 'desarrollo@one-consultores.com', '{\"country\":\"\",\"number\":\"\"}', NULL, NULL, NULL, 'MEX', 'Cancún', 'America/Cancun', 'MXN', 'es', '{\"id\":\"\",\"name\":\"\",\"country\":\"\"}', '[\"1\",\"2\",\"4\",\"8\",\"9\"]', '[\"1\"]', '[]', '2020-10-20', 0),
+(2, NULL, 'Cancún Sailing', 'business', 'cancunsailing', 'desarrollo@one-consultores.com', '{\"country\":\"\",\"number\":\"\"}', NULL, NULL, NULL, 'MEX', 'Cancún', 'America/Cancun', 'MXN', 'es', '{\"id\":\"\",\"name\":\"\",\"country\":\"\"}', '[\"1\",\"2\",\"4\"]', '[\"1\"]', '[]', '2020-10-20', 0);
 
 -- --------------------------------------------------------
 
@@ -110,9 +110,10 @@ CREATE TABLE `custody_chains` (
   `qr` text DEFAULT NULL,
   `pdf` text DEFAULT NULL,
   `lang` text DEFAULT NULL,
-  `closed` tinyint(1) NOT NULL,
-  `user` bigint(20) DEFAULT NULL,
   `version` text DEFAULT NULL,
+  `user` bigint(20) DEFAULT NULL,
+  `sent` tinyint(1) NOT NULL,
+  `closed` tinyint(1) NOT NULL,
   `deleted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -120,9 +121,14 @@ CREATE TABLE `custody_chains` (
 -- Volcado de datos para la tabla `custody_chains`
 --
 
-INSERT INTO `custody_chains` (`id`, `account`, `token`, `employee`, `contact`, `type`, `reason`, `start_process`, `end_process`, `results`, `medicines`, `prescription`, `location`, `laboratory`, `taker`, `collector`, `chemical`, `date`, `hour`, `comments`, `signature`, `qr`, `pdf`, `lang`, `closed`, `user`, `version`, `deleted`) VALUES
-(6516, NULL, 'TCN-MnP7JhFq', NULL, '{\"firstname\":\"Gers\\u00f3n Aar\\u00f3n\",\"lastname\":\"G\\u00f3mez Mac\\u00edas\",\"sex\":\"male\",\"birth_date\":\"1992-08-01\",\"age\":\"28\",\"nationality\":\"Mexicana\",\"ife\":\"0987654321\",\"email\":\"gergomez18@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981579343\"},\"sf\":{\"pregnant\":\"not\",\"symptoms\":[],\"symptoms_time\":\"\",\"travel\":\"not\",\"travel_countries\":\"\",\"contact\":\"not\",\"covid\":\"not\",\"covid_time\":\"\"}}', 'covid_pcr', 'random', '2021-04-30', '2021-04-30', '{\"result\":\"negative\",\"unity\":\"INDEX\",\"reference_values\":\"not_detected\"}', NULL, NULL, NULL, 2, 14, 6, 1, '2021-04-30', '11:27:26', NULL, 'I6vpSQlWOkBOEBUu.png', 'covid_qr_TCN-MnP7JhFq_2021_04_30_12_26_26.png', 'covid_pdf_TCN-MnP7JhFq_2021_04_30_12_26_26.pdf', 'es', 1, 1, 'v2', 0),
-(6517, NULL, 'TCN-rX9QQkie', NULL, '{\"firstname\":\"Miguel Fernando\",\"lastname\":\"Parra Ordu\\u00f1a\",\"sex\":\"male\",\"birth_date\":\"1975-12-19\",\"age\":\"46\",\"nationality\":\"Mexicana\",\"ife\":\"G17117371\",\"email\":\"migue.parra07@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9985010226\"},\"sf\":{\"pregnant\":\"not\",\"symptoms\":[],\"symptoms_time\":\"\",\"travel\":\"not\",\"travel_countries\":\"\",\"contact\":\"not\",\"covid\":\"not\",\"covid_time\":\"\"}}', 'covid_an', 'random', '2021-04-30', '2021-04-30', '{\"result\":\"negative\",\"unity\":\"INDEX\",\"reference_values\":\"not_detected\"}', NULL, NULL, NULL, 2, 14, 6, 1, '2021-04-30', '11:37:55', NULL, 'wx2OnwVuTB1bbHVk.png', 'covid_qr_TCN-rX9QQkie_2021_04_30_11_43_33.png', 'covid_pdf_TCN-rX9QQkie_2021_04_30_11_43_33.pdf', 'es', 1, 1, 'v2', 0);
+INSERT INTO `custody_chains` (`id`, `account`, `token`, `employee`, `contact`, `type`, `reason`, `start_process`, `end_process`, `results`, `medicines`, `prescription`, `location`, `laboratory`, `taker`, `collector`, `chemical`, `date`, `hour`, `comments`, `signature`, `qr`, `pdf`, `lang`, `version`, `user`, `sent`, `closed`, `deleted`) VALUES
+(6520, NULL, 'TCN-Nk95LOaT', NULL, '{\"firstname\":\"Jose Alberto\",\"lastname\":\"Diaz Guerrero\",\"sex\":\"male\",\"birth_date\":\"1979-04-29\",\"age\":\"42\",\"nationality\":\"mexicano\",\"ife\":\"G30879924\",\"travel_to\":\"Lima Peru\",\"pregnant\":\"not\",\"symptoms\":[\"nothing\"],\"symptoms_time\":\"\",\"previous_travel\":\"not\",\"previous_travel_countries\":\"\",\"covid_contact\":\"not\",\"covid_infection\":\"not\",\"covid_infection_time\":\"\",\"email\":\"josealbertodg.jadg@gmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9983402043\"}}', 'covid_pcr', 'random', '2021-05-11', '2021-05-11', '{\"result\":\"negative\",\"unity\":\"INDEX\",\"reference_values\":\"not_detected\"}', NULL, NULL, NULL, 2, 14, 4, 1, '2021-05-11', '10:41:20', NULL, 'cA0ZyBIvCAXsyWNU.png', 'skylab_covid_pcr_qr_results_TCN-Nk95LOaT_2021_05_12_10_14_07.png', 'skylab_covid_pcr_pdf_results_TCN-Nk95LOaT_2021_05_12_10_14_07.pdf', 'es', 'v2', 1, 1, 1, 0),
+(6521, NULL, 'TCN-wonNVUxz', NULL, '{\"firstname\":\"Cecilia \",\"lastname\":\"Ortiz Naranjo\",\"sex\":\"female\",\"birth_date\":\"1973-11-22\",\"age\":\"47\",\"nationality\":\"Nunguno\",\"ife\":\"Na\",\"travel_to\":\"Na\",\"pregnant\":\"not\",\"symptoms\":[\"muscles_pain\",\"head_pain\",\"throat_pain\",\"knees_pain\",\"ears_pain\"],\"symptoms_time\":\"3 d\\u00edas \",\"previous_travel\":\"not\",\"previous_travel_countries\":\"\",\"covid_contact\":\"not\",\"covid_infection\":\"not\",\"covid_infection_time\":\"\",\"email\":\"ceci.ladyblue@hotmail.com\",\"phone\":{\"country\":\"52\",\"number\":\"9981159833\"}}', 'covid_an', 'random', '2021-05-12', '2021-05-12', '{\"result\":\"negative\",\"unity\":\"INDEX\",\"reference_values\":\"not_detected\"}', NULL, NULL, NULL, 2, 14, 4, 1, '2021-05-12', '12:20:50', NULL, 'jrnZVzSOlquJdgqF.png', 'skylab_covid_an_qr_results_TCN-wonNVUxz_2021_05_12_13_13_14.png', 'skylab_covid_an_pdf_results_TCN-wonNVUxz_2021_05_12_13_13_14.pdf', 'es', 'v2', 1, 1, 1, 0),
+(6522, NULL, 'TCN-DkWd4UpA', NULL, '{\"firstname\":\"ANA LOURDES\",\"lastname\":\"NAVARRO CAMINO\",\"sex\":\"female\",\"birth_date\":\"1978-03-26\",\"age\":\"43\",\"nationality\":\"ESPA\\u00d1A\",\"ife\":\"AAG440155\",\"travel_to\":\"ESPA\\u00d1A\",\"pregnant\":\"not\",\"symptoms\":[\"nothing\"],\"symptoms_time\":\"\",\"previous_travel\":\"not\",\"previous_travel_countries\":\"\",\"covid_contact\":\"not\",\"covid_infection\":\"not\",\"covid_infection_time\":\"\",\"email\":\"icebarmexico@yahoo.com\",\"phone\":{\"country\":\"52\",\"number\":\"9988704195\"}}', 'covid_pcr', 'random', '2021-05-12', '2021-05-13', '{\"result\":\"negative\",\"unity\":\"INDEX\",\"reference_values\":\"not_detected\"}', NULL, NULL, NULL, 2, 14, 6, 1, '2021-05-12', '13:42:46', NULL, 'bBkGheVyd0WpWW2D.png', 'skylab_covid_pcr_qr_results_TCN-DkWd4UpA_2021_05_13_09_17_17.png', 'skylab_covid_pcr_pdf_results_TCN-DkWd4UpA_2021_05_13_09_17_17.pdf', 'es', 'v2', 1, 1, 1, 0),
+(6523, NULL, 'TCN-CLherLZ6', NULL, '{\"firstname\":\" Aparecida Do Carmo \",\"lastname\":\"Tha\\u00eds \",\"sex\":\"female\",\"birth_date\":\"1988-02-23\",\"age\":\"33\",\"nationality\":\"Brasileiro \",\"ife\":\"Gb966239\",\"travel_to\":\"Brasil\",\"pregnant\":\"yeah\",\"symptoms\":[\"nothing\"],\"symptoms_time\":\"\",\"previous_travel\":\"not\",\"previous_travel_countries\":\"\",\"covid_contact\":\"not\",\"covid_infection\":\"not\",\"covid_infection_time\":\"\",\"email\":\"thaiscarmo88@outlook.com\",\"phone\":{\"country\":\"55\",\"number\":\"5534991710660\"}}', 'covid_pcr', 'random', '2021-05-13', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, 2, 14, 4, NULL, '2021-05-13', '10:15:49', NULL, 'ps2XJL2hOAPOACtE.png', 'skylab_covid_pcr_qr_results_TCN-CLherLZ6_2021_05_13_10_15_49.png', NULL, 'es', 'v2', NULL, 0, 0, 0),
+(6524, NULL, 'TCN-hdALu5ca', NULL, '{\"firstname\":\"Alex\",\"lastname\":\"Goncalves Martins\",\"sex\":\"male\",\"birth_date\":\"1988-04-02\",\"age\":\"33\",\"nationality\":\"Brasileiro\",\"ife\":\"Gb966237\",\"travel_to\":\"Brasil\",\"pregnant\":\"not\",\"symptoms\":[\"nothing\"],\"symptoms_time\":\"\",\"previous_travel\":\"not\",\"previous_travel_countries\":\"\",\"covid_contact\":\"not\",\"covid_infection\":\"not\",\"covid_infection_time\":\"\",\"email\":\"alexgoncalves02@yahoo.com.br\",\"phone\":{\"country\":\"55\",\"number\":\"5534996470304\"}}', 'covid_pcr', 'random', '2021-05-13', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, 2, 14, 4, NULL, '2021-05-13', '10:20:41', NULL, 'dps3ItaoXTXLXXsZ.png', 'skylab_covid_pcr_qr_results_TCN-hdALu5ca_2021_05_13_10_20_41.png', NULL, 'es', 'v2', NULL, 0, 0, 0),
+(6525, NULL, 'TCN-fr4KnKCi', NULL, '{\"firstname\":\"CLAUDIA LORENA \",\"lastname\":\"ARIAS AGUDELO \",\"sex\":\"female\",\"birth_date\":\"1989-05-03\",\"age\":\"32\",\"nationality\":\"Colombiana \",\"ife\":\"AO834333\",\"travel_to\":\"Colombia \",\"pregnant\":\"not\",\"symptoms\":[\"nothing\"],\"symptoms_time\":\"\",\"previous_travel\":\"not\",\"previous_travel_countries\":\"\",\"covid_contact\":\"not\",\"covid_infection\":\"not\",\"covid_infection_time\":\"\",\"email\":\"lorenna3@hotmail.com\",\"phone\":{\"country\":\"57\",\"number\":\"3106434399\"}}', 'covid_pcr', 'random', '2021-05-13', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, 2, 14, 4, NULL, '2021-05-13', '10:44:14', NULL, 'zPXZLeSUnq1oAoez.png', 'skylab_covid_pcr_qr_results_TCN-fr4KnKCi_2021_05_13_10_44_14.png', NULL, 'es', 'v2', NULL, 0, 0, 0),
+(6526, NULL, 'TCN-CCAncgQg', NULL, '{\"firstname\":\"Cesar Augusto \",\"lastname\":\"Bustamante Herrera\",\"sex\":\"male\",\"birth_date\":\"1985-09-29\",\"age\":\"35\",\"nationality\":\"Colombiana\",\"ife\":\"AN937570\",\"travel_to\":\"Colombia\",\"pregnant\":\"not\",\"symptoms\":[\"nothing\"],\"symptoms_time\":\"\",\"previous_travel\":\"not\",\"previous_travel_countries\":\"\",\"covid_contact\":\"not\",\"covid_infection\":\"not\",\"covid_infection_time\":\"\",\"email\":\"cesarbien001@hotmail.com\",\"phone\":{\"country\":\"57\",\"number\":\"3148040583\"}}', 'covid_pcr', 'random', '2021-05-13', NULL, '{\"result\":\"\",\"unity\":\"\",\"reference_values\":\"\"}', NULL, NULL, NULL, 2, 14, 4, NULL, '2021-05-13', '10:47:14', NULL, 'pEpCG0BzuEoOYkHc.png', 'skylab_covid_pcr_qr_results_TCN-CCAncgQg_2021_05_13_10_47_14.png', NULL, 'es', 'v2', NULL, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -445,18 +451,14 @@ CREATE TABLE `system_collectors` (
 --
 
 INSERT INTO `system_collectors` (`id`, `token`, `name`, `email`, `schedule`, `qrs`, `authentication`, `notifications`, `laboratories`, `user`, `blocked`) VALUES
-(1, 'hdy73j8w', 'Gersón Gómez', NULL, '{\"open\":\"00:00:00\",\"close\":\"23:59:59\"}', '{\"authentication\":\"system_collector_authentication_qr_hdy73j8w.png\",\"record\":\"system_collector_record_qr_hdy73j8w.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"1\",\"2\"]', 1, 0),
-(2, 'ms38j3gh', 'Marbu Salud', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_ms38j3gh.png\",\"record\":\"system_collector_record_qr_ms38j3gh.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"1\"]', NULL, 1),
-(3, 'djaybja9', 'Alison', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_djaybja9.png\",\"record\":\"system_collector_record_qr_djaybja9.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', NULL, 0),
-(4, 'p5wj0127', 'Eduar', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_p5wj0127.png\",\"record\":\"system_collector_record_qr_p5wj0127.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', 5, 0),
-(5, '9vuwfgr1', 'Julieta', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_9vuwfgr1.png\",\"record\":\"system_collector_record_qr_9vuwfgr1.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', NULL, 0),
-(6, 'ifkg76x8', 'Miguel Parra', NULL, '{\"open\":\"08:00:00\",\"close\":\"20:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_ifkg76x8.png\",\"record\":\"system_collector_record_qr_ifkg76x8.png\"}', '{\"type\":\"covid\",\"taker\":\"14\"}', 1, '[\"2\"]', 2, 0),
-(7, 'e0SaS6QC', 'Miguel Escobedo', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_e0SaS6QC.png\",\"record\":\"system_collector_record_qr_e0SaS6QC.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', NULL, 0),
-(8, '3pd7j863', 'Noé Cuxim', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_3pd7j863.png\",\"record\":\"system_collector_record_qr_3pd7j863.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', 3, 0),
-(9, '4z1fd401', 'Paula', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_4z1fd401.png\",\"record\":\"system_collector_record_qr_4z1fd401.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', NULL, 0),
-(10, 'pkx8sg20', 'Román', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_pkx8sg20.png\",\"record\":\"system_collector_record_qr_pkx8sg20.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', NULL, 0),
-(11, 'ckcc1ouu', 'SkyLab', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_ckcc1ouu.png\",\"record\":\"system_collector_record_qr_ckcc1ouu.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', NULL, 0),
-(12, 'wvu7shyu', 'Yazmin', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_wvu7shyu.png\",\"record\":\"system_collector_record_qr_wvu7shyu.png\"}', '{\"type\":\"none\",\"taker\":\"none\"}', 1, '[\"2\"]', 4, 0);
+(1, 'hdy73j8w', 'Gersón Gómez', NULL, '{\"open\":\"00:00:00\",\"close\":\"23:59:59\"}', '{\"authentication\":\"system_collector_authentication_qr_hdy73j8w.png\",\"record\":\"system_collector_record_qr_hdy73j8w.png\"}', '{\"type\":\"covid\",\"taker\":\"14\"}', 1, '[\"1\",\"2\"]', 1, 0),
+(3, 'djaybja9', 'Alison Pech', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_djaybja9.png\",\"record\":\"system_collector_record_qr_djaybja9.png\"}', '{\"type\":\"covid\",\"taker\":\"14\"}', 1, '[\"2\"]', NULL, 0),
+(4, 'p5wj0127', 'Eduar Canul', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_p5wj0127.png\",\"record\":\"system_collector_record_qr_p5wj0127.png\"}', '{\"type\":\"covid\",\"taker\":\"14\"}', 1, '[\"2\"]', NULL, 0),
+(6, 'ifkg76x8', 'Miguel Parra', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_ifkg76x8.png\",\"record\":\"system_collector_record_qr_ifkg76x8.png\"}', '{\"type\":\"covid\",\"taker\":\"14\"}', 1, '[\"2\"]', 2, 0),
+(9, '4z1fd401', 'Paula Mauleon', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_4z1fd401.png\",\"record\":\"system_collector_record_qr_4z1fd401.png\"}', '{\"type\":\"covid\",\"taker\":\"14\"}', 1, '[\"2\"]', NULL, 0),
+(10, 'pkx8sg20', 'Román Trinidad', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_pkx8sg20.png\",\"record\":\"system_collector_record_qr_pkx8sg20.png\"}', '{\"type\":\"covid\",\"taker\":\"14\"}', 1, '[\"2\"]', NULL, 0),
+(12, 'wvu7shyu', 'Yazmin Morales', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_wvu7shyu.png\",\"record\":\"system_collector_record_qr_wvu7shyu.png\"}', '{\"type\":\"covid\",\"taker\":\"14\"}', 1, '[\"2\"]', 4, 0),
+(13, '3pd7j863', 'Alejandro Rojas', NULL, '{\"open\":\"08:00:00\",\"close\":\"18:00:00\"}', '{\"authentication\":\"system_collector_authentication_qr_3pd7j863.png\",\"record\":\"system_collector_record_qr_3pd7j863.png\"}', '{\"type\":\"covid\",\"taker\":\"14\"}', 1, '[\"2\"]', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -751,8 +753,8 @@ CREATE TABLE `system_laboratories` (
 --
 
 INSERT INTO `system_laboratories` (`id`, `avatar`, `name`, `path`, `business`, `rfc`, `sanitary_opinion`, `address`, `email`, `phone`, `rrss`, `website`, `time_zone`, `colors`, `blocked`) VALUES
-(1, 'system_laboratory_logotype_marbusalud.png', 'Marbu Salud', 'marbusalud', 'Marbu Salud S.A. de C.V.', 'MSA1907259GA', 'DPCRS-CZNCS-1029-2021', '{\"first\":\"SM47 MZ6 LT21 AV Del Sol CP 77506\",\"second\":\"Cancún, Qroo. México\"}', 'marbu@one-consultores.com', '+52 (998) 440 33 02', '{\"facebook\":\"marbusalud\",\"instagram\":\"marbusalud\",\"linkedin\":\"marbusalud\"}', 'marbu.one-consultores.com', 'America/Cancun', '{\"first\":\"#004770\",\"second\":\"#0b5178\"}', 1),
-(2, 'system_laboratory_logotype_skylab.png', 'SkyLab', 'skylab', 'SkyLab International', 'MSA1907259GA', 'DPCRS-CZNCS-1029-2021', '{\"first\":\"Av. Hidalgo por Morelos s/n Colonia Centro. SM 6, MZ 260, LT 6 Fracc. Ampliación LA\",\"second\":\"Isla Mujeres, Qroo. México\"}', 'skylab@one-consultores.com', '+52 (998) 440 33 02', '{\"facebook\":\"skylab\",\"instagram\":\"skylab\",\"linkedin\":\"skylab\"}', 'skylab.one-consultores.com', 'America/Cancun', '{\"first\":\"#00acdb\",\"second\":\"#f68b1f\"}', 0);
+(1, 'system_laboratory_logotype_marbusalud.png', 'Marbu Salud', 'marbusalud', 'Marbu Salud S.A. de C.V.', 'MSA1907259GA', 'DPCRS-CZNCS-1029-2021', '{\"first\":\"SM47 MZ6 LT21 AV Del Sol CP 77506\",\"second\":\"Cancún, Qroo. México\"}', 'marbu@one-consultores.com', '+52 (998) 440 33 02', '{\"facebook\":\"marbusalud\",\"instagram\":\"marbusalud\",\"linkedin\":\"marbusalud\"}', 'marbu.one-consultores.com', 'America/Cancun', '{\"first\":\"#004770\",\"second\":\"#0b5178\"}', 0),
+(2, 'system_laboratory_logotype_skylab.png', 'SkyLab', 'skylab', 'SkyLab', 'MSA1907259GA', 'DPCRS-CZNCS-1029-2021', '{\"first\":\"Av. Hidalgo por Morelos s/n Colonia Centro. SM 6, MZ 260, LT 6 Fracc. Ampliación LA\",\"second\":\"Isla Mujeres, Qroo. México\"}', 'skylab@one-consultores.com', '+52 (998) 440 33 02', '{\"facebook\":\"skylab\",\"instagram\":\"skylab\",\"linkedin\":\"skylab\"}', 'skylab.one-consultores.com', 'America/Cancun', '{\"first\":\"#00acdb\",\"second\":\"#f68b1f\"}', 0);
 
 -- --------------------------------------------------------
 
@@ -786,12 +788,12 @@ INSERT INTO `system_takers` (`id`, `name`, `token`, `prices`, `blocked`) VALUES
 (11, 'Hotel Rest Inn', 'HRI', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
 (12, 'Hotel Wesintg Regina', 'HWR', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
 (13, 'Hotel Cancún Bay', 'HCB', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(14, 'Toma Cancún', 'TCN', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(15, 'Toma Playa del Carmen', 'TPC', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(16, 'Toma Tulum', 'TTL', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(14, 'Toma de Cancún', 'TCN', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(15, 'Toma de Playa del Carmen', 'TPC', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
+(16, 'Toma de Tulum', 'TTL', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
 (17, 'Hotel Dos Playas', 'HDP', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
 (18, 'Hotel Moon Palace', 'HMP', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0),
-(19, 'Toma Isla Mujeres', 'TIM', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0);
+(19, 'Toma de Isla Mujeres', 'TIM', '{\"alcoholic\":{\"mxn\":\"0\",\"usd\":\"0\"},\"antidoping\":{\"mxn\":\"0\",\"usd\":\"0\"},\"covid\":{\"pcr\":{\"mxn\":\"0\",\"usd\":\"0\"},\"an\":{\"mxn\":\"0\",\"usd\":\"0\"},\"ac\":{\"mxn\":\"0\",\"usd\":\"0\"}}}', 0);
 
 -- --------------------------------------------------------
 
@@ -821,10 +823,9 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `avatar`, `firstname`, `lastname`, `email`, `password`, `language`, `accounts`, `settings`, `signup_date`, `god`, `blocked`) VALUES
 (1, NULL, 'Gersón', 'Gómez', 'desarrollo@one-consultores.com', 'aff76a06ed02c05751326d143dd634d896bcd96c:0sSChO6OMgSEhONB8nq7oNTj0041KUKfDwnFWQ5GcwzF3EndySf7KeY3BqwpQ5jX', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"}]', '[]', '2020-10-20', 1, 0),
 (2, NULL, 'Miguel', 'Parra', 'mparra@one-consultores.com', '6848b097426f2db12c74f06340f33835acda3f59:DijGTBs9o1HpyBHZYzhlxV17O8vl9On2ncDDxhvVqr5jJ8pjLe6breNuZUSXpNy6', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"}]', '[]', '2020-10-20', 1, 0),
-(3, NULL, 'Noé', 'Cuxim', 'noec@one-consultores.com', 'ca11ab6776330fc981c8f43951dcf66e677a41e5:CNx02tt6iM2FL7MB7FLOJ24io0eZRSbtZeZuDfWQ3jFmjTFuZ5hq1H8Unz9uWI03', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"}]', '[]', '2020-10-20', 1, 0),
 (4, NULL, 'Yazmin', 'Morales', 'ymorales@one-consultores.com', '5f82db09c0085acd32e3a3ffbeced5a04f90fb54:2p6775u8MbmQaEahPCqJCdW9LJGmjoUV8Qutc7zL0VbaLw3pewA7CSznpSKnNAvf', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"}]', '[]', '2021-01-28', 1, 0),
-(5, NULL, 'Eduar', 'Canúl', 'ecanul@one-consultores.com', 'ba460c2371a7dd90b3c4858729f902406c2be6af:LySfpScaJKwJqepDR24JlNEszNFIEENvJymkr9ek9oXLubA9FceIzLgqxid6Nfbj', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"}]', '[]', '2021-01-28', 1, 0),
-(8, NULL, 'Francisco', 'Gutierrez', 'fcomanuelg@hotmail.com', 'd48d812190a70bc2c056b775d97499f333f92f01:SGDNryjeckofNpvbMO8ECwkGLZYQWQj1jlXjpraiufHIKFh53cGciTBLiimvYXIJ', 'es', '[{\"id\":1,\"permissions\":\"all\"},{\"id\":2,\"permissions\":\"all\"}]', '[]', '2021-02-15', 1, 0);
+(8, NULL, 'Francisco', 'Gutierrez', 'fcomanuelg@hotmail.com', 'd48d812190a70bc2c056b775d97499f333f92f01:SGDNryjeckofNpvbMO8ECwkGLZYQWQj1jlXjpraiufHIKFh53cGciTBLiimvYXIJ', 'es', '[{\"id\":1,\"permissions\":\"all\"}]', '[]', '2021-02-15', 1, 0),
+(9, NULL, 'Jorge', 'Domínguez', 'jorge.do1385@hotmail.com', '456c165f1f6f8c40c4fca81529801d5387031fb3:8jaFEIYBZY5SZ9fWmTNyJvT0SB3qQx8BWmKB5Lms5wWDOMwWd5LNE1xTh4XMbekZ', 'es', '[{\"id\":1,\"permissions\":\"all\"}]', '[]', '2021-05-10', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -989,7 +990,7 @@ ALTER TABLE `accounts_permissions`
 -- AUTO_INCREMENT de la tabla `custody_chains`
 --
 ALTER TABLE `custody_chains`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6518;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6527;
 
 --
 -- AUTO_INCREMENT de la tabla `employees`
@@ -1013,7 +1014,7 @@ ALTER TABLE `system_chemicals`
 -- AUTO_INCREMENT de la tabla `system_collectors`
 --
 ALTER TABLE `system_collectors`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `system_countries`
@@ -1037,7 +1038,7 @@ ALTER TABLE `system_takers`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `users_permissions`

@@ -711,7 +711,7 @@ class Laboratory_controller extends Controller
 														<td style="width:auto;margin:0px;padding:20px;border:0px;box-sizing:border-box;vertical-align:middle;">
 															<table style="width:100%;margin:0px;padding:0px;border:0px;">
 																<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-																	<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:600;text-align:right;color:#fff;">' . $global['laboratory']['business'] . '</td>
+																	<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:600;text-align:right;color:#fff;">' . $global['laboratory']['name'] . '</td>
 																</tr>
 																<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 																	<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['laboratory']['rfc'] . '</td>

@@ -14,7 +14,6 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
         <h1><?php echo $global['laboratory']['name']; ?></h1>
     </div>
     <div>
-        <h2 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['business']; ?></h2>
         <h2 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['rfc']; ?></h2>
         <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['sanitary_opinion']; ?></h3>
         <h3 style="color:<?php echo $global['laboratory']['colors']['second']; ?>;"><?php echo $global['laboratory']['address']['first']; ?></h3>
