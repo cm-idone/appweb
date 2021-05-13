@@ -2,7 +2,7 @@
 
 defined('_EXEC') or die;
 
-$this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
+$this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.2']);
 
 ?>
 
