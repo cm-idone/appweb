@@ -1,7 +1,17 @@
 <?php defined('_EXEC') or die; ?>
 
 <header class="topbar">
-    <?php if (!empty(Session::get_value('vkye_account'))) : ?>
+    <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
+        <div class="account">
+            <figure>
+                <img src="{$path.images}god.png">
+            </figure>
+            <div>
+                <h4 class="online"><i class="fas fa-circle"></i>{$lang.god_mode_activated}</h4>
+                <span>{$lang.business}</span>
+            </div>
+        </div>
+    <?php elseif (!empty(Session::get_value('vkye_account'))) : ?>
         <div class="account">
             <figure>
                 <img src="<?php echo (!empty(Session::get_value('vkye_account')['avatar']) ? '{$path.uploads}' . Session::get_value('vkye_account')['avatar'] : 'https://cdn.codemonkey.com.mx/monkeyboard/assets/images/account.png'); ?>">
@@ -89,32 +99,34 @@
                     <a data-action="change_god_mode"></a>
                 </div>
             <?php endif; ?>
-            <?php if (!empty(Session::get_value('vkye_user')['accounts'])) : ?>
-                <?php foreach (Session::get_value('vkye_user')['accounts'] as $key => $value) : ?>
-                    <div class="item">
-                        <figure>
-                            <img src="<?php echo (!empty($value['avatar']) ? '{$path.uploads}' . $value['avatar'] : 'https://cdn.codemonkey.com.mx/monkeyboard/assets/images/account.png'); ?>">
-                        </figure>
-                        <div>
-                            <h4><?php echo $value['name']; ?></h4>
-                            <?php if ($value['blocked'] == false) : ?>
-                                <?php if (Session::get_value('vkye_account')['id'] == $value['id']) : ?>
-                                    <span class="online"><i class="fas fa-circle"></i>{$lang.online}</span>
+            <?php if (Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') : ?>
+                <?php if (!empty(Session::get_value('vkye_user')['accounts'])) : ?>
+                    <?php foreach (Session::get_value('vkye_user')['accounts'] as $key => $value) : ?>
+                        <div class="item">
+                            <figure>
+                                <img src="<?php echo (!empty($value['avatar']) ? '{$path.uploads}' . $value['avatar'] : 'https://cdn.codemonkey.com.mx/monkeyboard/assets/images/account.png'); ?>">
+                            </figure>
+                            <div>
+                                <h4><?php echo $value['name']; ?></h4>
+                                <?php if ($value['blocked'] == false) : ?>
+                                    <?php if (Session::get_value('vkye_account')['id'] == $value['id']) : ?>
+                                        <span class="online"><i class="fas fa-circle"></i>{$lang.online}</span>
+                                    <?php else : ?>
+                                        <span class="onhold"><i class="fas fa-circle"></i>{$lang.onhold}</span>
+                                    <?php endif; ?>
                                 <?php else : ?>
-                                    <span class="onhold"><i class="fas fa-circle"></i>{$lang.onhold}</span>
+                                    <span class="offline"><i class="fas fa-circle"></i>{$lang.offline}</span>
                                 <?php endif; ?>
-                            <?php else : ?>
-                                <span class="offline"><i class="fas fa-circle"></i>{$lang.offline}</span>
-                            <?php endif; ?>
+                            </div>
+                            <a data-action="switch_account" data-id="<?php echo $value['id']; ?>"></a>
                         </div>
-                        <a data-action="switch_account" data-id="<?php echo $value['id']; ?>"></a>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <div class="empty">
+                        <i class="far fa-sad-tear"></i>
+                        <p>{$lang.not_accounts}</p>
                     </div>
-                <?php endforeach; ?>
-            <?php else : ?>
-                <div class="empty">
-                    <i class="far fa-sad-tear"></i>
-                    <p>{$lang.not_accounts}</p>
-                </div>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
         <nav>

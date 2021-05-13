@@ -18,7 +18,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                     <div class="row">
                         <div class="span4">
                             <div class="text">
-                                <input type="text" value="<?php echo $global['custody_chain']['laboratory_business']; ?>" disabled>
+                                <input type="text" value="<?php echo $global['custody_chain']['laboratory_name']; ?> | <?php echo $global['custody_chain']['laboratory_rfc']; ?> | <?php echo $global['custody_chain']['laboratory_sanitary_opinion']; ?>" disabled>
                             </div>
                             <div class="title">
                                 <h6>{$lang.laboratory}</h6>

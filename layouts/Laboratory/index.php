@@ -100,21 +100,20 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                 <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
                     <fieldset class="fields-group">
                         <div class="row">
-                            <div class="<?php echo ((System::temporal('get', 'laboratory', 'filter')['own'] == 'account') ? 'span12' : 'span4'); ?>">
+                            <div class="span4">
                                 <div class="text">
-                                    <select name="own">
-                                        <option value="account" <?php echo ((System::temporal('get', 'laboratory', 'filter')['own'] == 'account') ? 'selected' : '') ?>>{$lang.account} (<?php echo Session::get_value('vkye_account')['name']; ?>)</option>
-                                        <option value="laboratories" <?php echo ((System::temporal('get', 'laboratory', 'filter')['own'] == 'laboratories') ? 'selected' : '') ?>>{$lang.all_laboratories}</option>
+                                    <select name="laboratory">
+                                        <option value="all" <?php echo ((System::temporal('get', 'laboratory', 'filter')['laboratory'] == 'all') ? 'selected' : '') ?>>{$lang.all}</option>
                                         <?php foreach ($global['laboratories'] as $value) : ?>
-                                            <option value="<?php echo $value['id']; ?>" <?php echo ((System::temporal('get', 'laboratory', 'filter')['own'] == $value['id']) ? 'selected' : '') ?>><?php echo $value['name']; ?></option>
+                                            <option value="<?php echo $value['id']; ?>" <?php echo ((System::temporal('get', 'laboratory', 'filter')['laboratory'] == $value['id']) ? 'selected' : '') ?>><?php echo $value['name']; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
                                 <div class="title">
-                                    <h6>{$lang.own}</h6>
+                                    <h6>{$lang.laboratory}</h6>
                                 </div>
                             </div>
-                            <div class="span4 <?php echo ((System::temporal('get', 'laboratory', 'filter')['own'] == 'account') ? 'hidden' : ''); ?>">
+                            <div class="span4">
                                 <div class="text">
                                     <select name="taker">
                                         <option value="all" <?php echo ((System::temporal('get', 'laboratory', 'filter')['taker'] == 'all') ? 'selected' : '') ?>>{$lang.all}</option>
@@ -127,7 +126,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                                     <h6>{$lang.taker}</h6>
                                 </div>
                             </div>
-                            <div class="span4 <?php echo ((System::temporal('get', 'laboratory', 'filter')['own'] == 'account') ? 'hidden' : ''); ?>">
+                            <div class="span4">
                                 <div class="text">
                                     <select name="collector">
                                         <option value="all" <?php echo ((System::temporal('get', 'laboratory', 'filter')['collector'] == 'all') ? 'selected' : '') ?>>{$lang.all}</option>
@@ -201,7 +200,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                 <fieldset class="fields-group">
                     <div class="row">
                         <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
-                            <div class="span6 <?php echo ((System::temporal('get', 'laboratory', 'filter')['own'] == 'account' OR System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'deleted') ? 'hidden' : ''); ?>">
+                            <div class="span6 <?php echo ((System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'deleted') ? 'hidden' : ''); ?>">
                                 <div class="text">
                                     <select name="sent_status">
                                         <option value="all" <?php echo ((System::temporal('get', 'laboratory', 'filter')['sent_status'] == 'all') ? 'selected' : '') ?>>{$lang.all}</option>
@@ -214,7 +213,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.1']);
                                 </div>
                             </div>
                         <?php endif; ?>
-                        <div class="<?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['own'] != 'account' AND System::temporal('get', 'laboratory', 'filter')['deleted_status'] != 'deleted') ? 'span6' : 'span12'); ?>">
+                        <div class="<?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['deleted_status'] != 'deleted') ? 'span6' : 'span12'); ?>">
                             <div class="text">
                                 <select name="deleted_status">
                                     <option value="not_deleted" <?php echo ((System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'not_deleted') ? 'selected' : '') ?>>{$lang.not_deleted}</option>

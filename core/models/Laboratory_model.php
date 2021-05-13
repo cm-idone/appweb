@@ -121,17 +121,15 @@ class Laboratory_model extends Model
 	{
 		$AND = [];
 
-		if (Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep' OR (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['own'] == 'account'))
+		if (Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep')
 			$AND['custody_chains.account'] = Session::get_value('vkye_account')['id'];
-		else if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['own'] == 'laboratories')
-			$AND['custody_chains.laboratory[>=]'] = 1;
-		else if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['own'] >= 1)
-			$AND['custody_chains.laboratory'] = System::temporal('get', 'laboratory', 'filter')['own'];
+		else if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['laboratory'] != 'all')
+			$AND['custody_chains.laboratory'] = System::temporal('get', 'laboratory', 'filter')['laboratory'];
 
-		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['own'] != 'account' AND System::temporal('get', 'laboratory', 'filter')['taker'] != 'all')
+		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['taker'] != 'all')
 			$AND['custody_chains.taker'] = System::temporal('get', 'laboratory', 'filter')['taker'];
 
-		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['own'] != 'account' AND System::temporal('get', 'laboratory', 'filter')['collector'] != 'all')
+		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['collector'] != 'all')
 			$AND['custody_chains.collector'] = System::temporal('get', 'laboratory', 'filter')['collector'];
 
 		if (System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'not_deleted')
@@ -152,7 +150,7 @@ class Laboratory_model extends Model
 		if (System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'not_deleted')
 			$AND['custody_chains.hour[<>]'] = [System::temporal('get', 'laboratory', 'filter')['start_hour'],System::temporal('get', 'laboratory', 'filter')['end_hour']];
 
-		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['own'] != 'account' AND System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'not_deleted' AND System::temporal('get', 'laboratory', 'filter')['sent_status'] != 'all')
+		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'not_deleted' AND System::temporal('get', 'laboratory', 'filter')['sent_status'] != 'all')
 		{
 			if (System::temporal('get', 'laboratory', 'filter')['sent_status'] == 'not_sent')
 				$AND['custody_chains.sent'] = false;
@@ -750,23 +748,23 @@ class Laboratory_model extends Model
     //     return !empty($query) ? $query[0] : null;
 	// }
 
-	// public function read_locations()
-	// {
-	// 	$query = $this->database->select('locations', [
-	// 		'id',
-	// 		'name'
-	// 	], [
-    //         'AND' => [
-	// 			'account' => Session::get_value('vkye_account')['id'],
-	// 			'blocked' => false
-	// 		],
-    //         'ORDER' => [
-    // 			'name' => 'ASC'
-    // 		]
-    //     ]);
-	//
-	// 	return $query;
-	// }
+	public function read_locations()
+	{
+		$query = $this->database->select('locations', [
+			'id',
+			'name'
+		], [
+            'AND' => [
+				'account' => Session::get_value('vkye_account')['id'],
+				'blocked' => false
+			],
+            'ORDER' => [
+    			'name' => 'ASC'
+    		]
+        ]);
+
+		return $query;
+	}
 
 	public function read_laboratories()
 	{
