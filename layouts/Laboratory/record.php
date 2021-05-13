@@ -396,7 +396,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.2']);
                     <h4>{$lang.signature}</h4>
                     <p>{$lang.accept_terms_1} <a href="https://<?php echo $global['laboratory']['website']; ?>/terminos-y-condiciones" target="_blank">{$lang.terms_and_conditions}</a> {$lang.accept_terms_2} <a href="https://<?php echo $global['laboratory']['website']; ?>/aviso-de-privacidad" target="_blank">{$lang.privacy_notice}</a></p>
                     <div class="accept_terms">
-                        <p>{$lang.accept_terms_3} <?php echo $global['laboratory']['business']; ?> {$lang.accept_terms_4}</p>
+                        <p>{$lang.accept_terms_3} <?php echo $global['laboratory']['name']; ?> {$lang.accept_terms_4}</p>
                     </div>
                     <fieldset class="fields-group">
                         <div class="signature" id="signature">
