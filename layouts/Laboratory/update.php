@@ -86,7 +86,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                         </div>
                         <div class="span4">
                             <div class="text">
-                                <input type="number" name="age" value="<?php echo $global['custody_chain']['contact']['age']; ?>">
+                                <input type="text" name="age" value="<?php echo $global['custody_chain']['contact']['age']; ?>">
                             </div>
                             <div class="title">
                                 <h6>{$lang.age}</h6>
@@ -139,7 +139,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                                         <option value="<?php echo $value['lada']; ?>" <?php echo (($global['custody_chain']['contact']['phone']['country'] == $value['lada']) ? 'selected' : ''); ?>><?php echo $value['name'][Session::get_value('vkye_lang')] . ' +' . $value['lada']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                                <input type="number" name="phone_number" value="<?php echo $global['custody_chain']['contact']['phone']['number']; ?>" placeholder="{$lang.number}">
+                                <input type="text" name="phone_number" value="<?php echo $global['custody_chain']['contact']['phone']['number']; ?>" placeholder="{$lang.number}">
                             </div>
                             <div class="title">
                                 <h6>{$lang.phone}</h6>
@@ -229,7 +229,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                     <?php if ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND $global['custody_chain']['type'] == 'alcoholic') : ?>
                         <div class="span4">
                             <div class="text">
-                                <input type="number" name="test_1" value="<?php echo $global['custody_chain']['results']['1']; ?>">
+                                <input type="text" name="test_1" value="<?php echo $global['custody_chain']['results']['1']; ?>">
                             </div>
                             <div class="title">
                                 <h6>{$lang.test} 1</h6>
@@ -237,7 +237,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                         </div>
                         <div class="span4">
                             <div class="text">
-                                <input type="number" name="test_2" value="<?php echo $global['custody_chain']['results']['2']; ?>">
+                                <input type="text" name="test_2" value="<?php echo $global['custody_chain']['results']['2']; ?>">
                             </div>
                             <div class="title">
                                 <h6>{$lang.test} 2</h6>
@@ -245,7 +245,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                         </div>
                         <div class="span4">
                             <div class="text">
-                                <input type="number" name="test_3" value="<?php echo $global['custody_chain']['results']['3']; ?>">
+                                <input type="text" name="test_3" value="<?php echo $global['custody_chain']['results']['3']; ?>">
                             </div>
                             <div class="title">
                                 <h6>{$lang.test} 3</h6>
@@ -288,7 +288,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                                 <h6>MET</h6>
                             </div>
                         </div>
-                        <div class="span2">
+                        <div class="span1">
                             <div class="text">
                                 <select name="test_ANF">
                                     <option value="">{$lang.undefined}</option>
@@ -300,7 +300,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                                 <h6>ANF</h6>
                             </div>
                         </div>
-                        <div class="span2">
+                        <div class="span1">
                             <div class="text">
                                 <select name="test_BZD">
                                     <option value="">{$lang.undefined}</option>
@@ -312,7 +312,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                                 <h6>BZD</h6>
                             </div>
                         </div>
-                        <div class="span2">
+                        <div class="span1">
                             <div class="text">
                                 <select name="test_OPI">
                                     <option value="">{$lang.undefined}</option>
@@ -324,7 +324,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                                 <h6>OPI</h6>
                             </div>
                         </div>
-                        <div class="span2">
+                        <div class="span1">
                             <div class="text">
                                 <select name="test_BAR">
                                     <option value="">{$lang.undefined}</option>
@@ -523,7 +523,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                             <input type="text" name="comments" value="<?php echo $global['custody_chain']['comments']; ?>">
                         </div>
                         <div class="title">
-                            <h6>{$lang.conformity_result}</h6>
+                            <h6>{$lang.comments}</h6>
                         </div>
                     </div>
                 </div>

@@ -22,19 +22,15 @@ class Urls_registered_vkye
                 'method' => 'index'
             ],
             '/laboratory/%param%' => [
-                'controller' => 'Laboratory', // Pendiente
+                'controller' => 'Laboratory', // Falta el control general
                 'method' => 'index'
-            ],
-            '/laboratory/control' => [
-                'controller' => 'Laboratory', // Pendiente
-                'method' => 'control'
             ],
             '/laboratory/create/%param%/%param%' => [
                 'controller' => 'Laboratory', // Pendiente
                 'method' => 'create'
             ],
             '/laboratory/update/%param%' => [
-                'controller' => 'Laboratory', // Pendiente
+                'controller' => 'Laboratory',
                 'method' => 'update'
             ],
             '/%param%/authentication/%param%' => [

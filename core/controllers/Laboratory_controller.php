@@ -97,136 +97,107 @@ class Laboratory_controller extends Controller
 		}
     }
 
-	public function control()
-    {
-		define('_title', Configuration::$web_page . ' | {$lang.laboratory}');
+	public function create($params)
+	{
+		global $global;
 
-		$template = $this->view->render($this, 'control');
+		$global['type'] = $params[0];
+		$global['employee'] = $this->model->read_employee($params[1]);
 
-		echo $template;
-    }
+		if (!empty($global['employee']))
+        {
+            if (Format::exist_ajax_request() == true)
+    		{
+                if ($_POST['action'] == 'create_custody_chain')
+                {
+                    $errors = [];
 
-	// public function create($params)
-	// {
-    //     $go = false;
-	//
-    //     if (!empty($params[0]))
-    //     {
-    //         global $global;
-	//
-    //         $global['type'] = $params[0];
-	//
-    //         if (($global['type'] == 'alcoholic' OR $global['type'] == 'antidoping' OR $global['type'] == 'covid_pcr' OR $global['type'] == 'covid_an' OR $global['type'] == 'covid_ac') AND !empty($params[1]))
-    //         {
-	// 			$global['employee'] = $this->model->read_employee($params[1]);
-	//
-	// 			if (!empty($global['employee']))
-	// 				$go = true;
-    //         }
-    //     }
-	//
-	// 	if ($go == true)
-    //     {
-    //         if (Format::exist_ajax_request() == true)
-    // 		{
-    //             if ($_POST['action'] == 'create_custody_chain')
-    //             {
-    //                 $errors = [];
-	//
-	// 				if (Validations::empty($_POST['reason']) == false)
-    // 					array_push($errors, ['reason','{$lang.dont_leave_this_field_empty}']);
-	//
-	// 				if (($global['type'] == 'covid_pcr' OR $global['type'] == 'covid_an' OR $global['type'] == 'covid_ac') AND Validations::empty($_POST['start_process']) == false)
-    // 					array_push($errors, ['start_process','{$lang.dont_leave_this_field_empty}']);
-	//
-	// 				if (($global['type'] == 'covid_pcr' OR $global['type'] == 'covid_an' OR $global['type'] == 'covid_ac') AND Validations::empty($_POST['end_process']) == false)
-    // 					array_push($errors, ['end_process','{$lang.dont_leave_this_field_empty}']);
-	//
-	// 				if ($global['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_1'], true) == false)
-	// 				   array_push($errors, ['test_1','{$lang.invalid_field}']);
-	//
-	// 				if ($global['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_2'], true) == false)
-	// 				   array_push($errors, ['test_2','{$lang.invalid_field}']);
-	//
-	// 				if ($global['type'] == 'alcoholic' AND Validations::number(['int','float'], $_POST['test_3'], true) == false)
-	// 				   array_push($errors, ['test_3','{$lang.invalid_field}']);
-	//
-	// 				if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validations::empty($_POST['test_result']) == false)
-	// 					array_push($errors, ['test_result','{$lang.dont_leave_this_field_empty}']);
-	//
-	// 				if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validations::empty($_POST['test_unity']) == false)
-	// 					array_push($errors, ['test_unity','{$lang.dont_leave_this_field_empty}']);
-	//
-	// 				if (($global['custody_chain']['type'] == 'covid_pcr' OR $global['custody_chain']['type'] == 'covid_an') AND Validations::empty($_POST['test_reference_values']) == false)
-	// 					array_push($errors, ['test_reference_values','{$lang.dont_leave_this_field_empty}']);
-	//
-	// 				if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igm_result']) == false)
-	// 					array_push($errors, ['test_igm_result','{$lang.dont_leave_this_field_empty}']);
-	//
-	// 				if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igm_reference_values']) == false)
-	// 					array_push($errors, ['test_igm_reference_values','{$lang.dont_leave_this_field_empty}']);
-	//
-	// 				if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igg_result']) == false)
-	// 					array_push($errors, ['test_igg_result','{$lang.dont_leave_this_field_empty}']);
-	//
-	// 				if ($global['custody_chain']['type'] == 'covid_ac' AND Validations::empty($_POST['test_igg_reference_values']) == false)
-	// 					array_push($errors, ['test_igg_reference_values','{$lang.dont_leave_this_field_empty}']);
-	//
-    //                 if (Validations::empty($_POST['date']) == false)
-    // 					array_push($errors, ['date','{$lang.dont_leave_this_field_empty}']);
-	//
-    //                 if (Validations::empty($_POST['hour']) == false)
-    // 					array_push($errors, ['hour','{$lang.dont_leave_this_field_empty}']);
-	//
-    //                 if (Validations::empty($_POST['chemical']) == false)
-    // 					array_push($errors, ['chemical','{$lang.dont_leave_this_field_empty}']);
-	//
-    // 				if (empty($errors))
-    // 				{
-    //                     $_POST['employee'] = $global['employee']['id'];
-    //                     $_POST['type'] = $global['type'];
-	//
-	// 					$query = $this->model->create_custody_chain($_POST);
-	//
-    // 					if (!empty($query))
-    // 					{
-    // 						echo json_encode([
-    // 							'status' => 'success',
-    // 							'message' => '{$lang.operation_success}',
-    // 							'path' => 'go_back'
-    // 						]);
-    // 					}
-    // 					else
-    // 					{
-    // 						echo json_encode([
-    // 							'status' => 'error',
-    // 							'message' => '{$lang.operation_error}'
-    // 						]);
-    // 					}
-    // 				}
-    // 				else
-    // 				{
-    // 					echo json_encode([
-    // 						'status' => 'error',
-    // 						'errors' => $errors
-    // 					]);
-    // 				}
-    //             }
-    // 		}
-    // 		else
-    // 		{
-    // 			define('_title', Configuration::$web_page . ' | {$lang.do_test} | {$lang.' . $params[0] . '}');
-	//
-	// 			$global['locations'] = $this->model->read_locations();
-	//
-    // 			$template = $this->view->render($this, 'create');
-	//
-    // 			echo $template;
-    // 		}
-    //     }
-    //     else
-    //         Permissions::redirection('laboratory');
-	// }
+					if (Validations::empty($_POST['reason']) == false)
+    					array_push($errors, ['reason','{$lang.dont_leave_this_field_empty}']);
+
+					if (($global['type'] == 'covid_pcr' OR $global['type'] == 'covid_an' OR $global['type'] == 'covid_ac') AND Validations::empty($_POST['start_process']) == false)
+    					array_push($errors, ['start_process','{$lang.dont_leave_this_field_empty}']);
+
+					if (($global['type'] == 'covid_pcr' OR $global['type'] == 'covid_an') AND Validations::empty($_POST['test_result']) == false)
+						array_push($errors, ['test_result','{$lang.dont_leave_this_field_empty}']);
+
+					if (($global['type'] == 'covid_pcr' OR $global['type'] == 'covid_an') AND Validations::empty($_POST['test_unity']) == false)
+						array_push($errors, ['test_unity','{$lang.dont_leave_this_field_empty}']);
+
+					if (($global['type'] == 'covid_pcr' OR $global['type'] == 'covid_an') AND Validations::empty($_POST['test_reference_values']) == false)
+						array_push($errors, ['test_reference_values','{$lang.dont_leave_this_field_empty}']);
+
+					if ($global['type'] == 'covid_ac' AND Validations::empty($_POST['test_igm_result']) == false)
+						array_push($errors, ['test_igm_result','{$lang.dont_leave_this_field_empty}']);
+
+					if ($global['type'] == 'covid_ac' AND Validations::empty($_POST['test_igm_unity']) == false)
+						array_push($errors, ['test_igm_unity','{$lang.dont_leave_this_field_empty}']);
+
+					if ($global['type'] == 'covid_ac' AND Validations::empty($_POST['test_igm_reference_values']) == false)
+						array_push($errors, ['test_igm_reference_values','{$lang.dont_leave_this_field_empty}']);
+
+					if ($global['type'] == 'covid_ac' AND Validations::empty($_POST['test_igg_result']) == false)
+						array_push($errors, ['test_igg_result','{$lang.dont_leave_this_field_empty}']);
+
+					if ($global['type'] == 'covid_ac' AND Validations::empty($_POST['test_igg_unity']) == false)
+						array_push($errors, ['test_igg_unity','{$lang.dont_leave_this_field_empty}']);
+
+					if ($global['type'] == 'covid_ac' AND Validations::empty($_POST['test_igg_reference_values']) == false)
+						array_push($errors, ['test_igg_reference_values','{$lang.dont_leave_this_field_empty}']);
+
+                    if (Validations::empty($_POST['date']) == false)
+    					array_push($errors, ['date','{$lang.dont_leave_this_field_empty}']);
+
+                    if (Validations::empty($_POST['hour']) == false)
+    					array_push($errors, ['hour','{$lang.dont_leave_this_field_empty}']);
+
+                    if (Validations::empty($_POST['chemical']) == false)
+    					array_push($errors, ['chemical','{$lang.dont_leave_this_field_empty}']);
+
+    				if (empty($errors))
+    				{
+                        $_POST['employee'] = $global['employee']['id'];
+                        $_POST['type'] = $global['type'];
+
+						$query = $this->model->create_custody_chain($_POST);
+
+    					if (!empty($query))
+    					{
+    						echo json_encode([
+    							'status' => 'success',
+    							'message' => '{$lang.operation_success}',
+    							'path' => 'go_back'
+    						]);
+    					}
+    					else
+    					{
+    						echo json_encode([
+    							'status' => 'error',
+    							'message' => '{$lang.operation_error}'
+    						]);
+    					}
+    				}
+    				else
+    				{
+    					echo json_encode([
+    						'status' => 'error',
+    						'errors' => $errors
+    					]);
+    				}
+                }
+    		}
+    		else
+    		{
+    			define('_title', Configuration::$web_page . ' | {$lang.create_test} | {$lang.' . $params[0] . '}');
+
+				$global['locations'] = $this->model->read_locations();
+
+    			$template = $this->view->render($this, 'create');
+
+    			echo $template;
+    		}
+        }
+	}
 
 	public function update($params)
 	{

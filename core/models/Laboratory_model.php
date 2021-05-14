@@ -88,7 +88,7 @@ class Laboratory_model extends Model
 				'issued_by' => !empty($data['prescription_issued_by']) ? $data['prescription_issued_by'] : '',
 				'date' => !empty($data['prescription_date']) ? $data['prescription_date'] : ''
 			]) : null),
-			'location' => ($record == true) ? null : $data['location'],
+			'location' => ($record == true) ? null : (!empty($data['location']) ? $data['location'] : null),
 			'laboratory' => ($record == true) ? $data['laboratory']['id'] : null,
 			'taker' => ($record == true) ? $data['collector']['authentication']['taker']['id'] : null,
 			'collector' => ($record == true) ? $data['collector']['id'] : null,
@@ -721,25 +721,19 @@ class Laboratory_model extends Model
         return $query;
     }
 
-    // public function read_employee($nie)
-	// {
-	// 	$query = System::decode_json_to_array($this->database->select('employees', [
-    //         'id',
-	// 		'firstname',
-	// 		'lastname',
-	// 		'birth_date',
-    //         'sex',
-    //         'ife',
-	// 		'nie',
-	// 		'nss',
-	// 		'rfc',
-	// 		'curp'
-	// 	], [
-    //         'nie' => $nie
-    //     ]));
-	//
-    //     return !empty($query) ? $query[0] : null;
-	// }
+    public function read_employee($nie)
+	{
+		$query = System::decode_json_to_array($this->database->select('employees', [
+            'id',
+			'firstname',
+			'lastname',
+			'nie'
+		], [
+            'nie' => $nie
+        ]));
+
+        return !empty($query) ? $query[0] : null;
+	}
 
 	public function read_locations()
 	{

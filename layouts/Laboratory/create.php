@@ -2,7 +2,7 @@
 
 defined('_EXEC') or die;
 
-$this->dependencies->add(['js', '{$path.plugins}signature_pad/signature_pad.css']);
+$this->dependencies->add(['css', '{$path.plugins}signature_pad/signature_pad.css']);
 $this->dependencies->add(['js', '{$path.plugins}signature_pad/signature_pad.js']);
 $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
 
@@ -11,29 +11,11 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
 %{header}%
 <main class="workspace unmodbar">
     <article class="scanner-4 create">
-        <header>
-            <figure>
-                <img src="{$path.images}marbu_logotype_color_circle.png">
-            </figure>
-            <h1>{$lang.custody_chain} | {$lang.<?php echo $global['type']; ?>} | {$lang.new_test}</h1>
-            <figure>
-                <img src="<?php echo (!empty(Session::get_value('vkye_account')['avatar']) ? '{$path.uploads}' . Session::get_value('vkye_account')['avatar'] : '{$path.images}logotype_color.png'); ?>">
-            </figure>
-        </header>
         <form name="create_custody_chain">
-            <p>{$lang.custody_chain_alert_1}</p>
             <h2>{$lang.donor_identification}</h2>
             <fieldset class="fields-group">
                 <div class="row">
-                    <div class="span6">
-                        <div class="text">
-                            <input type="text" value="<?php echo $global['employee']['lastname']; ?>" disabled>
-                        </div>
-                        <div class="title">
-                            <h6>{$lang.lastname}</h6>
-                        </div>
-                    </div>
-                    <div class="span6">
+                    <div class="span4">
                         <div class="text">
                             <input type="text" value="<?php echo $global['employee']['firstname']; ?>" disabled>
                         </div>
@@ -41,68 +23,58 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                             <h6>{$lang.firstname}</h6>
                         </div>
                     </div>
-                </div>
-            </fieldset>
-            <fieldset class="fields-group">
-                <div class="row">
-                    <div class="span6">
-                        <div class="text">
-                            <input type="text" value="<?php echo Session::get_value('vkye_account')['name']; ?>" disabled>
-                        </div>
-                        <div class="title">
-                            <h6>{$lang.institution}</h6>
-                        </div>
-                    </div>
-                    <div class="span6">
-                        <div class="text">
-                            <input type="text" value="<?php echo $global['employee']['ife']; ?>" disabled>
-                        </div>
-                        <div class="title">
-                            <h6>{$lang.id}</h6>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-            <fieldset class="fields-group">
-                <div class="row">
                     <div class="span4">
                         <div class="text">
-                            <input type="text" value="<?php echo Dates::format_date($global['employee']['birth_date'], 'long'); ?>" disabled>
+                            <input type="text" value="<?php echo $global['employee']['lastname']; ?>" disabled>
                         </div>
                         <div class="title">
-                            <h6>{$lang.birth_date}</h6>
+                            <h6>{$lang.lastname}</h6>
                         </div>
                     </div>
                     <div class="span4">
                         <div class="text">
-                            <input type="text" value="<?php echo Functions::format_age($global['employee']['birth_date']); ?>" disabled>
+                            <input type="text" value="<?php echo $global['employee']['nie']; ?>" disabled>
                         </div>
                         <div class="title">
-                            <h6>{$lang.age}</h6>
-                        </div>
-                    </div>
-                    <div class="span4">
-                        <div class="text">
-                            <input type="text" value="{$lang.<?php echo $global['employee']['sex']; ?>}" disabled>
-                        </div>
-                        <div class="title">
-                            <h6>{$lang.sex}</h6>
+                            <h6>{$lang.nie}</h6>
                         </div>
                     </div>
                 </div>
             </fieldset>
+            <?php if ($global['type'] == 'alcoholic' OR $global['type'] == 'antidoping') : ?>
+                <fieldset class="fields-group">
+                    <div class="text">
+                        <textarea name="medicines"></textarea>
+                    </div>
+                    <div class="title">
+                        <h6>{$lang.medical_treatment_prescription_drugs}</h6>
+                    </div>
+                </fieldset>
+                <fieldset class="fields-group">
+                    <div class="row">
+                        <div class="span8">
+                            <div class="text">
+                                <input type="text" name="prescription_issued_by">
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.prescription_issued_by}</h6>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="text">
+                                <input type="date" name="prescription_date">
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.date}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            <?php endif; ?>
             <h2>{$lang.exam_reasons}</h2>
             <fieldset class="fields-group">
                 <div class="row">
-                    <div class="span4">
-                        <div class="text">
-                            <input type="text" value="{$lang.auto}" disabled>
-                        </div>
-                        <div class="title">
-                            <h6>{$lang.token}</h6>
-                        </div>
-                    </div>
-                    <div class="span4">
+                    <div class="span8">
                         <div class="text">
                             <input type="text" value="{$lang.<?php echo $global['type'] ?>}" disabled>
                         </div>
@@ -113,7 +85,6 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                     <div class="span4">
                         <div class="text">
                             <select name="reason">
-                                <option value="" class="hidden">{$lang.choose_an_option}</option>
                                 <option value="random">{$lang.random}</option>
                                 <option value="reasonable_suspicion">{$lang.reasonable_suspicion}</option>
                                 <option value="periodic">{$lang.periodic}</option>
@@ -160,7 +131,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                     <?php if ($global['type'] == 'alcoholic') : ?>
                         <div class="span4">
                             <div class="text">
-                                <input type="number" name="test_1">
+                                <input type="text" name="test_1">
                             </div>
                             <div class="title">
                                 <h6>{$lang.test} 1</h6>
@@ -168,7 +139,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                         </div>
                         <div class="span4">
                             <div class="text">
-                                <input type="number" name="test_2">
+                                <input type="text" name="test_2">
                             </div>
                             <div class="title">
                                 <h6>{$lang.test} 2</h6>
@@ -176,14 +147,13 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                         </div>
                         <div class="span4">
                             <div class="text">
-                                <input type="number" name="test_3">
+                                <input type="text" name="test_3">
                             </div>
                             <div class="title">
                                 <h6>{$lang.test} 3</h6>
                             </div>
                         </div>
-                    <?php endif; ?>
-                    <?php if ($global['type'] == 'antidoping') : ?>
+                    <?php elseif ($global['type'] == 'antidoping') : ?>
                         <div class="span2">
                             <div class="text">
                                 <select name="test_COC">
@@ -220,7 +190,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                                 <h6>MET</h6>
                             </div>
                         </div>
-                        <div class="span2">
+                        <div class="span1">
                             <div class="text">
                                 <select name="test_ANF">
                                     <option value="">{$lang.undefined}</option>
@@ -232,7 +202,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                                 <h6>ANF</h6>
                             </div>
                         </div>
-                        <div class="span2">
+                        <div class="span1">
                             <div class="text">
                                 <select name="test_BZD">
                                     <option value="">{$lang.undefined}</option>
@@ -244,7 +214,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                                 <h6>BZD</h6>
                             </div>
                         </div>
-                        <div class="span2">
+                        <div class="span1">
                             <div class="text">
                                 <select name="test_OPI">
                                     <option value="">{$lang.undefined}</option>
@@ -256,7 +226,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                                 <h6>OPI</h6>
                             </div>
                         </div>
-                        <div class="span2">
+                        <div class="span1">
                             <div class="text">
                                 <select name="test_BAR">
                                     <option value="">{$lang.undefined}</option>
@@ -268,8 +238,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                                 <h6>BAR</h6>
                             </div>
                         </div>
-                    <?php endif; ?>
-                    <?php if ($global['type'] == 'covid_pcr' OR $global['type'] == 'covid_an') : ?>
+                    <?php elseif ($global['type'] == 'covid_pcr' OR $global['type'] == 'covid_an') : ?>
                         <div class="span4">
                             <div class="text">
                                 <select name="test_result">
@@ -302,8 +271,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                                 <h6>{$lang.reference_values}</h6>
                             </div>
                         </div>
-                    <?php endif; ?>
-                    <?php if ($global['type'] == 'covid_ac') : ?>
+                    <?php elseif ($global['type'] == 'covid_ac') : ?>
                         <div class="span2">
                             <div class="text">
                                 <select name="test_igm_result">
@@ -371,44 +339,13 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                     <?php endif; ?>
                 </div>
             </fieldset>
-            <?php if ($global['type'] == 'alcoholic' OR $global['type'] == 'antidoping') : ?>
-                <h2>{$lang.medical_information}</h2>
-                <fieldset class="fields-group">
-                    <div class="text">
-                        <textarea name="medicines"></textarea>
-                    </div>
-                    <div class="title">
-                        <h6>{$lang.medical_treatment_prescription_drugs}</h6>
-                    </div>
-                </fieldset>
-                <fieldset class="fields-group">
-                    <div class="row">
-                        <div class="span8">
-                            <div class="text">
-                                <input type="text" name="prescription_issued_by">
-                            </div>
-                            <div class="title">
-                                <h6>{$lang.prescription_issued_by}</h6>
-                            </div>
-                        </div>
-                        <div class="span4">
-                            <div class="text">
-                                <input type="date" name="prescription_date">
-                            </div>
-                            <div class="title">
-                                <h6>{$lang.date}</h6>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-            <?php endif; ?>
             <h2>{$lang.authorization_donor}</h2>
             <p>{$lang.custody_chain_alert_<?php echo $global['type']; ?>_1}</p>
             <fieldset class="fields-group">
-                <div class="signature" id="employee_signature">
+                <div class="signature" id="signature">
                     <canvas></canvas>
                     <div class="sign_by_first_time">
-                        <a data-action="clean_employee_signature"><i class="fas fa-trash"></i></a>
+                        <a data-action="clean_signature"><i class="fas fa-trash"></i></a>
                     </div>
                 </div>
                 <div class="title">
@@ -416,7 +353,6 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                 </div>
             </fieldset>
             <h2>{$lang.authorization_chemical}</h2>
-            <p>{$lang.custody_chain_alert_<?php echo $global['type']; ?>_2}</p>
             <fieldset class="fields-group">
                 <div class="row">
                     <div class="span4">
@@ -455,7 +391,6 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                     <div class="span4">
                         <div class="text">
                             <select name="chemical">
-                                <option value="" class="hidden">{$lang.choose_an_option}</option>
                                 <?php foreach (Functions::chemicals() as $value) : ?>
                                     <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
                                 <?php endforeach; ?>
@@ -470,7 +405,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                             <input type="text" name="comments">
                         </div>
                         <div class="title">
-                            <h6>{$lang.conformity_result}</h6>
+                            <h6>{$lang.comments}</h6>
                         </div>
                     </div>
                 </div>

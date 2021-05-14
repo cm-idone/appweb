@@ -99,7 +99,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.3']);
                 <h4>{$lang.what_your_age}</h4>
                 <fieldset class="fields-group">
                     <div class="text">
-                        <input type="number" name="age" placeholder="{$lang.write_your_age}">
+                        <input type="text" name="age" placeholder="{$lang.write_your_age}">
                     </div>
                 </fieldset>
             </div>
@@ -356,7 +356,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.3']);
                 </fieldset>
                 <fieldset class="fields-group">
                     <div class="text">
-                        <input type="number" name="phone_number" placeholder="{$lang.write_your_phone}">
+                        <input type="text" name="phone_number" placeholder="{$lang.write_your_phone}">
                     </div>
                 </fieldset>
             </div>

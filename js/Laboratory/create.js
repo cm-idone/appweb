@@ -17,17 +17,17 @@ $(document).ready(function()
         validate_string(['int','float'], $(this).val(), $(this));
     });
 
-    var employee_signature = document.getElementById('employee_signature');
-    var employee_canvas = employee_signature.querySelector('canvas');
-    var employee_pad = new SignaturePad(employee_canvas, {
+    var signature = document.getElementById('signature');
+    var signature_canvas = signature.querySelector('canvas');
+    var signature_pad = new SignaturePad(signature_canvas, {
         backgroundColor: 'rgb(255, 255, 255)'
     });
 
-    resize_canvas(employee_canvas);
+    resize_canvas(signature_canvas);
 
-    $('[data-action="clean_employee_signature"]').on('click', function()
+    $('[data-action="clean_signature"]').on('click', function()
     {
-        employee_pad.clear();
+        signature_pad.clear();
     });
 
     $('form[name="create_custody_chain"]').on('submit', function(event)
@@ -37,9 +37,9 @@ $(document).ready(function()
         var form = $(this);
         var data = new FormData(form[0]);
 
-        employee_pad.fromData(employee_pad.toData());
+        signature_pad.fromData(signature_pad.toData());
 
-        data.append('employee_signature', ((employee_pad.isEmpty()) ? '' : employee_pad.toDataURL('image/jpeg')));
+        data.append('signature', ((signature_pad.isEmpty()) ? '' : signature_pad.toDataURL('image/jpeg')));
         data.append('action', 'create_custody_chain');
 
         $.ajax({
