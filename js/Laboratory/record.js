@@ -78,6 +78,8 @@ $(document).ready(function()
         var form = $(this);
         var data = new FormData(form[0]);
 
+        signature_pad.fromData(signature_pad.toData());
+
         data.append('signature', ((signature_pad.isEmpty()) ? '' : signature_pad.toDataURL('image/jpeg')));
         data.append('action', 'create_record');
 
