@@ -28,11 +28,7 @@ class Laboratory_model extends Model
 			'account' => ($record == true) ? null : Session::get_value('vkye_account')['id'],
 			'token' => ($record == true) ? $data['token'] : System::generate_random_string(),
             'employee' => ($record == true) ? null : $data['employee'],
-			'contact' => ($record == true) ? (($data['collector']['authentication']['type'] == 'alcoholic') ? json_encode([
-
-			]) : (($data['collector']['authentication']['type'] == 'antidoping') ? json_encode([
-
-			]) : (($data['collector']['authentication']['type'] == 'covid') ? json_encode([
+			'contact' => ($record == true) ? json_encode([
 				'firstname' => ucwords($data['firstname']),
                 'lastname' => ucwords($data['lastname']),
 				'sex' => $data['sex'],
@@ -54,28 +50,28 @@ class Laboratory_model extends Model
                     'country' => $data['phone_country'],
                     'number' => $data['phone_number']
                 ]
-			]) : null))) : null,
-			'type' => ($record == true) ? (($data['collector']['authentication']['type'] == 'covid') ? $data['type'] : $data['collector']['authentication']['type']) : $data['type'],
+			]) : null,
+			'type' => $data['type'],
 			'reason' => ($record == true) ? 'random' : $data['reason'],
-			'start_process' => ($record == true) ? (($data['collector']['authentication']['type'] == 'covid') ? Dates::current_date() : null) : (($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an' OR $data['type'] == 'covid_ac') ? $data['start_process'] : null),
-			'end_process' => ($record == false AND ($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an' OR $data['type'] == 'covid_ac')) ? $data['end_process'] : null,
-			'results' => (($record == true AND $data['collector']['authentication']['type'] == 'alcoholic') OR ($record == false AND $data['type'] == 'alcoholic')) ? json_encode([
-                '1' => ($record == true) ? '' : (!empty($data['test_1']) ? $data['test_1'] : ''),
-                '2' => ($record == true) ? '' : (!empty($data['test_2']) ? $data['test_2'] : ''),
-                '3' => ($record == true) ? '' : (!empty($data['test_3']) ? $data['test_3'] : '')
-            ]) : ((($record == true AND $data['collector']['authentication']['type'] == 'antidoping') OR ($record == false AND $data['type'] == 'antidoping')) ? json_encode([
-                'COC' => ($record == true) ? '' : (!empty($data['test_COC']) ? $data['test_COC'] : ''),
-                'THC' => ($record == true) ? '' : (!empty($data['test_THC']) ? $data['test_THC'] : ''),
-                'MET' => ($record == true) ? '' : (!empty($data['test_MET']) ? $data['test_MET'] : ''),
-                'ANF' => ($record == true) ? '' : (!empty($data['test_ANF']) ? $data['test_ANF'] : ''),
-                'BZD' => ($record == true) ? '' : (!empty($data['test_BZD']) ? $data['test_BZD'] : ''),
-                'OPI' => ($record == true) ? '' : (!empty($data['test_OPI']) ? $data['test_OPI'] : ''),
-                'BAR' => ($record == true) ? '' : (!empty($data['test_BAR']) ? $data['test_BAR'] : '')
-            ]) : (((($record == true AND $data['collector']['authentication']['type'] == 'covid') OR $record == false) AND ($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an')) ? json_encode([
+			'start_process' => ($record == true) ? Dates::current_date() : (($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an' OR $data['type'] == 'covid_ac') ? $data['start_process'] : null),
+			'end_process' => ($record == true) ? null : (($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an' OR $data['type'] == 'covid_ac') ? $data['end_process'] : null),
+			'results' => ($record == false AND $data['type'] == 'alcoholic') ? json_encode([
+                '1' => !empty($data['test_1']) ? $data['test_1'] : '',
+                '2' => !empty($data['test_2']) ? $data['test_2'] : '',
+                '3' => !empty($data['test_3']) ? $data['test_3'] : ''
+            ]) : (($record == false AND $data['type'] == 'antidoping') ? json_encode([
+                'COC' => !empty($data['test_COC']) ? $data['test_COC'] : '',
+                'THC' => !empty($data['test_THC']) ? $data['test_THC'] : '',
+                'MET' => !empty($data['test_MET']) ? $data['test_MET'] : '',
+                'ANF' => !empty($data['test_ANF']) ? $data['test_ANF'] : '',
+                'BZD' => !empty($data['test_BZD']) ? $data['test_BZD'] : '',
+                'OPI' => !empty($data['test_OPI']) ? $data['test_OPI'] : '',
+                'BAR' => !empty($data['test_BAR']) ? $data['test_BAR'] : ''
+            ]) : (($data['type'] == 'covid_pcr' OR $data['type'] == 'covid_an') ? json_encode([
 				'result' => ($record == true) ? '' : $data['test_result'],
 				'unity' => ($record == true) ? '' : $data['test_unity'],
 				'reference_values' => ($record == true) ? '' : $data['test_reference_values']
-			]) : (((($record == true AND $data['collector']['authentication']['type'] == 'covid') OR $record == false) AND $data['type'] == 'covid_ac') ? json_encode([
+			]) : (($data['type'] == 'covid_ac') ? json_encode([
 				'igm' => [
 					'result' => ($record == true) ? '' : $data['test_igm_result'],
 					'unity' => ($record == true) ? '' : $data['test_igm_unity'],
@@ -87,20 +83,20 @@ class Laboratory_model extends Model
 					'reference_values' => ($record == true) ? '' : $data['test_igg_reference_values']
 				]
 			]) : null))),
-			'medicines' => ((($record == true AND ($data['collector']['authentication']['type'] == 'alcoholic' OR $data['collector']['authentication']['type'] == 'antidoping')) OR ($record == false AND ($data['type'] == 'alcoholic' OR $data['type'] == 'antidoping'))) AND !empty($data['medicines'])) ? $data['medicines'] : null,
-			'prescription' => (($record == true AND ($data['collector']['authentication']['type'] == 'alcoholic' OR $data['collector']['authentication']['type'] == 'antidoping')) OR ($record == false AND ($data['type'] == 'alcoholic' OR $data['type'] == 'antidoping'))) ? json_encode([
+			'medicines' => ($record == true) ? null : (($data['type'] == 'alcoholic' OR $data['type'] == 'antidoping') ? $data['medicines'] : null),
+			'prescription' => ($record == true) ? null : (($data['type'] == 'alcoholic' OR $data['type'] == 'antidoping') ? json_encode([
 				'issued_by' => !empty($data['prescription_issued_by']) ? $data['prescription_issued_by'] : '',
 				'date' => !empty($data['prescription_date']) ? $data['prescription_date'] : ''
-			]) : null,
-			'location' => ($record == false AND !empty($data['location'])) ? $data['location'] : null,
+			]) : null),
+			'location' => ($record == true) ? null : $data['location'],
 			'laboratory' => ($record == true) ? $data['laboratory']['id'] : null,
 			'taker' => ($record == true) ? $data['collector']['authentication']['taker']['id'] : null,
 			'collector' => ($record == true) ? $data['collector']['id'] : null,
 			'chemical' => ($record == true) ? null : $data['chemical'],
 			'date' => ($record == true) ? Dates::current_date() : $data['date'],
 			'hour' => ($record == true) ? Dates::current_hour() : $data['hour'],
-			'comments' => ($record == false AND !empty($data['comments'])) ? $data['comments'] : null,
-			'signature' => ($record == true OR ($record == false AND !empty($data['signature']))) ? Fileloader::base64($data['signature']) : null,
+			'comments' => ($record == true) ? null : (!empty($data['comments']) ? $data['comments'] : null),
+			'signature' => ($record == true) ? Fileloader::base64($data['signature']) : (!empty($data['signature']) ? Fileloader::base64($data['signature']) : null),
 			'qr' => ($record == true) ? $data['qr']['filename'] : null,
 			'pdf' => null,
 			'lang' => ($record == true) ? Session::get_value('vkye_lang') : null,
@@ -121,10 +117,12 @@ class Laboratory_model extends Model
 	{
 		$AND = [];
 
-		if (Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep')
-			$AND['custody_chains.account'] = Session::get_value('vkye_account')['id'];
+		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['laboratory'] == 'all')
+			$AND['custody_chains.laboratory[>=]'] = 1;
 		else if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['laboratory'] != 'all')
 			$AND['custody_chains.laboratory'] = System::temporal('get', 'laboratory', 'filter')['laboratory'];
+		else if (Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep')
+			$AND['custody_chains.account'] = Session::get_value('vkye_account')['id'];
 
 		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['taker'] != 'all')
 			$AND['custody_chains.taker'] = System::temporal('get', 'laboratory', 'filter')['taker'];
@@ -141,7 +139,7 @@ class Laboratory_model extends Model
 			$AND['custody_chains.type'] = ['covid_pcr','covid_an','covid_ac'];
 		else if ($type == 'covid' AND System::temporal('get', 'laboratory', 'filter')['type'] != 'all')
 			$AND['custody_chains.type'] = System::temporal('get', 'laboratory', 'filter')['type'];
-		else
+		else if ($type != 'covid')
 			$AND['custody_chains.type'] = $type;
 
 		if (System::temporal('get', 'laboratory', 'filter')['deleted_status'] == 'not_deleted')
@@ -262,9 +260,7 @@ class Laboratory_model extends Model
 			'custody_chains.employee',
 			'employees.firstname(employee_firstname)',
 			'employees.lastname(employee_lastname)',
-			'employees.ife(employee_ife)',
-			'employees.birth_date(employee_birth_date)',
-			'employees.sex(employee_sex)',
+			'employees.nie(employee_nie)',
 			'custody_chains.contact',
 			'custody_chains.type',
 			'custody_chains.reason',
@@ -788,7 +784,6 @@ class Laboratory_model extends Model
 			'avatar',
             'name',
             'path',
-            'business',
             'rfc',
 			'sanitary_opinion',
             'address',
@@ -880,7 +875,7 @@ class Laboratory_model extends Model
 	{
 		$query = $this->database->update('system_collectors', [
 			'authentication' => json_encode([
-				'type' => $data['type'],
+				'type' => 'covid',
 				'taker' => $data['taker']
 			])
 		], [

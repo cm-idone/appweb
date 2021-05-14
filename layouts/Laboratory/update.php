@@ -2,8 +2,6 @@
 
 defined('_EXEC') or die;
 
-$this->dependencies->add(['js', '{$path.plugins}signature_pad/signature_pad.css']);
-$this->dependencies->add(['js', '{$path.plugins}signature_pad/signature_pad.js']);
 $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
 
 ?>
@@ -42,78 +40,60 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                         </div>
                     </div>
                 </fieldset>
-            <?php endif; ?>
-            <fieldset class="fields-group">
-                <div class="row">
-                    <div class="span4">
-                        <div class="text">
-                            <input type="text" name="firstname" value="<?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $global['custody_chain']['contact']['firstname'] : $global['custody_chain']['employee_firstname']); ?>" <?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? '' : 'disabled'); ?>>
-                        </div>
-                        <div class="title">
-                            <h6>{$lang.firstname}</h6>
-                        </div>
-                    </div>
-                    <div class="span4">
-                        <div class="text">
-                            <input type="text" name="lastname" value="<?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $global['custody_chain']['contact']['lastname'] : $global['custody_chain']['employee_lastname']); ?>" <?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? '' : 'disabled'); ?>>
-                        </div>
-                        <div class="title">
-                            <h6>{$lang.lastname}</h6>
-                        </div>
-                    </div>
-                    <div class="span4">
-                        <div class="text">
-                            <input type="text" name="ife" value="<?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $global['custody_chain']['contact']['ife'] : $global['custody_chain']['employee_ife']); ?>" <?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? '' : 'disabled'); ?>>
-                        </div>
-                        <div class="title">
-                            <h6>{$lang.ife}</h6>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-            <fieldset class="fields-group">
-                <div class="row">
-                    <div class="span3">
-                        <div class="text">
-                            <input type="date" name="birth_date" value="<?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $global['custody_chain']['contact']['birth_date'] : $global['custody_chain']['employee_birth_date']); ?>" <?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? '' : 'disabled'); ?>>
-                        </div>
-                        <div class="title">
-                            <h6>{$lang.birth_date}</h6>
-                        </div>
-                    </div>
-                    <div class="span3">
-                        <div class="text">
-                            <input type="number" name="age" value="<?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $global['custody_chain']['contact']['age'] : Functions::format_age($global['custody_chain']['employee_birth_date'], true)); ?>" <?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? '' : 'disabled'); ?>>
-                        </div>
-                        <div class="title">
-                            <h6>{$lang.age}</h6>
-                        </div>
-                    </div>
-                    <div class="span3">
-                        <div class="text">
-                            <select name="sex" <?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? '' : 'disabled') ?>>
-                                <option value="male" <?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? (($global['custody_chain']['contact']['sex'] == 'male') ? 'selected' : '') : (($global['custody_chain']['employee_sex'] == 'male') ? 'selected' : '')); ?>>{$lang.male}</option>
-                                <option value="female" <?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? (($global['custody_chain']['contact']['sex'] == 'female') ? 'selected' : '') : (($global['custody_chain']['employee_sex'] == 'female') ? 'selected' : '')); ?>>{$lang.female}</option>
-                            </select>
-                        </div>
-                        <div class="title">
-                            <h6>{$lang.sex}</h6>
-                        </div>
-                    </div>
-                    <div class="span3">
-                        <div class="text">
-                            <input type="text" name="travel_to" value="<?php echo $global['custody_chain']['contact']['travel_to']; ?>">
-                        </div>
-                        <div class="title">
-                            <h6>{$lang.travel_to}</h6>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-            <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
                 <fieldset class="fields-group">
                     <div class="row">
-                        <div class="span3">
+                        <div class="span6">
+                            <div class="text">
+                                <input type="text" name="firstname" value="<?php echo $global['custody_chain']['contact']['firstname']; ?>">
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.firstname}</h6>
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <div class="text">
+                                <input type="text" name="lastname" value="<?php echo $global['custody_chain']['contact']['lastname']; ?>">
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.lastname}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="fields-group">
+                    <div class="row">
+                        <div class="span4">
+                            <div class="text">
+                                <select name="sex">
+                                    <option value="male" <?php echo (($global['custody_chain']['contact']['sex'] == 'male') ? 'selected' : ''); ?>>{$lang.male}</option>
+                                    <option value="female" <?php echo (($global['custody_chain']['contact']['sex'] == 'female') ? 'selected' : ''); ?>>{$lang.female}</option>
+                                </select>
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.sex}</h6>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="text">
+                                <input type="date" name="birth_date" value="<?php echo $global['custody_chain']['contact']['birth_date']; ?>">
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.birth_date}</h6>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="text">
+                                <input type="number" name="age" value="<?php echo $global['custody_chain']['contact']['age']; ?>">
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.age}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="fields-group">
+                    <div class="row">
+                        <div class="span4">
                             <div class="text">
                                 <input type="text" name="nationality" value="<?php echo $global['custody_chain']['contact']['nationality']; ?>">
                             </div>
@@ -121,7 +101,27 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                                 <h6>{$lang.nationality}</h6>
                             </div>
                         </div>
-                        <div class="span3">
+                        <div class="span4">
+                            <div class="text">
+                                <input type="text" name="ife" value="<?php echo $global['custody_chain']['contact']['ife']; ?>">
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.ife}</h6>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="text">
+                                <input type="text" name="travel_to" value="<?php echo $global['custody_chain']['contact']['travel_to']; ?>">
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.travel_to}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="fields-group">
+                    <div class="row">
+                        <div class="span4">
                             <div class="text">
                                 <input type="email" name="email" value="<?php echo $global['custody_chain']['contact']['email']; ?>">
                             </div>
@@ -129,7 +129,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                                 <h6>{$lang.email}</h6>
                             </div>
                         </div>
-                        <div class="span3">
+                        <div class="span4">
                             <div class="compound st-1-left">
                                 <select name="phone_country">
                                     <?php foreach (Functions::countries() as $value) : ?>
@@ -142,7 +142,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                                 <h6>{$lang.phone}</h6>
                             </div>
                         </div>
-                        <div class="span3">
+                        <div class="span4">
                             <div class="text">
                                 <select name="lang">
                                     <option value="es" <?php echo (($global['custody_chain']['lang'] == 'es') ? 'selected' : '') ?>>{$lang.es}</option>
@@ -155,11 +155,40 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                         </div>
                     </div>
                 </fieldset>
+            <?php else : ?>
+                <fieldset class="fields-group">
+                    <div class="row">
+                        <div class="span4">
+                            <div class="text">
+                                <input type="text" value="<?php echo $global['custody_chain']['employee_firstname']; ?>" disabled>
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.firstname}</h6>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="text">
+                                <input type="text" value="<?php echo $global['custody_chain']['employee_lastname']; ?>" disabled>
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.lastname}</h6>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="text">
+                                <input type="text" value="<?php echo $global['custody_chain']['employee_nie']; ?>" disabled>
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.nie}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
             <?php endif; ?>
             <h2>{$lang.exam_reasons}</h2>
             <fieldset class="fields-group">
                 <div class="row">
-                    <div class="<?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? 'span6' : 'span4'); ?>">
+                    <div class="<?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? 'span12' : 'span4'); ?>">
                         <div class="text">
                             <input type="text" value="<?php echo $global['custody_chain']['token'] ?>" disabled>
                         </div>
@@ -167,15 +196,15 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                             <h6>{$lang.token}</h6>
                         </div>
                     </div>
-                    <div class="<?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? 'span6' : 'span4'); ?>">
-                        <div class="text">
-                            <input type="text" value="{$lang.<?php echo $global['custody_chain']['type'] ?>}" disabled>
-                        </div>
-                        <div class="title">
-                            <h6>{$lang.type}</h6>
-                        </div>
-                    </div>
                     <?php if (Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') : ?>
+                        <div class="span4">
+                            <div class="text">
+                                <input type="text" value="{$lang.<?php echo $global['custody_chain']['type'] ?>}" disabled>
+                            </div>
+                            <div class="title">
+                                <h6>{$lang.type}</h6>
+                            </div>
+                        </div>
                         <div class="span4">
                             <div class="text">
                                 <select name="reason">

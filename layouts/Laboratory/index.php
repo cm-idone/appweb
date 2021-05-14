@@ -2,7 +2,7 @@
 
 defined('_EXEC') or die;
 
-$this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.2']);
+$this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
 
 ?>
 
@@ -25,15 +25,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.2']);
             <?php foreach ($global['custody_chains'] as $value) : ?>
                 <tr>
                     <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
-                        <?php if ($value['type'] == 'alcoholic') : ?>
-                            <!--  -->
-                        <?php elseif ($value['type'] == 'antidoping') : ?>
-                            <!--  -->
-                        <?php elseif ($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') : ?>
-                            <td class="hidden"><?php echo $value['contact']['birth_date']; ?></td>
-                            <td class="hidden"><?php echo $value['contact']['ife']; ?></td>
-                            <td class="hidden"><?php echo $value['contact']['email']; ?></td>
-                        <?php endif; ?>
+                        <td class="hidden"><?php echo $value['contact']['birth_date']; ?></td>
+                        <td class="hidden"><?php echo $value['contact']['ife']; ?></td>
+                        <td class="hidden"><?php echo $value['contact']['email']; ?></td>
                     <?php endif; ?>
                     <td class="smalltag"><span><?php echo $value['token']; ?></span></td>
                     <?php if ($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') : ?>
@@ -41,25 +35,13 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.2']);
                     <?php endif; ?>
                     <td>
                         <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
-                            <?php if ($value['type'] == 'alcoholic') : ?>
-                                <!--  -->
-                            <?php elseif ($value['type'] == 'antidoping') : ?>
-                                <!--  -->
-                            <?php elseif ($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') : ?>
-                                <?php echo $value['contact']['firstname'] . ' ' . $value['contact']['lastname']; ?>
-                            <?php endif; ?>
+                            <?php echo $value['contact']['firstname'] . ' ' . $value['contact']['lastname']; ?>
                         <?php else: ?>
                             <?php echo $value['employee_firstname'] . ' ' . $value['employee_lastname']; ?>
                         <?php endif; ?>
                     </td>
                     <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
-                        <?php if ($value['type'] == 'alcoholic') : ?>
-                            <!--  -->
-                        <?php elseif ($value['type'] == 'antidoping') : ?>
-                            <!--  -->
-                        <?php elseif ($value['type'] == 'covid_pcr' OR $value['type'] == 'covid_an' OR $value['type'] == 'covid_ac') : ?>
-                            <td class="smalltag"><?php echo (($value['sent'] == true) ? '<i class="fas fa-envelope" style="margin-right:5px;color:#009688;"></i> {$lang.sent}' : '<i class="fas fa-envelope"  style="margin-right:5px;color:#ff9800;"></i> {$lang.not_sent}'); ?></td>
-                        <?php endif; ?>
+                        <td class="smalltag"><?php echo (($value['sent'] == true) ? '<i class="fas fa-envelope" style="margin-right:5px;color:#009688;"></i> {$lang.sent}' : '<i class="fas fa-envelope"  style="margin-right:5px;color:#ff9800;"></i> {$lang.not_sent}'); ?></td>
                     <?php endif; ?>
                     <td class="smalltag"><i class="<?php echo (!empty($value['status']) ? (($value['status'] == 'negative') ? 'fas fa-times-circle' : (($value['status'] == 'positive') ? 'fas fa-check-circle' : 'fas fa-exclamation-circle')) : 'fas fa-question-circle'); ?>" style="margin-right:5px;color:<?php echo (!empty($value['status']) ? (($value['status'] == 'negative') ? '#f44336' : (($value['status'] == 'positive') ? '#009688' : '#ff9800')) : '#9e9e9e'); ?>;"></i>{$lang.<?php echo (!empty($value['status']) ? 'short_' . $value['status'] : 'in_process'); ?>}</td>
                     <td class="mediumtag"><span><?php echo Dates::format_date_hour($value['date'], $value['hour'], 'long_year', '12-short'); ?></span></td>

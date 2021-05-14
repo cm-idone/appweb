@@ -32,28 +32,12 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
                 <i class="fas fa-lock"></i>
                 <fieldset class="fields-group">
                     <div class="text">
-                        <select name="type">
-                            <option value="" class="hidden">{$lang.choose_an_option}</option>
-                            <!-- <option value="alcoholic">{$lang.to_do_test} {$lang.alcoholic}</option>
-                            <option value="antidoping">{$lang.to_do_test} {$lang.antidoping}</option> -->
-                            <option value="covid">{$lang.to_do_test} {$lang.covid}</option>
-                        </select>
-                    </div>
-                    <div class="title">
-                        <h6>{$lang.authenticate_to}</h6>
-                    </div>
-                </fieldset>
-                <fieldset class="fields-group">
-                    <div class="text">
                         <select name="taker">
-                            <option value="" class="hidden">{$lang.choose_an_option}</option>
+                            <option value="" class="hidden">{$lang.choose_a_taker}</option>
                             <?php foreach ($global['takers'] as $value) : ?>
                                 <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
                             <?php endforeach; ?>
                         </select>
-                    </div>
-                    <div class="title">
-                        <h6>{$lang.active_taker}</h6>
                     </div>
                 </fieldset>
                 <fieldset class="fields-group">
@@ -65,7 +49,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
         <?php else : ?>
             <div class="authentication">
                 <h4><i class="fas fa-check-circle"></i>{$lang.authenticated}</h4>
-                <h5>{$lang.to_do_test} {$lang.<?php echo $global['collector']['authentication']['type']; ?>}</h5>
+                <h5><?php echo $global['collector']['token']; ?> | <?php echo $global['collector']['name']; ?></h5>
                 <h6><?php echo $global['collector']['authentication']['taker']['name']; ?></h6>
                 <figure>
                     <img src="{$path.uploads}<?php echo $global['collector']['qrs']['authentication']; ?>">
