@@ -589,7 +589,7 @@ class Laboratory_model extends Model
 			'prescription' => ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND ($data['custody_chain']['type'] == 'alcoholic' OR $data['custody_chain']['type'] == 'antidoping')) ? json_encode([
 				'issued_by' => !empty($data['prescription_issued_by']) ? $data['prescription_issued_by'] : '',
 				'date' => !empty($data['prescription_date']) ? $data['prescription_date'] : ''
-			]) : null),
+			]) : null,
 			'location' => ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND !empty($data['location'])) ? $data['location'] : null,
 			'chemical' => (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? $data['chemical'][0]['id'] : $data['chemical'],
 			'date' => $data['date'],
