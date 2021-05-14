@@ -97,21 +97,14 @@ class Laboratory_controller extends Controller
 		}
     }
 
-	// public function control()
-    // {
-    //     if (Format::exist_ajax_request() == true)
-	// 	{
-	//
-	// 	}
-	// 	else
-	// 	{
-	// 		define('_title', Configuration::$web_page . ' | {$lang.laboratory}');
-	//
-	// 		$template = $this->view->render($this, 'control');
-	//
-	// 		echo $template;
-	// 	}
-    // }
+	public function control()
+    {
+		define('_title', Configuration::$web_page . ' | {$lang.laboratory}');
+
+		$template = $this->view->render($this, 'control');
+
+		echo $template;
+    }
 
 	// public function create($params)
 	// {
