@@ -607,9 +607,6 @@ class Laboratory_model extends Model
 
 		if (!empty($query))
 		{
-			if (!empty($data['custody_chain']['signature']))
-				Fileloader::down($data['custody_chain']['signature']);
-
 			if (!empty($data['custody_chain']['qr']))
 				Fileloader::down($data['custody_chain']['qr']);
 
