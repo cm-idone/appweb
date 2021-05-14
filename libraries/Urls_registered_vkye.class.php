@@ -26,7 +26,7 @@ class Urls_registered_vkye
                 'method' => 'index'
             ],
             '/laboratory/create/%param%/%param%' => [
-                'controller' => 'Laboratory', // Pendiente
+                'controller' => 'Laboratory',
                 'method' => 'create'
             ],
             '/laboratory/update/%param%' => [
