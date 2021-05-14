@@ -11,17 +11,10 @@ class Dashboard_controller extends Controller
 
 	public function index()
 	{
-		if (Format::exist_ajax_request() == true)
-		{
-			
-		}
-		else
-		{
-			define('_title', Configuration::$web_page . ' | {$lang.dashboard}');
+		define('_title', Configuration::$web_page . ' | {$lang.dashboard}');
 
-			$template = $this->view->render($this, 'index');
+		$template = $this->view->render($this, 'index');
 
-			echo $template;
-		}
+		echo $template;
 	}
 }
