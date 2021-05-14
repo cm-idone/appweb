@@ -535,7 +535,7 @@ class Laboratory_model extends Model
 				'firstname' => $data['firstname'],
                 'lastname' => $data['lastname'],
 				'sex' => $data['sex'],
-                'birth_date' => $data['birth_date_year'] . '-' . $data['birth_date_month'] . '-' . $data['birth_date_day'],
+                'birth_date' => $data['birth_date'],
                 'age' => $data['age'],
                 'nationality' => $data['nationality'],
 				'ife' => $data['ife'],
