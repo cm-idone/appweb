@@ -765,7 +765,6 @@ class Laboratory_model extends Model
 			'id',
             'name'
         ], [
-            'blocked' => false,
 			'ORDER' => [
 				'name' => 'ASC'
 			]
@@ -804,7 +803,6 @@ class Laboratory_model extends Model
             'id',
             'name'
         ], [
-            'blocked' => false,
 			'ORDER' => [
 				'name' => 'ASC'
 			]
@@ -845,7 +843,6 @@ class Laboratory_model extends Model
             'id',
             'name'
         ], [
-            'blocked' => false,
 			'ORDER' => [
 				'name' => 'ASC'
 			]
