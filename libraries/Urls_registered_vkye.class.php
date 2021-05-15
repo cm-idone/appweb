@@ -22,7 +22,7 @@ class Urls_registered_vkye
                 'method' => 'index'
             ],
             '/laboratory/%param%' => [
-                'controller' => 'Laboratory', // Falta el control general
+                'controller' => 'Laboratory',
                 'method' => 'index'
             ],
             '/laboratory/create/%param%/%param%' => [
@@ -54,7 +54,7 @@ class Urls_registered_vkye
                 'method' => 'index'
             ],
             '/employees/profile/%param%' => [
-                'controller' => 'Employees', // Pendiente
+                'controller' => 'Employees',
                 'method' => 'profile'
             ],
             '/locations' => [

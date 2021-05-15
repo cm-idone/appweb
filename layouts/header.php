@@ -1,24 +1,14 @@
 <?php defined('_EXEC') or die; ?>
 
 <header class="topbar">
-    <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
+    <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND !empty(Session::get_value('vkye_account')))) : ?>
         <div class="account">
             <figure>
-                <img src="{$path.images}god.png">
+                <img src="<?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? '{$path.images}god.png' : (!empty(Session::get_value('vkye_account')['avatar']) ? '{$path.uploads}' . Session::get_value('vkye_account')['avatar'] : 'https://cdn.codemonkey.com.mx/monkeyboard/assets/images/account.png')); ?>">
             </figure>
             <div>
-                <h4 class="online"><i class="fas fa-circle"></i>{$lang.god_mode_activated}</h4>
-                <span>{$lang.business}</span>
-            </div>
-        </div>
-    <?php elseif (!empty(Session::get_value('vkye_account'))) : ?>
-        <div class="account">
-            <figure>
-                <img src="<?php echo (!empty(Session::get_value('vkye_account')['avatar']) ? '{$path.uploads}' . Session::get_value('vkye_account')['avatar'] : 'https://cdn.codemonkey.com.mx/monkeyboard/assets/images/account.png'); ?>">
-            </figure>
-            <div>
-                <h4 class="<?php echo ((Session::get_value('vkye_account')['blocked'] == false) ? 'online' : 'offline'); ?>"><i class="fas fa-circle"></i><?php echo Session::get_value('vkye_account')['name'] . ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? ' ({$lang.god_mode_activated})' : ''); ?></h4>
-                <span>{$lang.<?php echo Session::get_value('vkye_account')['type']; ?>}</span>
+                <h4 class="<?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? 'online' : ((Session::get_value('vkye_account')['blocked'] == false) ? 'online' : 'offline')); ?>"><i class="fas fa-circle"></i><?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? '{$lang.god_mode_activated}' : Session::get_value('vkye_account')['name']); ?></h4>
+                <span><?php echo ((Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? '{$lang.business}' : '{$lang.' . Session::get_value('vkye_account')['type'] . '}'); ?></span>
             </div>
         </div>
     <?php endif; ?>
@@ -51,26 +41,30 @@
             <li><a href="/about" class="logotype"><img src="{$path.images}imagotype_white.png"><span><strong><?php echo Configuration::$web_page . ' ' . Configuration::$web_version; ?></strong> by One Consultores</span></a></li>
         </ul>
         <ul>
-            <li><a href="/search"><i class="fas fa-search"></i><span>{$lang.search}</span></a></li>
+            <?php if ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND !empty(Session::get_value('vkye_account'))) : ?>
+                <li><a href="/search"><i class="fas fa-search"></i><span>{$lang.search}</span></a></li>
+            <?php endif; ?>
             <li><a href="/dashboard"><i class="fas fa-igloo"></i><span>{$lang.dashboard}</span></a></li>
         </ul>
-        <?php if (!empty(Session::get_value('vkye_account'))) : ?>
-            <?php if (Permissions::account(['laboratory']) == true AND Permissions::user(['laboratory','alcoholic','antidoping','covid'], true) == true) : ?>
+        <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND !empty(Session::get_value('vkye_account')))) : ?>
+            <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::account(['laboratory']) == true AND Permissions::user(['laboratory','alcoholic','antidoping','covid'], true) == true)) : ?>
                 <ul>
-                    <?php if (Permissions::user(['laboratory'], true) == true) : ?>
+                    <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['laboratory'], true) == true)) : ?>
                         <li><a href="/laboratory/control"><i class="fas fa-flask"></i><span>{$lang.laboratory}</span></a></li>
                     <?php endif; ?>
-                    <?php if (Permissions::user(['alcoholic'], true) == true) : ?>
+                    <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['alcoholic'], true) == true)) : ?>
                         <li><a href="/laboratory/alcoholic"><i class="fas fa-cocktail"></i><span>{$lang.alcoholic}</span></a></li>
                     <?php endif; ?>
-                    <?php if (Permissions::user(['antidoping'], true) == true) : ?>
+                    <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['antidoping'], true) == true)) : ?>
                         <li><a href="/laboratory/antidoping"><i class="fas fa-cannabis"></i><span>{$lang.antidoping}</span></a></li>
                     <?php endif; ?>
-                    <?php if (Permissions::user(['covid'], true) == true) : ?>
+                    <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['covid'], true) == true)) : ?>
                         <li><a href="/laboratory/covid"><i class="fas fa-virus"></i><span>{$lang.covid}</span></a></li>
                     <?php endif; ?>
                 </ul>
             <?php endif; ?>
+        <?php endif; ?>
+        <?php if ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND !empty(Session::get_value('vkye_account'))) : ?>
             <?php if (Permissions::account(['laboratory']) == true AND Permissions::user(['employees'], true) == true) : ?>
                 <ul>
                     <li><a href="/employees"><i class="fas fa-user-friends"></i><span>{$lang.employees}</span></a></li>
@@ -82,18 +76,18 @@
 <header class="rightbar">
     <div>
         <div class="accounts">
-            <?php if (Session::get_value('vkye_user')['god'] == 'activate_but_sleep' OR Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
+            <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') : ?>
                 <div class="item">
                     <figure>
                         <img src="{$path.images}god.png">
                     </figure>
                     <div>
-                        <?php if (Session::get_value('vkye_user')['god'] == 'activate_but_sleep') : ?>
-                            <h4>{$lang.activate_god_mode}</h4>
-                            <span class="offline"><i class="fas fa-circle"></i>{$lang.offline}</span>
-                        <?php elseif (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
+                        <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
                             <h4>{$lang.deactivate_god_mode}</h4>
                             <span class="online"><i class="fas fa-circle"></i>{$lang.online}</span>
+                        <?php elseif (Session::get_value('vkye_user')['god'] == 'activate_but_sleep') : ?>
+                            <h4>{$lang.activate_god_mode}</h4>
+                            <span class="onhold"><i class="fas fa-circle"></i>{$lang.onhold}</span>
                         <?php endif; ?>
                     </div>
                     <a data-action="change_god_mode"></a>
@@ -133,24 +127,26 @@
             <ul>
                 <li><a href="/dashboard"><i class="fas fa-igloo"></i>{$lang.dashboard}</a></li>
             </ul>
-            <?php if (!empty(Session::get_value('vkye_account'))) : ?>
-                <?php if (Permissions::account(['laboratory']) == true AND Permissions::user(['laboratory','alcoholic','antidoping','covid'], true) == true) : ?>
+            <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND !empty(Session::get_value('vkye_account')))) : ?>
+                <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::account(['laboratory']) == true AND Permissions::user(['laboratory','alcoholic','antidoping','covid'], true) == true)) : ?>
                     <ul>
                         <li><h4>{$lang.laboratory}</h4></li>
-                        <?php if (Permissions::user(['laboratory'], true) == true) : ?>
+                        <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['laboratory'], true) == true)) : ?>
                             <li><a href="/laboratory/control"><i class="fas fa-flask"></i>{$lang.laboratory}</a></li>
                         <?php endif; ?>
-                        <?php if (Permissions::user(['alcoholic'], true) == true) : ?>
+                        <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['alcoholic'], true) == true)) : ?>
                             <li><a href="/laboratory/alcoholic"><i class="fas fa-cocktail"></i>{$lang.alcoholic}</a></li>
                         <?php endif; ?>
-                        <?php if (Permissions::user(['antidoping'], true) == true) : ?>
+                        <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['antidoping'], true) == true)) : ?>
                             <li><a href="/laboratory/antidoping"><i class="fas fa-cannabis"></i>{$lang.antidoping}</a></li>
                         <?php endif; ?>
-                        <?php if (Permissions::user(['covid'], true) == true) : ?>
+                        <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['covid'], true) == true)) : ?>
                             <li><a href="/laboratory/covid"><i class="fas fa-virus"></i>{$lang.covid}</a></li>
                         <?php endif; ?>
                     </ul>
                 <?php endif; ?>
+            <?php endif; ?>
+            <?php if ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND !empty(Session::get_value('vkye_account'))) : ?>
                 <?php if (Permissions::account(['laboratory']) == true AND Permissions::user(['employees','locations'], true) == true) : ?>
                     <ul>
                         <li><h4>{$lang.administration}</h4></li>
