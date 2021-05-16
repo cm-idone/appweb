@@ -171,9 +171,9 @@ class Laboratory_model extends Model
 			$AND['custody_chains.type'] = $data['type'];
 			$AND['custody_chains.date[<>]'] = [$data['start_date'],$data['end_date']];
 			$AND['custody_chains.hour[<>]'] = [$data['start_hour'],$data['end_hour']];
-			$AND['custody_chain.sent'] = false;
-			$AND['custody_chain.closed'] = false;
-			$AND['custody_chain.deleted'] = false;
+			$AND['custody_chains.sent'] = false;
+			$AND['custody_chains.closed'] = false;
+			$AND['custody_chains.deleted'] = false;
 		}
 
 		$query = System::decode_json_to_array($this->database->select('custody_chains', [
