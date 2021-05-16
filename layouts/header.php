@@ -52,10 +52,10 @@
                     <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['laboratory'], true) == true)) : ?>
                         <li><a href="/laboratory/control"><i class="fas fa-flask"></i><span>{$lang.laboratory}</span></a></li>
                     <?php endif; ?>
-                    <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['alcoholic'], true) == true)) : ?>
+                    <?php if ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['alcoholic'], true) == true) : ?>
                         <li><a href="/laboratory/alcoholic"><i class="fas fa-cocktail"></i><span>{$lang.alcoholic}</span></a></li>
                     <?php endif; ?>
-                    <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['antidoping'], true) == true)) : ?>
+                    <?php if ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['antidoping'], true) == true) : ?>
                         <li><a href="/laboratory/antidoping"><i class="fas fa-cannabis"></i><span>{$lang.antidoping}</span></a></li>
                     <?php endif; ?>
                     <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['covid'], true) == true)) : ?>
@@ -134,10 +134,10 @@
                         <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['laboratory'], true) == true)) : ?>
                             <li><a href="/laboratory/control"><i class="fas fa-flask"></i>{$lang.laboratory}</a></li>
                         <?php endif; ?>
-                        <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['alcoholic'], true) == true)) : ?>
+                        <?php if ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['alcoholic'], true) == true) : ?>
                             <li><a href="/laboratory/alcoholic"><i class="fas fa-cocktail"></i>{$lang.alcoholic}</a></li>
                         <?php endif; ?>
-                        <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['antidoping'], true) == true)) : ?>
+                        <?php if ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['antidoping'], true) == true) : ?>
                             <li><a href="/laboratory/antidoping"><i class="fas fa-cannabis"></i>{$lang.antidoping}</a></li>
                         <?php endif; ?>
                         <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' OR ((Session::get_value('vkye_user')['god'] == 'deactivate' OR Session::get_value('vkye_user')['god'] == 'activate_but_sleep') AND Permissions::user(['covid'], true) == true)) : ?>
