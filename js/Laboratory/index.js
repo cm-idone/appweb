@@ -10,6 +10,7 @@ $(document).ready(function()
     });
 
     var filter_action = 'filter_custody_chains';
+    var send_action = 'send_custody_chains';
     var restore_action = 'restore_custody_chain';
     var empty_action = 'empty_custody_chains';
     var delete_action = 'delete_custody_chain';
@@ -30,7 +31,7 @@ $(document).ready(function()
         if ($(this).val() == 'deleted')
         {
             $('[name="start_date"]').parents('fieldset').addClass('hidden');
-            $('[name="start_hour"]').parents('fieldset').addClass('hidden');
+            $('[name="end_date"]').parents('fieldset').addClass('hidden');
             $('[name="sent_status"]').parent().parent().addClass('hidden');
             $(this).parent().parent().removeClass('span6');
             $(this).parent().parent().addClass('span12');
@@ -38,7 +39,7 @@ $(document).ready(function()
         else
         {
             $('[name="start_date"]').parents('fieldset').removeClass('hidden');
-            $('[name="start_hour"]').parents('fieldset').removeClass('hidden');
+            $('[name="end_date"]').parents('fieldset').removeClass('hidden');
             $('[name="sent_status"]').parent().parent().removeClass('hidden');
             $(this).parent().parent().removeClass('span12');
             $(this).parent().parent().addClass('span6');
@@ -48,6 +49,37 @@ $(document).ready(function()
     $('[data-modal="' + filter_action + '"]').find('form').on('submit', function(event)
     {
         action = filter_action;
+        id = null;
+
+        send_form_modal('filter', $(this), event);
+    });
+
+    $(document).on('click', '[data-action="' + send_action + '"]', function()
+    {
+        action = send_action;
+        id = null;
+
+        transform_form_modal('filter', $('[data-modal="' + send_action + '"]'));
+        open_form_modal('filter', $('[data-modal="' + send_action + '"]'));
+    });
+
+    $('[data-modal="' + send_action + '"]').find('[name="type"]').on('change', function()
+    {
+        if ($(this).val() == 'covid_pcr' || $(this).val() == 'covid_an')
+        {
+            $('[name="test_result"]').parents('fieldset').removeClass('hidden');
+            $('[name="test_igm_result"]').parents('fieldset').addClass('hidden');
+        }
+        else if ($(this).val() == 'covid_ac')
+        {
+            $('[name="test_result"]').parents('fieldset').addClass('hidden');
+            $('[name="test_igm_result"]').parents('fieldset').removeClass('hidden');
+        }
+    });
+
+    $('[data-modal="' + send_action + '"]').find('form').on('submit', function(event)
+    {
+        action = send_action;
         id = null;
 
         send_form_modal('filter', $(this), event);

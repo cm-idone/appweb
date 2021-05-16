@@ -16,22 +16,6 @@ class Functions
             return $age;
     }
 
-    static public function chemicals()
-    {
-        $database = new Medoo();
-
-        return $database->select('system_chemicals', [
-            'id',
-            'name',
-            'signature'
-        ], [
-            'ORDER' => [
-                'default' => 'DESC',
-                'name' => 'ASC'
-            ]
-        ]);
-    }
-
     static public function countries()
     {
         $database = new Medoo();

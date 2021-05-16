@@ -10,6 +10,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
 <header class="modbar">
     <span class="title"><strong><?php echo count($global['custody_chains']) . ' {$lang.records}'; ?></strong></span>
     <div class="buttons">
+        <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
+            <a data-action="send_custody_chains" class="btn auto"><i class="fas fa-envelope"></i>{$lang.send_results}</a>
+        <?php endif; ?>
         <a data-action="filter_custody_chains" class="btn auto success"><i class="fas fa-filter"></i>{$lang.filter}</a>
         <fieldset class="fields-group big">
             <div class="compound st-4-left">
@@ -151,10 +154,10 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
                         </div>
                         <div class="span6">
                             <div class="text">
-                                <input type="date" name="end_date" value="<?php echo System::temporal('get', 'laboratory', 'filter')['end_date']; ?>">
+                                <input type="time" name="start_hour" value="<?php echo System::temporal('get', 'laboratory', 'filter')['start_hour']; ?>">
                             </div>
                             <div class="title">
-                                <h6>{$lang.end_date}</h6>
+                                <h6>{$lang.start_hour}</h6>
                             </div>
                         </div>
                     </div>
@@ -163,10 +166,10 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
                     <div class="row">
                         <div class="span6">
                             <div class="text">
-                                <input type="time" name="start_hour" value="<?php echo System::temporal('get', 'laboratory', 'filter')['start_hour']; ?>">
+                                <input type="date" name="end_date" value="<?php echo System::temporal('get', 'laboratory', 'filter')['end_date']; ?>">
                             </div>
                             <div class="title">
-                                <h6>{$lang.start_hour}</h6>
+                                <h6>{$lang.end_date}</h6>
                             </div>
                         </div>
                         <div class="span6">
@@ -218,6 +221,232 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
         </main>
     </div>
 </section>
+<?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
+    <section class="modal" data-modal="send_custody_chains">
+        <div class="content">
+            <main>
+                <form>
+                    <fieldset class="fields-group">
+                        <div class="row">
+                            <div class="span4">
+                                <div class="text">
+                                    <select name="laboratory">
+                                        <option value="all">{$lang.all}</option>
+                                        <?php foreach ($global['laboratories'] as $value) : ?>
+                                            <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.laboratory}</h6>
+                                </div>
+                            </div>
+                            <div class="span4">
+                                <div class="text">
+                                    <select name="taker">
+                                        <option value="all">{$lang.all}</option>
+                                        <?php foreach ($global['takers'] as $value) : ?>
+                                            <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.taker}</h6>
+                                </div>
+                            </div>
+                            <div class="span4">
+                                <div class="text">
+                                    <select name="type">
+                                        <option value="covid_pcr">{$lang.covid_pcr}</option>
+                                        <option value="covid_an">{$lang.covid_an}</option>
+                                        <option value="covid_ac">{$lang.covid_ac}</option>
+                                    </select>
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.type}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="fields-group">
+                        <div class="row">
+                            <div class="span6">
+                                <div class="text">
+                                    <input type="date" name="start_date" value="<?php echo Dates::current_date(); ?>">
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.start_date}</h6>
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="text">
+                                    <input type="time" name="start_hour" value="00:00:01">
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.start_hour}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="fields-group">
+                        <div class="row">
+                            <div class="span6">
+                                <div class="text">
+                                    <input type="date" name="end_date" value="<?php echo Dates::current_date(); ?>">
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.end_date}</h6>
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="text">
+                                    <input type="time" name="end_hour" value="23:59:59">
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.end_hour}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="fields-group">
+                        <div class="row">
+                            <div class="span4">
+                                <div class="text">
+                                    <select name="test_result">
+                                        <option value="negative">{$lang.negative}</option>
+                                        <option value="positive">{$lang.positive}</option>
+                                    </select>
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.result}</h6>
+                                </div>
+                            </div>
+                            <div class="span4">
+                                <div class="text">
+                                    <select name="test_unity">
+                                        <option value="INDEX">{$lang.index}</option>
+                                    </select>
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.unity}</h6>
+                                </div>
+                            </div>
+                            <div class="span4">
+                                <div class="text">
+                                    <select name="test_reference_values">
+                                        <option value="not_detected">{$lang.not_detected}</option>
+                                        <option value="detected">{$lang.detected}</option>
+                                    </select>
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.reference_values}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="fields-group hidden">
+                        <div class="row">
+                            <div class="span2">
+                                <div class="text">
+                                    <select name="test_igm_result">
+                                        <option value="not_reactive">{$lang.not_reactive}</option>
+                                        <option value="reactive">{$lang.reactive}</option>
+                                    </select>
+                                </div>
+                                <div class="title">
+                                    <h6>IgM {$lang.result}</h6>
+                                </div>
+                            </div>
+                            <div class="span2">
+                                <div class="text">
+                                    <select name="test_igm_unity">
+                                        <option value="INDEX">{$lang.index}</option>
+                                    </select>
+                                </div>
+                                <div class="title">
+                                    <h6>IgM {$lang.unity}</h6>
+                                </div>
+                            </div>
+                            <div class="span2">
+                                <div class="text">
+                                    <select name="test_igm_reference_values">
+                                        <option value="not_reactive">{$lang.not_reactive}</option>
+                                        <option value="reactive">{$lang.reactive}</option>
+                                    </select>
+                                </div>
+                                <div class="title">
+                                    <h6>IgM {$lang.reference_values}</h6>
+                                </div>
+                            </div>
+                            <div class="span2">
+                                <div class="text">
+                                    <select name="test_igg_result">
+                                        <option value="not_reactive">{$lang.not_reactive}</option>
+                                        <option value="reactive">{$lang.reactive}</option>
+                                    </select>
+                                </div>
+                                <div class="title">
+                                    <h6>IgG {$lang.result}</h6>
+                                </div>
+                            </div>
+                            <div class="span2">
+                                <div class="text">
+                                    <select name="test_igg_unity">
+                                        <option value="INDEX">{$lang.index}</option>
+                                    </select>
+                                </div>
+                                <div class="title">
+                                    <h6>IgG {$lang.unity}</h6>
+                                </div>
+                            </div>
+                            <div class="span2">
+                                <div class="text">
+                                    <select name="test_igg_reference_values">
+                                        <option value="not_reactive">{$lang.not_reactive}</option>
+                                        <option value="reactive">{$lang.reactive}</option>
+                                    </select>
+                                </div>
+                                <div class="title">
+                                    <h6>IgG {$lang.reference_values}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="fields-group">
+                        <div class="row">
+                            <div class="span6">
+                                <div class="text">
+                                    <input type="date" name="end_process" value="<?php echo Dates::current_date(); ?>">
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.end_process}</h6>
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="text">
+                                    <select name="chemical">
+                                        <?php foreach ($global['chemicals'] as $value) : ?>
+                                            <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.chemical}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="fields-group">
+                        <div class="button">
+                            <a class="alert" button-close><i class="fas fa-times"></i></a>
+                            <button type="submit" class="success"><i class="fas fa-check"></i></button>
+                        </div>
+                    </fieldset>
+                </form>
+            </main>
+        </div>
+    </section>
+<?php endif; ?>
 <?php if (($global['render'] == 'alcoholic' AND Permissions::user(['delete_alcoholic']) == true) OR ($global['render'] == 'antidoping' AND Permissions::user(['delete_antidoping']) == true) OR ($global['render'] == 'covid' AND Permissions::user(['delete_covid']) == true)) : ?>
     <section class="modal alert" data-modal="delete_custody_chain">
         <div class="content">

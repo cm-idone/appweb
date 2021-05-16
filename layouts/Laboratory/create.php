@@ -391,13 +391,13 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/create.js?v=1.0']);
                     <div class="span4">
                         <div class="text">
                             <select name="chemical">
-                                <?php foreach (Functions::chemicals() as $value) : ?>
+                                <?php foreach ($global['chemicals'] as $value) : ?>
                                     <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="title">
-                            <h6>{$lang.name}</h6>
+                            <h6>{$lang.chemical}</h6>
                         </div>
                     </div>
                     <div class="span8">
