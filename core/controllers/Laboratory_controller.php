@@ -100,121 +100,131 @@ class Laboratory_controller extends Controller
 				{
 					$query1 = $this->model->read_custody_chains($_POST, true);
 
-					foreach ($query1 as $value)
+					if (!empty($query1))
 					{
-						$_POST['qr']['filename'] = $value['laboratory_path'] . '_' . $value['type'] . '_qr_results_' . $value['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
-						$_POST['pdf']['filename'] = $value['laboratory_path'] . '_' . $value['type'] . '_pdf_results_' . $value['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
-						$_POST['custody_chain'] = $value;
-
-						$query2 = $this->model->update_custody_chain($_POST, true);
-
-						if (!empty($query2))
+						foreach ($query1 as $value)
 						{
-							$mail = new Mailer(true);
+							$_POST['qr']['filename'] = $value['laboratory_path'] . '_' . $value['type'] . '_qr_results_' . $value['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
+							$_POST['pdf']['filename'] = $value['laboratory_path'] . '_' . $value['type'] . '_pdf_results_' . $value['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
+							$_POST['custody_chain'] = $value;
 
-							try
+							$query2 = $this->model->update_custody_chain($_POST, true);
+
+							if (!empty($query2))
 							{
-								$mail->setFrom($value['laboratory_email'], $value['laboratory_name']);
-								$mail->addAddress($value['contact']['email'], $value['contact']['firstname'] . ' ' . $value['contact']['lastname']);
-								$mail->addAttachment(PATH_UPLOADS . $_POST['pdf']['filename']);
-								$mail->Subject = '¡' . Languages::email('hi')[$value['lang']] . ' ' . explode(' ',  $value['contact']['firstname'])[0] . '! ' . Languages::email('your_results_are_ready')[$value['lang']];
-								$mail->Body =
-								'<html>
-									<head>
-										<title>' . $mail->Subject . '</title>
-									</head>
-									<body>
-										<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $value['laboratory_colors']['first'] . ';">
-											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-												<td style="width:100px;margin:0px;padding:20px 0px 20px 20px;border:0px;box-sizing:border-box;vertical-align:middle;">
-													<img style="width:100px" src="https://' . Configuration::$domain . '/uploads/' . $value['laboratory_avatar'] . '">
-												</td>
-												<td style="width:auto;margin:0px;padding:20px;border:0px;box-sizing:border-box;vertical-align:middle;">
-													<table style="width:100%;margin:0px;padding:0px;border:0px;">
-														<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-															<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:600;text-align:right;text-transform:uppercase;color:#fff;">' . $value['laboratory_name'] . '</td>
-														</tr>
-														<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-															<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $value['laboratory_rfc'] . '</td>
-														</tr>
-														<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-															<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $value['laboratory_sanitary_opinion'] . '</td>
-														</tr>
-														<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-															<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $value['laboratory_address']['first'] . '</td>
-														</tr>
-														<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-															<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $value['laboratory_address']['second']. '</td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-										</table>
-										<table style="width:100%;max-width:600px;margin:20px 0px;padding:0px;border:1px dashed #bdbdbd;box-sizing:border-box;background-color:#fff;">
-											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-												<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:18px;font-weight:600;text-align:center;text-transform:uppercase;color:#000;">¡' . Languages::email('ready_results')[$value['lang']] . '!</td>
-											</tr>
-											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-												<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#757575;">¡' . Languages::email('hi')[$value['lang']] . ' <strong>' . explode(' ', $value['contact']['firstname'])[0] . '</strong>! ' . Languages::email('get_covid_results_1')[$value['lang']] . ' <strong>' . Dates::format_date($value['date'], 'short') . '</strong> ' . Languages::email('get_covid_results_2')[$value['lang']] . '</td>
-											</tr>
-											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-												<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
-													<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $_POST['qr']['filename'] . '">
-												</td>
-											</tr>
-											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-												<td style="width:100%;margin:0px;padding:20px;border:0px;box-sizing:border-box;">
-													<a style="width:100%;display:block;margin:0px;padding:10px;border:0px;border-radius:5px;box-sizing:border-box;background-color:#009688;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#fff;" href="https://' . Configuration::$domain . '/' . $value['laboratory_path'] . '/results/' . $value['token'] . '">' . Languages::email('view_online_results')[$value['lang']] . '</a>
-												</td>
-											</tr>
-										</table>
-										<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $value['laboratory_colors']['second'] . ';">
-											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-												<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="tel:' . $value['laboratory_phone'] . '">' . $value['laboratory_phone'] . '</a></td>
-											</tr>
-											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-												<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="mailto:' . $value['laboratory_email'] . '">' . $value['laboratory_email'] . '</a></td>
-											</tr>
-											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-												<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="https://' . $value['laboratory_website'] . '">' . $value['laboratory_website'] . '</a></td>
-											</tr>
-										</table>
-										<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $value['laboratory_colors']['first'] . ';">
-											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-												<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">' . Languages::email('power_by')[$value['lang']] . ' <a style="font-weight:600;text-decoration:none;color:#fff;" href="https://id.one-consultores.com">' . Configuration::$web_page . ' ' . Configuration::$web_version . '</a></td>
-											</tr
-											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-												<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Copyright (C) <a style="text-decoration:none;color:#fff;" href="https://one-consultores.com">One Consultores</a></td>
-											</tr>
-											<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-												<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Software ' . Languages::email('development_by')[$value['lang']] . ' <a style="text-decoration:none;color:#fff;" href="https://codemonkey.com.mx">Code Monkey</a></td>
-											</tr>
-										</table>
-									</body>
-								</html>';
-								$mail->send();
-							}
-							catch (Exception $e) {}
+								$mail = new Mailer(true);
 
-							$sms = new \Nexmo\Client\Credentials\Basic('51db0b68', 'd2TTUheuHp6BqYep');
-							$sms = new \Nexmo\Client($sms);
+								try
+								{
+									$mail->setFrom($value['laboratory_email'], $value['laboratory_name']);
+									$mail->addAddress($value['contact']['email'], $value['contact']['firstname'] . ' ' . $value['contact']['lastname']);
+									$mail->addAttachment(PATH_UPLOADS . $_POST['pdf']['filename']);
+									$mail->Subject = '¡' . Languages::email('hi')[$value['lang']] . ' ' . explode(' ',  $value['contact']['firstname'])[0] . '! ' . Languages::email('your_results_are_ready')[$value['lang']];
+									$mail->Body =
+									'<html>
+										<head>
+											<title>' . $mail->Subject . '</title>
+										</head>
+										<body>
+											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $value['laboratory_colors']['first'] . ';">
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100px;margin:0px;padding:20px 0px 20px 20px;border:0px;box-sizing:border-box;vertical-align:middle;">
+														<img style="width:100px" src="https://' . Configuration::$domain . '/uploads/' . $value['laboratory_avatar'] . '">
+													</td>
+													<td style="width:auto;margin:0px;padding:20px;border:0px;box-sizing:border-box;vertical-align:middle;">
+														<table style="width:100%;margin:0px;padding:0px;border:0px;">
+															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:600;text-align:right;text-transform:uppercase;color:#fff;">' . $value['laboratory_name'] . '</td>
+															</tr>
+															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $value['laboratory_rfc'] . '</td>
+															</tr>
+															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $value['laboratory_sanitary_opinion'] . '</td>
+															</tr>
+															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $value['laboratory_address']['first'] . '</td>
+															</tr>
+															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $value['laboratory_address']['second']. '</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</table>
+											<table style="width:100%;max-width:600px;margin:20px 0px;padding:0px;border:1px dashed #bdbdbd;box-sizing:border-box;background-color:#fff;">
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:18px;font-weight:600;text-align:center;text-transform:uppercase;color:#000;">¡' . Languages::email('ready_results')[$value['lang']] . '!</td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#757575;">¡' . Languages::email('hi')[$value['lang']] . ' <strong>' . explode(' ', $value['contact']['firstname'])[0] . '</strong>! ' . Languages::email('get_covid_results_1')[$value['lang']] . ' <strong>' . Dates::format_date($value['date'], 'short') . '</strong> ' . Languages::email('get_covid_results_2')[$value['lang']] . '</td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
+														<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $_POST['qr']['filename'] . '">
+													</td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px;border:0px;box-sizing:border-box;">
+														<a style="width:100%;display:block;margin:0px;padding:10px;border:0px;border-radius:5px;box-sizing:border-box;background-color:#009688;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#fff;" href="https://' . Configuration::$domain . '/' . $value['laboratory_path'] . '/results/' . $value['token'] . '">' . Languages::email('view_online_results')[$value['lang']] . '</a>
+													</td>
+												</tr>
+											</table>
+											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $value['laboratory_colors']['second'] . ';">
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="tel:' . $value['laboratory_phone'] . '">' . $value['laboratory_phone'] . '</a></td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="mailto:' . $value['laboratory_email'] . '">' . $value['laboratory_email'] . '</a></td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="https://' . $value['laboratory_website'] . '">' . $value['laboratory_website'] . '</a></td>
+												</tr>
+											</table>
+											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $value['laboratory_colors']['first'] . ';">
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">' . Languages::email('power_by')[$value['lang']] . ' <a style="font-weight:600;text-decoration:none;color:#fff;" href="https://id.one-consultores.com">' . Configuration::$web_page . ' ' . Configuration::$web_version . '</a></td>
+												</tr
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Copyright (C) <a style="text-decoration:none;color:#fff;" href="https://one-consultores.com">One Consultores</a></td>
+												</tr>
+												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+													<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Software ' . Languages::email('development_by')[$value['lang']] . ' <a style="text-decoration:none;color:#fff;" href="https://codemonkey.com.mx">Code Monkey</a></td>
+												</tr>
+											</table>
+										</body>
+									</html>';
+									$mail->send();
+								}
+								catch (Exception $e) {}
 
-							try
-							{
-								$sms->message()->send([
-									'to' => $value['contact']['phone']['country'] . $value['contact']['phone']['number'],
-									'from' => $value['laboratory_name'],
-									'text' => '¡' . Languages::email('hi')[$value['lang']] . ' ' . explode(' ',  $value['contact']['firstname'])[0] . '! ' . Languages::email('your_results_are_ready')[$value['lang']] . '. ' . Languages::email('we_send_email_1')[$value['lang']] . ' ' . $value['contact']['email'] . ' ' . Languages::email('we_send_email_3')[$value['lang']] . ': https://' . Configuration::$domain . '/' . $value['laboratory_path'] . '/results/' . $value['token'] . '. ' . Languages::email('power_by')[$value['lang']] . ' ' . Configuration::$web_page . ' ' . Configuration::$web_version . '.'
-								]);
+								$sms = new \Nexmo\Client\Credentials\Basic('51db0b68', 'd2TTUheuHp6BqYep');
+								$sms = new \Nexmo\Client($sms);
+
+								try
+								{
+									$sms->message()->send([
+										'to' => $value['contact']['phone']['country'] . $value['contact']['phone']['number'],
+										'from' => $value['laboratory_name'],
+										'text' => '¡' . Languages::email('hi')[$value['lang']] . ' ' . explode(' ',  $value['contact']['firstname'])[0] . '! ' . Languages::email('your_results_are_ready')[$value['lang']] . '. ' . Languages::email('we_send_email_1')[$value['lang']] . ' ' . $value['contact']['email'] . ' ' . Languages::email('we_send_email_3')[$value['lang']] . ': https://' . Configuration::$domain . '/' . $value['laboratory_path'] . '/results/' . $value['token'] . '. ' . Languages::email('power_by')[$value['lang']] . ' ' . Configuration::$web_page . ' ' . Configuration::$web_version . '.'
+									]);
+								}
+								catch (Exception $e) {}
 							}
-							catch (Exception $e) {}
 						}
-					}
 
-					echo json_encode([
-						'status' => 'success',
-						'message' => '{$lang.operation_success}'
-					]);
+						echo json_encode([
+							'status' => 'success',
+							'message' => '{$lang.operation_success}'
+						]);
+					}
+					else
+					{
+						echo json_encode([
+							'status' => 'error',
+							'message' => '{$lang.not_found_custody_chains}'
+						]);
+					}
 				}
 				else
 				{
