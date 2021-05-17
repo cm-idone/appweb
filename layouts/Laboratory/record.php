@@ -33,7 +33,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.3']);
         <form name="create_record">
             <h4>{$lang.record}</h4>
             <p>{$lang.custody_chain_alert_1}</p>
-            <div data-step>
+            <div data-step="1">
                 <h4>{$lang.what_your_name}</h4>
                 <fieldset class="fields-group">
                     <div class="text">
@@ -62,7 +62,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.3']);
                     </div>
                 </fieldset>
             </div>
-            <div data-step>
+            <div data-step="2">
                 <h4>{$lang.what_your_born}</h4>
                 <fieldset class="fields-group">
                     <div class="text">
@@ -95,7 +95,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.3']);
                     </div>
                 </fieldset>
             </div>
-            <div data-step>
+            <div data-step="3">
                 <h4>{$lang.what_your_age}</h4>
                 <fieldset class="fields-group">
                     <div class="text">
@@ -103,7 +103,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.3']);
                     </div>
                 </fieldset>
             </div>
-            <div data-step>
+            <div data-step="4">
                 <h4>{$lang.what_your_personal_information}</h4>
                 <fieldset class="fields-group">
                     <div class="text">
@@ -121,7 +121,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.3']);
                     </div>
                 </fieldset>
             </div>
-            <div data-step>
+            <div data-step="5">
                 <h4>{$lang.security_form}</h4>
                 <fieldset class="fields-group hidden" data-hidden="pregnant">
                     <div class="title">
@@ -336,7 +336,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.3']);
                     </div>
                 </fieldset>
             </div>
-            <div data-step>
+            <div data-step="6">
                 <h4>{$lang.what_your_contact}</h4>
                 <p>{$lang.what_your_contact_description}</p>
                 <fieldset class="fields-group">
@@ -360,13 +360,13 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.3']);
                     </div>
                 </fieldset>
             </div>
-            <div data-step>
+            <div data-step="7">
                 <h4>{$lang.what_your_test}</h4>
                 <fieldset class="fields-group">
                     <div class="checkbox">
                         <label>
                             <input type="radio" name="type" value="covid_pcr" checked>
-                            <span>PCR (<?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['pcr']['usd'], 'USD'); ?> + <?php echo $global['collector']['authentication']['taker']['prices']['covid']['card']; ?>% {$lang.with_card_payment})</span>
+                            <span>PCR <strong><?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['pcr']['usd'], 'USD'); ?></strong></span>
                         </label>
                     </div>
                 </fieldset>
@@ -374,7 +374,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.3']);
                     <div class="checkbox">
                         <label>
                             <input type="radio" name="type" value="covid_an">
-                            <span>{$lang.antigen} (<?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['an']['usd'], 'USD'); ?> + <?php echo $global['collector']['authentication']['taker']['prices']['covid']['card']; ?>% {$lang.with_card_payment})</span>
+                            <span>{$lang.antigen} <strong><?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['an']['usd'], 'USD'); ?></strong></span>
                         </label>
                     </div>
                 </fieldset>
@@ -382,12 +382,13 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.3']);
                     <div class="checkbox">
                         <label>
                             <input type="radio" name="type" value="covid_ac">
-                            <span>{$lang.anticorps} (<?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['ac']['usd'], 'USD'); ?> + <?php echo $global['collector']['authentication']['taker']['prices']['covid']['card']; ?>% {$lang.with_card_payment})</span>
+                            <span>{$lang.anticorps} <strong><?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['ac']['usd'], 'USD'); ?></strong></span>
                         </label>
                     </div>
                 </fieldset>
+                <p>+ <?php echo $global['collector']['authentication']['taker']['prices']['covid']['card']; ?> % {$lang.with_card_payment}</p>
             </div>
-            <div data-step>
+            <div data-step="8">
                 <h4>{$lang.signature}</h4>
                 <p>{$lang.accept_terms_1} <a href="https://<?php echo $global['laboratory']['website']; ?>/terminos-y-condiciones" target="_blank">{$lang.terms_and_conditions}</a> {$lang.accept_terms_2} <a href="https://<?php echo $global['laboratory']['website']; ?>/aviso-de-privacidad" target="_blank">{$lang.privacy_notice}</a></p>
                 <div class="accept_terms">
