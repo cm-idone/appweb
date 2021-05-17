@@ -102,6 +102,8 @@ class Laboratory_controller extends Controller
 
 					if (!empty($query1))
 					{
+						set_time_limit(10000000000);
+
 						foreach ($query1 as $value)
 						{
 							$_POST['qr']['filename'] = $value['laboratory_path'] . '_' . $value['type'] . '_qr_results_' . $value['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
