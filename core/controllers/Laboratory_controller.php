@@ -98,14 +98,14 @@ class Laboratory_controller extends Controller
 
 				if (empty($errors))
 				{
-					set_time_limit(100000000);
-
 					$query1 = $this->model->read_custody_chains($_POST, true);
 
 					if (!empty($query1))
 					{
 						foreach ($query1 as $value)
 						{
+							set_time_limit(100000000);
+
 							$_POST['qr']['filename'] = $value['laboratory_path'] . '_' . $value['type'] . '_qr_results_' . $value['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
 							$_POST['pdf']['filename'] = $value['laboratory_path'] . '_' . $value['type'] . '_pdf_results_' . $value['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
 							$_POST['custody_chain'] = $value;
@@ -761,196 +761,203 @@ class Laboratory_controller extends Controller
 				{
 					if (!empty($_POST['signature']))
 					{
-						$errors = [];
-
-						if (Validations::empty($_POST['firstname']) == false)
-							array_push($errors, ['firstname','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::empty($_POST['lastname']) == false)
-							array_push($errors, ['lastname','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::empty($_POST['sex']) == false)
-							array_push($errors, ['sex','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::empty($_POST['birth_date_year']) == false)
-							array_push($errors, ['birth_date_year','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::empty($_POST['birth_date_month']) == false)
-							array_push($errors, ['birth_date_month','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::empty($_POST['birth_date_day']) == false)
-							array_push($errors, ['birth_date_day','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::empty($_POST['age']) == false)
-							array_push($errors, ['age','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::empty($_POST['nationality']) == false)
-							array_push($errors, ['nationality','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::empty($_POST['ife']) == false)
-							array_push($errors, ['ife','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::empty($_POST['travel_to']) == false)
-							array_push($errors, ['travel_to','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::equals($_POST['sex'], 'female') == true AND Validations::empty($_POST['pregnant']) == false)
-							array_push($errors, ['pregnant','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::equals($_POST['symptoms'][0], 'nothing') == false AND Validations::empty($_POST['symptoms_time']) == false)
-							array_push($errors, ['symptoms_time','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::empty($_POST['previous_travel']) == false)
-							array_push($errors, ['previous_travel','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::equals($_POST['previous_travel'], 'yeah') == true AND Validations::empty($_POST['previous_travel_countries']) == false)
-							array_push($errors, ['previous_travel_countries','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::empty($_POST['covid_contact']) == false)
-							array_push($errors, ['covid_contact','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::empty($_POST['covid_infection']) == false)
-							array_push($errors, ['covid_infection','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::equals($_POST['covid_infection'], 'yeah') == true AND Validations::empty($_POST['covid_infection_time']) == false)
-							array_push($errors, ['covid_infection_time','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::empty($_POST['email']) == false)
-							array_push($errors, ['email','{$lang.dont_leave_this_field_empty}']);
-						else if (Validations::email($_POST['email']) == false)
-							array_push($errors, ['email','{$lang.invalid_field}']);
-
-						if (Validations::empty($_POST['phone_country']) == false)
-							array_push($errors, ['phone_country','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::empty($_POST['phone_number']) == false)
-							array_push($errors, ['phone_number','{$lang.dont_leave_this_field_empty}']);
-
-						if (Validations::empty($_POST['type']) == false)
-							array_push($errors, ['type','{$lang.dont_leave_this_field_empty}']);
-
-						if (empty($errors))
+						if (!empty($_POST['type']))
 						{
-							$_POST['token'] = $global['collector']['authentication']['taker']['token'] . '-' . System::generate_random_string();
-							$_POST['qr']['filename'] = $global['laboratory']['path'] . '_' . $_POST['type'] . '_qr_results_' . $_POST['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
-							$_POST['laboratory'] = $global['laboratory'];
-							$_POST['collector'] = $global['collector'];
+							$errors = [];
 
-							$query = $this->model->create_custody_chain($_POST, true);
+							if (Validations::empty($_POST['firstname']) == false)
+								array_push($errors, ['firstname','{$lang.dont_leave_this_field_empty}']);
 
-							if (!empty($query))
+							if (Validations::empty($_POST['lastname']) == false)
+								array_push($errors, ['lastname','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['sex']) == false)
+								array_push($errors, ['sex','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['birth_date_year']) == false)
+								array_push($errors, ['birth_date_year','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['birth_date_month']) == false)
+								array_push($errors, ['birth_date_month','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['birth_date_day']) == false)
+								array_push($errors, ['birth_date_day','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['age']) == false)
+								array_push($errors, ['age','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['nationality']) == false)
+								array_push($errors, ['nationality','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['ife']) == false)
+								array_push($errors, ['ife','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['travel_to']) == false)
+								array_push($errors, ['travel_to','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::equals($_POST['sex'], 'female') == true AND Validations::empty($_POST['pregnant']) == false)
+								array_push($errors, ['pregnant','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::equals($_POST['symptoms'][0], 'nothing') == false AND Validations::empty($_POST['symptoms_time']) == false)
+								array_push($errors, ['symptoms_time','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['previous_travel']) == false)
+								array_push($errors, ['previous_travel','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::equals($_POST['previous_travel'], 'yeah') == true AND Validations::empty($_POST['previous_travel_countries']) == false)
+								array_push($errors, ['previous_travel_countries','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['covid_contact']) == false)
+								array_push($errors, ['covid_contact','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['covid_infection']) == false)
+								array_push($errors, ['covid_infection','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::equals($_POST['covid_infection'], 'yeah') == true AND Validations::empty($_POST['covid_infection_time']) == false)
+								array_push($errors, ['covid_infection_time','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['email']) == false)
+								array_push($errors, ['email','{$lang.dont_leave_this_field_empty}']);
+							else if (Validations::email($_POST['email']) == false)
+								array_push($errors, ['email','{$lang.invalid_field}']);
+
+							if (Validations::empty($_POST['phone_country']) == false)
+								array_push($errors, ['phone_country','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['phone_number']) == false)
+								array_push($errors, ['phone_number','{$lang.dont_leave_this_field_empty}']);
+
+							if (empty($errors))
 							{
-								$mail = new Mailer(true);
+								$_POST['token'] = $global['collector']['authentication']['taker']['token'] . '-' . System::generate_random_string();
+								$_POST['qr']['filename'] = $global['laboratory']['path'] . '_' . $_POST['type'] . '_qr_results_' . $_POST['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
+								$_POST['laboratory'] = $global['laboratory'];
+								$_POST['collector'] = $global['collector'];
 
-								try
+								$query = $this->model->create_custody_chain($_POST, true);
+
+								if (!empty($query))
 								{
-									$mail->setFrom($global['laboratory']['email'], $global['laboratory']['name']);
-									$mail->addAddress(strtolower($_POST['email']), ucwords($_POST['firstname'] . ' ' . $_POST['lastname']));
-									$mail->Subject = '¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' ' . ucwords(explode(' ', $_POST['firstname'])[0]) . '! ' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'];
-									$mail->Body =
-									'<html>
-										<head>
-											<title>' . $mail->Subject . '</title>
-										</head>
-										<body>
-											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $global['laboratory']['colors']['first'] . ';">
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100px;margin:0px;padding:20px 0px 20px 20px;border:0px;box-sizing:border-box;vertical-align:middle;">
-														<img style="width:100px" src="https://' . Configuration::$domain . '/uploads/' . $global['laboratory']['avatar'] . '">
-													</td>
-													<td style="width:auto;margin:0px;padding:20px;border:0px;box-sizing:border-box;vertical-align:middle;">
-														<table style="width:100%;margin:0px;padding:0px;border:0px;">
-															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:600;text-align:right;text-transform:uppercase;color:#fff;">' . $global['laboratory']['name'] . '</td>
-															</tr>
-															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['laboratory']['rfc'] . '</td>
-															</tr>
-															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['laboratory']['sanitary_opinion'] . '</td>
-															</tr>
-															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['laboratory']['address']['first'] . '</td>
-															</tr>
-															<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-																<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['laboratory']['address']['second'] . '</td>
-															</tr>
-														</table>
-													</td>
-												</tr>
-											</table>
-											<table style="width:100%;max-width:600px;margin:20px 0px;padding:0px;border:1px dashed #bdbdbd;box-sizing:border-box;background-color:#fff;">
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:18px;font-weight:600;text-align:center;text-transform:uppercase;color:#000;">' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': </td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:28px;font-weight:600;text-align:center;text-transform:uppercase;color:#000;">' . $_POST['token'] . '</td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#757575;">¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' <strong>' . ucwords(explode(' ', $_POST['firstname'])[0]) . '</strong>! ' . Languages::email('your_results_next_email')[Session::get_value('vkye_lang')] . '</td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
-														<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $_POST['qr']['filename'] . '">
-													</td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px;border:0px;box-sizing:border-box;">
-														<a style="width:100%;display:block;margin:0px;padding:10px;border:0px;border-radius:5px;box-sizing:border-box;background-color:#009688;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#fff;" href="https://' . Configuration::$domain . '/' . $global['laboratory']['path'] . '/results/' . $_POST['token'] . '">' . Languages::email('view_online_results')[Session::get_value('vkye_lang')] . '</a>
-													</td>
-												</tr>
-											</table>
-											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $global['laboratory']['colors']['second'] . ';">
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="tel:' . $global['laboratory']['phone'] . '">' . $global['laboratory']['phone'] . '</a></td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="mailto:' . $global['laboratory']['email'] . '">' . $global['laboratory']['email'] . '</a></td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="https://' . $global['laboratory']['website'] . '">' . $global['laboratory']['website'] . '</a></td>
-												</tr>
-											</table>
-											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $global['laboratory']['colors']['first'] . ';">
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' <a style="font-weight:600;text-decoration:none;color:#fff;" href="https://id.one-consultores.com">' . Configuration::$web_page . ' ' . Configuration::$web_version . '</a></td>
-												</tr
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Copyright (C) <a style="text-decoration:none;color:#fff;" href="https://one-consultores.com">One Consultores</a></td>
-												</tr>
-												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Software ' . Languages::email('development_by')[Session::get_value('vkye_lang')] . ' <a style="text-decoration:none;color:#fff;" href="https://codemonkey.com.mx">Code Monkey</a></td>
-												</tr>
-											</table>
-										</body>
-									</html>';
-									$mail->send();
-								}
-								catch (Exception $e) {}
+									$mail = new Mailer(true);
 
-								$sms = new \Nexmo\Client\Credentials\Basic('51db0b68', 'd2TTUheuHp6BqYep');
-								$sms = new \Nexmo\Client($sms);
+									try
+									{
+										$mail->setFrom($global['laboratory']['email'], $global['laboratory']['name']);
+										$mail->addAddress(strtolower($_POST['email']), ucwords($_POST['firstname'] . ' ' . $_POST['lastname']));
+										$mail->Subject = '¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' ' . ucwords(explode(' ', $_POST['firstname'])[0]) . '! ' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'];
+										$mail->Body =
+										'<html>
+											<head>
+												<title>' . $mail->Subject . '</title>
+											</head>
+											<body>
+												<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $global['laboratory']['colors']['first'] . ';">
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100px;margin:0px;padding:20px 0px 20px 20px;border:0px;box-sizing:border-box;vertical-align:middle;">
+															<img style="width:100px" src="https://' . Configuration::$domain . '/uploads/' . $global['laboratory']['avatar'] . '">
+														</td>
+														<td style="width:auto;margin:0px;padding:20px;border:0px;box-sizing:border-box;vertical-align:middle;">
+															<table style="width:100%;margin:0px;padding:0px;border:0px;">
+																<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																	<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:600;text-align:right;text-transform:uppercase;color:#fff;">' . $global['laboratory']['name'] . '</td>
+																</tr>
+																<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																	<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['laboratory']['rfc'] . '</td>
+																</tr>
+																<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																	<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['laboratory']['sanitary_opinion'] . '</td>
+																</tr>
+																<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																	<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['laboratory']['address']['first'] . '</td>
+																</tr>
+																<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+																	<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $global['laboratory']['address']['second'] . '</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+												<table style="width:100%;max-width:600px;margin:20px 0px;padding:0px;border:1px dashed #bdbdbd;box-sizing:border-box;background-color:#fff;">
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:18px;font-weight:600;text-align:center;text-transform:uppercase;color:#000;">' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': </td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:0px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:28px;font-weight:600;text-align:center;text-transform:uppercase;color:#000;">' . $_POST['token'] . '</td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#757575;">¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' <strong>' . ucwords(explode(' ', $_POST['firstname'])[0]) . '</strong>! ' . Languages::email('your_results_next_email')[Session::get_value('vkye_lang')] . '</td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
+															<img style="width:100%;" src="https://' . Configuration::$domain . '/uploads/' . $_POST['qr']['filename'] . '">
+														</td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:20px;border:0px;box-sizing:border-box;">
+															<a style="width:100%;display:block;margin:0px;padding:10px;border:0px;border-radius:5px;box-sizing:border-box;background-color:#009688;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#fff;" href="https://' . Configuration::$domain . '/' . $global['laboratory']['path'] . '/results/' . $_POST['token'] . '">' . Languages::email('view_online_results')[Session::get_value('vkye_lang')] . '</a>
+														</td>
+													</tr>
+												</table>
+												<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $global['laboratory']['colors']['second'] . ';">
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="tel:' . $global['laboratory']['phone'] . '">' . $global['laboratory']['phone'] . '</a></td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="mailto:' . $global['laboratory']['email'] . '">' . $global['laboratory']['email'] . '</a></td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="https://' . $global['laboratory']['website'] . '">' . $global['laboratory']['website'] . '</a></td>
+													</tr>
+												</table>
+												<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $global['laboratory']['colors']['first'] . ';">
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' <a style="font-weight:600;text-decoration:none;color:#fff;" href="https://id.one-consultores.com">' . Configuration::$web_page . ' ' . Configuration::$web_version . '</a></td>
+													</tr
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Copyright (C) <a style="text-decoration:none;color:#fff;" href="https://one-consultores.com">One Consultores</a></td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Software ' . Languages::email('development_by')[Session::get_value('vkye_lang')] . ' <a style="text-decoration:none;color:#fff;" href="https://codemonkey.com.mx">Code Monkey</a></td>
+													</tr>
+												</table>
+											</body>
+										</html>';
+										$mail->send();
+									}
+									catch (Exception $e) {}
 
-								try
-								{
-									$sms->message()->send([
-										'to' => $_POST['phone_country'] . $_POST['phone_number'],
-										'from' => $global['laboratory']['name'],
-										'text' => '¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' ' . ucwords(explode(' ',  $_POST['firstname'])[0]) . '! ' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'] . '. ' . Languages::email('we_send_email_1')[Session::get_value('vkye_lang')] . ' ' . strtolower($_POST['email']) . ' ' . Languages::email('we_send_email_2')[Session::get_value('vkye_lang')] . ': https://' . Configuration::$domain . '/' . $global['laboratory']['path'] . '/results/' . $_POST['token'] . '. ' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' ' . Configuration::$web_page . ' ' . Configuration::$web_version . '.'
+									$sms = new \Nexmo\Client\Credentials\Basic('51db0b68', 'd2TTUheuHp6BqYep');
+									$sms = new \Nexmo\Client($sms);
+
+									try
+									{
+										$sms->message()->send([
+											'to' => $_POST['phone_country'] . $_POST['phone_number'],
+											'from' => $global['laboratory']['name'],
+											'text' => '¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' ' . ucwords(explode(' ',  $_POST['firstname'])[0]) . '! ' . Languages::email('your_token_is')[Session::get_value('vkye_lang')] . ': ' . $_POST['token'] . '. ' . Languages::email('we_send_email_1')[Session::get_value('vkye_lang')] . ' ' . strtolower($_POST['email']) . ' ' . Languages::email('we_send_email_2')[Session::get_value('vkye_lang')] . ': https://' . Configuration::$domain . '/' . $global['laboratory']['path'] . '/results/' . $_POST['token'] . '. ' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' ' . Configuration::$web_page . ' ' . Configuration::$web_version . '.'
+										]);
+									}
+									catch (Exception $e) {}
+
+									echo json_encode([
+										'status' => 'success',
+										'message' => '{$lang.operation_success}',
+										'path' => '/' . $global['laboratory']['path'] . '/results/' . $_POST['token']
 									]);
 								}
-								catch (Exception $e) {}
-
-								echo json_encode([
-									'status' => 'success',
-									'message' => '{$lang.operation_success}',
-									'path' => '/' . $global['laboratory']['path'] . '/results/' . $_POST['token']
-								]);
+								else
+								{
+									echo json_encode([
+										'status' => 'error',
+										'message' => '{$lang.operation_error}'
+									]);
+								}
 							}
 							else
 							{
 								echo json_encode([
 									'status' => 'error',
-									'message' => '{$lang.operation_error}'
+									'errors' => $errors
 								]);
 							}
 						}
@@ -958,7 +965,7 @@ class Laboratory_controller extends Controller
 						{
 							echo json_encode([
 								'status' => 'error',
-								'errors' => $errors
+								'message' => '{$lang.choose_a_covid_test_type_error}'
 							]);
 						}
 					}

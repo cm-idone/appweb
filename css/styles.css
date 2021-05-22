@@ -684,6 +684,17 @@ main.laboratory > form[name="create_record"] > div[data-step="7"] label > span >
     right: 0px;
 }
 
+main.laboratory > form[name="create_record"] > div[data-step="7"] > p {
+    margin-bottom: 0px;
+}
+
+main.laboratory > form[name="create_record"] > div[data-step="7"] div.checkbox > span {
+    padding-left: 10px;
+    box-sizing: border-box;
+    font-size: 10px;
+    color: #757575;
+}
+
 main.laboratory > form[name="create_record"] > fieldset > div.button > button,
 main.laboratory > form[name="create_record"] > fieldset > div.button > a {
     width: 100% !important;

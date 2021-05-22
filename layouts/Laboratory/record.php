@@ -365,28 +365,32 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.3']);
                 <fieldset class="fields-group">
                     <div class="checkbox">
                         <label>
-                            <input type="radio" name="type" value="covid_pcr" checked>
-                            <span>PCR <strong><?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['pcr']['usd'], 'USD'); ?></strong></span>
+                            <input type="radio" name="type" value="covid_pcr">
+                            <span>PCR <?php echo (!empty($global['collector']['authentication']['taker']['prices']['covid']['pcr']['usd']) ? '<strong>' . Currency::format($global['collector']['authentication']['taker']['prices']['covid']['pcr']['usd'], 'USD') . '</strong>' : ''); ?></span>
                         </label>
+                        <span>PCR-SARS-CoV-2 (COVID-19)</span>
                     </div>
                 </fieldset>
                 <fieldset class="fields-group">
                     <div class="checkbox">
                         <label>
                             <input type="radio" name="type" value="covid_an">
-                            <span>{$lang.antigen} <strong><?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['an']['usd'], 'USD'); ?></strong></span>
+                            <span>{$lang.antigen} <?php echo (!empty($global['collector']['authentication']['taker']['prices']['covid']['an']['usd']) ? '<strong>' . Currency::format($global['collector']['authentication']['taker']['prices']['covid']['an']['usd'], 'USD') . '</strong>' : ''); ?></span>
                         </label>
+                        <span>Ag-SARS-CoV-2 (COVID-19)</span>
                     </div>
                 </fieldset>
                 <fieldset class="fields-group">
                     <div class="checkbox">
                         <label>
                             <input type="radio" name="type" value="covid_ac">
-                            <span>{$lang.anticorps} <strong><?php echo Currency::format($global['collector']['authentication']['taker']['prices']['covid']['ac']['usd'], 'USD'); ?></strong></span>
+                            <span>{$lang.anticorps} <?php echo (!empty($global['collector']['authentication']['taker']['prices']['covid']['ac']['usd']) ? '<strong>' . Currency::format($global['collector']['authentication']['taker']['prices']['covid']['ac']['usd'], 'USD') . '</strong>' : ''); ?></span>
                         </label>
+                        <span>SARS-CoV-2 (2019) IgG/IgM</span>
                     </div>
                 </fieldset>
-                <p>+ <?php echo $global['collector']['authentication']['taker']['prices']['covid']['card']; ?> % {$lang.with_card_payment}</p>
+                <p>{$lang.apply_comision_for_card_payment_1} <strong><?php echo $global['collector']['authentication']['taker']['prices']['covid']['card']; ?>%</strong> {$lang.apply_comision_for_card_payment_2}</p>
+                <p>{$lang.apply_comision_for_transfer}</p>
             </div>
             <div data-step="8">
                 <h4>{$lang.signature}</h4>
