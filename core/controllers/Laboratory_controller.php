@@ -98,14 +98,14 @@ class Laboratory_controller extends Controller
 
 				if (empty($errors))
 				{
+					set_time_limit(100000000);
+
 					$query1 = $this->model->read_custody_chains($_POST, true);
 
 					if (!empty($query1))
 					{
 						foreach ($query1 as $value)
 						{
-							set_time_limit(100000000);
-
 							$_POST['qr']['filename'] = $value['laboratory_path'] . '_' . $value['type'] . '_qr_results_' . $value['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
 							$_POST['pdf']['filename'] = $value['laboratory_path'] . '_' . $value['type'] . '_pdf_results_' . $value['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
 							$_POST['custody_chain'] = $value;
