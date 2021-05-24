@@ -341,6 +341,8 @@ class Laboratory_model extends Model
 
 	public function update_custody_chain($data, $group = false)
     {
+		set_time_limit(100000000);
+		
 		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up')
 		{
 			$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . $data['custody_chain']['laboratory_path'] . '/results/' . $data['custody_chain']['token'];

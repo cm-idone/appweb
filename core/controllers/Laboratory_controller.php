@@ -98,8 +98,6 @@ class Laboratory_controller extends Controller
 
 				if (empty($errors))
 				{
-					set_time_limit(100000000);
-
 					$query1 = $this->model->read_custody_chains($_POST, true);
 
 					if (!empty($query1))
@@ -114,6 +112,8 @@ class Laboratory_controller extends Controller
 
 							if (!empty($query2))
 							{
+								set_time_limit(100000000);
+								
 								$mail = new Mailer(true);
 
 								try
