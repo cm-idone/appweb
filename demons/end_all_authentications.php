@@ -20,7 +20,7 @@
 
         $current_time = date('H:i:s', time());
 
-        if ($current_time < $value['schedule']['open'] OR $current_time > $value['schedule']['close'])
+        if ($current_time < $value['schedule']['open'] OR $current_time >= $value['schedule']['close'])
         {
             $database->update('system_collectors', [
                 'authentication' => json_encode([
