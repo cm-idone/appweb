@@ -52,7 +52,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/authentication.js?v=1.0'])
                 <h5><?php echo $global['collector']['token']; ?> | <?php echo $global['collector']['name']; ?></h5>
                 <h6><?php echo $global['collector']['authentication']['taker']['name']; ?></h6>
                 <figure>
-                    <img src="{$path.uploads}<?php echo $global['collector']['qrs']['authentication']; ?>">
+                    <img src="{$path.uploads}<?php echo $global['collector']['qrs']['record']; ?>">
                 </figure>
                 <a data-action="share" data-title="<?php echo $global['laboratory']['name']; ?>" data-text="{$lang.record_now}" data-url="https://<?php echo Configuration::$domain; ?>/<?php echo $global['laboratory']['path']; ?>/record/<?php echo $global['collector']['token']; ?>/<?php echo $global['collector']['authentication']['type']; ?>"><i class="fas fa-share-alt"></i><span>{$lang.share_form}</span></a>
                 <a data-action="end_authentication">{$lang.end_authentication}</a>
