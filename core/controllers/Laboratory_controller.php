@@ -276,7 +276,7 @@ class Laboratory_controller extends Controller
 					'type' => ($params[0] == 'covid') ? 'all' : $params[0],
 					'start_date' => Dates::past_date(Dates::current_date(), 1, 'days'),
 					'end_date' => Dates::current_date(),
-					'start_hour' => '00:00:00',
+					'start_hour' => '00:00:01',
 					'end_hour' => '23:59:59',
 					'sent_status' => (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') ? 'all' : ''
 				]);
