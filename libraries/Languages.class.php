@@ -314,6 +314,139 @@ class Languages
             'development_by' => [
                 'es' => 'desarrollado por',
                 'en' => 'development by'
+            ],
+
+            'security_form' => [
+                'es' => 'Formulario de seguridad',
+                'en' => 'Security form'
+            ],
+            'nationality' => [
+                'es' => 'Nacionalidad',
+                'en' => 'Nationality'
+            ],
+            'travel_to' => [
+                'es' => 'Viaja a',
+                'en' => 'Travel to'
+            ],
+            'are_you_pregnant' => [
+                'es' => '¿Estás embarazada?',
+                'en' => 'Are you pregnant?'
+            ],
+            'yeah' => [
+                'es' => 'Sí',
+                'en' => 'Yes'
+            ],
+            'not' => [
+                'es' => 'No',
+                'en' => 'not'
+            ],
+            'are_you_symptoms' => [
+                'es' => '¿En los últimos 14 días haz tenido alguno de los siguientes síntomas?',
+                'en' => 'In the last 14 days, have you had any of the following symptoms?'
+            ],
+            'fever' => [
+                'es' => 'Fiebre',
+                'en' => 'Fever'
+            ],
+            'eyes_pain' => [
+                'es' => 'Dolor de ojos',
+                'en' => 'Eyes pain'
+            ],
+            'torax_pain' => [
+                'es' => 'Dolor de torax',
+                'en' => 'Torax pain'
+            ],
+            'muscles_pain' => [
+                'es' => 'Dolor de músculos',
+                'en' => 'Muscles pain'
+            ],
+            'head_pain' => [
+                'es' => 'Dolo de cabeza',
+                'en' => 'Head pain'
+            ],
+            'throat_pain' => [
+                'es' => 'Dolor de garganta',
+                'en' => 'Throat pain'
+            ],
+            'knees_pain' => [
+                'es' => 'Dolor de rodillas',
+                'en' => 'Knees pain'
+            ],
+            'ears_pain' => [
+                'es' => 'Dolor de oídos',
+                'en' => 'Ears pain'
+            ],
+            'joints_pain' => [
+                'es' => 'Dolor de articulaciones',
+                'en' => 'Joints pain'
+            ],
+            'cough' => [
+                'es' => 'Tos',
+                'en' => 'Cough'
+            ],
+            'difficulty_breathing' => [
+                'es' => 'Dificultad respiratoria',
+                'en' => 'Breathing difficulty'
+            ],
+            'sweating' => [
+                'es' => 'Transpiración',
+                'en' => 'Sweating'
+            ],
+            'runny_nose' => [
+                'es' => 'Escurrimiento nasal',
+                'en' => 'Runny nose'
+            ],
+            'itching' => [
+                'es' => 'Comezón',
+                'en' => 'Itching'
+            ],
+            'conjunctivitis' => [
+                'es' => 'Conjuntivitis',
+                'en' => 'Conjuntivitis'
+            ],
+            'vomit' => [
+                'es' => 'Vómito',
+                'en' => 'Vomit'
+            ],
+            'diarrhea' => [
+                'es' => 'Diarrea',
+                'en' => 'Diarrhea'
+            ],
+            'smell_loss' => [
+                'es' => 'Pérdida del olfato',
+                'en' => 'Smell loss'
+            ],
+            'taste_loss' => [
+                'es' => 'Pérdida del gusto',
+                'en' => 'Taste loss'
+            ],
+            'write_symptoms_time' => [
+                'es' => '¿Hace cuanto tiempo empezaron tus síntomas?',
+                'en' => 'How long ago your symptoms started?'
+            ],
+            'are_travel_prev' => [
+                'es' => '¿Haz realizado viajes prévios a otros países?',
+                'en' => 'Have you made previous trips to other countries?'
+            ],
+            'are_contact_covid' => [
+                'es' => '¿En los últimos 14 días haz tenido contácto con personas que han tenido cualquiera de los síntomas anteriores o que tenga sospecha de COVID-19?',
+                'en' => 'In the last 14 days, have you had contact with people who have had any of the above symptoms or are suspected of COVID-19?'
+            ],
+            'are_you_covid' => [
+                'es' => '¿Haz tenido COVID-19?',
+                'en' => 'Have you had COVID-19?'
+            ],
+            'email' => [
+                'es' => 'Correo electrónico',
+                'en' => 'Email'
+            ],
+            'phone' => [
+                'es' => 'Teléfono',
+                'en' => 'Phone'
+            ],
+            'responsability_signature' => [
+                'es' => 'Firma de responsabilidad',
+                'en' => 'Responsability signature'
             ]
         ];
 
