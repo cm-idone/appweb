@@ -342,7 +342,7 @@ class Laboratory_model extends Model
 	public function update_custody_chain($data, $group = false)
     {
 		set_time_limit(100000000);
-		
+
 		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up')
 		{
 			$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . $data['custody_chain']['laboratory_path'] . '/results/' . $data['custody_chain']['token'];
@@ -792,11 +792,10 @@ class Laboratory_model extends Model
 			'id',
             'name'
         ], [
-			'blocked' => false,
 			'ORDER' => [
 				'name' => 'ASC'
 			]
-        ]));
+		]));
 
 		return $query;
 	}
@@ -831,11 +830,10 @@ class Laboratory_model extends Model
             'id',
             'name'
         ], [
-			'blocked' => false,
 			'ORDER' => [
 				'name' => 'ASC'
 			]
-        ]));
+		]));
 
 		return $query;
 	}
@@ -866,17 +864,21 @@ class Laboratory_model extends Model
 			return null;
 	}
 
-	public function read_takers()
+	public function read_takers($option = 'all')
 	{
-		$query = System::decode_json_to_array($this->database->select('system_takers', [
-            'id',
-            'name'
-        ], [
-			'blocked' => false,
+		$where = [
 			'ORDER' => [
 				'name' => 'ASC'
 			]
-        ]));
+		];
+
+		if ($option == 'not_blocked')
+			$where['blocked'] = false;
+
+		$query = System::decode_json_to_array($this->database->select('system_takers', [
+            'id',
+            'name'
+        ], $where));
 
 		return $query;
 	}

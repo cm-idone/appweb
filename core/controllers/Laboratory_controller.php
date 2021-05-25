@@ -113,7 +113,7 @@ class Laboratory_controller extends Controller
 							if (!empty($query2))
 							{
 								set_time_limit(100000000);
-								
+
 								$mail = new Mailer(true);
 
 								try
@@ -736,7 +736,7 @@ class Laboratory_controller extends Controller
 				else if (Dates::current_hour() > $global['collector']['schedule']['open'] AND Dates::current_hour() < $global['collector']['schedule']['close'])
 				{
 					$global['render'] = 'go';
-					$global['takers'] = $this->model->read_takers();
+					$global['takers'] = $this->model->read_takers('not_blocked');
 				}
 
 	            $template = $this->view->render($this, 'authentication');
