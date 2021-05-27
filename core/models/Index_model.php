@@ -13,6 +13,30 @@ class Index_model extends Model
 	}
 
 	// public function sql()
+	// {
+	// 	set_time_limit(100000000);
+	//
+	// 	$query = System::decode_json_to_array($this->database->select('custody_chains', [
+	// 		'id',
+	// 		'contact',
+	// 		'lang'
+	// 	], [
+	// 		'laboratory[>=]' => 1
+	// 	]));
+	//
+	// 	foreach ($query as $value)
+	// 	{
+	// 		$value['contact']['lang'] = $value['lang'];
+	//
+	// 		$this->database->update('custody_chains', [
+	// 			'contact' => json_encode($value['contact'])
+	// 		], [
+	// 			'id' => $value['id']
+	// 		]);
+	// 	}
+	// }
+
+	// public function sql()
     // {
 	// 	set_time_limit(100000000);
 	//
