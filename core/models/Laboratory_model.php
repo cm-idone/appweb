@@ -49,7 +49,7 @@ class Laboratory_model extends Model
                 'phone' => [
                     'country' => $data['phone_country'],
                     'number' => $data['phone_number']
-                ]
+                ],
 				'lang' => $data['lang']
 			]) : null,
 			'type' => $data['type'],
