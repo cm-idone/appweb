@@ -361,6 +361,33 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/record.js?v=1.3']);
                 </fieldset>
             </div>
             <div data-step="7">
+                <h4>{$lang.what_send_language}</h4>
+                <fieldset class="fields-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="radio" name="lang" value="es" <?php echo ((Session::get_value('vkye_lang') == 'es') ? 'checked' : ''); ?>>
+                            <span>{$lang.es}</span>
+                        </label>
+                    </div>
+                </fieldset>
+                <fieldset class="fields-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="radio" name="lang" value="en" <?php echo ((Session::get_value('vkye_lang') == 'en') ? 'checked' : ''); ?>>
+                            <span>{$lang.en}</span>
+                        </label>
+                    </div>
+                </fieldset>
+                <fieldset class="fields-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="radio" name="lang" value="pr" <?php echo ((Session::get_value('vkye_lang') == 'pr') ? 'checked' : ''); ?>>
+                            <span>{$lang.pr}</span>
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
+            <div data-step="8">
                 <h4>{$lang.what_your_test}</h4>
                 <fieldset class="fields-group">
                     <div class="checkbox">

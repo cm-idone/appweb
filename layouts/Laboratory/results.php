@@ -141,42 +141,64 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/results.js?v=1.0']);
                 <td><?php echo $global['custody_chain']['contact']['travel_to']; ?></td>
             </tr>
         </table>
-        <table>
-            <?php if ($global['custody_chain']['contact']['sex'] == 'female') : ?>
-                <tr>
-                    <td>{$lang.pregnant}:</td>
-                    <td>{$lang.<?php echo $global['custody_chain']['contact']['pregnant']; ?>}</td>
+        <?php if ($global['custody_chain']['contact']['sex'] == 'female') : ?>
+            <table>
+                <tr style="margin-bottom:20px;">
+                    <td>{$lang.are_you_pregnant}</td>
                 </tr>
-            <?php endif; ?>
+                <tr style="margin-bottom:20px;">
+                    <td>- {$lang.<?php echo $global['custody_chain']['contact']['pregnant']; ?>}</td>
+                </tr>
+            </table>
+        <?php endif; ?>
+        <table>
             <tr>
-                <td>{$lang.symptoms}:</td>
+                <td>{$lang.are_you_symptoms}</td>
+            </tr>
+            <tr>
                 <td>
                     <?php if ($global['custody_chain']['contact']['symptoms'][0] != 'nothing') : ?>
                         <?php foreach ($global['custody_chain']['contact']['symptoms'] as $value) : ?>
-                            {$lang.<?php echo $value; ?>}<br>
+                            - {$lang.<?php echo $value; ?>}<br>
                         <?php endforeach; ?>
                     <?php else : ?>
-                        {$lang.nothing}
+                        - {$lang.nothing}
                     <?php endif; ?>
                 </td>
             </tr>
-            <?php if ($global['custody_chain']['contact']['symptoms'][0] != 'nothing') : ?>
+        </table>
+        <?php if ($global['custody_chain']['contact']['symptoms'][0] != 'nothing') : ?>
+            <table>
                 <tr>
-                    <td>{$lang.symptoms_time}:</td>
-                    <td><?php echo $global['custody_chain']['contact']['symptoms_time']; ?></td>
+                    <td>{$lang.write_symptoms_time}</td>
                 </tr>
-            <?php endif; ?>
+                <tr>
+                    <td>- <?php echo $global['custody_chain']['contact']['symptoms_time']; ?></td>
+                </tr>
+            </table>
+        <?php endif; ?>
+        <table>
             <tr>
-                <td>{$lang.previous_travel}:</td>
-                <td><?php echo (($global['custody_chain']['contact']['previous_travel'] == 'yeah') ? $global['custody_chain']['contact']['previous_travel_countries'] : '{$lang.not}') ?></td>
+                <td>{$lang.are_travel_prev}</td>
             </tr>
             <tr>
-                <td>{$lang.covid_contact}:</td>
-                <td><?php echo (($global['custody_chain']['contact']['covid_contact'] == 'yeah') ? '{$lang.yeah}' : '{$lang.not}') ?></td>
+                <td>- <?php echo (($global['custody_chain']['contact']['previous_travel'] == 'yeah') ? $global['custody_chain']['contact']['previous_travel_countries'] : '{$lang.not}') ?></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>{$lang.are_contact_covid}</td>
             </tr>
             <tr>
-                <td>{$lang.covid_infection}:</td>
-                <td><?php echo (($global['custody_chain']['contact']['covid_infection'] == 'yeah') ? $global['custody_chain']['contact']['covid_infection_time'] : '{$lang.not}') ?></td>
+                <td>- <?php echo (($global['custody_chain']['contact']['covid_contact'] == 'yeah') ? '{$lang.yeah}' : '{$lang.not}') ?></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>{$lang.are_you_covid}</td>
+            </tr>
+            <tr>
+                <td>- <?php echo (($global['custody_chain']['contact']['covid_infection'] == 'yeah') ? $global['custody_chain']['contact']['covid_infection_time'] : '{$lang.not}') ?></td>
             </tr>
         </table>
         <table>

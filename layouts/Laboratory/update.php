@@ -148,8 +148,9 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/update.js?v=1.0']);
                         <div class="span4">
                             <div class="text">
                                 <select name="lang">
-                                    <option value="es" <?php echo (($global['custody_chain']['lang'] == 'es') ? 'selected' : '') ?>>{$lang.es}</option>
-                                    <option value="en" <?php echo (($global['custody_chain']['lang'] == 'en') ? 'selected' : '') ?>>{$lang.en}</option>
+                                    <option value="es" <?php echo (($global['custody_chain']['contact']['lang'] == 'es') ? 'selected' : '') ?>>{$lang.es}</option>
+                                    <option value="en" <?php echo (($global['custody_chain']['contact']['lang'] == 'en') ? 'selected' : '') ?>>{$lang.en}</option>
+                                    <option value="pr" <?php echo (($global['custody_chain']['contact']['lang'] == 'pr') ? 'selected' : '') ?>>{$lang.pr}</option>
                                 </select>
                             </div>
                             <div class="title">

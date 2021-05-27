@@ -523,7 +523,7 @@ class Laboratory_controller extends Controller
 									$mail->setFrom($global['custody_chain']['laboratory_email'], $global['custody_chain']['laboratory_name']);
 									$mail->addAddress($_POST['email'], $_POST['firstname'] . ' ' . $_POST['lastname']);
 									$mail->addAttachment(PATH_UPLOADS . $_POST['pdf']['filename']);
-									$mail->Subject = '¡' . Languages::email('hi')[$_POST['lang']] . ' ' . explode(' ',  $_POST['firstname'])[0] . '! ' . Languages::email('your_results_are_ready')[$_POST['lang']];
+									$mail->Subject = '¡' . Languages::email('hi')[$global['custody_chain']['lang']] . ' ' . explode(' ',  $_POST['firstname'])[0] . '! ' . Languages::email('your_results_are_ready')[$global['custody_chain']['lang']];
 									$mail->Body =
 									'<html>
 										<head>
@@ -558,10 +558,10 @@ class Laboratory_controller extends Controller
 											</table>
 											<table style="width:100%;max-width:600px;margin:20px 0px;padding:0px;border:1px dashed #bdbdbd;box-sizing:border-box;background-color:#fff;">
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:18px;font-weight:600;text-align:center;text-transform:uppercase;color:#000;">¡' . Languages::email('ready_results')[$_POST['lang']] . '!</td>
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:18px;font-weight:600;text-align:center;text-transform:uppercase;color:#000;">¡' . Languages::email('ready_results')[$global['custody_chain']['lang']] . '!</td>
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#757575;">¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' <strong>' . explode(' ', $_POST['firstname'])[0] . '</strong>! ' . Languages::email('get_covid_results_1')[$_POST['lang']] . ' <strong>' . Dates::format_date($global['custody_chain']['date'], 'short') . '</strong> ' . Languages::email('get_covid_results_2')[$_POST['lang']] . '</td>
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:center;color:#757575;">¡' . Languages::email('hi')[Session::get_value('vkye_lang')] . ' <strong>' . explode(' ', $_POST['firstname'])[0] . '</strong>! ' . Languages::email('get_covid_results_1')[$global['custody_chain']['lang']] . ' <strong>' . Dates::format_date($global['custody_chain']['date'], 'short') . '</strong> ' . Languages::email('get_covid_results_2')[$global['custody_chain']['lang']] . '</td>
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;">
@@ -570,7 +570,7 @@ class Laboratory_controller extends Controller
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 													<td style="width:100%;margin:0px;padding:20px;border:0px;box-sizing:border-box;">
-														<a style="width:100%;display:block;margin:0px;padding:10px;border:0px;border-radius:5px;box-sizing:border-box;background-color:#009688;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#fff;" href="https://' . Configuration::$domain . '/' . $global['custody_chain']['laboratory_path'] . '/results/' . $global['custody_chain']['token'] . '">' . Languages::email('view_online_results')[$_POST['lang']] . '</a>
+														<a style="width:100%;display:block;margin:0px;padding:10px;border:0px;border-radius:5px;box-sizing:border-box;background-color:#009688;font-size:14px;font-weight:400;text-align:center;text-decoration:none;color:#fff;" href="https://' . Configuration::$domain . '/' . $global['custody_chain']['laboratory_path'] . '/results/' . $global['custody_chain']['token'] . '">' . Languages::email('view_online_results')[$global['custody_chain']['lang']] . '</a>
 													</td>
 												</tr>
 											</table>
@@ -587,13 +587,13 @@ class Laboratory_controller extends Controller
 											</table>
 											<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $global['custody_chain']['laboratory_colors']['first'] . ';">
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">' . Languages::email('power_by')[$_POST['lang']] . ' <a style="font-weight:600;text-decoration:none;color:#fff;" href="https://id.one-consultores.com">' . Configuration::$web_page . ' ' . Configuration::$web_version . '</a></td>
+													<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">' . Languages::email('power_by')[$global['custody_chain']['lang']] . ' <a style="font-weight:600;text-decoration:none;color:#fff;" href="https://id.one-consultores.com">' . Configuration::$web_page . ' ' . Configuration::$web_version . '</a></td>
 												</tr
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 													<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Copyright (C) <a style="text-decoration:none;color:#fff;" href="https://one-consultores.com">One Consultores</a></td>
 												</tr>
 												<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-													<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Software ' . Languages::email('development_by')[$_POST['lang']] . ' <a style="text-decoration:none;color:#fff;" href="https://codemonkey.com.mx">Code Monkey</a></td>
+													<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Software ' . Languages::email('development_by')[$global['custody_chain']['lang']] . ' <a style="text-decoration:none;color:#fff;" href="https://codemonkey.com.mx">Code Monkey</a></td>
 												</tr>
 											</table>
 										</body>
@@ -610,7 +610,7 @@ class Laboratory_controller extends Controller
 									$sms->message()->send([
 										'to' => $_POST['phone_country'] . $_POST['phone_number'],
 										'from' => $global['custody_chain']['laboratory_name'],
-										'text' => '¡' . Languages::email('hi')[$_POST['lang']] . ' ' . explode(' ',  $_POST['firstname'])[0] . '! ' . Languages::email('your_results_are_ready')[$_POST['lang']] . '. ' . Languages::email('we_send_email_1')[$_POST['lang']] . ' ' . $_POST['email'] . ' ' . Languages::email('we_send_email_3')[$_POST['lang']] . ': https://' . Configuration::$domain . '/' . $global['custody_chain']['laboratory_path'] . '/results/' . $global['custody_chain']['token'] . '. ' . Languages::email('power_by')[$_POST['lang']] . ' ' . Configuration::$web_page . ' ' . Configuration::$web_version . '.'
+										'text' => '¡' . Languages::email('hi')[$global['custody_chain']['lang']] . ' ' . explode(' ',  $_POST['firstname'])[0] . '! ' . Languages::email('your_results_are_ready')[$global['custody_chain']['lang']] . '. ' . Languages::email('we_send_email_1')[$global['custody_chain']['lang']] . ' ' . $_POST['email'] . ' ' . Languages::email('we_send_email_3')[$global['custody_chain']['lang']] . ': https://' . Configuration::$domain . '/' . $global['custody_chain']['laboratory_path'] . '/results/' . $global['custody_chain']['token'] . '. ' . Languages::email('power_by')[$global['custody_chain']['lang']] . ' ' . Configuration::$web_page . ' ' . Configuration::$web_version . '.'
 									]);
 								}
 								catch (Exception $e) {}
@@ -826,6 +826,9 @@ class Laboratory_controller extends Controller
 
 							if (Validations::empty($_POST['phone_number']) == false)
 								array_push($errors, ['phone_number','{$lang.dont_leave_this_field_empty}']);
+
+							if (Validations::empty($_POST['lang']) == false)
+								array_push($errors, ['lang','{$lang.dont_leave_this_field_empty}']);
 
 							if (empty($errors))
 							{

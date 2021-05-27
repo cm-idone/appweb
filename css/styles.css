@@ -664,31 +664,29 @@ main.laboratory > form[name="create_record"] > div[data-step] > div.accept_terms
     color: #fff;
 }
 
-main.laboratory > form[name="create_record"] > div[data-step="7"] label {
+main.laboratory > form[name="create_record"] > div[data-step="8"] label {
     width: 100%;
     display: block;
-    border-radius: 5px;
     padding: 5px;
     box-sizing: border-box;
-    background-color: #eee;
 }
 
-main.laboratory > form[name="create_record"] > div[data-step="7"] label > span {
+main.laboratory > form[name="create_record"] > div[data-step="8"] label > span {
     width: calc(100% - 30px);
     display: inline-block;
     position: relative;
 }
 
-main.laboratory > form[name="create_record"] > div[data-step="7"] label > span > strong {
+main.laboratory > form[name="create_record"] > div[data-step="8"] label > span > strong {
     position: absolute;
     right: 0px;
 }
 
-main.laboratory > form[name="create_record"] > div[data-step="7"] > p {
+main.laboratory > form[name="create_record"] > div[data-step="8"] > p {
     margin-bottom: 0px;
 }
 
-main.laboratory > form[name="create_record"] > div[data-step="7"] div.checkbox > span {
+main.laboratory > form[name="create_record"] > div[data-step="8"] div.checkbox > span {
     padding-left: 10px;
     box-sizing: border-box;
     font-size: 10px;
