@@ -581,6 +581,10 @@ class Languages
             'tests' => [
                 'es' => 'Pruebas',
                 'en' => 'Tests'
+            ],
+            'totals' => [
+                'es' => 'Totales',
+                'en' => 'Totals'
             ]
         ];
 

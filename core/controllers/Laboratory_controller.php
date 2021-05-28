@@ -276,8 +276,11 @@ class Laboratory_controller extends Controller
 						set_time_limit(100000000);
 
 						$_POST['pdf'] = $query['laboratory']['path'] . '_day_report_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
-
 						$query['report'] = [];
+						$count_a_pcr = 0;
+						$count_a_an = 0;
+						$count_a_ac = 0;
+						$count_a_total = 0;
 
 						foreach ($query['custody_chains'] as $value)
 						{
@@ -323,6 +326,15 @@ class Laboratory_controller extends Controller
 
 						foreach ($query['report'] as $key => $value)
 						{
+							$count_b_pcr = !empty($value['covid_pcr']) ? count($value['covid_pcr']) : 0;
+							$count_b_an = !empty($value['covid_an']) ? count($value['covid_an']) : 0;
+							$count_b_ac = !empty($value['covid_ac']) ? count($value['covid_ac']) : 0;
+							$count_b_total = $count_b_pcr + $count_b_an + $count_b_ac;
+							$count_a_pcr = $count_a_pcr + $count_b_pcr;
+							$count_a_an = $count_a_an + $count_b_an;
+							$count_a_ac = $count_a_ac + $count_b_ac;
+							$count_a_total = $count_a_total + $count_b_total;
+
 							$writing .=
 							'<table style="width:100%;margin:0px;padding:0px 40px 5px 40px;border:0px;box-sizing:border-box;background-color:#fff;">
 							    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
@@ -331,10 +343,10 @@ class Laboratory_controller extends Controller
 							</table>
 							<table style="width:100%;margin:0px;padding:0px 40px 20px 40px;border:0px;box-sizing:border-box;background-color:#fff;">
 								<tr style="width:100%;margin:0px;padding:0px;border:0px;">
-									<td style="width:25%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:left;color:' . $query['laboratory']['colors']['first'] . ';">' . Languages::email('total')[Session::get_value('vkye_lang')] . ': <span style="color:' . $query['laboratory']['colors']['second'] . ';">' . (!empty($query['report'][$key]['covid_pcr']) ? count($query['report'][$key]['covid_pcr']) : '0') . ' ' . Languages::email('tests')[Session::get_value('vkye_lang')] . '</span></td>
-									<td style="width:25%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:left;color:' . $query['laboratory']['colors']['first'] . ';">' . Languages::email('pcr')[Session::get_value('vkye_lang')] . ': <span style="color:' . $query['laboratory']['colors']['second'] . ';">' . (!empty($query['report'][$key]['covid_pcr']) ? count($query['report'][$key]['covid_pcr']) : '0') . ' ' . Languages::email('tests')[Session::get_value('vkye_lang')] . '</span></td>
-									<td style="width:25%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:left;color:' . $query['laboratory']['colors']['first'] . ';">' . Languages::email('antigen')[Session::get_value('vkye_lang')] . ': <span style="color:' . $query['laboratory']['colors']['second'] . ';">' . (!empty($query['report'][$key]['covid_an']) ? count($query['report'][$key]['covid_an']) : '0') . ' ' . Languages::email('tests')[Session::get_value('vkye_lang')] . '</span></td>
-									<td style="width:25%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:left;color:' . $query['laboratory']['colors']['first'] . ';">' . Languages::email('anticorps')[Session::get_value('vkye_lang')] . ': <span style="color:' . $query['laboratory']['colors']['second'] . ';">' . (!empty($query['report'][$key]['covid_ac']) ? count($query['report'][$key]['covid_ac']) : '0') . ' ' . Languages::email('tests')[Session::get_value('vkye_lang')] . '</span></td>
+									<td style="width:25%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:left;color:' . $query['laboratory']['colors']['first'] . ';">' . Languages::email('total')[Session::get_value('vkye_lang')] . ': <span style="color:' . $query['laboratory']['colors']['second'] . ';">' . $count_b_total . ' ' . Languages::email('tests')[Session::get_value('vkye_lang')] . '</span></td>
+									<td style="width:25%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:left;color:' . $query['laboratory']['colors']['first'] . ';">' . Languages::email('pcr')[Session::get_value('vkye_lang')] . ': <span style="color:' . $query['laboratory']['colors']['second'] . ';">' . $count_b_pcr . ' ' . Languages::email('tests')[Session::get_value('vkye_lang')] . '</span></td>
+									<td style="width:25%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:left;color:' . $query['laboratory']['colors']['first'] . ';">' . Languages::email('antigen')[Session::get_value('vkye_lang')] . ': <span style="color:' . $query['laboratory']['colors']['second'] . ';">' . $count_b_an . ' ' . Languages::email('tests')[Session::get_value('vkye_lang')] . '</span></td>
+									<td style="width:25%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:left;color:' . $query['laboratory']['colors']['first'] . ';">' . Languages::email('anticorps')[Session::get_value('vkye_lang')] . ': <span style="color:' . $query['laboratory']['colors']['second'] . ';">' . $count_b_ac . ' ' . Languages::email('tests')[Session::get_value('vkye_lang')] . '</span></td>
 								</tr>
 							</table>';
 
@@ -400,7 +412,20 @@ class Laboratory_controller extends Controller
 						}
 
 						$writing .=
-						'<table style="width:100%;margin:0px;padding:0px 40px 20px 40px;border:0px;box-sizing:border-box;background-color:#fff;">
+						'<table style="width:100%;margin:0px;padding:0px 40px 5px 40px;border:0px;box-sizing:border-box;background-color:#fff;">
+							<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+								<td style="width:100%;margin:0px;padding:0px 0px 0px 10px;border:0px;border-left:5px;border-color:' . $query['laboratory']['colors']['first'] . ';box-sizing:border-box;font-size:18px;font-weight:600;text-transform:uppercase;text-align:left;color:' . $query['laboratory']['colors']['second'] . ';">' . Languages::email('totals')[Session::get_value('vkye_lang')] . '</td>
+							</tr>
+						</table>
+						<table style="width:100%;margin:0px;padding:0px 40px 20px 40px;border:0px;box-sizing:border-box;background-color:#fff;">
+							<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+								<td style="width:25%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:left;color:' . $query['laboratory']['colors']['first'] . ';">' . Languages::email('total')[Session::get_value('vkye_lang')] . ': <span style="color:' . $query['laboratory']['colors']['second'] . ';">' . $count_a_total . ' ' . Languages::email('tests')[Session::get_value('vkye_lang')] . '</span></td>
+								<td style="width:25%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:left;color:' . $query['laboratory']['colors']['first'] . ';">' . Languages::email('pcr')[Session::get_value('vkye_lang')] . ': <span style="color:' . $query['laboratory']['colors']['second'] . ';">' . $count_a_pcr . ' ' . Languages::email('tests')[Session::get_value('vkye_lang')] . '</span></td>
+								<td style="width:25%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:left;color:' . $query['laboratory']['colors']['first'] . ';">' . Languages::email('antigen')[Session::get_value('vkye_lang')] . ': <span style="color:' . $query['laboratory']['colors']['second'] . ';">' . $count_a_an . ' ' . Languages::email('tests')[Session::get_value('vkye_lang')] . '</span></td>
+								<td style="width:25%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:left;color:' . $query['laboratory']['colors']['first'] . ';">' . Languages::email('anticorps')[Session::get_value('vkye_lang')] . ': <span style="color:' . $query['laboratory']['colors']['second'] . ';">' . $count_a_ac . ' ' . Languages::email('tests')[Session::get_value('vkye_lang')] . '</span></td>
+							</tr>
+						</table>
+						<table style="width:100%;margin:0px;padding:0px 40px 20px 40px;border:0px;box-sizing:border-box;background-color:#fff;">
 							<tr style="width:100%;margin:0px;padding:0px;border:0px;">
 						        <td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:center;color:' . $query['laboratory']['colors']['second'] . ';">' . $query['laboratory']['phone'] . ' | ' . $query['laboratory']['email'] . ' | ' . $query['laboratory']['website'] . '</td>
 						    </tr>
