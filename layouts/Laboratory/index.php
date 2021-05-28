@@ -54,6 +54,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
                         <td class="smalltag"><span><?php echo $value['laboratory_name']; ?></span></td>
                         <td class="smalltag"><span><?php echo $value['taker_name']; ?></span></td>
                         <td class="smalltag"><span><?php echo $value['collector_name']; ?></span></td>
+                        <td class="smalltag"><?php echo (!empty($value['user']) ? '<span>' . $value['user_firstname'] . ' ' . $value['user_lastname'] . '</span>' : '') ?></td>
                         <td class="button">
                             <?php if (!empty($value['pdf'])) : ?>
                                 <a href="{$path.uploads}<?php echo $value['pdf']; ?>" download="<?php echo $value['pdf']; ?>"><i class="fas fa-file-pdf"></i><span>{$lang.download_pdf}</span></a>

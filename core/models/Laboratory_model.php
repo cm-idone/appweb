@@ -192,6 +192,9 @@ class Laboratory_model extends Model
 			],
 			'[>]system_chemicals' => [
 				'chemical' => 'id'
+			],
+			'[>]users' => [
+				'user' => 'id'
 			]
 		], [
 			'custody_chains.id',
@@ -228,6 +231,9 @@ class Laboratory_model extends Model
 			'custody_chains.qr',
 			'custody_chains.pdf',
 			'custody_chains.lang',
+			'custody_chains.user',
+			'users.firstname(user_firstname)',
+			'users.lastname(user_lastname)',
 			'custody_chains.sent',
 			'custody_chains.deleted'
 		], [
