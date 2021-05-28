@@ -10,8 +10,10 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
 <header class="modbar">
     <span class="title"><strong><?php echo count($global['custody_chains']) . ' {$lang.records}'; ?></strong></span>
     <div class="buttons">
-        <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
-            <a data-action="send_custody_chains" class="btn auto"><i class="fas fa-envelope"></i>{$lang.send_results}</a>
+        <?php if (Session::get_value('vkye_user')['id'] == 1) : ?>
+            <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
+                <a data-action="send_custody_chains" class="btn auto"><i class="fas fa-envelope"></i>{$lang.send_results}</a>
+            <?php endif; ?>
         <?php endif; ?>
         <a data-action="filter_custody_chains" class="btn auto success"><i class="fas fa-filter"></i>{$lang.filter}</a>
         <fieldset class="fields-group big">
