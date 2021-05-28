@@ -114,11 +114,11 @@ class Laboratory_model extends Model
         return $query;
     }
 
-	public function read_custody_chains($data, $group = false)
+	public function read_custody_chains($data, $group = 'list')
 	{
 		$AND = [];
 
-		if ($group == false)
+		if ($group == 'list')
 		{
 			if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up' AND System::temporal('get', 'laboratory', 'filter')['laboratory'] == 'all')
 				$AND['custody_chains.laboratory[>=]'] = 1;
@@ -159,21 +159,32 @@ class Laboratory_model extends Model
 					$AND['custody_chains.sent'] = true;
 			}
 		}
-		else
+		else if ($group == 'sender' OR $group == 'report')
 		{
 			if ($data['laboratory'] == 'all')
 				$AND['custody_chains.laboratory[>=]'] = 1;
 			else if ($data['laboratory'] != 'all')
 				$AND['custody_chains.laboratory'] = $data['laboratory'];
 
-			if ($data['taker'] != 'all')
+			if ($data['taker'] == 'all')
+				$AND['custody_chains.taker[>=]'] = 1;
+			else if ($data['taker'] != 'all')
 				$AND['custody_chains.taker'] = $data['taker'];
 
-			$AND['custody_chains.type'] = $data['type'];
+			if ($data['type'] == 'all')
+				$AND['custody_chains.type'] = ['covid_pcr','covid_an','covid_ac'];
+			else if ($data['type'] != 'all')
+				$AND['custody_chains.type'] = $data['type'];
+
 			$AND['custody_chains.date[<>]'] = [$data['start_date'],$data['end_date']];
 			$AND['custody_chains.hour[<>]'] = [$data['start_hour'],$data['end_hour']];
-			$AND['custody_chains.sent'] = false;
-			$AND['custody_chains.closed'] = false;
+
+			if ($group == 'sender')
+			{
+				$AND['custody_chains.sent'] = false;
+				$AND['custody_chains.closed'] = false;
+			}
+
 			$AND['custody_chains.deleted'] = false;
 		}
 
@@ -244,7 +255,7 @@ class Laboratory_model extends Model
 			]
 		]));
 
-		if ($group == false)
+		if ($group == 'list')
 		{
 			foreach ($query as $key => $value)
 			{
@@ -274,6 +285,13 @@ class Laboratory_model extends Model
 						$query[$key]['status'] = 'positive';
 				}
 			}
+		}
+		else if ($group == 'report' AND !empty($query))
+		{
+			$query = [
+				'custody_chains' => $query,
+				'laboratory' => $this->read_laboratory($data['laboratory'], true)
+			];
 		}
 
 		return $query;
@@ -348,8 +366,6 @@ class Laboratory_model extends Model
 
 	public function update_custody_chain($data, $group = false)
     {
-		set_time_limit(100000000);
-
 		if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up')
 		{
 			$data['qr']['content'] = 'https://' . Configuration::$domain . '/' . $data['custody_chain']['laboratory_path'] . '/results/' . $data['custody_chain']['token'];
@@ -807,8 +823,15 @@ class Laboratory_model extends Model
 		return $query;
 	}
 
-	public function read_laboratory($path)
+	public function read_laboratory($path, $id = false)
 	{
+		$where = [];
+
+		if ($id == true)
+			$where['id'] = $path;
+		else if ($id == false)
+			$where['path'] = $path;
+
 		$query = System::decode_json_to_array($this->database->select('system_laboratories', [
 			'id',
 			'avatar',
@@ -824,9 +847,7 @@ class Laboratory_model extends Model
             'time_zone',
             'colors',
             'blocked'
-        ], [
-			'path' => $path
-		]));
+        ], $where));
 
 		return !empty($query) ? $query[0] : null;
 	}

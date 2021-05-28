@@ -13,6 +13,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
         <?php if (Session::get_value('vkye_user')['id'] == 1) : ?>
             <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
                 <a data-action="send_custody_chains" class="btn auto"><i class="fas fa-envelope"></i>{$lang.send_results}</a>
+                <a data-action="report_custody_chains" class="btn auto"><i class="fas fa-envelope"></i>{$lang.send_report}</a>
             <?php endif; ?>
         <?php endif; ?>
         <a data-action="filter_custody_chains" class="btn auto success"><i class="fas fa-filter"></i>{$lang.filter}</a>
@@ -40,7 +41,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
                     <?php endif; ?>
                     <td>
                         <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
-                            <?php echo '(' . $value['id'] . ') ' . $value['contact']['firstname'] . ' ' . $value['contact']['lastname']; ?>
+                            <?php echo $value['contact']['firstname'] . ' ' . $value['contact']['lastname']; ?>
                         <?php else: ?>
                             <?php echo $value['employee_firstname'] . ' ' . $value['employee_lastname']; ?>
                         <?php endif; ?>
@@ -439,6 +440,111 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
                                     <h6>{$lang.chemical}</h6>
                                 </div>
                             </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="fields-group">
+                        <div class="button">
+                            <a class="alert" button-close><i class="fas fa-times"></i></a>
+                            <button type="submit" class="success"><i class="fas fa-check"></i></button>
+                        </div>
+                    </fieldset>
+                </form>
+            </main>
+        </div>
+    </section>
+    <section class="modal" data-modal="report_custody_chains">
+        <div class="content">
+            <main>
+                <form>
+                    <fieldset class="fields-group">
+                        <div class="row">
+                            <div class="span4">
+                                <div class="text">
+                                    <select name="laboratory">
+                                        <option value="" class="hidden">{$lang.choose_an_option}</option>
+                                        <?php foreach ($global['laboratories'] as $value) : ?>
+                                            <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.laboratory}</h6>
+                                </div>
+                            </div>
+                            <div class="span4">
+                                <div class="text">
+                                    <select name="taker">
+                                        <option value="all">{$lang.all}</option>
+                                        <?php foreach ($global['takers'] as $value) : ?>
+                                            <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.taker}</h6>
+                                </div>
+                            </div>
+                            <div class="span4">
+                                <div class="text">
+                                    <select name="type">
+                                        <option value="all">{$lang.all}</option>
+                                        <option value="covid_pcr">{$lang.covid_pcr}</option>
+                                        <option value="covid_an">{$lang.covid_an}</option>
+                                        <option value="covid_ac">{$lang.covid_ac}</option>
+                                    </select>
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.type}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="fields-group">
+                        <div class="row">
+                            <div class="span6">
+                                <div class="text">
+                                    <input type="date" name="start_date" value="<?php echo Dates::current_date(); ?>">
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.start_date}</h6>
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="text">
+                                    <input type="time" name="start_hour" value="00:00:01">
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.start_hour}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="fields-group">
+                        <div class="row">
+                            <div class="span6">
+                                <div class="text">
+                                    <input type="date" name="end_date" value="<?php echo Dates::current_date(); ?>">
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.end_date}</h6>
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="text">
+                                    <input type="time" name="end_hour" value="23:59:59">
+                                </div>
+                                <div class="title">
+                                    <h6>{$lang.end_hour}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="fields-group">
+                        <div class="text">
+                            <input type="text" name="emails">
+                        </div>
+                        <div class="title">
+                            <h6>{$lang.emails}</h6>
                         </div>
                     </fieldset>
                     <fieldset class="fields-group">

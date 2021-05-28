@@ -3,6 +3,8 @@
 defined('_EXEC') or die;
 
 require_once 'plugins/nexmo/vendor/autoload.php';
+require 'vendor/autoload.php';
+use Spipu\Html2Pdf\Html2Pdf;
 
 class Laboratory_controller extends Controller
 {
@@ -98,12 +100,14 @@ class Laboratory_controller extends Controller
 
 				if (empty($errors))
 				{
-					$query1 = $this->model->read_custody_chains($_POST, true);
+					$query1 = $this->model->read_custody_chains($_POST, 'sender');
 
 					if (!empty($query1))
 					{
 						foreach ($query1 as $value)
 						{
+							set_time_limit(100000000);
+
 							$_POST['qr']['filename'] = $value['laboratory_path'] . '_' . $value['type'] . '_qr_results_' . $value['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.png';
 							$_POST['pdf']['filename'] = $value['laboratory_path'] . '_' . $value['type'] . '_pdf_results_' . $value['token'] . '_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
 							$_POST['custody_chain'] = $value;
@@ -112,8 +116,6 @@ class Laboratory_controller extends Controller
 
 							if (!empty($query2))
 							{
-								set_time_limit(100000000);
-
 								$mail = new Mailer(true);
 
 								try
@@ -214,6 +216,294 @@ class Laboratory_controller extends Controller
 								catch (Exception $e) {}
 							}
 						}
+
+						echo json_encode([
+							'status' => 'success',
+							'message' => '{$lang.operation_success}'
+						]);
+					}
+					else
+					{
+						echo json_encode([
+							'status' => 'error',
+							'message' => '{$lang.not_found_custody_chains}'
+						]);
+					}
+				}
+				else
+				{
+					echo json_encode([
+						'status' => 'error',
+						'errors' => $errors
+					]);
+				}
+			}
+
+			if ($_POST['action'] == 'report_custody_chains')
+			{
+				$errors = [];
+
+				if (Validations::empty($_POST['laboratory']) == false)
+					array_push($errors, ['laboratory','{$lang.dont_leave_this_field_empty}']);
+
+				if (Validations::empty($_POST['taker']) == false)
+					array_push($errors, ['taker','{$lang.dont_leave_this_field_empty}']);
+
+				if (Validations::empty($_POST['type']) == false)
+					array_push($errors, ['type','{$lang.dont_leave_this_field_empty}']);
+
+				if (Validations::empty($_POST['start_date']) == false)
+					array_push($errors, ['start_date','{$lang.dont_leave_this_field_empty}']);
+
+				if (Validations::empty($_POST['start_hour']) == false)
+					array_push($errors, ['start_hour','{$lang.dont_leave_this_field_empty}']);
+
+				if (Validations::empty($_POST['end_date']) == false)
+					array_push($errors, ['end_date','{$lang.dont_leave_this_field_empty}']);
+
+				if (Validations::empty($_POST['end_hour']) == false)
+					array_push($errors, ['end_hour','{$lang.dont_leave_this_field_empty}']);
+
+				if (Validations::empty($_POST['emails']) == false)
+					array_push($errors, ['emails','{$lang.dont_leave_this_field_empty}']);
+
+				if (empty($errors))
+				{
+					$query = $this->model->read_custody_chains($_POST, 'report');
+
+					if (!empty($query))
+					{
+						set_time_limit(100000000);
+
+						$_POST['pdf'] = $query['laboratory']['path'] . '_day_report_' . Dates::current_date('Y_m_d') . '_' . Dates::current_hour('H_i_s') . '.pdf';
+
+						$query['report'] = [];
+
+						foreach ($query['custody_chains'] as $value)
+						{
+							if (array_key_exists($value['collector_name'], $query['report']))
+							{
+								if (array_key_exists($value['type'], $query['report'][$value['collector_name']]))
+									array_push($query['report'][$value['collector_name']][$value['type']], $value);
+								else
+									$query['report'][$value['collector_name']][$value['type']][0] = $value;
+							}
+							else
+								$query['report'][$value['collector_name']][$value['type']][0] = $value;
+						}
+
+						$html2pdf = new Html2Pdf('P', 'A4', 'es', true, 'UTF-8', [0,0,0,0]);
+						$writing =
+						'<table style="width:100%;margin:0px;padding:20px 40px;border:0px;border-top:20px;border-color:' . $query['laboratory']['colors']['second'] . ';box-sizing:border-box;background-color:#fff;">
+						    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
+						        <td style="width:20%;margin:0px;padding:0px;border:0px;vertical-align:middle;">
+						            <img style="width:100%;" src="' . PATH_UPLOADS . $query['laboratory']['avatar'] . '">
+						        </td>
+						        <td style="width:80%;margin:0px;padding:0px;border:0px;vertical-align:middle;">
+						            <table style="width:100%;margin:0px;padding:0px;border:0px;">
+						                <tr style="width:100%;margin:0px;padding:0px;border:0px;">
+						                    <td style="width:100%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:24px;font-weight:600;text-transform:uppercase;text-align:right;color:' . $query['laboratory']['colors']['first'] . ';">' . Languages::email('day_report')[Session::get_value('vkye_lang')] . ': ' . (($_POST['start_date'] == $_POST['end_date']) ? $_POST['start_date'] : $_POST['start_date'] . ' ' . Languages::email('to')[Session::get_value('vkye_lang')] . ' ' . $_POST['start_date']) . '</td>
+						                </tr>
+						                <tr style="width:100%;margin:0px;padding:0px;border:0px;">
+						                    <td style="width:100%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:18px;font-weight:400;text-transform:uppercase;text-align:right;color:' . $query['laboratory']['colors']['second'] . ';">' .  Languages::email('laboratory_analisys')[Session::get_value('vkye_lang')] . ' <span style="font-weight:600;">' . $query['laboratory']['name'] . '</span></td>
+						                </tr>
+						                <tr style="width:100%;margin:0px;padding:0px;border:0px;">
+						                    <td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:right;color:' . $query['laboratory']['colors']['second'] . ';">' . $query['laboratory']['address']['first'] . '</td>
+						                </tr>
+						                <tr style="width:100%;margin:0px;padding:0px;border:0px;">
+						                    <td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:right;color:' . $query['laboratory']['colors']['second'] . ';">' . $query['laboratory']['address']['second'] . '</td>
+						                </tr>
+						                <tr style="width:100%;margin:0px;padding:0px;border:0px;">
+						                    <td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:right;color:' . $query['laboratory']['colors']['second'] . ';">' . $query['laboratory']['rfc'] . ' | ' . $query['laboratory']['sanitary_opinion'] . '</td>
+						                </tr>
+						            </table>
+						        </td>
+						    </tr>
+						</table>';
+
+						foreach ($query['report'] as $key => $value)
+						{
+							$writing .=
+							'<table style="width:100%;margin:0px;padding:0px 40px 5px 40px;border:0px;box-sizing:border-box;background-color:#fff;">
+							    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
+							        <td style="width:100%;margin:0px;padding:0px 0px 0px 10px;border:0px;border-left:5px;border-color:' . $query['laboratory']['colors']['second'] . ';box-sizing:border-box;font-size:18px;font-weight:600;text-transform:uppercase;text-align:left;color:' . $query['laboratory']['colors']['first'] . ';">' . $key . '</td>
+							    </tr>
+							</table>
+							<table style="width:100%;margin:0px;padding:0px 40px 20px 40px;border:0px;box-sizing:border-box;background-color:#fff;">
+								<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+									<td style="width:25%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:left;color:' . $query['laboratory']['colors']['first'] . ';">' . Languages::email('total')[Session::get_value('vkye_lang')] . ': <span style="color:' . $query['laboratory']['colors']['second'] . ';">' . (!empty($query['report'][$key]['covid_pcr']) ? count($query['report'][$key]['covid_pcr']) : '0') . ' ' . Languages::email('tests')[Session::get_value('vkye_lang')] . '</span></td>
+									<td style="width:25%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:left;color:' . $query['laboratory']['colors']['first'] . ';">' . Languages::email('pcr')[Session::get_value('vkye_lang')] . ': <span style="color:' . $query['laboratory']['colors']['second'] . ';">' . (!empty($query['report'][$key]['covid_pcr']) ? count($query['report'][$key]['covid_pcr']) : '0') . ' ' . Languages::email('tests')[Session::get_value('vkye_lang')] . '</span></td>
+									<td style="width:25%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:left;color:' . $query['laboratory']['colors']['first'] . ';">' . Languages::email('antigen')[Session::get_value('vkye_lang')] . ': <span style="color:' . $query['laboratory']['colors']['second'] . ';">' . (!empty($query['report'][$key]['covid_an']) ? count($query['report'][$key]['covid_an']) : '0') . ' ' . Languages::email('tests')[Session::get_value('vkye_lang')] . '</span></td>
+									<td style="width:25%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:14px;font-weight:400;text-align:left;color:' . $query['laboratory']['colors']['first'] . ';">' . Languages::email('anticorps')[Session::get_value('vkye_lang')] . ': <span style="color:' . $query['laboratory']['colors']['second'] . ';">' . (!empty($query['report'][$key]['covid_ac']) ? count($query['report'][$key]['covid_ac']) : '0') . ' ' . Languages::email('tests')[Session::get_value('vkye_lang')] . '</span></td>
+								</tr>
+							</table>';
+
+							if (!empty($value['covid_pcr']))
+							{
+								$writing .= '<table style="width:100%;margin:0px;padding:0px 40px 20px 40px;border:0px;box-sizing:border-box;background-color:#fff;">';
+
+								foreach ($value['covid_pcr'] as $subkey => $subvalue)
+								{
+									$writing .=
+									'<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+										<td style="width:15%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:left;color:#757575;">' . $subvalue['token'] . '</td>
+										<td style="width:5%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:left;color:#757575;">' . Languages::email($subvalue['type'])[Session::get_value('vkye_lang')] . '</td>
+										<td style="width:40%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:left;color:#757575;">' . $subvalue['contact']['firstname'] . ' ' . $subvalue['contact']['lastname'] . '</td>
+										<td style="width:10%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:right;color:#757575;">' . $subvalue['date'] . '</td>
+										<td style="width:10%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:right;color:#757575;">' . $subvalue['hour'] . '</td>
+										<td style="width:20%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:right;color:#757575;">' . $subvalue['taker_name'] . '</td>
+									</tr>';
+								}
+
+								$writing .= '</table>';
+							}
+
+							if (!empty($value['covid_an']))
+							{
+								$writing .= '<table style="width:100%;margin:0px;padding:0px 40px 20px 40px;border:0px;box-sizing:border-box;background-color:#fff;">';
+
+								foreach ($value['covid_an'] as $subkey => $subvalue)
+								{
+									$writing .=
+									'<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+										<td style="width:15%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:left;color:#757575;">' . $subvalue['token'] . '</td>
+										<td style="width:5%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:left;color:#757575;">' . Languages::email($subvalue['type'])[Session::get_value('vkye_lang')] . '</td>
+										<td style="width:40%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:left;color:#757575;">' . $subvalue['contact']['firstname'] . ' ' . $subvalue['contact']['lastname'] . '</td>
+										<td style="width:10%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:right;color:#757575;">' . $subvalue['date'] . '</td>
+										<td style="width:10%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:right;color:#757575;">' . $subvalue['hour'] . '</td>
+										<td style="width:20%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:right;color:#757575;">' . $subvalue['taker_name'] . '</td>
+									</tr>';
+								}
+
+								$writing .= '</table>';
+							}
+
+							if (!empty($value['covid_ac']))
+							{
+								$writing .= '<table style="width:100%;margin:0px;padding:0px 40px 20px 40px;border:0px;box-sizing:border-box;background-color:#fff;">';
+
+								foreach ($value['covid_ac'] as $subkey => $subvalue)
+								{
+									$writing .=
+									'<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+										<td style="width:15%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:left;color:#757575;">' . $subvalue['token'] . '</td>
+										<td style="width:5%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:left;color:#757575;">' . Languages::email($subvalue['type'])[Session::get_value('vkye_lang')] . '</td>
+										<td style="width:40%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:left;color:#757575;">' . $subvalue['contact']['firstname'] . ' ' . $subvalue['contact']['lastname'] . '</td>
+										<td style="width:10%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:right;color:#757575;">' . $subvalue['date'] . '</td>
+										<td style="width:10%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:right;color:#757575;">' . $subvalue['hour'] . '</td>
+										<td style="width:20%;margin:0px;padding:0px 0px 5px 0px;border:0px;box-sizing:border-box;font-size:10px;font-weight:400;text-align:right;color:#757575;">' . $subvalue['taker_name'] . '</td>
+									</tr>';
+								}
+
+								$writing .= '</table>';
+							}
+						}
+
+						$writing .=
+						'<table style="width:100%;margin:0px;padding:0px 40px 20px 40px;border:0px;box-sizing:border-box;background-color:#fff;">
+							<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+						        <td style="width:100%;margin:0px;padding:0px;border:0px;font-size:14px;font-weight:400;text-align:center;color:' . $query['laboratory']['colors']['second'] . ';">' . $query['laboratory']['phone'] . ' | ' . $query['laboratory']['email'] . ' | ' . $query['laboratory']['website'] . '</td>
+						    </tr>
+						</table>
+						<table style="width:100%;margin:0px;padding:0px 40px;border:0px;box-sizing:border-box;background-color:#fff;">
+						    <tr style="width:100%;margin:0px;padding:0px;border:0px;">
+						        <td style="width:20%;margin:0px;padding:0px;border:0px;vertical-align:middle;text-align:center;">
+						            <img style="width:auto;height:40px;" src="' . PATH_IMAGES . '/secretaria_salud.png">
+						        </td>
+						        <td style="width:20%;margin:0px;padding:0px;border:0px;vertical-align:middle;text-align:center;">
+						            <img style="width:auto;height:40px;" src="' . PATH_IMAGES . '/cofepris.png">
+						        </td>
+						        <td style="width:20%;margin:0px;padding:0px;border:0px;vertical-align:middle;text-align:center;">
+						            <img style="width:auto;height:40px;" src="' . PATH_IMAGES . '/qroo_1.png">
+						        </td>
+						        <td style="width:20%;margin:0px;padding:0px;border:0px;vertical-align:middle;text-align:center;">
+						            <img style="width:auto;height:40px;" src="' . PATH_IMAGES . '/qroo_2.png">
+						        </td>
+						        <td style="width:20%;margin:0px;padding:0px;border:0px;vertical-align:middle;text-align:center;">
+						            <img style="width:auto;height:40px;" src="' . PATH_IMAGES . '/qroo_sesa.png">
+						        </td>
+						    </tr>
+						</table>';
+						$html2pdf->writeHTML($writing);
+						$html2pdf->output(PATH_UPLOADS . $_POST['pdf'], 'F');
+
+						$mail = new Mailer(true);
+
+						try
+						{
+							$mail->setFrom($query['laboratory']['email'], $query['laboratory']['name']);
+
+							$_POST['emails'] = explode(',', $_POST['emails']);
+
+							foreach ($_POST['emails'] as $value)
+								$mail->addAddress($value, $query['laboratory']['name']);
+
+							$mail->addAttachment(PATH_UPLOADS . $_POST['pdf']);
+							$mail->Subject = Languages::email('day_report')[Session::get_value('vkye_lang')] . ': ' . (($_POST['start_date'] == $_POST['end_date']) ? $_POST['start_date'] : $_POST['start_date'] . ' ' . Languages::email('to')[Session::get_value('vkye_lang')] . ' ' . $_POST['start_date']);
+							$mail->Body =
+							'<html>
+								<head>
+									<title>' . $mail->Subject . '</title>
+								</head>
+								<body>
+									<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $query['laboratory']['colors']['first'] . ';">
+										<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+											<td style="width:100px;margin:0px;padding:20px 0px 20px 20px;border:0px;box-sizing:border-box;vertical-align:middle;">
+												<img style="width:100px" src="https://' . Configuration::$domain . '/uploads/' . $query['laboratory']['avatar'] . '">
+											</td>
+											<td style="width:auto;margin:0px;padding:20px;border:0px;box-sizing:border-box;vertical-align:middle;">
+												<table style="width:100%;margin:0px;padding:0px;border:0px;">
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:600;text-align:right;text-transform:uppercase;color:#fff;">' . $query['laboratory']['name'] . '</td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $query['laboratory']['rfc'] . '</td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $query['laboratory']['sanitary_opinion'] . '</td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $query['laboratory']['address']['first'] . '</td>
+													</tr>
+													<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+														<td style="width:100%;margin:0px;padding:0px;border:0px;font-size:12px;font-weight:400;text-align:right;color:#fff;">' . $query['laboratory']['address']['second']. '</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+									<table style="width:100%;max-width:600px;margin:20px 0px;padding:0px;border:1px dashed #bdbdbd;box-sizing:border-box;background-color:#fff;">
+										<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+											<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:18px;font-weight:600;text-align:center;text-transform:uppercase;color:#000;">' . Languages::email('day_report')[Session::get_value('vkye_lang')] . ': '. (($_POST['start_date'] == $_POST['end_date']) ? $_POST['start_date'] : $_POST['start_date'] . ' ' . Languages::email('to')[Session::get_value('vkye_lang')] . ' ' . $_POST['start_date']) . '</td>
+										</tr>
+									</table>
+									<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $query['laboratory']['colors']['second'] . ';">
+										<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+											<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="tel:' . $query['laboratory']['phone'] . '">' . $query['laboratory']['phone'] . '</a></td>
+										</tr>
+										<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+											<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="mailto:' . $query['laboratory']['email'] . '">' . $query['laboratory']['email'] . '</a></td>
+										</tr>
+										<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+											<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;"><a style="text-decoration:none;color:#fff;" href="https://' . $query['laboratory']['website'] . '">' . $query['laboratory']['website'] . '</a></td>
+										</tr>
+									</table>
+									<table style="width:100%;max-width:600px;margin:0px;padding:0px;border:0px;background-color:' . $query['laboratory']['colors']['first'] . ';">
+										<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+											<td style="width:100%;margin:0px;padding:20px 20px 0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">' . Languages::email('power_by')[Session::get_value('vkye_lang')] . ' <a style="font-weight:600;text-decoration:none;color:#fff;" href="https://id.one-consultores.com">' . Configuration::$web_page . ' ' . Configuration::$web_version . '</a></td>
+										</tr
+										<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+											<td style="width:100%;margin:0px;padding:0px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Copyright (C) <a style="text-decoration:none;color:#fff;" href="https://one-consultores.com">One Consultores</a></td>
+										</tr>
+										<tr style="width:100%;margin:0px;padding:0px;border:0px;">
+											<td style="width:100%;margin:0px;padding:0px 20px 20px 20px;border:0px;box-sizing:border-box;font-size:12px;font-weight:400;text-align:left;color:#fff;">Software ' . Languages::email('development_by')[Session::get_value('vkye_lang')] . ' <a style="text-decoration:none;color:#fff;" href="https://codemonkey.com.mx">Code Monkey</a></td>
+										</tr>
+									</table>
+								</body>
+							</html>';
+							$mail->send();
+						}
+						catch (Exception $e) {}
 
 						echo json_encode([
 							'status' => 'success',

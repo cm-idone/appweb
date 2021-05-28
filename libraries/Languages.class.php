@@ -541,6 +541,46 @@ class Languages
                 'es' => 'Firma de responsabilidad',
                 'en' => 'Responsibility signature',
                 'pr' => 'Assinatura de responsabilidade'
+            ],
+            'day_report' => [
+                'es' => 'Reporte del día',
+                'en' => 'Day report'
+            ],
+            'to' => [
+                'es' => 'al',
+                'en' => 'to'
+            ],
+            'total' => [
+                'es' => 'Total',
+                'en' => 'Total'
+            ],
+            'pcr' => [
+                'es' => 'PCR',
+                'en' => 'PCR'
+            ],
+            'antigen' => [
+                'es' => 'Antigeno',
+                'en' => 'Antigen'
+            ],
+            'anticorps' => [
+                'es' => 'Anticuerpos',
+                'en' => 'Anticorps'
+            ],
+            'covid_pcr' => [
+                'es' => 'PCR',
+                'en' => 'PCR'
+            ],
+            'covid_an' => [
+                'es' => 'AN',
+                'en' => 'AN'
+            ],
+            'covid_ac' => [
+                'es' => 'AC',
+                'en' => 'AC'
+            ],
+            'tests' => [
+                'es' => 'Pruebas',
+                'en' => 'Tests'
             ]
         ];
 

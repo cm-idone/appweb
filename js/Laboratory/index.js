@@ -11,6 +11,7 @@ $(document).ready(function()
 
     var filter_action = 'filter_custody_chains';
     var send_action = 'send_custody_chains';
+    var report_action = 'report_custody_chains';
     var restore_action = 'restore_custody_chain';
     var empty_action = 'empty_custody_chains';
     var delete_action = 'delete_custody_chain';
@@ -80,6 +81,23 @@ $(document).ready(function()
     $('[data-modal="' + send_action + '"]').find('form').on('submit', function(event)
     {
         action = send_action;
+        id = null;
+
+        send_form_modal('filter', $(this), event);
+    });
+
+    $(document).on('click', '[data-action="' + report_action + '"]', function()
+    {
+        action = report_action;
+        id = null;
+
+        transform_form_modal('filter', $('[data-modal="' + report_action + '"]'));
+        open_form_modal('filter', $('[data-modal="' + report_action + '"]'));
+    });
+
+    $('[data-modal="' + report_action + '"]').find('form').on('submit', function(event)
+    {
+        action = report_action;
         id = null;
 
         send_form_modal('filter', $(this), event);
