@@ -16,6 +16,27 @@ class Index_model extends Model
 	// {
 	// 	set_time_limit(100000000);
 	//
+	// 	$query = System::decode_json_to_array($this->database->select('system_countries', [
+	// 		'id',
+	// 		'name'
+	// 	]));
+	//
+	// 	foreach ($query as $value)
+	// 	{
+	// 		$value['name']['pr'] = $value['name']['es'];
+	//
+	// 		$this->database->update('system_countries', [
+	// 			'name' => json_encode($value['name'])
+	// 		], [
+	// 			'id' => $value['id']
+	// 		]);
+	// 	}
+	// }
+
+	// public function sql()
+	// {
+	// 	set_time_limit(100000000);
+	//
 	// 	$query = System::decode_json_to_array($this->database->select('custody_chains', [
 	// 		'id',
 	// 		'contact',
