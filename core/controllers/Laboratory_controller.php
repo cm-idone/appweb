@@ -458,10 +458,15 @@ class Laboratory_controller extends Controller
 						{
 							$mail->setFrom($query['laboratory']['email'], $query['laboratory']['name']);
 
-							$_POST['emails'] = explode(',', $_POST['emails']);
+							$_POST['emails'] = explode(';', $_POST['emails']);
 
 							foreach ($_POST['emails'] as $value)
-								$mail->addAddress($value, $query['laboratory']['name']);
+							{
+								$value = explode(',', $value);
+
+								if (!empty($value[0]) AND !empty($value[1]))
+									$mail->addAddress(trim($value[1]), trim($value[0]));
+							}
 
 							$mail->addAttachment(PATH_UPLOADS . $_POST['pdf']);
 							$mail->Subject = Languages::email('day_report')[Session::get_value('vkye_lang')] . ': ' . (($_POST['start_date'] == $_POST['end_date']) ? $_POST['start_date'] : $_POST['start_date'] . ' ' . Languages::email('to')[Session::get_value('vkye_lang')] . ' ' . $_POST['start_date']);
