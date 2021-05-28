@@ -58,15 +58,17 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
                             <?php endif; ?>
                         </td>
                     <?php endif; ?>
-                    <?php if ($value['deleted'] == true AND (($global['render'] == 'alcoholic' AND Permissions::user(['restore_alcoholic']) == true) OR ($global['render'] == 'antidoping' AND Permissions::user(['restore_antidoping']) == true) OR ($global['render'] == 'covid' AND Permissions::user(['restore_covid']) == true))) : ?>
-                        <td class="button">
-                            <a data-action="restore_custody_chain" data-id="<?php echo $value['id']; ?>"><i class="fas fa-reply"></i><span>{$lang.restore}</span></a>
-                        </td>
-                    <?php endif; ?>
-                    <?php if (($value['deleted'] == false AND (($global['render'] == 'alcoholic' AND Permissions::user(['delete_alcoholic']) == true) OR ($global['render'] == 'antidoping' AND Permissions::user(['delete_antidoping']) == true) OR ($global['render'] == 'covid' AND Permissions::user(['delete_covid']) == true))) OR ($value['deleted'] == true AND (($global['render'] == 'alcoholic' AND Permissions::user(['trash_alcoholic']) == true) OR ($global['render'] == 'antidoping' AND Permissions::user(['trash_antidoping']) == true) OR ($global['render'] == 'covid' AND Permissions::user(['trash_covid']) == true)))) : ?>
-                        <td class="button">
-                            <a data-action="delete_custody_chain" data-id="<?php echo $value['id']; ?>" class="alert"><i class="fas fa-trash"></i><span>{$lang.delete}</span></a>
-                        </td>
+                    <?php if (Session::get_value('vkye_user')['id'] == 1) : ?>
+                        <?php if ($value['deleted'] == true AND (($global['render'] == 'alcoholic' AND Permissions::user(['restore_alcoholic']) == true) OR ($global['render'] == 'antidoping' AND Permissions::user(['restore_antidoping']) == true) OR ($global['render'] == 'covid' AND Permissions::user(['restore_covid']) == true))) : ?>
+                            <td class="button">
+                                <a data-action="restore_custody_chain" data-id="<?php echo $value['id']; ?>"><i class="fas fa-reply"></i><span>{$lang.restore}</span></a>
+                            </td>
+                        <?php endif; ?>
+                        <?php if (($value['deleted'] == false AND (($global['render'] == 'alcoholic' AND Permissions::user(['delete_alcoholic']) == true) OR ($global['render'] == 'antidoping' AND Permissions::user(['delete_antidoping']) == true) OR ($global['render'] == 'covid' AND Permissions::user(['delete_covid']) == true))) OR ($value['deleted'] == true AND (($global['render'] == 'alcoholic' AND Permissions::user(['trash_alcoholic']) == true) OR ($global['render'] == 'antidoping' AND Permissions::user(['trash_antidoping']) == true) OR ($global['render'] == 'covid' AND Permissions::user(['trash_covid']) == true)))) : ?>
+                            <td class="button">
+                                <a data-action="delete_custody_chain" data-id="<?php echo $value['id']; ?>" class="alert"><i class="fas fa-trash"></i><span>{$lang.delete}</span></a>
+                            </td>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <?php if ($value['deleted'] == false AND (($global['render'] == 'alcoholic' AND Permissions::user(['update_alcoholic']) == true) OR ($global['render'] == 'antidoping' AND Permissions::user(['update_antidoping']) == true) OR ($global['render'] == 'covid' AND Permissions::user(['update_covid']) == true))) : ?>
                         <td class="button">
