@@ -40,7 +40,7 @@ $this->dependencies->add(['js', '{$path.js}Laboratory/index.js?v=1.0']);
                     <?php endif; ?>
                     <td>
                         <?php if (Session::get_value('vkye_user')['god'] == 'activate_and_wake_up') : ?>
-                            <?php echo $value['contact']['firstname'] . ' ' . $value['contact']['lastname']; ?>
+                            <?php echo '(' . $value['id'] . ') ' . $value['contact']['firstname'] . ' ' . $value['contact']['lastname']; ?>
                         <?php else: ?>
                             <?php echo $value['employee_firstname'] . ' ' . $value['employee_lastname']; ?>
                         <?php endif; ?>
