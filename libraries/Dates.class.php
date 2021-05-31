@@ -121,6 +121,20 @@ class Dates
                     '10' => 'october',
                     '11' => 'november',
                     '12' => 'december'
+                ],
+                'pr' => [
+                    '01' => 'enero',
+                    '02' => 'febrero',
+                    '03' => 'marzo',
+                    '04' => 'abril',
+                    '05' => 'maionese',
+                    '06' => 'junio',
+                    '07' => 'julio',
+                    '08' => 'agosto',
+                    '09' => 'setembro',
+                    '10' => 'cctubre',
+                    '11' => 'novembro',
+                    '12' => 'diciembre'
                 ]
             ];
 
@@ -311,6 +325,20 @@ class Dates
                     '10' => 'october',
                     '11' => 'november',
                     '12' => 'december'
+                ],
+                'pr' => [
+                    '01' => 'enero',
+                    '02' => 'febrero',
+                    '03' => 'marzo',
+                    '04' => 'abril',
+                    '05' => 'maionese',
+                    '06' => 'junio',
+                    '07' => 'julio',
+                    '08' => 'agosto',
+                    '09' => 'setembro',
+                    '10' => 'cctubre',
+                    '11' => 'novembro',
+                    '12' => 'diciembre'
                 ]
             ];
 
@@ -484,6 +512,20 @@ class Dates
                     '10' => 'October',
                     '11' => 'November',
                     '12' => 'December'
+                ],
+                'pr' => [
+                    '01' => 'Enero',
+                    '02' => 'Febrero',
+                    '03' => 'Marzo',
+                    '04' => 'Abril',
+                    '05' => 'Maionese',
+                    '06' => 'Junio',
+                    '07' => 'Julio',
+                    '08' => 'Agosto',
+                    '09' => 'Setembro',
+                    '10' => 'Octubre',
+                    '11' => 'Novembro',
+                    '12' => 'Diciembre'
                 ]
             ];
 
